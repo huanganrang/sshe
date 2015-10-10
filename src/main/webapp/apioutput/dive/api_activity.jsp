@@ -19,6 +19,8 @@
 			style="padding: 1px"></div>			
 		<div title="取消报名" data-options="href:'api_activity_unapply.jsp'"
 			style="padding: 1px"></div>			
+		<div title="首页热门" data-options="href:'api_activity_hot.jsp'"
+			style="padding: 1px"></div>			
 	</div>
 
 </body>

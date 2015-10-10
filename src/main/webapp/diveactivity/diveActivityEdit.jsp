@@ -87,6 +87,12 @@
 						<input type="hidden" name="businessId" id="businessId"  value ="${diveActivity.businessId}"/>
 					</td>	
 				</tr>
+				<tr>
+					<th>热门值</th>
+					<td colspan="3">
+						<input class="span2" name="hot" type="text" value="${diveActivity.hot}"/>（值越大排序越靠前）
+					</td>
+				</tr>
 				<tr>	
 					<th><%=TdiveActivity.ALIAS_DIVER_PRICE%></th>	
 					<td>

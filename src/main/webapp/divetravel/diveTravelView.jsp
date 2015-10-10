@@ -41,8 +41,10 @@
 				<td>${diveTravel.statusZh}</td>
 			</tr>
 			<tr>
+				<th>热门值</th>
+				<td>${diveTravel.hot}</td>
 				<th><%=TdiveTravel.ALIAS_ADDTIME%></th>
-				<td colspan="3">${diveTravel.addtime}</td>
+				<td>${diveTravel.addtime}</td>
 			</tr>
 			<tr>
 				<th><%=TdiveTravel.ALIAS_ICON%></th>

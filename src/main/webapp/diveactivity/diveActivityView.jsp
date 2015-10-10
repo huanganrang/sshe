@@ -79,8 +79,10 @@
 					</td>							
 				</tr>		
 				<tr>	
+					<th>热门值</th>
+					<td>${diveActivity.hot}</td>
 					<th><%=TdiveActivity.ALIAS_ADDTIME%></th>	
-					<td colspan="3">
+					<td>
 						<fmt:formatDate value="${diveActivity.addtime}" pattern="yyyy-MM-dd HH:mm:ss"/>						
 					</td>							
 				</tr>		

@@ -35,7 +35,7 @@
 			idField : 'id',
 			pageSize : 10,
 			pageList : [ 10, 20, 30, 40, 50 ],
-			sortName : 'id',
+			sortName : 'addtime',
 			sortOrder : 'desc',
 			checkOnSelect : false,
 			selectOnCheck : false,
@@ -51,7 +51,7 @@
 				}, {
 				field : 'name',
 				title : '<%=TdiveActivity.ALIAS_NAME%>',
-				width : 50		
+				width : 100		
 				}, {
 				field : 'roomTypeZh',
 				title : '<%=TdiveActivity.ALIAS_ROOM_TYPE%>',
@@ -83,9 +83,15 @@
 				title : '<%=TdiveActivity.ALIAS_END_ADDR%>',
 				width : 50		
 				}, {
+				field : 'hot',
+				title : '热门值',
+				width : 50,
+				sortable : true
+				}, {
 				field : 'addtime',
 				title : '<%=TdiveActivity.ALIAS_ADDTIME%>',
-				width : 50		
+				width : 80,
+				sortable : true
 			}, {
 				field : 'action',
 				title : '操作',

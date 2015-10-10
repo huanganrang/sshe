@@ -3,6 +3,7 @@ package jb.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import jb.interceptors.TokenManage;
+import jb.listener.Application;
 import jb.pageModel.DataGrid;
 import jb.pageModel.DiveActivity;
 import jb.pageModel.DiveActivityApply;
@@ -61,6 +62,30 @@ public class ApiActivityController extends BaseController {
 		try{
 			DataGrid dg = diveActivityService.dataGriComplex(diveActivity,ph);
 			j.setObj(dg);
+			j.success();
+		}catch(Exception e){
+			j.fail();
+			e.printStackTrace();
+		}		
+		return j;
+	}	
+	
+	/**
+	 * 首页热门
+	 * @param ph
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/activity_hot")
+	public Json activity_hot(PageHelper ph) {
+		Json j = new Json();
+		try{
+			ph.setPage(1);
+			ph.setRows(Integer.valueOf(Application.getString("SV410")));
+			ph.setSort("hot desc, t.addtime");
+			ph.setOrder("desc");
+			DataGrid dg = diveActivityService.dataGriComplex(null, ph);
+			j.setObj(dg.getRows());
 			j.success();
 		}catch(Exception e){
 			j.fail();

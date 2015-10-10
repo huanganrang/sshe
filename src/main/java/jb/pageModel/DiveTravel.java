@@ -16,6 +16,7 @@ public class DiveTravel implements java.io.Serializable {
 	private java.lang.String description;	
 	private java.lang.String feature;	
 	private java.lang.String status;	
+	private java.lang.Float hot;
 	private Date addtime;	
 	private java.lang.String addUserId;
 	private java.lang.String nameEn;	
@@ -92,6 +93,13 @@ public class DiveTravel implements java.io.Serializable {
 	
 	public java.lang.String getStatus() {
 		return this.status;
+	}
+	public java.lang.Float getHot() {
+		return this.hot;
+	}
+	
+	public void setHot(java.lang.Float hot) {
+		this.hot = hot;
 	}
 	public void setAddtime(Date addtime) {
 		this.addtime = addtime;

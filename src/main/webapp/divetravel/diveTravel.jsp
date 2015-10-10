@@ -39,7 +39,7 @@
 			idField : 'id',
 			pageSize : 10,
 			pageList : [ 10, 20, 30, 40, 50 ],
-			sortName : 'id',
+			sortName : 'addtime',
 			sortOrder : 'desc',
 			checkOnSelect : false,
 			selectOnCheck : false,
@@ -55,7 +55,7 @@
 				}, {
 				field : 'name',
 				title : '<%=TdiveTravel.ALIAS_NAME%>',
-				width : 50		
+				width : 100		
 				}, {
 				field : 'nameEn',
 				title : '<%=TdiveTravel.ALIAS_NAME_EN%>',
@@ -63,7 +63,8 @@
 				}, {
 				field : 'price',
 				title : '<%=TdiveTravel.ALIAS_PRICE%>',
-				width : 50		
+				width : 50,
+				sortable : true
 				}, {
 				field : 'countryName',
 				title : '<%=TdiveTravel.ALIAS_COUNTRY_NAME%>',
@@ -77,9 +78,15 @@
 				title : '<%=TdiveTravel.ALIAS_STATUS%>',
 				width : 50		
 				}, {
+				field : 'hot',
+				title : '热门值',
+				width : 50,
+				sortable : true
+				}, {
 				field : 'addtime',
 				title : '<%=TdiveTravel.ALIAS_ADDTIME%>',
-				width : 50		
+				width : 80,
+				sortable : true
 			}, {
 				field : 'action',
 				title : '操作',

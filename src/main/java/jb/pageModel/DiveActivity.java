@@ -18,6 +18,7 @@ public class DiveActivity implements java.io.Serializable {
 	private java.lang.String description;	
 	private java.lang.String status;	
 	private java.lang.String stamp;	
+	private java.lang.Float hot;
 	private Date addtime;		
 	private java.lang.String addUserId;
 	private java.lang.String businessType;	
@@ -43,6 +44,8 @@ public class DiveActivity implements java.io.Serializable {
 	private List<DiveActivityComment> diveActivityCommentList;
 
 	private Object business;
+	
+	private String icon; 
 	
 	public String getRoomTypeZh() {
 		return Application.getString(this.roomType);
@@ -128,6 +131,14 @@ public class DiveActivity implements java.io.Serializable {
 	
 	public java.lang.String getStamp() {
 		return this.stamp;
+	}
+	
+	public java.lang.Float getHot() {
+		return this.hot;
+	}
+	
+	public void setHot(java.lang.Float hot) {
+		this.hot = hot;
 	}
 	public void setAddtime(Date addtime) {
 		this.addtime = addtime;
@@ -280,6 +291,14 @@ public class DiveActivity implements java.io.Serializable {
 
 	public void setBusiness(Object business) {
 		this.business = business;
+	}
+
+	public String getIcon() {
+		return icon;
+	}
+
+	public void setIcon(String icon) {
+		this.icon = icon;
 	}
 	
 	

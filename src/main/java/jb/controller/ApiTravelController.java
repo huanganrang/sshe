@@ -3,6 +3,7 @@ package jb.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import jb.interceptors.TokenManage;
+import jb.listener.Application;
 import jb.pageModel.DataGrid;
 import jb.pageModel.DiveTravel;
 import jb.pageModel.Json;
@@ -64,6 +65,29 @@ public class ApiTravelController extends BaseController {
 		Json j = new Json();
 		try{
 			j.setObj(diveTravelService.dataGrid(diveTravel,ph));
+			j.success();
+		}catch(Exception e){
+			j.fail();
+			e.printStackTrace();
+		}		
+		return j;
+	}	
+	
+	/**
+	 * 首页热门列表查询
+	 * @param ph
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/travel_hot")
+	public Json travel_hot(PageHelper ph) {	
+		Json j = new Json();
+		try{
+			ph.setPage(1);
+			ph.setRows(Integer.valueOf(Application.getString("SV400")));
+			ph.setSort("hot desc, t.addtime");
+			ph.setOrder("desc");
+			j.setObj(diveTravelService.dataGrid(null,ph).getRows());
 			j.success();
 		}catch(Exception e){
 			j.fail();

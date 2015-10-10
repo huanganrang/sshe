@@ -18,6 +18,8 @@
 			style="padding: 1px"></div>
 		<div title="详情" data-options="href:'api_travel_detail.jsp'"
 			style="padding: 1px"></div>
+		<div title="首页热门" data-options="href:'api_travel_hot.jsp'"
+			style="padding: 1px"></div>
 	</div>
 
 </body>

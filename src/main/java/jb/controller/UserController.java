@@ -15,7 +15,6 @@ import jb.service.ResourceServiceI;
 import jb.service.RoleServiceI;
 import jb.service.UserServiceI;
 import jb.util.ConfigUtil;
-import jb.util.IpUtil;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -64,7 +63,7 @@ public class UserController extends BaseController {
 
 			SessionInfo sessionInfo = new SessionInfo();
 			BeanUtils.copyProperties(u, sessionInfo);
-			sessionInfo.setIp(IpUtil.getIpAddr(request));
+//			sessionInfo.setIp(IpUtil.getIpAddr(request));
 			sessionInfo.setResourceList(userService.resourceList(u.getId()));
 			sessionInfo.setRoleIds(userService.get(u.getId()).getRoleIds());
 			session.setAttribute(ConfigUtil.getSessionInfoName(), sessionInfo);

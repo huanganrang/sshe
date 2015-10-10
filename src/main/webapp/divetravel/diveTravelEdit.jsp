@@ -112,6 +112,12 @@
 					</td> -->
 				</tr>
 				<tr>
+					<th>热门值</th>
+					<td colspan="3">
+						<input class="span2" name="hot" type="text" value="${diveTravel.hot}"/>（值越大排序越靠前）
+					</td>
+				</tr>
+				<tr>
 					<th><%=TdiveTravel.ALIAS_SUMARY%></th>
 					<td colspan="3">
 						<textarea style="width: 500px;" name="sumary">${diveTravel.sumary}</textarea>

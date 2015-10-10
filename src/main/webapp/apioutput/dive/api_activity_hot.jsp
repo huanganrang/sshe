@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
-String url = request.getContextPath()+"/api/apiActivityController/activityList";
+String url = request.getContextPath()+"/api/apiActivityController/activity_hot";
 %>
 <title>Insert title here</title>
 </head>
@@ -14,7 +14,7 @@ String url = request.getContextPath()+"/api/apiActivityController/activityList";
 	<script type="text/javascript">
 	$(function() {
 	 	parent.$.messager.progress('close');
-		$('#activity_list_Form').form({
+		$('#activity_hot_Form').form({
 			url : '<%=url%>',
 			onSubmit : function() {
 				parent.$.messager.progress({
@@ -29,7 +29,7 @@ String url = request.getContextPath()+"/api/apiActivityController/activityList";
 			},
 			success : function(result) {
 				parent.$.messager.progress('close');
-				$("#activity_list_result").text(result);
+				$("#activity_hot_result").text(result);
 			}
 		});
 	});
@@ -38,38 +38,25 @@ String url = request.getContextPath()+"/api/apiActivityController/activityList";
 	<div class="easyui-layout" data-options="fit:true">
 
 		<div data-options="region:'center'">
-			<form id="activity_list_Form" action="">
+			<form id="activity_hot_Form" action="">
 				<table align="center" width="90%" class="tablex">
 					<tr>
 						<td align="right" style="width: 80px;"><label>url：</label></td>
 						<td><%=url%></td>
 					</tr>
 					<tr>
-						<td align="right" style="width: 180px;"><label>tokenId(token值)：
+						<td align="right" style="width: 180px;"><label>tokenId(token值)：</label>
 						<td><input name="tokenId" type="text" class="span2"  value="<%=BaseController.DEFAULT_TOKEN%>"/></td>
-					</tr>
-					<tr>
-						<td align="right" style="width: 180px;"><label>name(搜索值)：</label></td>
-						<td><input name="name" type="text" class="span2" value="" />（按名称模糊搜索，不传查全部）</td>
-					</tr>
-					
-					<tr>
-						<td align="right" style="width: 180px;"><label>page(第几页)：</label></td>
-						<td><input name="page" type="text" class="span2" value="1" /></td>
-					</tr>
-					<tr>
-						<td align="right" style="width: 180px;"><label>rows(每页数)：</label></td>
-						<td><input name="rows" type="text" class="span2" value="10" /></td>
 					</tr>
 
 					<tr>
 						<td colspan="2" align="center"><input type="button"
-							value="提交" onclick="javascript:$('#activity_list_Form').submit();" /></td>
+							value="提交" onclick="javascript:$('#activity_hot_Form').submit();" /></td>
 					</tr>
 				</table>
 			</form>
 			<label>结果：</label>
-			<div id="activity_list_result"></div>
+			<div id="activity_hot_result"></div>
 			<div>
 				结果说明：1、json格式<br /> 2、success:true 成功<br /> 3、obj:数组格式<br />
 
@@ -206,7 +193,7 @@ String url = request.getContextPath()+"/api/apiActivityController/activityList";
                 收藏数
             </td>
         </tr>
-        <tr height="19" style="height:14.25pt">
+         <tr height="19" style="height:14.25pt">
             <td height="14" class="xl23" style="">
                 icon
             </td>
