@@ -67,7 +67,6 @@
 						<value>/userController/loginCombobox</value><!-- 用户登录里面的autocomplete功能 -->
 						<value>/userController/loginCombogrid</value><!-- 用户登录里面的combogrid功能 -->
 						<value>/userController/logout</value><!-- 注销登录 -->
-						<value>/userController/test</value><!-- 注销登录 -->
 						<value>/resourceController/allTree</value><!-- 角色访问资源下拉树 -->
 						<value>/roleController/tree</value><!-- 用户访问角色树(只能看到自己拥有的角色) -->
 						<value>/roleController/allTree</value><!-- 用户访问角色树 -->

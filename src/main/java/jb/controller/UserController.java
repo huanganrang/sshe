@@ -43,23 +43,6 @@ public class UserController extends BaseController {
 
 	@Autowired
 	private ResourceServiceI resourceService;
-	
-	/**
-	 * 用户登录
-	 * 
-	 * @param user
-	 *            用户对象
-	 * @param session
-	 * @param request
-	 * @return
-	 */
-	@ResponseBody
-	@RequestMapping("/test")
-	public Json test(String mobile) {
-		Json j = new Json();
-		
-		return j;
-	}
 
 	/**
 	 * 用户登录

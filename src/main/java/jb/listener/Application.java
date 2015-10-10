@@ -26,8 +26,8 @@ public class Application implements ServletContextListener {
 	public void contextInitialized(ServletContextEvent event) {	
 		 context = event.getServletContext();	
 		 initAppVariable();
-		 //XmppServer.getInstance();
-		// ConfigManager.getInstance().getConfig().setProperty("server.home.dir", Application.class.getResource("/").getPath());
+		 XmppServer.getInstance();
+		 ConfigManager.getInstance().getConfig().setProperty("server.home.dir", Application.class.getResource("/").getPath());
 		
 	}
 

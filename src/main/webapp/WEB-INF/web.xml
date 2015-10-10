@@ -140,4 +140,8 @@
     <location>/error/500.jsp</location>
   </error-page>
   
+  <!-- 定时获取可接入令牌 -->
+	<listener>
+        <listener-class>jb.listener.TokenListener</listener-class>
+	</listener>
 </web-app>
