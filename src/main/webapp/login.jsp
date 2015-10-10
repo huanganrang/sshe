@@ -14,7 +14,7 @@
 	<div class="login_bj"></div>
 		<div class="login_zt">
 			<span></span>
-		    <a href="#" class="a1">下载APP</a>
+		    <a href="#" class="a1">下载APPmade</a>
 		    <a href="#" class="a2">下载客户端</a>
 		    <div class="clear"></div>
 		    <ol><a href="#">进入微社区</a></ol>
