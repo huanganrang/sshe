@@ -29,7 +29,7 @@ public class TdiveActivity implements java.io.Serializable,IEntity{
 	public static final String ALIAS_END_DATE = "结束时间";
 	public static final String ALIAS_START_ADDR = "始发地";
 	public static final String ALIAS_END_ADDR = "目的地";
-	public static final String ALIAS_DESCRIPTION = "描述";
+	public static final String ALIAS_DESCRIPTION = "简介";
 	public static final String ALIAS_STATUS = "活动状态";
 	public static final String ALIAS_STAMP = "印章";
 	public static final String ALIAS_ADDTIME = "addtime";
@@ -40,6 +40,8 @@ public class TdiveActivity implements java.io.Serializable,IEntity{
 	public static final String ALIAS_NON_DRIVE_PRICE = "非潜水员";
 	public static final String ALIAS_SINGLE_ROOM_PRICE = "单人房差/位";
 	public static final String ALIAS_PEER_NAME = "同行";
+	public static final String ALIAS_ICON = "图标";
+	public static final String ALIAS_INTRODUCE = "详情介绍";
 	
 	//date formats
 	public static final String FORMAT_START_DATE = jb.util.Constants.DATE_FORMAT_YMD;
@@ -63,6 +65,10 @@ public class TdiveActivity implements java.io.Serializable,IEntity{
 	private java.lang.String endAddr;
 	//@Length(max=2147483647)
 	private java.lang.String description;
+	//@Length(max=2147483647)
+	private java.lang.String icon;
+	//@Length(max=2147483647)
+	private java.lang.String introduce;
 	//@Length(max=4)
 	private java.lang.String status;
 	//@Length(max=4)
@@ -160,6 +166,22 @@ public class TdiveActivity implements java.io.Serializable,IEntity{
 	
 	public void setDescription(java.lang.String description) {
 		this.description = description;
+	}
+	@Column(name = "icon", unique = false, nullable = true, insertable = true, updatable = true, length = 2147483647)
+	public java.lang.String getIcon() {
+		return this.icon;
+	}
+	
+	public void setIcon(java.lang.String icon) {
+		this.icon = icon;
+	}
+	@Column(name = "introduce", unique = false, nullable = true, insertable = true, updatable = true, length = 2147483647)
+	public java.lang.String getIntroduce() {
+		return this.introduce;
+	}
+	
+	public void setIntroduce(java.lang.String introduce) {
+		this.introduce = introduce;
 	}
 	
 	@Column(name = "status", unique = false, nullable = true, insertable = true, updatable = true, length = 4)

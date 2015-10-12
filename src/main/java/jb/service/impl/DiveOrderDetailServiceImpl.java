@@ -106,9 +106,9 @@ public class DiveOrderDetailServiceImpl extends BaseServiceImpl<DiveOrderDetail>
 		List<DiveOrderDetail> rl = new ArrayList<DiveOrderDetail>();
 		String sql = "select t.id id, t.order_id orderId, t.business_id businessId, "
 				+ " t.business_type businessType, t.number number, t.price price, "
-				+ " (case t.business_type when 'BT01' then (select dt.name from dive_travel dt where dt.id = t.business_id) "
-				+ " when 'BT03' then (select de.equip_name from dive_equip de where de.id = t.business_id) "
-				+ " when 'BT06' then (select dc.title from dive_course dc where dc.id = t.business_id) end) businessName"
+				+ " (case t.business_type when 'BT01' then (select concat(dt.name, concat('--', dt.icon)) from dive_travel dt where dt.id = t.business_id) "
+				+ " when 'BT03' then (select concat(de.equip_name, concat('--', de.equip_icon)) from dive_equip de where de.id = t.business_id) "
+				+ " when 'BT06' then (select concat(dc.title, concat('--', dc.icon)) from dive_course dc where dc.id = t.business_id) end) name_icon"
 				+ " from dive_order_detail t where t.order_id = '" + orderId + "'";
 		List<Map> l = diveOrderDetailDao.findBySql2Map(sql);
 		if (l != null && l.size() > 0) {
@@ -116,6 +116,12 @@ public class DiveOrderDetailServiceImpl extends BaseServiceImpl<DiveOrderDetail>
 				DiveOrderDetail r = new DiveOrderDetail();
 				try {
 					org.apache.commons.beanutils.BeanUtils.populate(r, m);
+					String name_icon = (String)m.get("name_icon");
+					if(!F.empty(name_icon)) {
+						String[] arr = name_icon.split("--");
+						r.setBusinessName(arr[0]);
+						r.setBusinessIcon(arr[1]);
+					}
 				} catch (IllegalAccessException e) {
 					e.printStackTrace();
 				} catch (InvocationTargetException e) {

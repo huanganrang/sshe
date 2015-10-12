@@ -55,7 +55,7 @@
 				}, {
 				field : 'roomTypeZh',
 				title : '<%=TdiveActivity.ALIAS_ROOM_TYPE%>',
-				width : 50		
+				width : 80		
 				}, {
 					field : 'startDate',
 					title : '<%=TdiveActivity.ALIAS_START_DATE%>',

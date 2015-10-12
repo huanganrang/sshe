@@ -91,6 +91,8 @@ public class ApiCommonController extends BaseController {
 				content = diveAddressService.get(id).getDescription();
 			} else if("BT03".equals(type)) { // 装备
 				content = diveEquipService.get(id).getEquipDes();
+			} else if("BT04".equals(type)) { // 活动
+				content = diveActivityService.get(id).getIntroduce();
 			} else if("BT05".equals(type)) { // 度假村
 				content = diveStoreService.get(id).getDescription();
 			} else if("BT06".equals(type)) { // 学习

@@ -108,11 +108,11 @@ public class ApiActivityController extends BaseController {
 			SessionInfo s = tokenManage.getSessionInfo(request);
 			//详情接口需要完善
 			DiveActivity diveActivity = diveActivityService.getDetail(id, s.getId());
-			if("BT01".equals(diveActivity.getBusinessType())) {
-				diveActivity.setBusiness(diveTravelService.getDetail(diveActivity.getBusinessId(), s.getId()));
-			} else {
-				diveActivity.setBusiness(diveStoreService.getDetail(diveActivity.getBusinessId(), s.getId()));
-			}
+//			if("BT01".equals(diveActivity.getBusinessType())) {
+//				diveActivity.setBusiness(diveTravelService.getDetail(diveActivity.getBusinessId(), s.getId()));
+//			} else {
+//				diveActivity.setBusiness(diveStoreService.getDetail(diveActivity.getBusinessId(), s.getId()));
+//			}
 //			diveActivity.setDiveAddress(diveAddressService.getDetail(diveActivity.getAddrId(), s.getId()));
 			j.setObj(diveActivity);
 			j.success();

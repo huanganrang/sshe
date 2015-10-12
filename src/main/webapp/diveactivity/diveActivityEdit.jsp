@@ -6,7 +6,18 @@
 <%@ taglib prefix="jb" uri="http://www.jb.cn/jbtag"%>
 
 <script type="text/javascript">
+	var editor;
 	$(function() {
+		window.setTimeout(function() {
+			editor = KindEditor.create('#introduce', {
+				width : '580px',
+				height : '300px',
+				items : [ 'source', '|', 'undo', 'redo', '|', 'preview', 'print', 'template', 'code', 'cut', 'copy', 'paste', 'plainpaste', 'wordpaste', '|', 'justifyleft', 'justifycenter', 'justifyright', 'justifyfull', 'insertorderedlist', 'insertunorderedlist', 'indent', 'outdent', 'subscript', 'superscript', 'clearhtml', 'quickformat', 'selectall', '|', 'fullscreen', '/', 'formatblock', 'fontname', 'fontsize', '|', 'forecolor', 'hilitecolor', 'bold', 'italic', 'underline', 'strikethrough', 'lineheight', 'removeformat', '|', 'image', 'flash', 'media', 'insertfile', 'table', 'hr', 'emoticons', 'baidumap', 'pagebreak', 'anchor', 'link', 'unlink' ],
+				uploadJson : '${pageContext.request.contextPath}/fileController/upload',
+				fileManagerJson : '${pageContext.request.contextPath}/fileController/fileManage',
+				allowFileManager : true
+			});
+		}, 1);
 		parent.$.messager.progress('close');
 		$('#form').form({
 			url : '${pageContext.request.contextPath}/diveActivityController/edit',
@@ -19,13 +30,15 @@
 				if (!isValid) {
 					parent.$.messager.progress('close');
 				}
+				/*
 				var businessId;
 				if($("input:radio[name=businessType]:checked").val() == 'BT01') {
 					businessId = $('[name=travelId]').val();
 				} else {
 					businessId = $('[name=storeId]').val();
 				}
-				$("#businessId").val(businessId);
+				$("#businessId").val(businessId);*/
+				editor.sync();
 				return isValid;
 			},
 			success : function(result) {
@@ -40,7 +53,7 @@
 			}
 		});
 		
-		$("input:radio[name=businessType]").bind('click', function(){
+		/* $("input:radio[name=businessType]").bind('click', function(){
 			if($(this).val() == 'BT01') {
 				$("#travel").show();
 				$("#store").hide();
@@ -51,12 +64,27 @@
 		});
 		
 		$('[name=travelId]').val($("#businessId").val());
-		$('[name=storeId]').val($("#businessId").val());
+		$('[name=storeId]').val($("#businessId").val()); */
+
+		function ProcessFile() {
+			var file = document.getElementById('iconFile').files[0];
+			if (file) {
+				var reader = new FileReader();
+				reader.onload = function ( event ) {
+					var txt = event.target.result;
+					$('.img-preview').attr('src',txt);
+				};
+			}
+		    reader.readAsDataURL(file);
+		}
+		$(document).delegate('#iconFile','change',function () {
+			ProcessFile();
+		});
 	});
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
 	<div data-options="region:'center',border:false" title="" style="overflow: auto;">
-		<form id="form" method="post">
+		<form id="form" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="id" value = "${diveActivity.id}"/>
 			<table class="table table-hover table-condensed">
 				<tr>	
@@ -69,6 +97,14 @@
 						<jb:select dataType="RT" name="roomType" value="${diveActivity.roomType}"></jb:select>	
 					</td>		
 				</tr>	
+				<tr>
+					<th><%=TdiveActivity.ALIAS_ICON%></th>
+					<td colspan="3">
+						<img class="img-preview" src="${diveActivity.icon}" width="50" height="50"/> 
+						<input type="file" id="iconFile" name="iconFile">
+					</td>
+				</tr>	
+				<!-- 
 				<tr>	
 					<th><%=TdiveActivity.ALIAS_BUSINESS_TYPE%></th>	
 					<td>
@@ -86,7 +122,7 @@
 						</div>
 						<input type="hidden" name="businessId" id="businessId"  value ="${diveActivity.businessId}"/>
 					</td>	
-				</tr>
+				</tr> -->
 				<tr>
 					<th>热门值</th>
 					<td colspan="3">
@@ -143,6 +179,12 @@
 					<td colspan="3">
 						<textarea style="width: 500px;" name="description">${diveActivity.description}</textarea>
 					</td>							
+				</tr>
+				<tr>
+					<th><%=TdiveActivity.ALIAS_INTRODUCE%></th>
+					<td colspan="3">
+						<textarea  name="introduce" id="introduce" style="height:180px;visibility:hidden;">${diveActivity.introduce}</textarea>
+					</td>	
 				</tr>
 			</table>				
 		</form>

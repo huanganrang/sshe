@@ -19,14 +19,13 @@ import jb.dao.DiveTravelDaoI;
 import jb.model.TdiveAccount;
 import jb.model.TdiveActivity;
 import jb.model.TdiveActivityComment;
-import jb.model.TdiveStore;
-import jb.model.TdiveTravel;
 import jb.pageModel.DataGrid;
 import jb.pageModel.DiveAccount;
 import jb.pageModel.DiveActivity;
 import jb.pageModel.DiveActivityComment;
 import jb.pageModel.PageHelper;
 import jb.service.DiveActivityServiceI;
+import jb.util.Constants;
 import jb.util.MyBeanUtils;
 
 import org.springframework.beans.BeanUtils;
@@ -64,6 +63,7 @@ public class DiveActivityServiceImpl extends BaseServiceImpl<DiveActivity> imple
 			for (TdiveActivity t : l) {
 				DiveActivity o = new DiveActivity();
 				BeanUtils.copyProperties(t, o);
+				o.setIntroduce(null);
 				ol.add(o);
 			}
 		}
@@ -151,37 +151,37 @@ public class DiveActivityServiceImpl extends BaseServiceImpl<DiveActivity> imple
 		if(diveActivitys!=null&&diveActivitys.size()>0){
 			String[] businessIds = new String[diveActivitys.size()];
 			int i = 0;
-			List<String> travelIds = new ArrayList<String>();
-			List<String> storeIds = new ArrayList<String>();
+//			List<String> travelIds = new ArrayList<String>();
+//			List<String> storeIds = new ArrayList<String>();
 			for(DiveActivity d : diveActivitys){
 				businessIds[i] = d.getId();
 				i++;
-				if("BT01".equals(d.getBusinessType()) && !travelIds.contains(d.getBusinessId())) {
-					travelIds.add(d.getBusinessId());
-				}
-				if("BT05".equals(d.getBusinessType()) && !storeIds.contains(d.getBusinessId())) {
-					storeIds.add(d.getBusinessId());
-				}
+//				if("BT01".equals(d.getBusinessType()) && !travelIds.contains(d.getBusinessId())) {
+//					travelIds.add(d.getBusinessId());
+//				}
+//				if("BT05".equals(d.getBusinessType()) && !storeIds.contains(d.getBusinessId())) {
+//					storeIds.add(d.getBusinessId());
+//				}
 			}
 			//查询收藏数，报名人数，赞数，评论数
 			HashMap<String,Integer> collects = diveCollectDao.getCountCollectNum(ACTIVITY_TAG, businessIds);
 			HashMap<String,Integer> praises = divePraiseDao.getCountPraiseNum(ACTIVITY_TAG, businessIds);
 			HashMap<String,Integer> comments = diveActivityCommentDao.getCountCommentNum(businessIds);
 			HashMap<String,Integer> applies = diveActivityApplyDao.getCountApplyNum(businessIds);
-			List<TdiveTravel> travels = diveTravelDao.getDiveTravels(travelIds);
-			Map<String, String> travelMap = new HashMap<String, String>();
-			if(travels != null) {
-				for(TdiveTravel t : travels) {
-					travelMap.put(t.getId(), t.getIcon());
-				}
-			}
-			List<TdiveStore> stores = diveStoreDao.getDiveStores(storeIds);
-			Map<String, String> storeMap = new HashMap<String, String>();
-			if(stores != null) {
-				for(TdiveStore t : stores) {
-					storeMap.put(t.getId(), t.getIcon());
-				}
-			}
+//			List<TdiveTravel> travels = diveTravelDao.getDiveTravels(travelIds);
+//			Map<String, String> travelMap = new HashMap<String, String>();
+//			if(travels != null) {
+//				for(TdiveTravel t : travels) {
+//					travelMap.put(t.getId(), t.getIcon());
+//				}
+//			}
+//			List<TdiveStore> stores = diveStoreDao.getDiveStores(storeIds);
+//			Map<String, String> storeMap = new HashMap<String, String>();
+//			if(stores != null) {
+//				for(TdiveStore t : stores) {
+//					storeMap.put(t.getId(), t.getIcon());
+//				}
+//			}
 			
 			for(DiveActivity d : diveActivitys){
 				Integer num = praises.get(d.getId());
@@ -200,12 +200,12 @@ public class DiveActivityServiceImpl extends BaseServiceImpl<DiveActivity> imple
 				if(num != null)
 				d.setCollectNum(num);
 				
-				if("BT01".equals(d.getBusinessType()) && travelMap.containsKey(d.getBusinessId())) {
-					d.setIcon(travelMap.get(d.getBusinessId()));
-				}
-				if("BT05".equals(d.getBusinessType()) && storeMap.containsKey(d.getBusinessId())) {
-					d.setIcon(storeMap.get(d.getBusinessId()));
-				}
+//				if("BT01".equals(d.getBusinessType()) && travelMap.containsKey(d.getBusinessId())) {
+//					d.setIcon(travelMap.get(d.getBusinessId()));
+//				}
+//				if("BT05".equals(d.getBusinessType()) && storeMap.containsKey(d.getBusinessId())) {
+//					d.setIcon(storeMap.get(d.getBusinessId()));
+//				}
 			}
 		}
 		return datagrid;
@@ -281,6 +281,8 @@ public class DiveActivityServiceImpl extends BaseServiceImpl<DiveActivity> imple
 		diveActivity.setApplies(convert(applies));
 		
 		setCommentList(diveActivity);
+		
+		diveActivity.setIntroduce(Constants.DETAIL_HTML_PATH.replace("TYPE", "BT04").replace("ID", id));
 		return diveActivity;
 	}
 	

@@ -20,6 +20,7 @@
 						${diveActivity.roomTypeZh}							
 					</td>							
 				</tr>	
+				<!-- 
 				<tr>	
 					<th><%=TdiveActivity.ALIAS_BUSINESS_TYPE%></th>	
 					<td>
@@ -29,7 +30,7 @@
 					<td>
 						${diveActivity.businessId}	
 					</td>	
-				</tr>
+				</tr> -->
 				<tr>	
 					<th><%=TdiveActivity.ALIAS_DIVER_PRICE%></th>	
 					<td>
@@ -61,6 +62,14 @@
 					</td>						
 				</tr>
 				<tr>	
+					<th>热门值</th>
+					<td>${diveActivity.hot}</td>
+					<th><%=TdiveActivity.ALIAS_ADDTIME%></th>	
+					<td>
+						<fmt:formatDate value="${diveActivity.addtime}" pattern="yyyy-MM-dd HH:mm:ss"/>						
+					</td>							
+				</tr>	
+				<tr>	
 					<th><%=TdiveActivity.ALIAS_START_ADDR%></th>	
 					<td colspan="3">
 						${diveActivity.startAddr}							
@@ -72,20 +81,20 @@
 						${diveActivity.endAddr}							
 					</td>					
 				</tr>
+				<tr>
+					<th><%=TdiveActivity.ALIAS_ICON%></th>
+					<td colspan="3"><img alt="" src="${diveActivity.icon}"> </td>
+				</tr>
 				<tr>	
 					<th><%=TdiveActivity.ALIAS_DESCRIPTION%></th>	
 					<td colspan="3">
 						${diveActivity.description}							
 					</td>							
-				</tr>		
-				<tr>	
-					<th>热门值</th>
-					<td>${diveActivity.hot}</td>
-					<th><%=TdiveActivity.ALIAS_ADDTIME%></th>	
-					<td>
-						<fmt:formatDate value="${diveActivity.addtime}" pattern="yyyy-MM-dd HH:mm:ss"/>						
-					</td>							
-				</tr>		
+				</tr>	
+				<tr>
+				<th><%=TdiveActivity.ALIAS_INTRODUCE%></th>
+				<td colspan="3">${diveActivity.introduce}</td>
+			</tr>	
 		</table>
 	</div>
 </div>

@@ -4,14 +4,6 @@ import java.util.Date;
 
 public class DiveShopCart implements java.io.Serializable {
 
-	public String getBusinessName() {
-		return businessName;
-	}
-
-	public void setBusinessName(String businessName) {
-		this.businessName = businessName;
-	}
-
 	private static final long serialVersionUID = 5454155825314635342L;
 
 	private java.lang.String id;	
@@ -23,6 +15,7 @@ public class DiveShopCart implements java.io.Serializable {
 	private Date addtime;			
 
 	private String businessName;
+	private String businessIcon;
 
 	public void setId(java.lang.String value) {
 		this.id = value;
@@ -74,6 +67,22 @@ public class DiveShopCart implements java.io.Serializable {
 	
 	public Date getAddtime() {
 		return this.addtime;
+	}
+	
+	public String getBusinessName() {
+		return businessName;
+	}
+
+	public void setBusinessName(String businessName) {
+		this.businessName = businessName;
+	}
+	
+	public String getBusinessIcon() {
+		return businessIcon;
+	}
+
+	public void setBusinessIcon(String businessIcon) {
+		this.businessIcon = businessIcon;
 	}
 
 }
