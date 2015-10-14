@@ -4,9 +4,11 @@ import javax.servlet.http.HttpServletRequest;
 
 import jb.interceptors.TokenManage;
 import jb.pageModel.DiveCourse;
+import jb.pageModel.DiveCourseComment;
 import jb.pageModel.Json;
 import jb.pageModel.PageHelper;
 import jb.pageModel.SessionInfo;
+import jb.service.DiveCourseCommentServiceI;
 import jb.service.DiveCourseServiceI;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -31,7 +33,8 @@ public class ApiCourseController extends BaseController {
 	@Autowired
 	private DiveCourseServiceI diveCourseService;
 	
-	
+	@Autowired
+	private DiveCourseCommentServiceI diveCourseCommentService;
 	
 	/**
 	 * 学习列表
@@ -43,7 +46,7 @@ public class ApiCourseController extends BaseController {
 	public Json courselist(PageHelper ph,DiveCourse diveCourse) {
 		Json j = new Json();
 		try{
-			j.setObj(diveCourseService.dataGrid(diveCourse,ph));
+			j.setObj(diveCourseService.dataGriComplex(diveCourse,ph));
 			j.success();
 		}catch(Exception e){
 			j.fail();
@@ -62,7 +65,7 @@ public class ApiCourseController extends BaseController {
 	public Json search(PageHelper ph,DiveCourse diveCourse) {
 		Json j = new Json();
 		try{
-			j.setObj(diveCourseService.dataGrid(diveCourse,ph));
+			j.setObj(diveCourseService.dataGriComplex(diveCourse,ph));
 			j.success();
 		}catch(Exception e){
 			j.fail();
@@ -84,6 +87,27 @@ public class ApiCourseController extends BaseController {
 			SessionInfo s = getSessionInfo(request);
 			DiveCourse diveCourse = diveCourseService.getDetail(id, s.getId());
 			j.setObj(diveCourse);
+			j.success();
+		}catch(Exception e){
+			j.fail();
+			e.printStackTrace();
+		}		
+		return j;
+	}	
+	
+	/**
+	 * 添加评论
+	 * @param ph
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/addComment")
+	public Json addComment(HttpServletRequest request,DiveCourseComment diveCourseComment) {	
+		Json j = new Json();
+		try{
+			SessionInfo s = getSessionInfo(request);
+			diveCourseComment.setUserId(s.getId());
+			diveCourseCommentService.add(diveCourseComment);
 			j.success();
 		}catch(Exception e){
 			j.fail();

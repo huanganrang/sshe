@@ -38,7 +38,7 @@ String url = request.getContextPath()+"/api/apiCourseController/search";
 	<div class="easyui-layout" data-options="fit:true">
 
 		<div data-options="region:'center'">
-			<form id="course_search_Form" action="">
+			<form id="course_search_Form" action="" method="post">
 				<table align="center" width="90%" class="tablex">
 					<tr>
 						<td align="right" style="width: 80px;"><label>url：</label></td>
@@ -68,7 +68,7 @@ String url = request.getContextPath()+"/api/apiCourseController/search";
 					</tr>
 				</table>
 			</form>
-			<label>结果：学习列表结果集，查看基础数据接口</label>
+			<label>结果：视频列表结果集，查看基础数据接口</label>
 			<div id="course_search_result"></div>
 			<div>
 				结果说明：1、json格式<br /> 2、success:true 成功<br /> 3、obj:数组格式<br />
@@ -212,6 +212,39 @@ String url = request.getContextPath()+"/api/apiCourseController/search";
             <td style="border-top:none;border-left:none"></td>
             <td style="border-top:none;border-left:none">
                 状态（上架，下架）
+            </td>
+        </tr>
+        <tr height="19" style="height:14.25pt">
+            <td height="14" class="xl23" style="">
+                commentNum
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="xl23" width="117">
+                评论数
+            </td>
+        </tr>
+        <tr height="19" style="height:14.25pt">
+            <td height="14" class="xl23" style="">
+                praiseNum
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="xl23" width="117">
+                赞数
+            </td>
+        </tr>
+        <tr height="19" style="height:14.25pt">
+            <td height="14" class="xl23" style="">
+                collectNum
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="xl23" width="117">
+                收藏数
             </td>
         </tr>
     </tbody>

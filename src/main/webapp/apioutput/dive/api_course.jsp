@@ -16,6 +16,8 @@
 			style="padding: 1px"></div>
 		<div title="详情" data-options="href:'api_course_detail.jsp'"
 			style="padding: 1px"></div>
+		<div title="添加评论" data-options="href:'api_course_add_comment.jsp'"
+			style="padding: 1px"></div>
 	</div>
 
 </body>

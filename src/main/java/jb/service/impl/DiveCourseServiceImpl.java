@@ -8,10 +8,18 @@ import java.util.Map;
 import java.util.UUID;
 
 import jb.absx.F;
+import jb.dao.DiveAccountDaoI;
+import jb.dao.DiveCollectDaoI;
+import jb.dao.DiveCourseCommentDaoI;
 import jb.dao.DiveCourseDaoI;
+import jb.dao.DivePraiseDaoI;
+import jb.model.TdiveAccount;
 import jb.model.TdiveCourse;
+import jb.model.TdiveCourseComment;
 import jb.pageModel.DataGrid;
+import jb.pageModel.DiveAccount;
 import jb.pageModel.DiveCourse;
+import jb.pageModel.DiveCourseComment;
 import jb.pageModel.PageHelper;
 import jb.service.DiveCourseServiceI;
 import jb.util.Constants;
@@ -26,6 +34,15 @@ public class DiveCourseServiceImpl extends BaseServiceImpl<DiveCourse> implement
 
 	@Autowired
 	private DiveCourseDaoI diveCourseDao;
+	
+	@Autowired
+	private DivePraiseDaoI divePraiseDao;
+	@Autowired
+	private DiveCollectDaoI diveCollectDao;
+	@Autowired
+	private DiveCourseCommentDaoI diveCourseCommentDao;
+	@Autowired
+	private DiveAccountDaoI diveAccountDao;
 
 	@Override
 	public DataGrid dataGrid(DiveCourse diveCourse, PageHelper ph) {
@@ -121,23 +138,125 @@ public class DiveCourseServiceImpl extends BaseServiceImpl<DiveCourse> implement
 		diveCourseDao.delete(diveCourseDao.get(TdiveCourse.class, id));
 	}
 
+	@SuppressWarnings("unchecked")
+	@Override
+	public DataGrid dataGriComplex(DiveCourse diveCourse, PageHelper ph) {
+		DataGrid datagrid = dataGrid(diveCourse, ph);
+		List<DiveCourse> diveCourses = datagrid.getRows();
+		
+		if(diveCourses!=null&&diveCourses.size()>0){
+			String[] businessIds = new String[diveCourses.size()];
+			int i = 0;
+			for(DiveCourse d : diveCourses){
+				businessIds[i] = d.getId();
+				i++;
+			}
+			//查询收藏数，赞数，评论数
+			HashMap<String,Integer> collects = diveCollectDao.getCountCollectNum(COURSE_TAG, businessIds);
+			HashMap<String,Integer> praises = divePraiseDao.getCountPraiseNum(COURSE_TAG, businessIds);
+			HashMap<String,Integer> comments = diveCourseCommentDao.getCountCommentNum(businessIds);
+			
+			for(DiveCourse d : diveCourses){
+				Integer num = praises.get(d.getId());
+				if(num != null)
+				d.setPraiseNum(num);
+				
+				num = comments.get(d.getId());
+				if(num != null)
+				d.setCommentNum(num);
+				
+				num = collects.get(d.getId());
+				if(num != null)
+				d.setCollectNum(num);
+			}
+		}
+		return datagrid;
+	}
 
 	/**
 	 * 获取详情信息
 	 */
 	public DiveCourse getDetail(String id, String accountId) {
 		DiveCourse dc = get(id);
+		
 		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("accountId", accountId);
-		params.put("businessId", id);
-		params.put("businessType", "BT06");
-		params.put("orderStatus", "OS01");
-		dc.setPay(false); // 未买
-		if(diveCourseDao.count("select count(*) from TdiveOrder t where t.accountId = :accountId and t.orderStatus = :orderStatus and exists (select 1 from TdiveOrderDetail d where d.orderId = t.id and d.businessType = :businessType and d.businessId = :businessId)", params) > 0) {
-			dc.setPay(true); // 已买
+		if(!F.empty(accountId)) {
+			String cHql = "select count(*) from TdiveCollect t ";
+			String pHql = "select count(*) from TdivePraise t ";
+			params.put("businessId", id);
+			params.put("businessType", COURSE_TAG);
+			String where = " where t.businessId = :businessId and t.businessType = :businessType ";
+			dc.setCollectNum(diveCollectDao.count(cHql + where, params).intValue()); // 收藏数
+			dc.setPraiseNum(divePraiseDao.count(pHql + where, params).intValue()); // 赞数
+			
+			params.put("accountId", accountId);
+			where += " and t.accountId = :accountId ";
+			if(diveCollectDao.count(cHql + where, params) > 0) {
+				dc.setCollect(true); // 已收藏
+			} else {
+				dc.setCollect(false); // 未收藏
+			}
+			
+			if(divePraiseDao.count(pHql + where, params) > 0) {
+				dc.setPraise(true); // 已赞
+			} else {
+				dc.setPraise(false); // 未赞
+			}
+			
+			params = new HashMap<String, Object>();
+			params.put("accountId", accountId);
+			params.put("businessId", id);
+			params.put("businessType", COURSE_TAG);
+			params.put("orderStatus", "OS01");
+			dc.setPay(false); // 未买
+			if(diveCourseDao.count("select count(*) from TdiveOrder t where t.accountId = :accountId and t.orderStatus = :orderStatus and exists (select 1 from TdiveOrderDetail d where d.orderId = t.id and d.businessType = :businessType and d.businessId = :businessId)", params) > 0) {
+				dc.setPay(true); // 已买
+			}
 		}
-		dc.setIntroduce(Constants.DETAIL_HTML_PATH.replace("TYPE", "BT06").replace("ID", id));
+		
+		// 评论列表
+		setCommentList(dc);
+		
+		dc.setIntroduce(Constants.DETAIL_HTML_PATH.replace("TYPE", COURSE_TAG).replace("ID", id));
 		return dc;
 	}
+	
+	private void setCommentList(DiveCourse diveCourse) {
+		List<DiveAccount> commentUsers = convert(diveAccountDao.getDiveAccountByCourseComment(diveCourse.getId()));
+		Map<String,DiveAccount> commentUsersMap = new HashMap<String,DiveAccount>();
+		for(DiveAccount t : commentUsers){
+			commentUsersMap.put(t.getId(), t);
+		}
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("courseId", diveCourse.getId());
+		List<TdiveCourseComment> tDiveCourseCommentList = diveCourseCommentDao.find("from TdiveCourseComment t where t.courseId =:courseId order by addtime", params);
+		List<DiveCourseComment> diveCourseCommentList = new ArrayList<DiveCourseComment>();
+		Map<String, DiveAccount> commentAccountMap = new HashMap<String, DiveAccount>();
+		for(TdiveCourseComment t : tDiveCourseCommentList) {
+			commentAccountMap.put(t.getId(), commentUsersMap.get(t.getUserId()));
+		}
+		
+		for(TdiveCourseComment t : tDiveCourseCommentList){
+			DiveCourseComment diveCourseComment = new DiveCourseComment();
+			BeanUtils.copyProperties(t,diveCourseComment);
+			diveCourseComment.setCommentUser(commentUsersMap.get(t.getUserId()));
+			if(!F.empty(t.getPid())) {
+				diveCourseComment.setParentCommentUser(commentAccountMap.get(t.getPid()));
+			}
+			diveCourseCommentList.add(diveCourseComment);
+			
+		}
+		
+		diveCourse.setCommentList(diveCourseCommentList);
+	}
 
+	private List<DiveAccount> convert(List<TdiveAccount> diveAccounts){
+		List<DiveAccount> list = new ArrayList<DiveAccount>();
+		for(TdiveAccount s : diveAccounts){
+			DiveAccount o = new DiveAccount();
+			MyBeanUtils.copyProperties(s, o, new String[] { "password" , "personality", "email", "recommend", "hxPassword", "hxStatus", "addtime" }, true );
+			list.add(o);
+		}
+		return list;		
+	}
 }

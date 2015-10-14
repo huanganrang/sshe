@@ -25,7 +25,7 @@
 				style="padding: 1px"></div>
 			<div title="船宿" data-options="href:'api_travel.jsp'"
 				style="padding: 1px"></div>
-			<div title="学习" data-options="href:'api_course.jsp'"
+			<div title="视频" data-options="href:'api_course.jsp'"
 				style="padding: 1px"></div>
 			<div title="潜聊" data-options="href:'api_dive_chat.jsp'"
 				style="padding: 1px"></div>

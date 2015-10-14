@@ -10,6 +10,7 @@ import jb.pageModel.PageHelper;
  * 
  */
 public interface DiveCourseServiceI {
+	public final String COURSE_TAG = "BT06";
 
 	/**
 	 * 获取DiveCourse数据表格
@@ -58,5 +59,7 @@ public interface DiveCourseServiceI {
 	 * @return
 	 */
 	public DiveCourse getDetail(String id, String accountId);
+
+	public DataGrid dataGriComplex(DiveCourse diveCourse, PageHelper ph);
 
 }

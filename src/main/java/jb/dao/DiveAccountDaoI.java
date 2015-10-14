@@ -20,6 +20,13 @@ public interface DiveAccountDaoI extends BaseDaoI<TdiveAccount> {
 	public List<TdiveAccount> getDiveAccountByComment(String activityId);
 	
 	/**
+	 * 视频评论者用户
+	 * @param activityId
+	 * @return
+	 */
+	public List<TdiveAccount> getDiveAccountByCourseComment(String courseId);
+	
+	/**
 	 * 活动报名者用户信息
 	 * @param activityId
 	 * @return

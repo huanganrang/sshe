@@ -24,15 +24,15 @@ public class TdiveCourse implements java.io.Serializable,IEntity{
 	//alias
 	public static final String TABLE_ALIAS = "DiveCourse";
 	public static final String ALIAS_ID = "id";
-	public static final String ALIAS_TITLE = "标题";
+	public static final String ALIAS_TITLE = "名称";
 	public static final String ALIAS_COURSE_TYPE = "分类";
 	public static final String ALIAS_ICON = "图标";
 	public static final String ALIAS_PRICE = "价格";
-	public static final String ALIAS_CONTENT = "内容";
-	public static final String ALIAS_INTRODUCE = "介绍";
+	public static final String ALIAS_CONTENT = "简介";
+	public static final String ALIAS_INTRODUCE = "详细介绍";
 	public static final String ALIAS_FILE_PATH = "视频地址";
 	public static final String ALIAS_STATUS = "状态";
-	public static final String ALIAS_ADDTIME = "addtime";
+	public static final String ALIAS_ADDTIME = "创建时间";
 	
 	//date formats
 	public static final String FORMAT_ADDTIME = jb.util.Constants.DATE_FORMAT_FOR_ENTITY;

@@ -59,13 +59,14 @@ String url = request.getContextPath()+"/api/apiBaseDataController/basedata";
 							订单状态(OS)<br>
 							潜点特征(FT)<br>
 							潜水旅游兴趣(TT)<br>
-							学习分类(CT)<br>
+							<!-- 学习分类(CT)<br> -->
 							业务类型(BT)<br>
 							审核状态(AS)<br>
 							天气(WT)<br>
 							风力(WP)<br>
 							业务状态(ST)<br>
 							日志类型(LT)<br>
+							视频分类(VT)<br>
 						</td>
 						<td><input name="dataType" type="text" class="span2" /></td>
 					</tr><tr>
@@ -144,6 +145,19 @@ String url = request.getContextPath()+"/api/apiBaseDataController/basedata";
             <td style="border-top:none;border-left:none"></td>
             <td style="border-top:none;border-left:none">
                 字典父key值
+            </td>
+        </tr>
+        <tr height="19" style="height:19px">
+            <td height="19" style="border-top-style: none;">
+                description
+            </td>
+            <td style="border-top:none;border-left:none">
+            </td>
+            <td style="border-top:none;border-left:none" x:num="">
+            </td>
+            <td style="border-top:none;border-left:none"></td>
+            <td style="border-top:none;border-left:none">
+               描述
             </td>
         </tr>
     </tbody>

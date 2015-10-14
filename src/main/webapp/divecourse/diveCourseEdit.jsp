@@ -78,7 +78,7 @@
 				<tr>
 					<th><%=TdiveCourse.ALIAS_COURSE_TYPE%></th>
 					<td>
-						<jb:select dataType="CT" name="courseType" value="${diveCourse.courseType}"></jb:select>
+						<jb:select dataType="VT" name="courseType" value="${diveCourse.courseType}"></jb:select>
 					</td>
 					<th><%=TdiveCourse.ALIAS_STATUS%></th>
 					<td>

@@ -1,6 +1,7 @@
 package jb.pageModel;
 
 import java.util.Date;
+import java.util.List;
 
 import jb.listener.Application;
 
@@ -20,7 +21,16 @@ public class DiveCourse implements java.io.Serializable {
 	private Date addtime;			
 	private java.lang.String addUserId;
 
+	private int commentNum; //评论数量
+	private int collectNum; //收藏数量
+	private int praiseNum;  //赞人数
+	
+	private boolean isCollect;
+	private boolean isPraise;
 	private boolean isPay;
+	
+	//评论
+	private List<DiveCourseComment> commentList;
 	
 	public String getCourseTypeZh() {
 		return Application.getString(this.courseType);
@@ -109,7 +119,6 @@ public class DiveCourse implements java.io.Serializable {
 		return this.addtime;
 	}
 	
-	
 	public boolean isPay() {
 		return isPay;
 	}
@@ -117,4 +126,54 @@ public class DiveCourse implements java.io.Serializable {
 	public void setPay(boolean isPay) {
 		this.isPay = isPay;
 	}
+
+	public int getCommentNum() {
+		return commentNum;
+	}
+
+	public void setCommentNum(int commentNum) {
+		this.commentNum = commentNum;
+	}
+
+	public int getCollectNum() {
+		return collectNum;
+	}
+
+	public void setCollectNum(int collectNum) {
+		this.collectNum = collectNum;
+	}
+
+	public int getPraiseNum() {
+		return praiseNum;
+	}
+
+	public void setPraiseNum(int praiseNum) {
+		this.praiseNum = praiseNum;
+	}
+
+	public boolean isCollect() {
+		return isCollect;
+	}
+
+	public void setCollect(boolean isCollect) {
+		this.isCollect = isCollect;
+	}
+
+	public boolean isPraise() {
+		return isPraise;
+	}
+
+	public void setPraise(boolean isPraise) {
+		this.isPraise = isPraise;
+	}
+
+	public List<DiveCourseComment> getCommentList() {
+		return commentList;
+	}
+
+	public void setCommentList(List<DiveCourseComment> commentList) {
+		this.commentList = commentList;
+	}
+	
+	
 }

@@ -45,12 +45,12 @@ String url = request.getContextPath()+"/api/apiCourseController/courselist";
 						<td><%=url%></td>
 					</tr>
 					<tr>
-						<td align="right" style="width: 180px;"><label>tokenId(token值)：
+						<td align="right" style="width: 180px;"><label>tokenId(token值)：</label>
 						<td><input name="tokenId" type="text" class="span2"  value="<%=BaseController.DEFAULT_TOKEN%>"/></td>
 					</tr>
 					<tr>
-						<td align="right" style="width: 180px;"><label>courseType(分类)：</label></td>
-						<td><input name="courseType" type="text" class="span2" value="" />(不传查全部)</td>
+						<td align="right" style="width: 180px;"><label>courseType(视频分类)：</label></td>
+						<td><input name="courseType" type="text" class="span2" value="" />(参考基础数据VT，不传查全部)</td>
 					</tr>
 					<tr>
 						<td align="right" style="width: 180px;"><label>page(第几页)：</label></td>
@@ -68,7 +68,7 @@ String url = request.getContextPath()+"/api/apiCourseController/courselist";
 					</tr>
 				</table>
 			</form>
-			<label>结果：学习列表结果集，查看基础数据接口</label>
+			<label>结果：视频列表结果集，查看基础数据接口</label>
 			<div id="course_list_result"></div>
 			<div>
 				结果说明：1、json格式<br /> 2、success:true 成功<br /> 3、obj:数组格式<br />
@@ -212,6 +212,39 @@ String url = request.getContextPath()+"/api/apiCourseController/courselist";
             <td style="border-top:none;border-left:none"></td>
             <td style="border-top:none;border-left:none">
                 状态（上架，下架）
+            </td>
+        </tr>
+        <tr height="19" style="height:14.25pt">
+            <td height="14" class="xl23" style="">
+                commentNum
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="xl23" width="117">
+                评论数
+            </td>
+        </tr>
+        <tr height="19" style="height:14.25pt">
+            <td height="14" class="xl23" style="">
+                praiseNum
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="xl23" width="117">
+                赞数
+            </td>
+        </tr>
+        <tr height="19" style="height:14.25pt">
+            <td height="14" class="xl23" style="">
+                collectNum
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="xl23" width="117">
+                收藏数
             </td>
         </tr>
     </tbody>

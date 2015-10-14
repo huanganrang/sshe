@@ -5,7 +5,7 @@
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="jb" uri="http://www.jb.cn/jbtag"%> 
 <script type="text/javascript">
-	var editor;
+	var editor; 
 	$(function() {
 		window.setTimeout(function() {
 			editor = KindEditor.create('#introduce', {
@@ -77,11 +77,11 @@
 				<tr>
 					<th><%=TdiveCourse.ALIAS_COURSE_TYPE%></th>
 					<td>
-						<jb:select dataType="CT" name="courseType"></jb:select>
+						<jb:select dataType="VT" name="courseType"></jb:select>
 					</td>
 					<th><%=TdiveCourse.ALIAS_STATUS%></th>
 					<td>
-						<jb:select dataType="ST" name="status"></jb:select>
+						<jb:select dataType="ST" name="status" value="ST01"></jb:select>
 					</td>
 				</tr>
 				<tr>
