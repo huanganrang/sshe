@@ -6,9 +6,11 @@ import jb.absx.F;
 import jb.interceptors.TokenManage;
 import jb.pageModel.DataGrid;
 import jb.pageModel.DiveLog;
+import jb.pageModel.DiveLogComment;
 import jb.pageModel.Json;
 import jb.pageModel.PageHelper;
 import jb.pageModel.SessionInfo;
+import jb.service.DiveLogCommentServiceI;
 import jb.service.DiveLogServiceI;
 import jb.util.Constants;
 import jb.util.DateUtil;
@@ -37,7 +39,8 @@ public class ApiLogController extends BaseController {
 	@Autowired
 	private DiveLogServiceI diveLogService;
 	
-	
+	@Autowired
+	private DiveLogCommentServiceI diveLogCommentService;
 	
 	/**
 	 * 潜水日志
@@ -49,14 +52,14 @@ public class ApiLogController extends BaseController {
 	public Json loglist(PageHelper ph, DiveLog diveLog, HttpServletRequest request) {
 		Json j = new Json();
 		try{
-			SessionInfo s = getSessionInfo(request);
-			if(F.empty(diveLog.getAccountId())) {
-				diveLog.setAccountId(s.getId());
-			}
+//			SessionInfo s = getSessionInfo(request);
+//			if(F.empty(diveLog.getAccountId())) {
+//				diveLog.setAccountId(s.getId());
+//			}
 			
 			ph.setSort("addtime");
 			ph.setOrder("desc");
-			DataGrid dg = diveLogService.dataGrid(diveLog, ph);
+			DataGrid dg = diveLogService.dataGriComplex(diveLog, ph);
 			j.setObj(dg);
 			j.success();
 		}catch(Exception e){
@@ -73,10 +76,12 @@ public class ApiLogController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping("/logDetail")
-	public Json logDetail(String id) {
+	public Json logDetail(String id, HttpServletRequest request) {
 		Json j = new Json();
 		try{
-			j.setObj(diveLogService.get(id));
+			SessionInfo s = getSessionInfo(request);
+			DiveLog diveLog = diveLogService.getDetail(id, s.getId());
+			j.setObj(diveLog);
 			j.success();
 		}catch(Exception e){
 			j.fail();
@@ -208,6 +213,27 @@ public class ApiLogController extends BaseController {
 		}catch(Exception e){
 			j.fail();
 			j.setMsg("删除失败");
+			e.printStackTrace();
+		}		
+		return j;
+	}	
+	
+	/**
+	 * 添加评论
+	 * @param ph
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/addComment")
+	public Json addComment(HttpServletRequest request,DiveLogComment diveLogComment) {	
+		Json j = new Json();
+		try{
+			SessionInfo s = getSessionInfo(request);
+			diveLogComment.setUserId(s.getId());
+			diveLogCommentService.add(diveLogComment);
+			j.success();
+		}catch(Exception e){
+			j.fail();
 			e.printStackTrace();
 		}		
 		return j;

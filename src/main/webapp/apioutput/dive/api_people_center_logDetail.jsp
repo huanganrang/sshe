@@ -303,6 +303,163 @@ String url = request.getContextPath()+"/api/apiLogController/logDetail";
               创建时间
             </td>
         </tr>
+        <tr height="19" style="height:19px">
+            <td height="19" style="border-top-style: none;">
+                isCollect
+            </td>
+            <td style="border-top:none;border-left:none">
+                boolean
+            </td>
+            <td style="border-top:none;border-left:none" x:num="">
+            </td>
+            <td style="border-top:none;border-left:none"></td>
+            <td style="border-top:none;border-left:none">
+                是否已收藏（true:是；false:否）
+            </td>
+        </tr>
+        <tr height="19" style="height:19px">
+            <td height="19" style="border-top-style: none;">
+                praise
+            </td>
+            <td style="border-top:none;border-left:none">
+                boolean
+            </td>
+            <td style="border-top:none;border-left:none" x:num="">
+            </td>
+            <td style="border-top:none;border-left:none"></td>
+            <td style="border-top:none;border-left:none">
+                是否已赞（true:是；false:否）
+            </td>
+        </tr>
+        <tr height="19" style="height:19px">
+            <td height="19" style="border-top-style: none;">
+                collectNum
+            </td>
+            <td style="border-top:none;border-left:none">
+                int
+            </td>
+            <td style="border-top:none;border-left:none" x:num="">
+            </td>
+            <td style="border-top:none;border-left:none"></td>
+            <td style="border-top:none;border-left:none">
+                收藏数量
+            </td>
+        </tr>
+        <tr height="19" style="height:19px">
+            <td height="19" style="border-top-style: none;">
+                praiseNum
+            </td>
+            <td style="border-top:none;border-left:none">
+                int
+            </td>
+            <td style="border-top:none;border-left:none" x:num="">
+            </td>
+            <td style="border-top:none;border-left:none"></td>
+            <td style="border-top:none;border-left:none">
+                赞数量
+            </td>
+        </tr>
+        <tr height="19" style="height:19px">
+            <td height="19" style="">
+                commentList
+            </td>
+            <td style="border-left:none" x:str="List&lt;DiveLogComment&gt; ">
+                List&lt;DiveLogComment&gt;&nbsp;
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+                评论列表
+            </td>
+        </tr>
+    </tbody>
+</table>
+评论信息
+<table x:str="" cellpadding="0" cellspacing="0" width="673">
+    <colgroup>
+        <col width="192" style=";width:192px"/>
+        <col width="117" style=";width:117px"/>
+        <col width="72" span="2" style="width:72px"/>
+        <col width="148" style=";width:148px"/>
+        <col width="72" style="width:72px"/>
+    </colgroup>
+    <tbody>
+        <tr height="19" style="height:19px" class="firstRow">
+            <td height="19" width="192" style="">
+                logId
+            </td>
+            <td width="117" style="border-left-style: none;">
+                varchar
+            </td>
+            <td width="72" style="border-left-style: none;" x:num="">
+                36
+            </td>
+            <td width="72" style="border-left-style: none;"></td>
+            <td width="148" style="border-left-style: none;">
+               日志ID
+            </td>
+            <td width="72" style="border-left-style: none;"></td>
+        </tr>
+        <tr height="19" style="height:19px">
+            <td height="19" style="border-top-style: none;">
+                comment
+            </td>
+            <td style="border-top:none;border-left:none">
+                text
+            </td>
+            <td style="border-top:none;border-left:none"></td>
+            <td style="border-top:none;border-left:none"></td>
+            <td style="border-top:none;border-left:none">
+                评论
+            </td>
+            <td style="border-top:none;border-left:none"></td>
+        </tr>
+        <tr height="19" style="height:19px">
+            <td height="19" style="border-top-style: none;">
+                pid
+            </td>
+            <td style="border-top:none;border-left:none">
+                varchar
+            </td>
+            <td style="border-top:none;border-left:none" x:num="">
+                36
+            </td>
+            <td style="border-top:none;border-left:none"></td>
+            <td style="border-top:none;border-left:none">
+                评论上级(当pid为空时为最上级评论)
+            </td>
+            <td style="border-top:none;border-left:none"></td>
+        </tr>
+        <tr height="19" style="height:19px">
+            <td height="19" style="border-top-style: none;">
+                user_id
+            </td>
+            <td style="border-top:none;border-left:none">
+                varchar
+            </td>
+            <td style="border-top:none;border-left:none" x:num="">
+                36
+            </td>
+            <td style="border-top:none;border-left:none"></td>
+            <td style="border-top:none;border-left:none">
+                用户ID
+            </td>
+            <td style="border-top:none;border-left:none"></td>
+        </tr>
+        <tr height="19" style="height:19px">
+            <td height="19" style="border-top-style: none;">
+                addtime
+            </td>
+            <td style="border-top:none;border-left:none">
+                date
+            </td>
+            <td style="border-top:none;border-left:none"></td>
+            <td style="border-top:none;border-left:none"></td>
+            <td style="border-top:none;border-left:none">
+                评论时间
+            </td>
+            <td style="border-top:none;border-left:none"></td>
+        </tr>
     </tbody>
 </table>
 

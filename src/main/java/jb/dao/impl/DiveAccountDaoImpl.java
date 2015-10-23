@@ -29,6 +29,15 @@ public class DiveAccountDaoImpl extends BaseDaoImpl<TdiveAccount> implements Div
 		List<TdiveAccount> diveAccountList = find(hql,params);	
 		return diveAccountList;
 	}
+	
+	@Override
+	public List<TdiveAccount> getDiveAccountByLogComment(String logId) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		String hql = " from TdiveAccount a where exists (select 1 from TdiveLogComment c where c.userId = a.id and c.logId = :logId)";
+		params.put("logId", logId);
+		List<TdiveAccount> diveAccountList = find(hql,params);	
+		return diveAccountList;
+	}
 
 	@Override
 	public List<TdiveAccount> getDiveAccountByApply(String activityId) {

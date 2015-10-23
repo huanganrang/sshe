@@ -231,6 +231,39 @@ String url = request.getContextPath()+"/api/apiLogController/loglist";
               创建时间
             </td>
         </tr>
+        <tr height="19" style="height:14.25pt">
+            <td height="14" class="xl23" style="">
+                commentNum
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="xl23" width="117">
+                评论数
+            </td>
+        </tr>
+        <tr height="19" style="height:14.25pt">
+            <td height="14" class="xl23" style="">
+                praiseNum
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="xl23" width="117">
+                赞数
+            </td>
+        </tr>
+        <tr height="19" style="height:14.25pt">
+            <td height="14" class="xl23" style="">
+                collectNum
+            </td>
+            <td></td>
+            <td></td>
+            <td></td>
+            <td class="xl23" width="117">
+                收藏数
+            </td>
+        </tr>
     </tbody>
 </table>
 

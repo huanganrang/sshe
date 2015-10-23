@@ -10,6 +10,8 @@ import jb.pageModel.PageHelper;
  * 
  */
 public interface DiveLogServiceI {
+	
+	public final String LOG_TAG = "BT07";
 
 	/**
 	 * 获取DiveLog数据表格
@@ -50,5 +52,9 @@ public interface DiveLogServiceI {
 	 * @param id
 	 */
 	public void delete(String id);
+
+	public DataGrid dataGriComplex(DiveLog diveLog, PageHelper ph);
+
+	public DiveLog getDetail(String id, String accountId);
 
 }

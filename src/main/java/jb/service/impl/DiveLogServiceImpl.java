@@ -8,10 +8,18 @@ import java.util.Map;
 import java.util.UUID;
 
 import jb.absx.F;
+import jb.dao.DiveAccountDaoI;
+import jb.dao.DiveCollectDaoI;
+import jb.dao.DiveLogCommentDaoI;
 import jb.dao.DiveLogDaoI;
+import jb.dao.DivePraiseDaoI;
+import jb.model.TdiveAccount;
 import jb.model.TdiveLog;
+import jb.model.TdiveLogComment;
 import jb.pageModel.DataGrid;
+import jb.pageModel.DiveAccount;
 import jb.pageModel.DiveLog;
+import jb.pageModel.DiveLogComment;
 import jb.pageModel.PageHelper;
 import jb.service.DiveLogServiceI;
 import jb.util.MyBeanUtils;
@@ -25,6 +33,15 @@ public class DiveLogServiceImpl extends BaseServiceImpl<DiveLog> implements Dive
 
 	@Autowired
 	private DiveLogDaoI diveLogDao;
+	
+	@Autowired
+	private DivePraiseDaoI divePraiseDao;
+	@Autowired
+	private DiveCollectDaoI diveCollectDao;
+	@Autowired
+	private DiveLogCommentDaoI diveLogCommentDao;
+	@Autowired
+	private DiveAccountDaoI diveAccountDao;
 
 	@Override
 	public DataGrid dataGrid(DiveLog diveLog, PageHelper ph) {
@@ -105,6 +122,118 @@ public class DiveLogServiceImpl extends BaseServiceImpl<DiveLog> implements Dive
 	@Override
 	public void delete(String id) {
 		diveLogDao.delete(diveLogDao.get(TdiveLog.class, id));
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public DataGrid dataGriComplex(DiveLog diveLog, PageHelper ph) {
+		DataGrid datagrid = dataGrid(diveLog, ph);
+		List<DiveLog> diveLogs = datagrid.getRows();
+		
+		if(diveLogs!=null&&diveLogs.size()>0){
+			String[] businessIds = new String[diveLogs.size()];
+			int i = 0;
+			for(DiveLog d : diveLogs){
+				businessIds[i] = d.getId();
+				i++;
+			}
+			//查询收藏数，赞数，评论数
+			HashMap<String,Integer> collects = diveCollectDao.getCountCollectNum(LOG_TAG, businessIds);
+			HashMap<String,Integer> praises = divePraiseDao.getCountPraiseNum(LOG_TAG, businessIds);
+			HashMap<String,Integer> comments = diveLogCommentDao.getCountCommentNum(businessIds);
+			
+			for(DiveLog d : diveLogs){
+				Integer num = praises.get(d.getId());
+				if(num != null)
+				d.setPraiseNum(num);
+				
+				num = comments.get(d.getId());
+				if(num != null)
+				d.setCommentNum(num);
+				
+				num = collects.get(d.getId());
+				if(num != null)
+				d.setCollectNum(num);
+			}
+		}
+		return datagrid;
+	}
+	
+	/**
+	 * 获取详情信息
+	 */
+	public DiveLog getDetail(String id, String accountId) {
+		DiveLog log = get(id);
+		
+		Map<String, Object> params = new HashMap<String, Object>();
+		if(!F.empty(accountId)) {
+			String cHql = "select count(*) from TdiveCollect t ";
+			String pHql = "select count(*) from TdivePraise t ";
+			params.put("businessId", id);
+			params.put("businessType", LOG_TAG);
+			String where = " where t.businessId = :businessId and t.businessType = :businessType ";
+			log.setCollectNum(diveCollectDao.count(cHql + where, params).intValue()); // 收藏数
+			log.setPraiseNum(divePraiseDao.count(pHql + where, params).intValue()); // 赞数
+			
+			params.put("accountId", accountId);
+			where += " and t.accountId = :accountId ";
+			if(diveCollectDao.count(cHql + where, params) > 0) {
+				log.setCollect(true); // 已收藏
+			} else {
+				log.setCollect(false); // 未收藏
+			}
+			
+			if(divePraiseDao.count(pHql + where, params) > 0) {
+				log.setPraise(true); // 已赞
+			} else {
+				log.setPraise(false); // 未赞
+			}
+			
+		}
+		
+		// 评论列表
+		setCommentList(log);
+		
+		return log;
+	}
+	
+	private void setCommentList(DiveLog diveLog) {
+		List<DiveAccount> commentUsers = convert(diveAccountDao.getDiveAccountByLogComment(diveLog.getId()));
+		Map<String,DiveAccount> commentUsersMap = new HashMap<String,DiveAccount>();
+		for(DiveAccount t : commentUsers){
+			commentUsersMap.put(t.getId(), t);
+		}
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("logId", diveLog.getId());
+		List<TdiveLogComment> tDiveLogCommentList = diveLogCommentDao.find("from TdiveLogComment t where t.logId = :logId order by addtime", params);
+		List<DiveLogComment> diveLogCommentList = new ArrayList<DiveLogComment>();
+		Map<String, DiveAccount> commentAccountMap = new HashMap<String, DiveAccount>();
+		for(TdiveLogComment t : tDiveLogCommentList) {
+			commentAccountMap.put(t.getId(), commentUsersMap.get(t.getUserId()));
+		}
+		
+		for(TdiveLogComment t : tDiveLogCommentList){
+			DiveLogComment diveLogComment = new DiveLogComment();
+			BeanUtils.copyProperties(t,diveLogComment);
+			diveLogComment.setCommentUser(commentUsersMap.get(t.getUserId()));
+			if(!F.empty(t.getPid())) {
+				diveLogComment.setParentCommentUser(commentAccountMap.get(t.getPid()));
+			}
+			diveLogCommentList.add(diveLogComment);
+			
+		}
+		
+		diveLog.setCommentList(diveLogCommentList);
+	}
+
+	private List<DiveAccount> convert(List<TdiveAccount> diveAccounts){
+		List<DiveAccount> list = new ArrayList<DiveAccount>();
+		for(TdiveAccount s : diveAccounts){
+			DiveAccount o = new DiveAccount();
+			MyBeanUtils.copyProperties(s, o, new String[] { "password" , "personality", "email", "recommend", "hxPassword", "hxStatus", "addtime" }, true );
+			list.add(o);
+		}
+		return list;		
 	}
 
 }

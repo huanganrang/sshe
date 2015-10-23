@@ -48,6 +48,8 @@
 			style="padding: 1px"></div>
 		<div title="日志图片删除" data-options="href:'api_people_center_del_logImage.jsp'"
 			style="padding: 1px"></div>
+		<div title="添加日志评论" data-options="href:'api_people_center_add_logcomment.jsp'"
+			style="padding: 1px"></div>
 		<div title="退出登录" data-options="href:'api_logout.jsp'"
 			style="padding: 1px"></div>
 	</div>

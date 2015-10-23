@@ -1,6 +1,7 @@
 package jb.pageModel;
 
 import java.util.Date;
+import java.util.List;
 
 import jb.listener.Application;
 
@@ -29,6 +30,16 @@ public class DiveLog implements java.io.Serializable {
 	private java.lang.String diveAddress;
 	private java.lang.String highGas;
 	private java.lang.String sumary;
+	
+	private int commentNum; //评论数量
+	private int collectNum; //收藏数量
+	private int praiseNum;  //赞人数
+	
+	private boolean isCollect;
+	private boolean isPraise;
+	
+	//评论
+	private List<DiveLogComment> commentList;
 	
 	
 	public String getLogTypeZh() {
@@ -196,4 +207,42 @@ public class DiveLog implements java.io.Serializable {
 	public void setSumary(java.lang.String sumary) {
 		this.sumary = sumary;
 	}
+	public int getCommentNum() {
+		return commentNum;
+	}
+	public void setCommentNum(int commentNum) {
+		this.commentNum = commentNum;
+	}
+	public int getCollectNum() {
+		return collectNum;
+	}
+	public void setCollectNum(int collectNum) {
+		this.collectNum = collectNum;
+	}
+	public int getPraiseNum() {
+		return praiseNum;
+	}
+	public void setPraiseNum(int praiseNum) {
+		this.praiseNum = praiseNum;
+	}
+	public boolean isCollect() {
+		return isCollect;
+	}
+	public void setCollect(boolean isCollect) {
+		this.isCollect = isCollect;
+	}
+	public boolean isPraise() {
+		return isPraise;
+	}
+	public void setPraise(boolean isPraise) {
+		this.isPraise = isPraise;
+	}
+	public List<DiveLogComment> getCommentList() {
+		return commentList;
+	}
+	public void setCommentList(List<DiveLogComment> commentList) {
+		this.commentList = commentList;
+	}
+	
+	
 }
