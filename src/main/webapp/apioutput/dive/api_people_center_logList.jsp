@@ -50,7 +50,7 @@ String url = request.getContextPath()+"/api/apiLogController/loglist";
 					</tr>
 					<tr>
 						<td align="right" style="width: 180px;"><label>accountId(用户ID)：</label></td>
-						<td><input name="accountId" type="text" class="span2" value=""/>（不传查自己，传入则查询潜友信息）</td>
+						<td><input name="accountId" type="text" class="span2" value=""/>（不传查所有人）</td>
 					</tr>
 					<tr>
 						<td align="right" style="width: 180px;"><label>logType(日志类型)：</label>
