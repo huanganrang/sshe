@@ -84,7 +84,7 @@ public class DiveTravelServiceImpl extends BaseServiceImpl<DiveTravel> implement
 				params.put("areaName", "%%" + diveTravel.getAreaName() + "%%");
 			}
 			if (!F.empty(diveTravel.getSearchValue())) {
-				whereHql += " and (t.name like :searchValue or t.nameEn like :searchValue or t.countryName like :searchValue or t.areaName like :searchValue or t.countryNameEn like :searchValue or t.areaNameEn like :searchValue)";
+				whereHql += " and (t.name like :searchValue or t.nameEn like :searchValue or t.countryName like :searchValue or t.areaName like :searchValue or t.countryNameEn like :searchValue or t.areaNameEn like :searchValue or t.price like :searchValue)";
 				params.put("searchValue", "%%" + diveTravel.getSearchValue() + "%%");
 			}
 		}	
