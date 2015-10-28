@@ -95,6 +95,22 @@ String url = request.getContextPath()+"/api/apiOrderController/orderList";
         </tr>
         <tr height="19" style="height:14.25pt" class="firstRow">
             <td height="14" class="xl22" width="54" style="">
+                orderNo
+            </td>
+            <td class="xl22" width="54" style="border-left-style: none;">
+                varchar
+            </td>
+            <td class="xl22" width="54" style="border-left-style: none;">
+            	64
+            </td>
+            <td class="xl22" width="54" style="border-left-style: none;">
+            </td>
+            <td class="xl22" width="171" style="border-left-style: none;">
+               订单号
+            </td>
+        </tr>
+        <tr height="19" style="height:14.25pt" class="firstRow">
+            <td height="14" class="xl22" width="54" style="">
                 address
             </td>
             <td class="xl22" width="54" style="border-left-style: none;">

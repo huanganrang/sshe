@@ -259,4 +259,32 @@ public class DiveCourseServiceImpl extends BaseServiceImpl<DiveCourse> implement
 		}
 		return list;		
 	}
+	
+	/**
+	 * 个人收藏-视频收藏列表查询
+	 */
+	public DataGrid dataGridCollect(String accountId, PageHelper ph) {
+		List<DiveCourse> ol = new ArrayList<DiveCourse>();
+		ph.setSort("addtime");
+		ph.setOrder("desc");
+		
+		DataGrid dg = new DataGrid();
+		
+		String hql = "select a from TdiveCourse a ,TdiveCollect t  "
+				+ " where a.id = t.businessId and t.businessType='"+COURSE_TAG+"' and t.accountId = :accountId";
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("accountId", accountId);
+		List<TdiveCourse> l = diveCourseDao.find(hql   + orderHql(ph), params, ph.getPage(), ph.getRows());
+		dg.setTotal(diveCourseDao.count("select count(*) " + hql.substring(8) , params));
+		if (l != null && l.size() > 0) {
+			for (TdiveCourse t : l) {
+				DiveCourse o = new DiveCourse();
+				BeanUtils.copyProperties(t, o);
+				o.setIntroduce(null);
+				ol.add(o);
+			}
+		}
+		dg.setRows(ol);
+		return dg;
+	}
 }

@@ -8,6 +8,7 @@ public class DiveOrder implements java.io.Serializable {
 	private static final long serialVersionUID = 5454155825314635342L;
 
 	private java.lang.String id;	
+	private java.lang.String orderNo;
 	private java.lang.String accountId;	
 	private java.lang.String address;	
 	private java.lang.String expressName;	
@@ -18,7 +19,9 @@ public class DiveOrder implements java.io.Serializable {
 	private java.lang.String orderStatus;	
 	private java.lang.String sendStatus;	
 	private Date paytime;			
-	private Date addtime;			
+	private Date addtime;	
+	private java.lang.Float amount;	// 订单总金额（元）
+	private java.lang.String channel;
 
 	private List<DiveOrderDetail> detail_list;
 
@@ -29,8 +32,15 @@ public class DiveOrder implements java.io.Serializable {
 	public java.lang.String getId() {
 		return this.id;
 	}
-
 	
+	public java.lang.String getOrderNo() {
+		return orderNo;
+	}
+
+	public void setOrderNo(java.lang.String orderNo) {
+		this.orderNo = orderNo;
+	}
+
 	public void setAccountId(java.lang.String accountId) {
 		this.accountId = accountId;
 	}
@@ -107,6 +117,22 @@ public class DiveOrder implements java.io.Serializable {
 	
 	public Date getAddtime() {
 		return this.addtime;
+	}
+
+	public java.lang.Float getAmount() {
+		return amount;
+	}
+
+	public void setAmount(java.lang.Float amount) {
+		this.amount = amount;
+	}
+
+	public java.lang.String getChannel() {
+		return channel;
+	}
+
+	public void setChannel(java.lang.String channel) {
+		this.channel = channel;
 	}
 
 	public List<DiveOrderDetail> getDetail_list() {

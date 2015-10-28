@@ -24,6 +24,7 @@ public class TdiveOrder implements java.io.Serializable,IEntity{
 	//alias
 	public static final String TABLE_ALIAS = "DiveOrder";
 	public static final String ALIAS_ID = "主键";
+	public static final String ALIAS_ORDER_NO = "订单号";
 	public static final String ALIAS_ACCOUNT_ID = "用户ID";
 	public static final String ALIAS_ADDRESS = "地址";
 	public static final String ALIAS_EXPRESS_NAME = "快递公司";
@@ -45,6 +46,8 @@ public class TdiveOrder implements java.io.Serializable,IEntity{
 	//columns START
 	//@Length(max=36)
 	private java.lang.String id;
+	//@Length(max=64)
+	private java.lang.String orderNo; 
 	//@Length(max=36)
 	private java.lang.String accountId;
 	//@Length(max=256)
@@ -85,6 +88,15 @@ public class TdiveOrder implements java.io.Serializable,IEntity{
 	@Column(name = "id", unique = true, nullable = false, length = 36)
 	public java.lang.String getId() {
 		return this.id;
+	}
+	
+	@Column(name = "order_no", unique = false, nullable = true, insertable = true, updatable = true, length = 64)
+	public java.lang.String getOrderNo() {
+		return orderNo;
+	}
+	
+	public void setOrderNo(java.lang.String orderNo) {
+		this.orderNo = orderNo;
 	}
 	
 	@Column(name = "account_Id", unique = false, nullable = true, insertable = true, updatable = true, length = 36)

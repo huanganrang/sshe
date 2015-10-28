@@ -6,7 +6,7 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 <%
-String url = request.getContextPath()+"/api/apiOrderController/paySuccess";
+String url = request.getContextPath()+"/api/apiOrderController/pay";
 %>
 <title>Insert title here</title>
 </head>
@@ -71,6 +71,14 @@ String url = request.getContextPath()+"/api/apiOrderController/paySuccess";
 					<tr>
 						<td align="right" style="width: 180px;"><label>remark(备注)：</label></td>
 						<td><input name="remark" type="text" class="span2" value="" /></td>
+					</tr>
+					<tr>
+						<td align="right" style="width: 180px;"><label>channel(第三方支付渠道)：</label></td>
+						<td><input name="channel" type="text" class="span2" value="alipay"/></td>
+					</tr>
+					<tr>
+						<td align="right" style="width: 180px;"><label>amount(订单总金额)：</label></td>
+						<td><input name="amount" type="text" class="span2" value=""/>(单位元)</td>
 					</tr>
 
 					<tr>

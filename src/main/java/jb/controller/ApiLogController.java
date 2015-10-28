@@ -239,6 +239,27 @@ public class ApiLogController extends BaseController {
 		return j;
 	}	
 	
+	/**
+	 * 个人收藏-潜水日志收藏列表查询
+	 * @param ph
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/collectlist")
+	public Json collectlist(PageHelper ph, HttpServletRequest request) {	
+		Json j = new Json();
+		try{
+			SessionInfo s = getSessionInfo(request);
+			DataGrid dg = diveLogService.dataGridCollect(s.getId(), ph);
+			j.setObj(dg);
+			j.success();
+		}catch(Exception e){
+			j.fail();
+			e.printStackTrace();
+		}		
+		return j;
+	}	
+	
 	private SessionInfo getSessionInfo(HttpServletRequest request){
 		SessionInfo s = tokenManage.getSessionInfo(request);
 		return s;		

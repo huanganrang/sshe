@@ -118,6 +118,32 @@
                 活动收藏数量
             </td>
         </tr>
+        <tr height="19" style="height:19px" class="firstRow">
+            <td height="19" width="192" style="">
+               course_number
+            </td>
+            <td width="117" style="border-left-style: none;">
+                int
+            </td>
+            <td width="72" style="border-left-style: none;" x:num=""></td>
+            <td width="72" style="border-left-style: none;"></td>
+            <td width="148" style="border-left-style: none;">
+                视频收藏数量
+            </td>
+        </tr>
+        <tr height="19" style="height:19px" class="firstRow">
+            <td height="19" width="192" style="">
+               log_number
+            </td>
+            <td width="117" style="border-left-style: none;">
+                int
+            </td>
+            <td width="72" style="border-left-style: none;" x:num=""></td>
+            <td width="72" style="border-left-style: none;"></td>
+            <td width="148" style="border-left-style: none;">
+                潜水日志收藏数量
+            </td>
+        </tr>
        
     </tbody>
 </table>

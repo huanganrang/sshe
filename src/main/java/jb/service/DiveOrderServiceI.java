@@ -68,4 +68,6 @@ public interface DiveOrderServiceI {
 	 */
 	public Map<String, Integer> getOrderNumber(String accountId);
 
+	public void editByOrderNo(DiveOrder order);
+
 }

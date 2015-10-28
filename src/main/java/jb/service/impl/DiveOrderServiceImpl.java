@@ -15,7 +15,9 @@ import jb.pageModel.DataGrid;
 import jb.pageModel.DiveOrder;
 import jb.pageModel.PageHelper;
 import jb.service.DiveOrderServiceI;
+import jb.util.DateUtil;
 import jb.util.MyBeanUtils;
+import jb.util.Util;
 
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -125,17 +127,19 @@ public class DiveOrderServiceImpl extends BaseServiceImpl<DiveOrder> implements 
 		diveOrderDao.delete(diveOrderDao.get(TdiveOrder.class, id));
 	}
 
-
 	/**
 	 * 订单创建
 	 */
 	public String createOrder(String cardIds, String accountId) {
 		// 创建订单
 		DiveOrder order = new DiveOrder();
+		Date now = new Date();
 		order.setAccountId(accountId); 
 		order.setOrderStatus("OS02"); // 未完成
 		order.setPayStatus("PS02"); // 待支付
-		order.setAddtime(new Date());
+		order.setAddtime(now);
+		// 订单号
+		order.setOrderNo(DateUtil.format(now, "yyMMddHHmmss") + Util.CreateNonceNumstr(4)); 
 		this.add(order);
 		
 		// 添加订单明细
@@ -172,6 +176,16 @@ public class DiveOrderServiceImpl extends BaseServiceImpl<DiveOrder> implements 
 		Map m = l.get(0);
 		m.put("cart_number", diveShopCartDao.count("select count(*) from TdiveShopCart t where t.accountId = :accountId", params));
 		return m;
+	}
+
+	@Override
+	public void editByOrderNo(DiveOrder order) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("orderNo", order.getOrderNo());
+		TdiveOrder t = diveOrderDao.get("from TdiveOrder t where t.orderNo = :orderNo", params);
+		if (t != null) {
+			MyBeanUtils.copyProperties(order, t, new String[] {"id"},true);
+		}
 	}
 
 }

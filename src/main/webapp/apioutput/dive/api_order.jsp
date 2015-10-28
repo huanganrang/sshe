@@ -28,7 +28,7 @@
 			style="padding: 1px"></div>
 		<div title="订单创建" data-options="href:'api_order_create.jsp'"
 			style="padding: 1px"></div>
-		<div title="支付成功回调" data-options="href:'api_order_pay_success.jsp'"
+		<div title="支付" data-options="href:'api_order_pay.jsp'"
 			style="padding: 1px"></div>
 		<div title="订单取消" data-options="href:'api_order_cancel.jsp'"
 			style="padding: 1px"></div>

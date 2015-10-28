@@ -57,4 +57,6 @@ public interface DiveLogServiceI {
 
 	public DiveLog getDetail(String id, String accountId);
 
+	public DataGrid dataGridCollect(String accountId, PageHelper ph);
+
 }

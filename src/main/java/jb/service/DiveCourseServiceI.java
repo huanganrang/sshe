@@ -62,4 +62,6 @@ public interface DiveCourseServiceI {
 
 	public DataGrid dataGriComplex(DiveCourse diveCourse, PageHelper ph);
 
+	public DataGrid dataGridCollect(String accountId, PageHelper ph);
+
 }

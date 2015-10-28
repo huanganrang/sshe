@@ -30,13 +30,17 @@
 			style="padding: 1px"></div>
 		<div title="收藏主页" data-options="href:'api_people_center_collectHome.jsp'"
 			style="padding: 1px"></div>
-		<div title="潜水旅游收藏列表" data-options="href:'api_people_center_travelCollectList.jsp'"
+		<div title="船宿收藏列表" data-options="href:'api_people_center_travelCollectList.jsp'"
 			style="padding: 1px"></div>
 		<div title="潜点收藏列表" data-options="href:'api_people_center_addressCollectList.jsp'"
 			style="padding: 1px"></div>
 		<div title="装备收藏列表" data-options="href:'api_people_center_equipCollectList.jsp'"
 			style="padding: 1px"></div>
 		<div title="活动收藏列表" data-options="href:'api_people_center_activityCollectList.jsp'"
+			style="padding: 1px"></div>
+		<div title="视频收藏列表" data-options="href:'api_people_center_courseCollectList.jsp'"
+			style="padding: 1px"></div>
+		<div title="潜水日志收藏列表" data-options="href:'api_people_center_logCollectList.jsp'"
 			style="padding: 1px"></div>
 		<div title="潜水日志" data-options="href:'api_people_center_logList.jsp'"
 			style="padding: 1px"></div>

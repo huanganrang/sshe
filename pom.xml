@@ -303,6 +303,12 @@
 			</exclusions> 
 		</dependency>
 		<!-- androidpn server 依赖的jar 结束 -->	
+		<!-- ping++ -->
+		<dependency>
+		  <groupId>com.google.code.gson</groupId>
+		  <artifactId>gson</artifactId>
+		  <version>2.2.4</version>
+		</dependency>
 	</dependencies>
 	<build>
 		<finalName>dive</finalName>

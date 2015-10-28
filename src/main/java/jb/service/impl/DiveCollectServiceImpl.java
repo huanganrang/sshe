@@ -110,7 +110,9 @@ public class DiveCollectServiceImpl extends BaseServiceImpl<DiveCollect> impleme
 		String sql = "select count(case when business_type='BT01' then business_id end) travel_number, "
 				+ "count(case when business_type='BT02' then business_id end) address_number, "
 				+ "count(case when business_type='BT03' then business_id end) equip_number, "
-				+ "count(case when business_type='BT04' then business_id end) activity_number "
+				+ "count(case when business_type='BT04' then business_id end) activity_number, "
+				+ "count(case when business_type='BT06' then business_id end) course_number, "
+				+ "count(case when business_type='BT07' then business_id end) log_number "
 				+ " from dive_collect where account_id = :accountId";
 		List<Map> l = diveCollectDao.findBySql2Map(sql, params);
 		return l.get(0);

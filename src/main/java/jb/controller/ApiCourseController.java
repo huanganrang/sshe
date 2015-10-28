@@ -3,6 +3,7 @@ package jb.controller;
 import javax.servlet.http.HttpServletRequest;
 
 import jb.interceptors.TokenManage;
+import jb.pageModel.DataGrid;
 import jb.pageModel.DiveCourse;
 import jb.pageModel.DiveCourseComment;
 import jb.pageModel.Json;
@@ -108,6 +109,27 @@ public class ApiCourseController extends BaseController {
 			SessionInfo s = getSessionInfo(request);
 			diveCourseComment.setUserId(s.getId());
 			diveCourseCommentService.add(diveCourseComment);
+			j.success();
+		}catch(Exception e){
+			j.fail();
+			e.printStackTrace();
+		}		
+		return j;
+	}	
+	
+	/**
+	 * 个人收藏-视频收藏列表查询
+	 * @param ph
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/collectlist")
+	public Json collectlist(PageHelper ph, HttpServletRequest request) {	
+		Json j = new Json();
+		try{
+			SessionInfo s = getSessionInfo(request);
+			DataGrid dg = diveCourseService.dataGridCollect(s.getId(), ph);
+			j.setObj(dg);
 			j.success();
 		}catch(Exception e){
 			j.fail();
