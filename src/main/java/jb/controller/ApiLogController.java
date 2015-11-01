@@ -246,11 +246,11 @@ public class ApiLogController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping("/collectlist")
-	public Json collectlist(PageHelper ph, HttpServletRequest request) {	
+	public Json collectlist(DiveLog log, PageHelper ph, HttpServletRequest request) {	
 		Json j = new Json();
 		try{
 			SessionInfo s = getSessionInfo(request);
-			DataGrid dg = diveLogService.dataGridCollect(s.getId(), ph);
+			DataGrid dg = diveLogService.dataGridCollect(log, s.getId(), ph);
 			j.setObj(dg);
 			j.success();
 		}catch(Exception e){

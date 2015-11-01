@@ -33,6 +33,8 @@
 				style="padding: 1px"></div>	
 			<div title="订单" data-options="href:'api_order.jsp'"
 				style="padding: 1px"></div>	
+			<div title="提交审核" data-options="href:'api_audit.jsp'"
+				style="padding: 1px"></div>	
 			<div title="APP错误日志上传" data-options="href:'api_app_errorlog.jsp'"
 				style="padding: 1px"></div>
 		</div>

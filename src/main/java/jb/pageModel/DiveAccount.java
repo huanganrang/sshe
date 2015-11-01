@@ -23,7 +23,11 @@ public class DiveAccount implements java.io.Serializable {
 	private java.util.Date birthday;
 	private Double longitude;
 	private Double latitude;
-	private Date addtime;			
+	private Date addtime;	
+	
+	private java.lang.String realname;
+	private java.lang.String mobile;
+	private java.lang.String address;
 
 	private int logNum; // 潜水日志数量
 	private String qrCodePath; // 二维码地址
@@ -186,5 +190,27 @@ public class DiveAccount implements java.io.Serializable {
 		this.searchValue = searchValue;
 	}
 	
-	
+	public java.lang.String getRealname() {
+		return realname;
+	}
+
+	public void setRealname(java.lang.String realname) {
+		this.realname = realname;
+	}
+
+	public java.lang.String getMobile() {
+		return mobile;
+	}
+
+	public void setMobile(java.lang.String mobile) {
+		this.mobile = mobile;
+	}
+
+	public java.lang.String getAddress() {
+		return address;
+	}
+
+	public void setAddress(java.lang.String address) {
+		this.address = address;
+	}
 }

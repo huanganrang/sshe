@@ -239,7 +239,7 @@ public class DiveLogServiceImpl extends BaseServiceImpl<DiveLog> implements Dive
 	/**
 	 * 个人收藏-潜水日志收藏列表查询
 	 */
-	public DataGrid dataGridCollect(String accountId, PageHelper ph) {
+	public DataGrid dataGridCollect(DiveLog log, String accountId, PageHelper ph) {
 		List<DiveLog> ol = new ArrayList<DiveLog>();
 		ph.setSort("addtime");
 		ph.setOrder("desc");
@@ -247,9 +247,13 @@ public class DiveLogServiceImpl extends BaseServiceImpl<DiveLog> implements Dive
 		DataGrid dg = new DataGrid();
 		
 		String hql = "select a from TdiveLog a ,TdiveCollect t  "
-				+ " where a.id = t.businessId and t.businessType='"+LOG_TAG+"' and t.accountId = :accountId";
+				+ " where a.id = t.businessId and t.businessType='"+LOG_TAG+"' and t.accountId = :accountId ";
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("accountId", accountId);
+		if(!F.empty(log.getLogType())) {
+			hql += " and a.logType = :logType ";
+			params.put("logType", log.getLogType());
+		}
 		List<TdiveLog> l = diveLogDao.find(hql   + orderHql(ph), params, ph.getPage(), ph.getRows());
 		dg.setTotal(diveLogDao.count("select count(*) " + hql.substring(8) , params));
 		if (l != null && l.size() > 0) {

@@ -72,6 +72,10 @@ public class TdiveAccount implements java.io.Serializable,IEntity{
 	private Double latitude;
 	//
 	private java.util.Date addtime;
+	
+	private java.lang.String realname;
+	private java.lang.String mobile;
+	private java.lang.String address;
 	//columns END
 
 
@@ -227,6 +231,29 @@ public class TdiveAccount implements java.io.Serializable,IEntity{
 		this.addtime = addtime;
 	}
 	
+	@Column(name = "realname", unique = false, nullable = true, insertable = true, updatable = true, length = 128)
+	public java.lang.String getRealname() {
+		return realname;
+	}
+	public void setRealname(java.lang.String realname) {
+		this.realname = realname;
+	}
+	
+	@Column(name = "mobile", unique = false, nullable = true, insertable = true, updatable = true, length = 128)
+	public java.lang.String getMobile() {
+		return mobile;
+	}
+	public void setMobile(java.lang.String mobile) {
+		this.mobile = mobile;
+	}
+	
+	@Column(name = "address", unique = false, nullable = true, insertable = true, updatable = true, length = 256)
+	public java.lang.String getAddress() {
+		return address;
+	}
+	public void setAddress(java.lang.String address) {
+		this.address = address;
+	}
 	
 	/*
 	public String toString() {

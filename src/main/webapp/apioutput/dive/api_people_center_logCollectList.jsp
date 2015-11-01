@@ -49,6 +49,10 @@ String url = request.getContextPath()+"/api/apiLogController/collectlist";
 						<td><input name="tokenId" type="text" class="span2"  value=""/></td>
 					</tr>
 					<tr>
+						<td align="right" style="width: 180px;"><label>logType(日志类型)：</label>
+						<td><input name="logType" type="text" class="span2"  value="LT01"/>(LT01：电子日志；LT02：纸张日志)</td>
+					</tr>
+					<tr>
 						<td align="right" style="width: 180px;"><label>page(第几页)：</label></td>
 						<td><input name="page" type="text" class="span2" value="1" /></td>
 					</tr>

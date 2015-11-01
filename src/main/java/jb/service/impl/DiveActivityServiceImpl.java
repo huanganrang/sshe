@@ -231,6 +231,7 @@ public class DiveActivityServiceImpl extends BaseServiceImpl<DiveActivity> imple
 			for (TdiveActivity t : l) {
 				DiveActivity o = new DiveActivity();
 				BeanUtils.copyProperties(t, o);
+				o.setIntroduce(null);
 				ol.add(o);
 			}
 		}
