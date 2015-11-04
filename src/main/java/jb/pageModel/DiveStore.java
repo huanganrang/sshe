@@ -16,6 +16,7 @@ public class DiveStore implements java.io.Serializable {
 	private java.lang.String serverScope;	
 	private java.lang.String area;	
 	private java.lang.String status;	
+	private java.lang.Float hot;
 	private Date addtime;		
 	private java.lang.String addUserId;
 
@@ -85,6 +86,15 @@ public class DiveStore implements java.io.Serializable {
 	public java.lang.String getStatus() {
 		return this.status;
 	}
+	
+	public java.lang.Float getHot() {
+		return hot;
+	}
+
+	public void setHot(java.lang.Float hot) {
+		this.hot = hot;
+	}
+
 	public void setAddtime(Date addtime) {
 		this.addtime = addtime;
 	}

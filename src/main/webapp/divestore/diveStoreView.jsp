@@ -2,6 +2,7 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="jb.model.TdiveStore"%>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <script type="text/javascript">
 	$(function() {
 		parent.$.messager.progress('close');		
@@ -27,8 +28,10 @@
 				<td>${diveStore.statusZh}</td>
 			</tr>
 			<tr>
+				<th>热门值</th>
+				<td>${diveStore.hot}</td>
 				<th><%=TdiveStore.ALIAS_ADDTIME%></th>
-				<td colspan="3">${diveStore.addtime}</td>
+				<td><fmt:formatDate value="${diveStore.addtime}" pattern="yyyy-MM-dd HH:mm:ss"/></td>
 			</tr>
 			<tr>
 				<th><%=TdiveStore.ALIAS_ICON%></th>

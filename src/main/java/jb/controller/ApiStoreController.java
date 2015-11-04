@@ -53,6 +53,28 @@ public class ApiStoreController extends BaseController {
 	}	
 	
 	/**
+	 * 热门列表
+	 * @param ph
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/storelist_hot")
+	public Json store_hot(PageHelper ph,DiveStore diveStore) {
+		Json j = new Json();
+		try{
+			diveStore.setHot(0F);
+			ph.setSort("hot desc, t.addtime");
+			ph.setOrder("desc");
+			j.setObj(diveStoreService.dataGriComplex(diveStore,ph));
+			j.success();
+		}catch(Exception e){
+			j.fail();
+			e.printStackTrace();
+		}		
+		return j;
+	}	
+	
+	/**
 	 * 搜索
 	 * @param ph
 	 * @return

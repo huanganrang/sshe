@@ -55,6 +55,7 @@ public class TdiveStore implements java.io.Serializable,IEntity{
 	private java.lang.String area;
 	//@Length(max=4)
 	private java.lang.String status;
+	private java.lang.Float hot;
 	//
 	private java.util.Date addtime;
 	//@Length(max=36)
@@ -142,6 +143,14 @@ public class TdiveStore implements java.io.Serializable,IEntity{
 		this.status = status;
 	}
 	
+	@Column(name = "hot", unique = false, nullable = true, insertable = true, updatable = true, length = 12)
+	public java.lang.Float getHot() {
+		return this.hot;
+	}
+	
+	public void setHot(java.lang.Float hot) {
+		this.hot = hot;
+	}
 
 	@Column(name = "addtime", unique = false, nullable = true, insertable = true, updatable = true, length = 10)
 	public java.util.Date getAddtime() {

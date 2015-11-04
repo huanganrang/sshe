@@ -39,7 +39,7 @@
 			idField : 'id',
 			pageSize : 10,
 			pageList : [ 10, 20, 30, 40, 50 ],
-			sortName : 'id',
+			sortName : 'addtime',
 			sortOrder : 'desc',
 			checkOnSelect : false,
 			selectOnCheck : false,
@@ -65,9 +65,15 @@
 				title : '<%=TdiveStore.ALIAS_STATUS%>',
 				width : 50		
 				}, {
+				field : 'hot',
+				title : '热门值',
+				width : 50,
+				sortable : true
+				}, {
 				field : 'addtime',
 				title : '<%=TdiveStore.ALIAS_ADDTIME%>',
-				width : 50		
+				width : 50,
+				sortable : true
 			}, {
 				field : 'action',
 				title : '操作',

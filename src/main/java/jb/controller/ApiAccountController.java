@@ -65,6 +65,7 @@ public class ApiAccountController extends BaseController {
 			Map<String, Object> result = new HashMap<String, Object>();
 			result.put("tokenId", tokenManage.buildToken(account.getId(),account.getUserName()));
 			result.put("accountId", account.getId());
+			result.put("icon", account.getIcon());
 			j.setObj(result);
 			j.setSuccess(true);
 			j.setMsg("登陆成功！");
@@ -109,6 +110,7 @@ public class ApiAccountController extends BaseController {
 			Map<String, Object> result = new HashMap<String, Object>();
 			result.put("tokenId", tokenManage.buildToken(account.getId(),account.getUserName()));
 			result.put("accountId", account.getId());
+			result.put("icon", account.getIcon());
 			j.setObj(result);
 			j.setSuccess(true);
 			j.setMsg("注册成功");

@@ -79,6 +79,10 @@ public class DiveStoreServiceImpl extends BaseServiceImpl<DiveStore> implements 
 				whereHql += " and t.status = :status";
 				params.put("status", diveStore.getStatus());
 			}
+			if (diveStore.getHot() != null) {
+				whereHql += " and t.hot > :hot";
+				params.put("hot", diveStore.getHot());
+			}
 			if (!F.empty(diveStore.getAddUserId())) {
 				whereHql += " and t.addUserId = :addUserId";
 				params.put("addUserId", diveStore.getAddUserId());
