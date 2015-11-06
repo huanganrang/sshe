@@ -40,27 +40,32 @@ function loginFun() {
 
 <body>
 <div id="login">
-	<div class="login_top"></div>
+	<div class="login_top">
+		<img alt="" src="${pageContext.request.contextPath}/style/images/qian_pc_02.png" width="120" height="55">
+	</div>
     <div class="login_content1">
 		<div class="login_con">
    			<div class="login_font">
            	<form action="" method="post" name="loginForm" id="loginForm">
-       			<p class="log_sel" id="companyCodeP" style="display:block; margin-top:25px; border: inherit;"></p>
-               	<p class="yhm" id="accountP"><input type="text" id="name" name="name" class="yhm_id txtAccount" placeholder="用户名" /></p>
-               	<p class="mima" id="passwordP"><input type="password" id="pwd" name="pwd" class="mima_id" placeholder="密码" /></p>
+       			<p class="log_sel" style="display:block; border: inherit;"></p>
+               	<p class="yhm" id="accountP"><input type="text" id="name" name="name" class="yhm_id" placeholder="用户名" style="padding-left: 10px;"/></p>
+               	<p class="mima" id="passwordP"><input type="password" id="pwd" name="pwd" class="mima_id" placeholder="密码" style="padding-left: 10px;"/></p>
                	<b class="login_bor" id="msg" style="display: none;"></b>
-               	<p style="display:block; margin-top:10px; height:24px;">
+               	<p style="display:block; margin-top:20px; height:24px;">
       				<!-- 是否记住密码 -->
       				<span class="fleft curposter" id="chkRememberPassSpan"><input type="checkbox" id="chkRememberPass" name="chkRememberPass" class="checkbox_but" value="1" checked="checked" />记住密码</span>
                		<span class="fright"><a href="javascript:downfile();" class="lan">忘记密码？</a></span></p>
-               	<p><input type="button" class="marTop login_btn" id="login_id" value=" " onclick="loginFun();"/></p>
+               	<p class="marTop">
+               		<input type="button" class="login_btn" id="login_id" value=" " onclick="loginFun();"/>
+               		<input type="button" class="register_btn" />
+               	</p>
            	</form>
             </div>
         </div>
     </div>
-    <div class="login_center">
+   <!--  <div class="login_center">
     	<div class="login_bot"></div>
-	</div>
+	</div> -->
 </div>
 </body>
 </html>

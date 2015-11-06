@@ -110,7 +110,7 @@ public class DiveRegionServiceImpl extends BaseServiceImpl<DiveRegion> implement
 		List<DiveRegion> r = new ArrayList<DiveRegion>();
 		Map<String, Object> params = new HashMap<String, Object>();
 		String whereHql = whereHql(diveRegion, params);
-		List<TdiveRegion> l = diveRegionDao.find("from TdiveRegion t " + whereHql + " order by t.regionId asc", params);
+		List<TdiveRegion> l = diveRegionDao.find("from TdiveRegion t " + whereHql + " order by t.regionId+0 asc", params);
 		if (l != null && l.size() > 0) {
 			for (TdiveRegion t : l) {
 				DiveRegion o = new DiveRegion();
