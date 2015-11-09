@@ -158,6 +158,14 @@
     <url-pattern>*.3gp</url-pattern>
   </servlet-mapping>
   <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.apk</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
+    <servlet-name>default</servlet-name>
+    <url-pattern>*.APK</url-pattern>
+  </servlet-mapping>
+  <servlet-mapping>
     <servlet-name>druidStatView</servlet-name>
     <url-pattern>/druid/*</url-pattern>
   </servlet-mapping>

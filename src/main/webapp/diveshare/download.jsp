@@ -25,7 +25,7 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,bl
 	    } else {  
 	        switch(getDevice()) {  
 	            case 'Android':  
-	                window.location.href="${pageContext.request.contextPath}/fileController/download?filePath=<%=androidFilePath %>";  
+	            	window.location.href="${pageContext.request.contextPath}/<%=androidFilePath %>";  
 	                break;  
 	            case 'iOS':  
 	               window.location.href="<%=iosDownloadUrl %>"; 
