@@ -17,6 +17,7 @@ public class DiveAccount implements java.io.Serializable {
 	private java.lang.String city;	
 	private java.lang.String personality;	
 	private java.lang.String email;	
+	private java.lang.String channel;	
 	private java.lang.String recommend;
 	private java.lang.String hxPassword;
 	private java.lang.String hxStatus;
@@ -104,6 +105,15 @@ public class DiveAccount implements java.io.Serializable {
 	public java.lang.String getEmail() {
 		return this.email;
 	}
+	
+	public java.lang.String getChannel() {
+		return channel;
+	}
+
+	public void setChannel(java.lang.String channel) {
+		this.channel = channel;
+	}
+
 	public Double getLongitude() {
 		return longitude;
 	}

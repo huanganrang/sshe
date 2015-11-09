@@ -12,6 +12,8 @@
 			style="padding: 1px"></div>
 		<div title="登录" data-options="href:'api_login.jsp'"
 			style="padding: 1px"></div>
+		<div title="第三方登录" data-options="href:'api_login_thirdparty.jsp'"
+			style="padding: 1px"></div>
 		<div title="忘记密码" data-options="href:'api_forget_password.jsp'"
 			style="padding: 1px"></div>
 		<div title="修改密码" data-options="href:'api_updatePass.jsp'"

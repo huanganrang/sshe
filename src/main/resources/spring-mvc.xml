@@ -88,6 +88,7 @@
 						<value>/api/apiBaseDataController/basedata</value><!-- 基础数据 -->
 						<value>/api/apiAccountController/register</value><!-- 用户注册 -->
 						<value>/api/apiAccountController/login</value><!-- 用户登录 -->
+						<value>/api/apiAccountController/thirdparty_login</value><!-- 第三方登录 -->
 						<value>/api/apiAccountController/sendPassword</value><!-- 忘记密码，发送邮件 -->
 						<value>/api/apiCommon/html</value><!-- 获取详情html -->
 						<value>/api/apiCommon/error</value><!-- token过期错误返回 -->

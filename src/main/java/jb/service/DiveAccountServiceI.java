@@ -77,4 +77,6 @@ public interface DiveAccountServiceI {
 	public DataGrid dataGridNearby(PageHelper ph, Double longitude,
 			Double latitude);
 
+	public DiveAccount thirdpartyLogin(DiveAccount account);
+
 }

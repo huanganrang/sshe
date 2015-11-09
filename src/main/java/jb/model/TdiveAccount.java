@@ -61,6 +61,7 @@ public class TdiveAccount implements java.io.Serializable,IEntity{
 	private java.lang.String personality;
 	//@Email @Length(max=128)
 	private java.lang.String email;
+	private java.lang.String channel;
 	private java.lang.String recommend;
 	private java.lang.String hxPassword;
 	private java.lang.String hxStatus;
@@ -168,6 +169,13 @@ public class TdiveAccount implements java.io.Serializable,IEntity{
 		this.email = email;
 	}
 	
+	@Column(name = "channel", unique = false, nullable = true, insertable = true, updatable = true, length = 128)
+	public java.lang.String getChannel() {
+		return channel;
+	}
+	public void setChannel(java.lang.String channel) {
+		this.channel = channel;
+	}
 	@Column(name = "recommend", unique = false, nullable = true, insertable = true, updatable = true, length = 36)
 	public java.lang.String getRecommend() {
 		return recommend;
@@ -177,7 +185,7 @@ public class TdiveAccount implements java.io.Serializable,IEntity{
 		this.recommend = recommend;
 	}
 	
-	@Column(name = "hx_password", unique = false, nullable = true, insertable = true, updatable = true, length = 36)
+	@Column(name = "hx_password", unique = false, nullable = true, insertable = true, updatable = true, length = 128)
 	public java.lang.String getHxPassword() {
 		return hxPassword;
 	}

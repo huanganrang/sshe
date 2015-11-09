@@ -42,7 +42,7 @@
 					</tr>
 					
 					<tr>
-						<td align="right" style="width: 180px;"><label>icon(头像地址)：</label></td>
+						<td align="right" style="width: 180px;"><label>iconFile(头像地址)：</label></td>
 						<td><input name="iconFile" type="file" class="span2" value=""/></td>
 					</tr>
 					<tr>

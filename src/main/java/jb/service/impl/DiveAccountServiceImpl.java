@@ -217,6 +217,36 @@ public class DiveAccountServiceImpl extends BaseServiceImpl<DiveAccount> impleme
 		}
 		return null;
 	}
+	
+	/**
+	 * 第三方登录
+	 */
+	public DiveAccount thirdpartyLogin(DiveAccount account) {
+		
+		Map<String, Object> params = new HashMap<String, Object>();
+		String where = " where 1=1";
+		if(!F.empty(account.getUserName())) {
+			where += " and t.userName = :userName";
+			params.put("userName", account.getUserName());
+		}
+		if(!F.empty(account.getChannel())) {
+			where += " and t.channel = :channel";
+			params.put("channel", account.getChannel());
+		}
+		TdiveAccount t = diveAccountDao.get("from TdiveAccount t " + where, params);
+		if(t != null) {
+			BeanUtils.copyProperties(t, account);
+		} else {
+			account.setPassword(account.getUserName());
+			try {
+				account = this.reg(account);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		
+		return account;
+	}
 
 	/**
 	 * 个人主页
@@ -318,5 +348,6 @@ public class DiveAccountServiceImpl extends BaseServiceImpl<DiveAccount> impleme
 		dataGrid.setTotal(diveAccountDao.count("select count(*) from TdiveAccount"));
 		return dataGrid;
 	}
-	
+
+
 }

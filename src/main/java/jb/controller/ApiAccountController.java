@@ -76,6 +76,36 @@ public class ApiAccountController extends BaseController {
 	}
 	
 	/**
+	 * 第三方登录
+	 * @param account
+	 * @param session
+	 * @param request
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/thirdparty_login")
+	public Json thirdparty_login(DiveAccount account) {
+		Json j = new Json();
+		if(account != null && !F.empty(account.getUserName())) {
+			account = accountService.thirdpartyLogin(account);
+			if (account != null) {
+				Map<String, Object> result = new HashMap<String, Object>();
+				result.put("tokenId", tokenManage.buildToken(account.getId(),account.getUserName()));
+				result.put("accountId", account.getId());
+				result.put("icon", account.getIcon());
+				j.setObj(result);
+				j.setSuccess(true);
+				j.setMsg("登陆成功！");
+			} else {
+				j.setMsg("第三方账号有误！");
+			}
+		} else {
+			j.setMsg("第三方账号有误！");
+		}
+		return j;
+	}
+	
+	/**
 	 * 退出登录
 	 * @param account
 	 * @param session
