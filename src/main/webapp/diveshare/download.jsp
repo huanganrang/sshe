@@ -1,5 +1,11 @@
 ﻿<%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="jb.listener.Application" %>
+<%@ page import="jb.pageModel.BaseData" %>
+<%
+	String androidFilePath = Application.get("VM01").getIcon();
+	String iosDownloadUrl = Application.get("VM02").getDescription();
+%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -19,14 +25,15 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,bl
 	    } else {  
 	        switch(getDevice()) {  
 	            case 'Android':  
-	                window.location.href="${pageContext.request.contextPath}/fileController/download?filePath=v/Diving.apk";  
+	                window.location.href="${pageContext.request.contextPath}/fileController/download?filePath=<%=androidFilePath %>";  
 	                break;  
 	            case 'iOS':  
-	               // window.location.href="http://www.goodiver.com/Download/download"; 
-	               alert("暂不提供IOS下载！");
+	               window.location.href="<%=iosDownloadUrl %>"; 
+// 	               alert("暂不提供IOS下载！");
 	                break;  
 	            default:  
 	            	alert("暂无官网地址！");
+	            	window.location.href="${pageContext.request.contextPath}/fileController/download?filePath=<%=androidFilePath %>";
 	                break;  
 	        }  
 	    }  

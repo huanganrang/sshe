@@ -190,9 +190,14 @@ public class BaseController {
 		File f = new File(realPath);
 		if(!f.exists())
 			f.mkdir();
-		String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
-		fileName = fileName + "_" + Util.CreateNoncestr(4) + System.currentTimeMillis() + suffix;		
-		 try {
+		
+		if(F.empty(fileName)) {
+			fileName = file.getOriginalFilename();
+		} else {
+			String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
+			fileName = fileName + "_" + Util.CreateNoncestr(4) + System.currentTimeMillis() + suffix;	
+		}
+		try {
 			FileUtils.copyInputStreamToFile(file.getInputStream(), new File(realPath, fileName));
 			return Constants.UPLOADFILE+"/"+dirName+"/"+fileName;
 		} catch (IOException e) {

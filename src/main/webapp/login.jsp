@@ -5,7 +5,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-<title>潜水</title>
+<title>潜程商家管理平台</title>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <link href="${pageContext.request.contextPath}/winvoice/resource/img/favicon.ico" rel="shortcut icon"/>
 <link rel="stylesheet" type="text/css" href="${pageContext.request.contextPath}/style/styleFront.css">

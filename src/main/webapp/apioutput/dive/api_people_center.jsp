@@ -16,6 +16,8 @@
 			style="padding: 1px"></div>
 		<div title="修改密码" data-options="href:'api_updatePass.jsp'"
 			style="padding: 1px"></div>
+		<div title="检查更新" data-options="href:'api_checkUpdate.jsp'"
+			style="padding: 1px"></div>
 		<!-- <div title="个人主页" data-options="href:'api_people_center_personHome.jsp'"
 			style="padding: 1px"></div> -->
 		<div title="个人主页/信息（查）" data-options="href:'api_people_center_personInfo.jsp'"

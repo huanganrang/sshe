@@ -129,7 +129,8 @@ public class BasedataController extends BaseController {
 	public Json basedataAdd(BaseData basedata, @RequestParam MultipartFile iconFile, HttpServletRequest request) {
 		Json j = new Json();
 		try {
-			basedata.setIcon(uploadFile(request, "basedata/" + basedata.getBasetypeCode(), iconFile, basedata.getId()));
+			String fileName = "VM".equals(basedata.getBasetypeCode()) ? null : basedata.getId();
+			basedata.setIcon(uploadFile(request, "basedata/" + basedata.getBasetypeCode(), iconFile, fileName));
 			basedataService.add(basedata);
 			j.setSuccess(true);
 			j.setMsg("添加成功！");
@@ -184,7 +185,8 @@ public class BasedataController extends BaseController {
 	public Json basedataEdit(BaseData basedata, @RequestParam MultipartFile iconFile, HttpServletRequest request) {
 		Json j = new Json();
 		try {
-			basedata.setIcon(uploadFile(request, "basedata/" + basedata.getBasetypeCode(), iconFile, basedata.getId()));
+			String fileName = "VM".equals(basedata.getBasetypeCode()) ? null : basedata.getId();
+			basedata.setIcon(uploadFile(request, "basedata/" + basedata.getBasetypeCode(), iconFile, fileName));
 			basedataService.edit(basedata);
 			j.setSuccess(true);
 			j.setMsg("编辑成功！");

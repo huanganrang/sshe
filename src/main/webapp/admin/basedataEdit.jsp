@@ -41,7 +41,9 @@
 			    reader.readAsDataURL(file);
 		}
 		$(document).delegate('#upLoadFileAddress','change',function () {
-			ProcessFile();
+			if($("#basetypeCode").val() != 'VM') {
+				ProcessFile();
+			}
 			//$(this).parents('.uploader').find('.filename').val($(this).val().match(/[^\\]*$/)[0]);
 		});
 	});

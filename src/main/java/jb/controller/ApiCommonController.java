@@ -5,7 +5,9 @@ import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
@@ -13,6 +15,8 @@ import javax.servlet.http.HttpServletResponse;
 
 import jb.absx.F;
 import jb.interceptors.TokenManage;
+import jb.listener.Application;
+import jb.pageModel.BaseData;
 import jb.pageModel.Bug;
 import jb.pageModel.DiveAccount;
 import jb.pageModel.DiveActivity;
@@ -221,6 +225,42 @@ public class ApiCommonController extends BaseController {
 			bug.setTypeId("0"); // 错误
 			bug.setId(UUID.randomUUID().toString());
 			bugService.add(bug);
+			j.success();
+		}catch(Exception e){
+			j.fail();
+			e.printStackTrace();
+		}		
+		return j;
+	}
+	
+	/**
+	 * 检查更新
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/checkUpdate")
+	public Json checkUpdate(String versionNo) {
+		Json j = new Json();
+		try{
+			Map<String, Object> result = new HashMap<String, Object>();
+			result.put("andriod_mark", false);
+			result.put("ios_mark", false);
+			
+			// 检查android版本
+			BaseData android_version = Application.get("VM01");
+			if(F.empty(versionNo) || (android_version != null && !versionNo.equals(android_version.getName()))) {
+				result.put("andriod_mark", true);
+				result.put("android_filePath", android_version.getIcon());
+			} 
+			
+			// 检查ios版本
+			BaseData ios_version = Application.get("VM02");
+			if(F.empty(versionNo) || (ios_version != null && !versionNo.equals(ios_version.getName()))) {
+				result.put("ios_mark", true);
+				result.put("ios_downloadUrl", ios_version.getDescription());
+			} 
+			
+			j.setObj(result);
 			j.success();
 		}catch(Exception e){
 			j.fail();

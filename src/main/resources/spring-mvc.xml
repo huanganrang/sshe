@@ -92,6 +92,7 @@
 						<value>/api/apiCommon/html</value><!-- 获取详情html -->
 						<value>/api/apiCommon/error</value><!-- token过期错误返回 -->
 						<value>/api/apiCommon/share</value><!-- 分享 -->
+						<value>/api/apiCommon/checkUpdate</value><!-- 检查更新 -->
 						<value>/api/apiCommon/upload_errorlog</value><!-- 上传错误日志 -->
 						<value>/api/apiOrderController/pay_success</value><!-- 支付成功回调 -->
 					</list>
@@ -107,7 +108,7 @@
 		class="jb.util.MyMultipartResolver">
 		<property name="defaultEncoding" value="UTF-8" />
 		<!-- 指定所上传文件的总大小不能超过200KB。注意maxUploadSize属性的限制不是针对单个文件，而是所有文件的容量之和 -->
-		<property name="maxUploadSize" value="20000000" />
+		<property name="maxUploadSize" value="30000000" />
 	</bean>
 	<bean id="exceptionResolver" class="jb.exception.CustomMappingExceptionResolver">
 		<property name="exceptionMappings">
