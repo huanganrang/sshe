@@ -10,13 +10,15 @@
 <html>
 <head>
 <title>Diving Download</title>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=0.66, minimum-scale=0.66, maximum-scale=0.66, user-scalable=yes">
 <style type="text/css">
-body {font-family:"微软雅黑";font-size:12px; background-color:#f8f7f5;}
-body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,blockquote,p{padding:0; margin:0;}
-
-.content{ padding:5px 15px; margin:0 auto;}
-.content h1{ display:block; line-height:1.8em; font-size:20px; color:#4c4c4c; font-weight:bold; text-align:left;}
+	body {
+		background-image: URL(${pageContext.request.contextPath}/diveshare/download_bg.png);
+		background-position: center;
+		background-repeat: no-repeat;
+		background-attachment: fixed;
+		background-size:100% 100%;
+	}
 </style>
 <script type="text/javascript">
 	function download() {
@@ -32,8 +34,8 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,bl
 // 	               alert("暂不提供IOS下载！");
 	                break;  
 	            default:  
-	            	alert("暂无官网地址！");
-	            	window.location.href="${pageContext.request.contextPath}/fileController/download?filePath=<%=androidFilePath %>";
+// 	            	alert("暂无官网地址！");
+// 	            	window.location.href="${pageContext.request.contextPath}/";
 	                break;  
 	        }  
 	    }  
@@ -61,8 +63,5 @@ body,div,dl,dt,dd,ul,ol,li,h1,h2,h3,h4,h5,h6,pre,form,fieldset,input,textarea,bl
 </script>
 </head>
 <body onload="download();">
-	 <div class="content">
-		 <h1>亲爱的潜友，请点击右上角，选择"在浏览器中打开"就能下载十分有趣的潜伴APP。</h1>
-	</div>
 </body>
 </html>

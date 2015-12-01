@@ -85,7 +85,7 @@ dd,dl,dt{ margin:0 ; padding:0;}
  		<div class="content">
     		<div class="head">
         		<div class="left wd">
-        			<dt><img src="${pageContext.request.contextPath}/diveshare/logo.png"></dt>
+        			<dt><img src="${pageContext.request.contextPath}/diveshare/logo1.png"></dt>
            			<ul>
 		              <h1>${activity.name}</h1>
 		              <h2><span></span> &nbsp;</h2>

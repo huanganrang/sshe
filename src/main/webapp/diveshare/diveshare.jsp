@@ -32,7 +32,7 @@ dd,dl,dt{ margin:0 ; padding:0;}
 .content .nr img{ width:100%;}
 
 </style>
-<meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<meta name="viewport" content="width=device-width, initial-scale=0.66, minimum-scale=0.66, maximum-scale=0.66, user-scalable=yes">   
 </head>
 <body>
 	<div class="content">
@@ -41,8 +41,7 @@ dd,dl,dt{ margin:0 ; padding:0;}
 		 <div class="nr">
 		 	${content }
 		 </div>
-		 
-		 <jsp:include page="bottom.jsp"></jsp:include>
 	</div>
+	<jsp:include page="bottom.jsp"></jsp:include>
 </body>
 </html>

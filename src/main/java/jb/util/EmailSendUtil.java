@@ -80,13 +80,13 @@ public class EmailSendUtil {
 	 * @throws EmailException 
 	 */
 	public static boolean sendPassword(String toUser, String password) {
-		String title = "潜伴账号密码安全邮件（系统邮件，请勿回复。）";
+		String title = "潜程账号密码安全邮件（系统邮件，请勿回复。）";
 		String content="<div style='font-family:Verdana; padding:2px;'>";
 		content += "<div style='color:#666666;font-size:14px;'>";
 		content += "<div style='margin-top:10px; margin-left:40px;'>尊敬的用户您好：</div>";
-		content += "<div style='margin-top:25px; margin-left:40px;'>您的潜伴账号密码为：<font style='color:red;'>123456</font>。请妥善保管！</div>";
-		content += "<div style='margin-top:25px; margin-left:40px;'>潜伴团队 敬上</div>";		
-		content += "<div style='margin-top:5px; margin-left:40px;'><a href='javascript:void(0);' target='_blank' style='color: #006699;'>www.dive.com</a></div>";
+		content += "<div style='margin-top:25px; margin-left:40px;'>您的潜程账号密码为：<font style='color:red;'>123456</font>。请妥善保管！</div>";
+		content += "<div style='margin-top:25px; margin-left:40px;'>潜程团队 敬上</div>";		
+//		content += "<div style='margin-top:5px; margin-left:40px;'><a href='javascript:void(0);' target='_blank' style='color: #006699;'>www.dive.com</a></div>";
 		content += "</div></div>";
 		return sendHtmlMessage(toUser, title, content);
 	}
