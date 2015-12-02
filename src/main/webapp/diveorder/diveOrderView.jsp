@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ page import="jb.model.TdiveOrder" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <script type="text/javascript">
 	$(function() {
 		parent.$.messager.progress('close');		
@@ -10,12 +11,18 @@
 	<div data-options="region:'center',border:false">
 		<table class="table table-hover table-condensed">
 				<tr>	
-					<th><%=TdiveOrder.ALIAS_ACCOUNT_ID%></th>	
-					<td>
-						${diveOrder.accountId}							
+					<th width="10%">下单人账号</th>	
+					<td width="40%">
+						${diveOrder.userName}							
+					</td>
+					<th width="10%">下单人昵称</th>	
+					<td width="40%">
+						${diveOrder.nickname}							
 					</td>							
+				</tr>	
+				<tr>	
 					<th><%=TdiveOrder.ALIAS_ADDRESS%></th>	
-					<td>
+					<td colspan="3">
 						${diveOrder.address}							
 					</td>							
 				</tr>		
@@ -30,41 +37,78 @@
 					</td>							
 				</tr>		
 				<tr>	
+					<th><%=TdiveOrder.ALIAS_SEND_STATUS%></th>	
+					<td>
+						${diveOrder.sendStatusZh}							
+					</td>	
 					<th><%=TdiveOrder.ALIAS_PAY_WAY%></th>	
 					<td>
 						${diveOrder.payWay}							
-					</td>							
-					<th><%=TdiveOrder.ALIAS_REMARK%></th>	
-					<td>
-						${diveOrder.remark}							
-					</td>							
+					</td>	
 				</tr>		
 				<tr>	
 					<th><%=TdiveOrder.ALIAS_PAY_STATUS%></th>	
 					<td>
-						${diveOrder.payStatus}							
+						${diveOrder.payStatusZh}							
 					</td>							
 					<th><%=TdiveOrder.ALIAS_ORDER_STATUS%></th>	
 					<td>
-						${diveOrder.orderStatus}							
-					</td>							
-				</tr>		
-				<tr>	
-					<th><%=TdiveOrder.ALIAS_SEND_STATUS%></th>	
-					<td>
-						${diveOrder.sendStatus}							
-					</td>							
-					<th><%=TdiveOrder.ALIAS_PAYTIME%></th>	
-					<td>
-						${diveOrder.paytime}							
+						${diveOrder.orderStatusZh}							
 					</td>							
 				</tr>		
 				<tr>	
 					<th><%=TdiveOrder.ALIAS_ADDTIME%></th>	
 					<td>
-						${diveOrder.addtime}							
+						<fmt:formatDate value="${diveOrder.addtime}" pattern="yyyy-MM-dd HH:mm:ss"/>						
+					</td>
+					<th><%=TdiveOrder.ALIAS_PAYTIME%></th>	
+					<td>
+						<fmt:formatDate value="${diveOrder.paytime}" pattern="yyyy-MM-dd HH:mm:ss"/>						
 					</td>							
-				</tr>		
+				</tr>	
+				<tr>	
+					<th><%=TdiveOrder.ALIAS_REMARK%></th>	
+					<td colspan="3">
+						${diveOrder.remark}							
+					</td>						
+				</tr>	
+				<tr>	
+					<td colspan="4">
+						<table style="width: 100%; margin-top: 10px;">
+							<tr>
+								<th width="25%">商品图片</th>	
+								<th width="25%">商品名称</th>	
+								<th width="10%">商品类型</th>	
+								<th width="15%">商品单价（元）</th>	
+								<th width="10%">商品数量</th>	
+								<th width="15%">商品总价</th>	
+							</tr>
+							<c:forEach items="${diveOrder.detail_list}" var="detail" varStatus="vs">
+								<tr>
+									<td>
+										<img alt="" src="${detail.businessIcon}" width="50" height="50">
+									</td>
+									<td>
+										${detail.businessName}
+									</td>
+									<td>
+										${detail.businessTypeZh}
+									</td>
+									<td>
+										${detail.price}
+									</td>
+									<td>
+										${detail.number}
+									</td>
+									<td>
+										${detail.price*detail.number}
+									</td>
+								</tr>
+								
+							</c:forEach>
+						</table>						
+					</td>							
+				</tr>	
 		</table>
 	</div>
 </div>

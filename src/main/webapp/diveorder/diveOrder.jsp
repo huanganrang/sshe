@@ -49,13 +49,17 @@
 				width : 150,
 				hidden : true
 				}, {
-				field : 'accountId',
-				title : '<%=TdiveOrder.ALIAS_ACCOUNT_ID%>',
+				field : 'orderNo',
+				title : '订单号',
+				width : 100		
+				}, {
+				field : 'userName',
+				title : '下单人账号',
 				width : 50		
 				}, {
 				field : 'address',
 				title : '<%=TdiveOrder.ALIAS_ADDRESS%>',
-				width : 50		
+				width : 100		
 				}, {
 				field : 'expressName',
 				title : '<%=TdiveOrder.ALIAS_EXPRESS_NAME%>',
@@ -71,33 +75,29 @@
 				}, {
 				field : 'remark',
 				title : '<%=TdiveOrder.ALIAS_REMARK%>',
-				width : 50		
+				width : 100	
 				}, {
-				field : 'payStatus',
+				field : 'payStatusZh',
 				title : '<%=TdiveOrder.ALIAS_PAY_STATUS%>',
 				width : 50		
 				}, {
-				field : 'orderStatus',
+				field : 'orderStatusZh',
 				title : '<%=TdiveOrder.ALIAS_ORDER_STATUS%>',
-				width : 50		
-				}, {
-				field : 'sendStatus',
-				title : '<%=TdiveOrder.ALIAS_SEND_STATUS%>',
 				width : 50		
 				}, {
 				field : 'paytime',
 				title : '<%=TdiveOrder.ALIAS_PAYTIME%>',
-				width : 50,
+				width : 80,
 				sortable : true
 				}, {
 				field : 'addtime',
 				title : '<%=TdiveOrder.ALIAS_ADDTIME%>',
-				width : 50,
+				width : 80,
 				sortable : true
 			}, {
 				field : 'action',
 				title : '操作',
-				width : 100,
+				width : 30,
 				formatter : function(value, row, index) {
 					var str = '';
 					/*if ($.canEdit) {
@@ -230,6 +230,21 @@
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
 						<tr>	
+							<th><%=TdiveOrder.ALIAS_ORDER_NO%></th>	
+							<td>
+								<input type="text" name="orderNo" maxlength="19" class="span2"/>
+							</td>
+							<th>下单人账号</th>	
+							<td>
+								<input type="text" name="userName" maxlength="19" class="span2"/>
+							</td>
+							<th><%=TdiveOrder.ALIAS_PAYTIME%></th>	
+							<td>
+								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TdiveOrder.FORMAT_PAYTIME%>'})" id="paytimeBegin" name="paytimeBegin"/>
+								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TdiveOrder.FORMAT_PAYTIME%>'})" id="paytimeEnd" name="paytimeEnd"/>
+							</td>
+						</tr>	
+						<tr>	
 							<th><%=TdiveOrder.ALIAS_PAY_STATUS%></th>	
 							<td>
 								<jb:select dataType="PS" name="payStatus"></jb:select>	
@@ -238,16 +253,9 @@
 							<td>
 								<jb:select dataType="OS" name="orderStatus"></jb:select>	
 							</td>
-						</tr>	
-						<tr>	
 							<th><%=TdiveOrder.ALIAS_SEND_STATUS%></th>	
 							<td>
 								<jb:select dataType="SS" name="sendStatus"></jb:select>	
-							</td>
-							<th><%=TdiveOrder.ALIAS_PAYTIME%></th>	
-							<td>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TdiveOrder.FORMAT_PAYTIME%>'})" id="paytimeBegin" name="paytimeBegin"/>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TdiveOrder.FORMAT_PAYTIME%>'})" id="paytimeEnd" name="paytimeEnd"/>
 							</td>
 						</tr>	
 				</table>

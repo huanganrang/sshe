@@ -3,6 +3,8 @@ package jb.pageModel;
 import java.util.Date;
 import java.util.List;
 
+import jb.listener.Application;
+
 public class DiveOrder implements java.io.Serializable {
 
 	private static final long serialVersionUID = 5454155825314635342L;
@@ -27,7 +29,25 @@ public class DiveOrder implements java.io.Serializable {
 	
 	private String addUserId_travel;
 	private String addUserId_equip;
-
+	
+	private String userName;
+	private String nickname;
+	
+	private Date paytimeBegin;
+	private Date paytimeEnd;
+	
+	public String getOrderStatusZh() {
+		return Application.getString(orderStatus);
+	}
+	
+	public String getPayStatusZh() {
+		return Application.getString(payStatus);
+	}
+	
+	public String getSendStatusZh() {
+		return Application.getString(sendStatus);
+	}
+	
 	public void setId(java.lang.String value) {
 		this.id = value;
 	}
@@ -161,6 +181,35 @@ public class DiveOrder implements java.io.Serializable {
 	public void setAddUserId_equip(String addUserId_equip) {
 		this.addUserId_equip = addUserId_equip;
 	}
-	
-	
+	public String getUserName() {
+		return userName;
+	}
+
+	public void setUserName(String userName) {
+		this.userName = userName;
+	}
+
+	public String getNickname() {
+		return nickname;
+	}
+
+	public void setNickname(String nickname) {
+		this.nickname = nickname;
+	}
+
+	public Date getPaytimeBegin() {
+		return paytimeBegin;
+	}
+
+	public void setPaytimeBegin(Date paytimeBegin) {
+		this.paytimeBegin = paytimeBegin;
+	}
+
+	public Date getPaytimeEnd() {
+		return paytimeEnd;
+	}
+
+	public void setPaytimeEnd(Date paytimeEnd) {
+		this.paytimeEnd = paytimeEnd;
+	}
 }

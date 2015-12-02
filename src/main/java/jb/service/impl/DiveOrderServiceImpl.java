@@ -1,5 +1,7 @@
 package jb.service.impl;
 
+import java.lang.reflect.InvocationTargetException;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.HashMap;
@@ -52,9 +54,8 @@ public class DiveOrderServiceImpl extends BaseServiceImpl<DiveOrder> implements 
 	
 
 	protected String whereHql(DiveOrder diveOrder, Map<String, Object> params) {
-		String whereHql = "";	
+		String whereHql = " where 1=1 ";	
 		if (diveOrder != null) {
-			whereHql += " where 1=1 ";
 			if (!F.empty(diveOrder.getAccountId())) {
 				whereHql += " and t.accountId = :accountId";
 				params.put("accountId", diveOrder.getAccountId());
@@ -189,18 +190,94 @@ public class DiveOrderServiceImpl extends BaseServiceImpl<DiveOrder> implements 
 	}
 
 
+	@SuppressWarnings("rawtypes")
 	@Override
 	public DataGrid dataGridComplex(DiveOrder diveOrder, PageHelper ph) {
 		DataGrid dg = new DataGrid();
 		List<DiveOrder> ol = new ArrayList<DiveOrder>();
 		
-		String sql = "select distinct t.id id, t.user_id userId, t.bs_stream bsStream, t.bs_icon bsIcon, t.bs_description bsDescription, bs_play bsPlay, "
-				+ " t.bs_praise bsPraise, t.bs_comment bsComment, t.lg_name lgName, t.create_datetime createDatetime, t.parent_id parentId "
-				+ " from bshoot t left join user_attention ua on ua.att_user_id = t.user_id " 
-				+ " where t.status=1 and (ua.user_id = :userId or t.user_id = :userId) ";
+		String colSql = "select t.id, t.address, t.addtime addtime, t.express_name expressName, t.express_no expressNo, t.order_status orderStatus, "
+				+ " t.pay_status payStatus, t.payWay, t.paytime paytime, t.remark, t.send_status sendStatus, t.order_no orderNo, "
+				+ " a.user_name userName, a.nickname ";
+		String tableSql = " from dive_order t left join dive_account a on a.id = t.account_Id ";
+		
 		Map<String, Object> params = new HashMap<String, Object>();
+		String where = whereSql(diveOrder, params);
+		
+		String authWhere = " and (exists (select 1 from dive_order_detail d left join dive_travel dt on dt.id = d.business_id where d.business_type = 'BT01' and d.order_id = t.id ";
+		if(!F.empty(diveOrder.getAddUserId_travel())) {
+			authWhere += " and dt.add_user_id = :addUserId_travel)";
+			params.put("addUserId_travel", diveOrder.getAddUserId_travel());
+		} else {
+			authWhere += ")";
+		}
+		authWhere += " or exists (select 1 from dive_order_detail d left join dive_equip de on de.id = d.business_id where d.business_type = 'BT03' and d.order_id = t.id ";
+		if(!F.empty(diveOrder.getAddUserId_equip())) {
+			authWhere += " and de.add_user_id = :addUserId_equip)";
+			params.put("addUserId_equip", diveOrder.getAddUserId_equip());
+		} else {
+			authWhere += ")";
+		}
+		authWhere += ")";
+		
+		List<Map> lm = diveOrderDao.findBySql2Map(colSql + tableSql + where + authWhere + orderHql(ph), params, ph.getPage(), ph.getRows());
+		BigInteger count = diveOrderDao.countBySql("select count(*) " + tableSql + where + authWhere, params);
+		dg.setTotal(count == null ? 0 : count.longValue());
+		if(lm != null && lm.size() > 0) {
+			for(Map m : lm) {
+				DiveOrder t = new DiveOrder();
+				try {
+					if(m.get("paytime") == null) {
+						m.remove("paytime");
+					}
+					org.apache.commons.beanutils.BeanUtils.populate(t, m);
+					ol.add(t);
+				} catch (IllegalAccessException e) {
+					e.printStackTrace();
+				} catch (InvocationTargetException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		dg.setRows(ol);
 	
-		return null;
+		return dg;
+	}
+	
+	protected String whereSql(DiveOrder diveOrder, Map<String, Object> params) {
+		String whereSql = " where 1=1 ";	
+		if (diveOrder != null) {
+			if (!F.empty(diveOrder.getPayStatus())) {
+				whereSql += " and t.pay_status = :payStatus";
+				params.put("payStatus", diveOrder.getPayStatus());
+			}		
+			if (!F.empty(diveOrder.getOrderStatus())) {
+				whereSql += " and t.order_status = :orderStatus";
+				params.put("orderStatus", diveOrder.getOrderStatus());
+			}		
+			if (!F.empty(diveOrder.getSendStatus())) {
+				whereSql += " and t.send_status = :sendStatus";
+				params.put("sendStatus", diveOrder.getSendStatus());
+			}	
+			if (!F.empty(diveOrder.getOrderNo())) {
+				whereSql += " and t.order_no like :orderNo";
+				params.put("orderNo", "%%" + diveOrder.getOrderNo() + "%%");
+			}	
+			if (diveOrder.getPaytimeBegin() != null) {
+				whereSql += " and t.paytime >= :paytimeBegin";
+				params.put("paytimeBegin", diveOrder.getPaytimeBegin());
+			}
+			if (diveOrder.getPaytimeEnd() != null) {
+				whereSql += " and t.paytime <= :paytimeEnd";
+				params.put("paytimeEnd", diveOrder.getPaytimeEnd());
+			}
+			if (!F.empty(diveOrder.getUserName())) {
+				whereSql += " and a.user_name like :userName";
+				params.put("userName", "%%" + diveOrder.getUserName() + "%%");
+			}
+		}	
+		return whereSql;
 	}
 
 }

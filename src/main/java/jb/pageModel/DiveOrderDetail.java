@@ -1,5 +1,7 @@
 package jb.pageModel;
 
+import jb.listener.Application;
+
 
 public class DiveOrderDetail implements java.io.Serializable {
 
@@ -14,6 +16,10 @@ public class DiveOrderDetail implements java.io.Serializable {
 
 	private String businessName;
 	private String businessIcon;
+	
+	public String getBusinessTypeZh() {
+		return Application.getString(businessType);
+	}
 
 	public void setId(java.lang.String value) {
 		this.id = value;
