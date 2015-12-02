@@ -10,11 +10,13 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import jb.pageModel.Colum;
+import jb.pageModel.DiveAccount;
 import jb.pageModel.DiveOrder;
 import jb.pageModel.DataGrid;
 import jb.pageModel.Json;
 import jb.pageModel.PageHelper;
 import jb.pageModel.SessionInfo;
+import jb.service.DiveAccountServiceI;
 import jb.service.DiveOrderDetailServiceI;
 import jb.service.DiveOrderServiceI;
 import jb.util.ConfigUtil;
@@ -41,6 +43,9 @@ public class DiveOrderController extends BaseController {
 	
 	@Autowired
 	private DiveOrderDetailServiceI diveOrderDetailService;
+	
+	@Autowired
+	private DiveAccountServiceI accountService;
 
 
 	/**
@@ -128,7 +133,13 @@ public class DiveOrderController extends BaseController {
 	@RequestMapping("/view")
 	public String view(HttpServletRequest request, String id) {
 		DiveOrder diveOrder = diveOrderService.get(id);
-		diveOrder.setDetail_list(diveOrderDetailService.getOrderDetail(id));
+		if(diveOrder != null) {
+			DiveAccount account = accountService.get(diveOrder.getAccountId());
+			diveOrder.setUserName(account.getUserName());
+			diveOrder.setNickname(account.getNickname());
+			
+			diveOrder.setDetail_list(diveOrderDetailService.getOrderDetail(id));
+		}
 		request.setAttribute("diveOrder", diveOrder);
 		return "/diveorder/diveOrderView";
 	}

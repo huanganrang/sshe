@@ -35,7 +35,7 @@
 	                break;  
 	            default:  
 // 	            	alert("暂无官网地址！");
-// 	            	window.location.href="${pageContext.request.contextPath}/";
+	            	window.location.href="${pageContext.request.contextPath}/";
 	                break;  
 	        }  
 	    }  
