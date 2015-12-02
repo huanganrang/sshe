@@ -35,7 +35,7 @@
 			idField : 'id',
 			pageSize : 10,
 			pageList : [ 10, 20, 30, 40, 50 ],
-			sortName : 'id',
+			sortName : 'addtime',
 			sortOrder : 'desc',
 			checkOnSelect : false,
 			selectOnCheck : false,
@@ -87,27 +87,29 @@
 				}, {
 				field : 'paytime',
 				title : '<%=TdiveOrder.ALIAS_PAYTIME%>',
-				width : 50		
+				width : 50,
+				sortable : true
 				}, {
 				field : 'addtime',
 				title : '<%=TdiveOrder.ALIAS_ADDTIME%>',
-				width : 50		
+				width : 50,
+				sortable : true
 			}, {
 				field : 'action',
 				title : '操作',
 				width : 100,
 				formatter : function(value, row, index) {
 					var str = '';
-					if ($.canEdit) {
+					/*if ($.canEdit) {
 						str += $.formatString('<img onclick="editFun(\'{0}\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_edit.png');
 					}
 					str += '&nbsp;';
 					if ($.canDelete) {
 						str += $.formatString('<img onclick="deleteFun(\'{0}\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_delete.png');
 					}
-					str += '&nbsp;';
+					str += '&nbsp;';*/
 					if ($.canView) {
-						str += $.formatString('<img onclick="viewFun(\'{0}\');" src="{1}" title="查看"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_link.png');
+						str += $.formatString('<img onclick="viewFun(\'{0}\');" src="{1}" title="查看明细"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_link.png');
 					}
 					return str;
 				}
@@ -224,59 +226,28 @@
 </head>
 <body>
 	<div class="easyui-layout" data-options="fit : true,border : false">
-		<div data-options="region:'north',title:'查询条件',border:false" style="height: 160px; overflow: hidden;">
+		<div data-options="region:'north',title:'查询条件',border:false" style="height: 120px; overflow: hidden;">
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
 						<tr>	
-							<th><%=TdiveOrder.ALIAS_ACCOUNT_ID%></th>	
-							<td>
-											<input type="text" name="accountId" maxlength="36" class="span2"/>
-							</td>
-							<th><%=TdiveOrder.ALIAS_ADDRESS%></th>	
-							<td>
-											<input type="text" name="address" maxlength="256" class="span2"/>
-							</td>
-							<th><%=TdiveOrder.ALIAS_EXPRESS_NAME%></th>	
-							<td>
-											<input type="text" name="expressName" maxlength="128" class="span2"/>
-							</td>
-							<th><%=TdiveOrder.ALIAS_EXPRESS_NO%></th>	
-							<td>
-											<input type="text" name="expressNo" maxlength="128" class="span2"/>
-							</td>
-						</tr>	
-						<tr>	
-							<th><%=TdiveOrder.ALIAS_PAY_WAY%></th>	
-							<td>
-											<input type="text" name="payWay" maxlength="128" class="span2"/>
-							</td>
-							<th><%=TdiveOrder.ALIAS_REMARK%></th>	
-							<td>
-											<input type="text" name="remark" maxlength="256" class="span2"/>
-							</td>
 							<th><%=TdiveOrder.ALIAS_PAY_STATUS%></th>	
 							<td>
-											<jb:select dataType="PS" name="payStatus"></jb:select>	
+								<jb:select dataType="PS" name="payStatus"></jb:select>	
 							</td>
 							<th><%=TdiveOrder.ALIAS_ORDER_STATUS%></th>	
 							<td>
-											<jb:select dataType="OS" name="orderStatus"></jb:select>	
+								<jb:select dataType="OS" name="orderStatus"></jb:select>	
 							</td>
 						</tr>	
 						<tr>	
 							<th><%=TdiveOrder.ALIAS_SEND_STATUS%></th>	
 							<td>
-											<jb:select dataType="SS" name="sendStatus"></jb:select>	
+								<jb:select dataType="SS" name="sendStatus"></jb:select>	
 							</td>
 							<th><%=TdiveOrder.ALIAS_PAYTIME%></th>	
 							<td>
 								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TdiveOrder.FORMAT_PAYTIME%>'})" id="paytimeBegin" name="paytimeBegin"/>
 								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TdiveOrder.FORMAT_PAYTIME%>'})" id="paytimeEnd" name="paytimeEnd"/>
-							</td>
-							<th><%=TdiveOrder.ALIAS_ADDTIME%></th>	
-							<td>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TdiveOrder.FORMAT_ADDTIME%>'})" id="addtimeBegin" name="addtimeBegin"/>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TdiveOrder.FORMAT_ADDTIME%>'})" id="addtimeEnd" name="addtimeEnd"/>
 							</td>
 						</tr>	
 				</table>
@@ -287,9 +258,9 @@
 		</div>
 	</div>
 	<div id="toolbar" style="display: none;">
-		<c:if test="${fn:contains(sessionInfo.resourceList, '/diveOrderController/addPage')}">
+		<!--<c:if test="${fn:contains(sessionInfo.resourceList, '/diveOrderController/addPage')}">
 			<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'bug_add'">添加</a>
-		</c:if>
+		</c:if>-->
 		<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">过滤条件</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_delete',plain:true" onclick="cleanFun();">清空条件</a>
 		<c:if test="${fn:contains(sessionInfo.resourceList, '/diveOrderController/download')}">
 			<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'server_go',plain:true" onclick="downloadTable();">导出</a>		

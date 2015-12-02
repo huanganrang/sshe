@@ -7,13 +7,16 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import jb.pageModel.Colum;
 import jb.pageModel.DiveOrder;
 import jb.pageModel.DataGrid;
 import jb.pageModel.Json;
 import jb.pageModel.PageHelper;
+import jb.pageModel.SessionInfo;
 import jb.service.DiveOrderServiceI;
+import jb.util.ConfigUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -54,8 +57,16 @@ public class DiveOrderController extends BaseController {
 	 */
 	@RequestMapping("/dataGrid")
 	@ResponseBody
-	public DataGrid dataGrid(DiveOrder diveOrder, PageHelper ph) {
-		return diveOrderService.dataGrid(diveOrder, ph);
+	public DataGrid dataGrid(DiveOrder diveOrder, PageHelper ph, HttpSession session) {
+		SessionInfo sessionInfo = (SessionInfo)session.getAttribute(ConfigUtil.getSessionInfoName());
+		if(checkRoleMark("RL01", sessionInfo)) {
+			diveOrder.setAddUserId_travel(sessionInfo.getId());
+		}
+		if(checkRoleMark("RL03", sessionInfo)) {
+			diveOrder.setAddUserId_equip(sessionInfo.getId());
+		}
+		
+		return diveOrderService.dataGridComplex(diveOrder, ph);
 	}
 	/**
 	 * 获取DiveOrder数据表格excel
@@ -70,8 +81,8 @@ public class DiveOrderController extends BaseController {
 	 * @throws IOException 
 	 */
 	@RequestMapping("/download")
-	public void download(DiveOrder diveOrder, PageHelper ph,String downloadFields,HttpServletResponse response) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, IOException{
-		DataGrid dg = dataGrid(diveOrder,ph);		
+	public void download(DiveOrder diveOrder, PageHelper ph,String downloadFields,HttpServletResponse response, HttpSession session) throws SecurityException, NoSuchMethodException, IllegalArgumentException, IllegalAccessException, InvocationTargetException, IOException{
+		DataGrid dg = dataGrid(diveOrder,ph,session);		
 		downloadFields = downloadFields.replace("&quot;", "\"");
 		downloadFields = downloadFields.substring(1,downloadFields.length()-1);
 		List<Colum> colums = JSON.parseArray(downloadFields, Colum.class);

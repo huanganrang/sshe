@@ -188,4 +188,19 @@ public class DiveOrderServiceImpl extends BaseServiceImpl<DiveOrder> implements 
 		}
 	}
 
+
+	@Override
+	public DataGrid dataGridComplex(DiveOrder diveOrder, PageHelper ph) {
+		DataGrid dg = new DataGrid();
+		List<DiveOrder> ol = new ArrayList<DiveOrder>();
+		
+		String sql = "select distinct t.id id, t.user_id userId, t.bs_stream bsStream, t.bs_icon bsIcon, t.bs_description bsDescription, bs_play bsPlay, "
+				+ " t.bs_praise bsPraise, t.bs_comment bsComment, t.lg_name lgName, t.create_datetime createDatetime, t.parent_id parentId "
+				+ " from bshoot t left join user_attention ua on ua.att_user_id = t.user_id " 
+				+ " where t.status=1 and (ua.user_id = :userId or t.user_id = :userId) ";
+		Map<String, Object> params = new HashMap<String, Object>();
+	
+		return null;
+	}
+
 }

@@ -24,6 +24,9 @@ public class DiveOrder implements java.io.Serializable {
 	private java.lang.String channel;
 
 	private List<DiveOrderDetail> detail_list;
+	
+	private String addUserId_travel;
+	private String addUserId_equip;
 
 	public void setId(java.lang.String value) {
 		this.id = value;
@@ -142,4 +145,22 @@ public class DiveOrder implements java.io.Serializable {
 	public void setDetail_list(List<DiveOrderDetail> detail_list) {
 		this.detail_list = detail_list;
 	}
+
+	public String getAddUserId_travel() {
+		return addUserId_travel;
+	}
+
+	public void setAddUserId_travel(String addUserId_travel) {
+		this.addUserId_travel = addUserId_travel;
+	}
+
+	public String getAddUserId_equip() {
+		return addUserId_equip;
+	}
+
+	public void setAddUserId_equip(String addUserId_equip) {
+		this.addUserId_equip = addUserId_equip;
+	}
+	
+	
 }

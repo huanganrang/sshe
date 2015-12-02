@@ -84,7 +84,7 @@ public class EmailSendUtil {
 		String content="<div style='font-family:Verdana; padding:2px;'>";
 		content += "<div style='color:#666666;font-size:14px;'>";
 		content += "<div style='margin-top:10px; margin-left:40px;'>尊敬的用户您好：</div>";
-		content += "<div style='margin-top:25px; margin-left:40px;'>您的潜程账号密码为：<font style='color:red;'>123456</font>。请妥善保管！</div>";
+		content += "<div style='margin-top:25px; margin-left:40px;'>您的潜程账号密码为：<font style='color:red;'>"+password+"</font>。请妥善保管！</div>";
 		content += "<div style='margin-top:25px; margin-left:40px;'>潜程团队 敬上</div>";		
 //		content += "<div style='margin-top:5px; margin-left:40px;'><a href='javascript:void(0);' target='_blank' style='color: #006699;'>www.dive.com</a></div>";
 		content += "</div></div>";

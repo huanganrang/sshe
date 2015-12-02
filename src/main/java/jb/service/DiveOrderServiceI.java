@@ -70,4 +70,6 @@ public interface DiveOrderServiceI {
 
 	public void editByOrderNo(DiveOrder order);
 
+	public DataGrid dataGridComplex(DiveOrder diveOrder, PageHelper ph);
+
 }
