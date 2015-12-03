@@ -1,5 +1,6 @@
 ﻿package jb.service;
 
+import java.util.List;
 import java.util.Map;
 
 import jb.pageModel.DataGrid;
@@ -71,5 +72,8 @@ public interface DiveOrderServiceI {
 	public void editByOrderNo(DiveOrder order);
 
 	public DataGrid dataGridComplex(DiveOrder diveOrder, PageHelper ph);
+	
+	@SuppressWarnings("rawtypes")
+	public List<Map> queryImportData(DiveOrder diveOrder);
 
 }

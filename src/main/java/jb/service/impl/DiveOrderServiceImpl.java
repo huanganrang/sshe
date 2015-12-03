@@ -12,6 +12,7 @@ import java.util.UUID;
 import jb.absx.F;
 import jb.dao.DiveOrderDaoI;
 import jb.dao.DiveShopCartDaoI;
+import jb.listener.Application;
 import jb.model.TdiveOrder;
 import jb.pageModel.DataGrid;
 import jb.pageModel.DiveOrder;
@@ -279,5 +280,29 @@ public class DiveOrderServiceImpl extends BaseServiceImpl<DiveOrder> implements 
 		}	
 		return whereSql;
 	}
+	
+	public List<Map> queryImportData(DiveOrder diveOrder) {
+		String sql = "select o.order_no orderNo, concat('商品',t.rank) rank, (case t.business_type when 'BT01' then dt.name when 'BT03' then de.equip_name end) name,"
+				+ " t.business_type type, t.price price, t.number number, t.price*t.number totalAmount, (case t.business_type when 'BT01' then ut.NAME when 'BT03' then ue.NAME end) merchant, "
+				+ " a.user_name userName, o.address, o.express_name expressName, o.express_no expressNo, o.payWay, o.remark,  o.pay_status payStatus,o.order_status orderStatus, o.paytime paytime, o.addtime addtime "
+				+ "  from (select a.*, if(@order_id = a.order_id, @rank \\:= @rank + 1, @rank \\:= 1) as rank, @order_id \\:= a.order_id from (select * from dive_order_detail  order by order_id asc) a, (select @rownum \\:= 0, @order_id \\:= null, @rank \\:= 0) b) t "
+				+ " left join dive_order o on o.id = t.order_id "
+				+ " left join dive_account a on a.id = o.account_Id "
+				+ " left join dive_travel dt on dt.id = t.business_id and t.business_type = 'BT01' "
+				+ " left join dive_equip de on de.id = t.business_id and t.business_type = 'BT03' "
+				+ " left join tuser ut on ut.id = dt.add_user_id "
+				+ " left join tuser ue on ue.id = de.add_user_id order by o.addtime desc,t.rank";
+		
+		List<Map> lm = diveOrderDao.findBySql2Map(sql);
+		if(lm != null && lm.size() > 0) {
+			for(Map m : lm) {
+				m.put("type", Application.getString(m.get("type").toString()));
+				m.put("payStatus", Application.getString(m.get("payStatus").toString()));
+				m.put("orderStatus", Application.getString(m.get("orderStatus").toString()));
+			}
+		}
+		return lm;
+	}
+	
 
 }
