@@ -76,6 +76,7 @@
 						<value>/userController/currentUserResourcePage</value><!-- 查看自己的权限页面 -->
 						<value>/diveRegionController/getByParentRegionId</value><!-- 根据父编码获取行政区域 -->
 						<value>/fileController/download</value><!-- 下载 -->
+						<value>/diveActivityController/activity_page_home</value>
 					</list>
 				</property>
 			</bean>

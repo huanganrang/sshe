@@ -175,5 +175,21 @@ public class DiveActivityController extends BaseController {
 		j.setSuccess(true);
 		return j;
 	}
+	
+	/**
+	 * 
+	 * 
+	 * @return
+	 */
+	@RequestMapping("/activity_page_home")
+	public String activity_page_home(HttpServletRequest request, PageHelper ph) {
+		ph.setPage(1);
+		ph.setRows(12);
+		ph.setSort("hot desc, t.addtime");
+		ph.setOrder("desc");
+		DataGrid dg = diveActivityService.dataGrid(null, ph);
+		request.setAttribute("activitys", dg.getRows());
+		return "/web/activity_list";
+	}
 
 }
