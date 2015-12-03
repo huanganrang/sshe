@@ -5,9 +5,9 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <body>
-	<div class="isotope-container row grid-space-20" style="position: relative; height: 699px;" id="activity">
+	<div class="isotope-container row grid-space-20">
 		<c:forEach items="${activitys}" var="activity" varStatus="vs">
-			<div class="col-sm-6 col-md-3 isotope-item">
+			<div class="col-sm-6 col-md-3 isotope-item web-design">
 				<div class="image-box">
 					<div class="overlay-container">
 						<img src="${pageContext.request.contextPath}/${activity.icon}" alt="" width="263" height="175" style="height: 175px;">
@@ -48,7 +48,7 @@
 										<!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque sed, quidem quis praesentium, ut unde. Quae sed, incidunt laudantium nesciunt, optio corporis quod earum pariatur omnis illo saepe numquam suscipit, nemo placeat dignissimos eius mollitia et quas officia doloremque ipsum labore rem deserunt vero! Magnam totam delectus accusantium voluptas et, tempora quos atque, fugiat, obcaecati voluptatibus commodi illo voluptates dolore nemo quo soluta quis.</p>
 										<p>Molestiae sed enim laboriosam atque delectus voluptates rerum nostrum sapiente obcaecati molestias quasi optio exercitationem, voluptate quis consequatur libero incidunt, in, quod. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos nobis officiis, autem earum tenetur quidem. Quae non dicta earum. Ipsum autem eaque cum dolor placeat corporis quisquam dolorum at nesciunt.</p>
 										 -->
-										 <iframe width="100%" height="93%" border="0" frameborder="0" src="http://121.40.109.77:8080/dive/api/apiCommon/html?type=BT04&id=${activity.id}">
+										 <iframe width="100%" height="360" border="0" frameborder="0" src="${pageContext.request.contextPath}/api/apiCommon/html?type=BT04&id=${activity.id}">
 										 </iframe>
 									</div>
 									<div class="col-md-6">
@@ -66,17 +66,27 @@
 			</div>
 		</c:forEach>
 	</div>
-	<script type="text/javascript" src="${pageContext.request.contextPath}/web/js/jquery-2.0.0.min.js"></script>
-	
-	<script type="text/javascript">
-		function frameResize() {
-			$("#activity iframe").height(360);
-		}
-		$(document).ready(function() {
-			frameResize();
-		});
-		window.onresize = (function() { frameResize(); });
+    <!-- Jquery and Bootstap core js files -->
+		<script type="text/javascript" src="${pageContext.request.contextPath}/web/plugins/jquery.min.js"></script>
+		<script type="text/javascript" src="${pageContext.request.contextPath}/web/bootstrap/js/bootstrap.min.js"></script>
+
+		<!-- Modernizr javascript -->
+		<script type="text/javascript" src="${pageContext.request.contextPath}/web/plugins/modernizr.js"></script>
+
+		<!-- Isotope javascript -->
+		<script type="text/javascript" src="${pageContext.request.contextPath}/web/plugins/isotope/isotope.pkgd.min.js"></script>
 		
-	</script>
+		<!-- Backstretch javascript -->
+		<script type="text/javascript" src="${pageContext.request.contextPath}/web/plugins/jquery.backstretch.min.js"></script>
+
+		<!-- Appear javascript -->
+		<script type="text/javascript" src="${pageContext.request.contextPath}/web/plugins/jquery.appear.js"></script>
+
+		<!-- Initialization of Plugins -->
+		<script type="text/javascript" src="${pageContext.request.contextPath}/web/js/template.js"></script>
+
+		<!-- Custom Scripts -->
+		<script type="text/javascript" src="${pageContext.request.contextPath}/web/js/custom.js"></script>
+	
 </body>
 </html>
