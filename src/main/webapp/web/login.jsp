@@ -271,8 +271,9 @@
 
 		<!-- section start 登录-->
 		<!-- ================ -->
-		<div class="section clearfix object-non-visible loginclass" data-animation-effect="fadeIn" id="about">
+		<div class="section clearfix object-non-visible loginclass" data-animation-effect="fadeIn">
 			<div class="container " >
+				<h1 id="about" class="title text-center"></h1>
 				<div class="row " >
 					<div class="col-md-12">
 						<div class="space"></div>
