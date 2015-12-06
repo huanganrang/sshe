@@ -8,7 +8,9 @@ img {
 }
 
 .logo {
-	background: url('images/jbase.png') no-repeat;
+	background: url('images/logo.png') no-repeat;
+	background-size: 10% 80%; 
+	background-position: 20px;
 }
 
 .folder_wrench {

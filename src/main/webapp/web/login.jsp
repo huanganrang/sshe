@@ -177,7 +177,7 @@
 
 						<!-- header-left start -->
 						<!-- ================ -->
-						<div class="header-left clearfix">
+						<div class="header-left clearfix" style="margin-left: -80px;">
 
 							<!-- logo -->
 							<div class="logo smooth-scroll">
@@ -280,7 +280,7 @@
 						<div class="row">
                                                         <!--logo images-->							
                                                         <div style="position:absolute;top:0px;left:0px;">
-                                                                <img u="image" src="${pageContext.request.contextPath}/web/images/qianchenglogo.png" />
+                                                              <!--   <img u="image" src="${pageContext.request.contextPath}/web/images/qianchenglogo.png" /> -->
                                                         </div>
                                                         <!--login layer-->
                                                         <div  class="loginlayer">
@@ -791,7 +791,7 @@
 					<div class="row">
 						<div class="col-sm-6">
 							<div class="footer-content">
-								<p class="large">上海懿游科技有限公司</p>
+								<p class="large">上海懿游实业发展有限公司</p>
 								<ul class="list-icons">
 									<li><i class="fa fa-map-marker pr-10"></i> One infinity loop, 54100</li>
 									<li><i class="fa fa-phone pr-10"></i> +00 1234567890</li>
@@ -843,7 +843,8 @@
 				<div class="container">
 					<div class="row">
 						<div class="col-md-12">
-							<p class="text-center">Copyright © 2014 Worthy by <a target="_blank" href="http://htmlcoder.me">HtmlCoder</a>.</p>
+							<!-- <p class="text-center">Copyright © 2014 Worthy by <a target="_blank" href="http://htmlcoder.me">HtmlCoder</a>.</p> -->
+							<p class="text-center">Copyright © 上海懿游实业发展有限公司</p>
 						</div>
 					</div>
 				</div>
