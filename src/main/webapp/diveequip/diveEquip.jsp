@@ -35,7 +35,7 @@
 			idField : 'id',
 			pageSize : 10,
 			pageList : [ 10, 20, 30, 40, 50 ],
-			sortName : 'id',
+			sortName : 'addtime',
 			sortOrder : 'desc',
 			checkOnSelect : false,
 			selectOnCheck : false,
@@ -51,7 +51,7 @@
 				}, {
 				field : 'equipName',
 				title : '<%=TdiveEquip.ALIAS_EQUIP_NAME%>',
-				width : 50		
+				width : 100		
 				}, {
 				field : 'equipTypeZh',
 				title : '<%=TdiveEquip.ALIAS_EQUIP_TYPE%>',
@@ -63,7 +63,8 @@
 				}, {
 				field : 'hot',
 				title : '<%=TdiveEquip.ALIAS_HOT%>',
-				width : 50		
+				width : 50,
+				sortable : true
 				}, {
 				field : 'price',
 				title : '<%=TdiveEquip.ALIAS_PRICE%>',
@@ -79,7 +80,8 @@
 				}, {
 				field : 'addtime',
 				title : '<%=TdiveEquip.ALIAS_ADDTIME%>',
-				width : 50
+				width : 80,
+				sortable : true
 			}, {
 				field : 'action',
 				title : '操作',
