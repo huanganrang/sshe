@@ -76,4 +76,6 @@ public interface DiveOrderServiceI {
 	@SuppressWarnings("rawtypes")
 	public List<Map> queryImportData(DiveOrder diveOrder);
 
+	public DataGrid dataGrid_detail(DiveOrder diveOrder, PageHelper ph);
+
 }

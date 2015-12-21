@@ -174,7 +174,7 @@ public class ApiOrderController extends BaseController {
 			ph.setOrder("desc");
 			SessionInfo s = getSessionInfo(request);
 			diveOrder.setAccountId(s.getId());
-			j.setObj(diveOrderService.dataGrid(diveOrder,ph));
+			j.setObj(diveOrderService.dataGrid_detail(diveOrder,ph));
 			j.success();
 		}catch(Exception e){
 			j.fail();
