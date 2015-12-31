@@ -34,7 +34,7 @@ img {
        	<div class="wm">
        		<div class="down_wm"><a href="${pageContext.request.contextPath}/diveshare/download.jsp"><img src="${pageContext.request.contextPath}/diveshare/20151128_down_ewm.png"></a></div>
 	    	<div class="down_wen">点击或长按二维码下载</div>
-	    	<div class="top"><a href="javascript:void(0);"><img src="${pageContext.request.contextPath}/diveshare/logo2.png"></a></div>
+	    	<!-- <div class="top"><a href="javascript:void(0);"><img src="${pageContext.request.contextPath}/diveshare/logo2.png"></a></div> -->
 	    	<div class="bottom"></div>
        	</div>
    	</div>
