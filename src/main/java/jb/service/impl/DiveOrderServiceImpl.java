@@ -17,6 +17,7 @@ import jb.model.TdiveOrder;
 import jb.pageModel.DataGrid;
 import jb.pageModel.DiveOrder;
 import jb.pageModel.PageHelper;
+import jb.service.DiveOrderDetailServiceI;
 import jb.service.DiveOrderServiceI;
 import jb.util.DateUtil;
 import jb.util.MyBeanUtils;
@@ -34,6 +35,9 @@ public class DiveOrderServiceImpl extends BaseServiceImpl<DiveOrder> implements 
 	
 	@Autowired
 	private DiveShopCartDaoI diveShopCartDao;
+	
+	@Autowired
+	private DiveOrderDetailServiceI diveOrderDetailService;
 
 	@Override
 	public DataGrid dataGrid(DiveOrder diveOrder, PageHelper ph) {
@@ -50,6 +54,18 @@ public class DiveOrderServiceImpl extends BaseServiceImpl<DiveOrder> implements 
 			}
 		}
 		dg.setRows(ol);
+		return dg;
+	}
+	
+	@SuppressWarnings("unchecked")
+	@Override
+	public DataGrid dataGrid_detail(DiveOrder diveOrder, PageHelper ph) {
+		DataGrid dg = dataGrid(diveOrder, ph);
+		List<DiveOrder> ol = dg.getRows();
+		for(DiveOrder o : ol) {
+			o.setDetail_list(diveOrderDetailService.getOrderDetail(o.getId()));
+		}
+		
 		return dg;
 	}
 	

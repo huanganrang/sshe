@@ -254,7 +254,127 @@ String url = request.getContextPath()+"/api/apiOrderController/orderList";
         </tr>
 	</tbody>
 </table>
-
+订单物品详情列表detail_list:
+<table x:str="" cellpadding="0" cellspacing="0">
+    <colgroup>
+        <col width="72" span="5" style="width:54pt"/>
+    </colgroup>
+    <tbody>
+        <tr height="19" style="height:14.25pt" class="firstRow">
+            <td height="14" class="xl22" width="54" style="">
+                id
+            </td>
+            <td class="xl22" width="54" style="border-left-style: none;">
+                varchar
+            </td>
+            <td class="xl22" width="54" style="border-left-style: none;">
+            	36
+            </td>
+            <td class="xl22" width="54" style="border-left-style: none;">
+          		PK
+            </td>
+            <td class="xl22" width="171" style="border-left-style: none;">
+                主键(明细ID)
+            </td>
+        </tr>
+        <tr height="19" style="height:14.25pt">
+            <td height="14" class="xl22" style="border-top-style: none;">
+                orderId
+            </td>
+            <td class="xl22" style="border-top:none;border-left:none">
+                varchar
+            </td>
+            <td class="xl22" style="border-top:none;border-left:none">36</td>
+            <td class="xl22" style="border-top:none;border-left:none"></td>
+            <td class="xl22" style="border-top:none;border-left:none" width="117">
+              订单ID
+            </td>
+        </tr>
+        <tr height="19" style="height:14.25pt">
+            <td height="14" class="xl22" style="border-top-style: none;">
+                businessId
+            </td>
+            <td class="xl22" style="border-top:none;border-left:none">
+                varchar
+            </td>
+            <td class="xl22" align="right" style="border-top:none;border-left:none" x:num="">
+                36
+            </td>
+            <td class="xl22" style="border-top:none;border-left:none"></td>
+            <td class="xl22" style="border-top:none;border-left:none" width="117">
+              业务ID
+            </td>
+        </tr>
+        <tr height="19" style="height:14.25pt">
+            <td height="14" class="xl22" style="border-top-style: none;">
+                businessType
+            </td>
+            <td class="xl22" style="border-top:none;border-left:none">
+                varchar
+            </td>
+            <td class="xl22" align="right" style="border-top:none;border-left:none" x:num="">
+                4
+            </td>
+            <td class="xl22" style="border-top:none;border-left:none"></td>
+            <td class="xl22" style="border-top:none;border-left:none" width="117">
+                业务类型{BT}
+            </td>
+        </tr>
+        <tr height="19" style="height:14.25pt">
+            <td height="14" class="xl22" style="border-top-style: none;">
+                number
+            </td>
+            <td class="xl22" style="border-top:none;border-left:none">
+                int
+            </td>
+            <td class="xl22" align="right" style="border-top:none;border-left:none" x:num="">
+            </td>
+            <td class="xl22" style="border-top:none;border-left:none"></td>
+            <td class="xl22" style="border-top:none;border-left:none" width="117">
+                数量
+            </td>
+        </tr>
+        <tr height="19" style="height:14.25pt">
+            <td height="14" class="xl22" style="border-top-style: none;">
+                price
+            </td>
+            <td class="xl22" style="border-top:none;border-left:none">
+                float
+            </td>
+            <td class="xl22" style="border-top:none;border-left:none"></td>
+            <td class="xl22" style="border-top:none;border-left:none"></td>
+            <td class="xl22" style="border-top:none;border-left:none" width="117">
+                价格（单个）
+            </td>
+        </tr>
+        <tr height="19" style="height:14.25pt">
+            <td height="14" class="xl22" style="border-top-style: none;">
+                businessName
+            </td>
+            <td class="xl22" style="border-top:none;border-left:none">
+                varchar
+            </td>
+            <td class="xl22" style="border-top:none;border-left:none"></td>
+            <td class="xl22" style="border-top:none;border-left:none"></td>
+            <td class="xl22" style="border-top:none;border-left:none" width="117">
+               业务商品名称
+            </td>
+        </tr>
+         <tr height="19" style="height:14.25pt">
+            <td height="14" class="xl22" style="border-top-style: none;">
+                businessIcon
+            </td>
+            <td class="xl22" style="border-top:none;border-left:none">
+                varchar
+            </td>
+            <td class="xl22" style="border-top:none;border-left:none"></td>
+            <td class="xl22" style="border-top:none;border-left:none"></td>
+            <td class="xl22" style="border-top:none;border-left:none" width="117">
+               业务商品图片地址
+            </td>
+        </tr>
+    </tbody>
+</table>
 			</div>
 		</div>
 	</div>
