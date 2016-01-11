@@ -11,7 +11,7 @@
 				<div class="image-box">
 					<div class="overlay-container">
 						<img src="${pageContext.request.contextPath}/${activity.icon}" alt="" width="263" height="175" style="height: 175px;">
-						<a class="overlay" data-toggle="modal" data-target="#project-${vs.index+1}">
+						<a class="overlay viewDetail" activetyId="${activity.id}" data-toggle="modal" data-target="#project-${vs.index+1}">
 							<i class="fa fa-search-plus"></i>
 							<span style="text-align: inherit;">
 								周期：<fmt:formatDate value="${activity.startDate}" pattern="yyyy-MM-dd"/> to <fmt:formatDate value="${activity.endDate}" pattern="yyyy-MM-dd"/><br>
@@ -31,7 +31,7 @@
 							</span>
 						</a>
 					</div>
-					<a class="btn btn-default btn-block" data-toggle="modal" data-target="#project-${vs.index+1}">${activity.name}</a>
+					<a class="btn btn-default btn-block viewDetail" activetyId="${activity.id}" data-toggle="modal" data-target="#project-${vs.index+1}">${activity.name}</a>
 				</div>
 				<!-- Modal -->
 				<div class="modal fade" id="project-${vs.index+1}" tabindex="-1" role="dialog" aria-labelledby="project-${vs.index+1}-label" aria-hidden="true">
@@ -48,7 +48,7 @@
 										<!-- <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Atque sed, quidem quis praesentium, ut unde. Quae sed, incidunt laudantium nesciunt, optio corporis quod earum pariatur omnis illo saepe numquam suscipit, nemo placeat dignissimos eius mollitia et quas officia doloremque ipsum labore rem deserunt vero! Magnam totam delectus accusantium voluptas et, tempora quos atque, fugiat, obcaecati voluptatibus commodi illo voluptates dolore nemo quo soluta quis.</p>
 										<p>Molestiae sed enim laboriosam atque delectus voluptates rerum nostrum sapiente obcaecati molestias quasi optio exercitationem, voluptate quis consequatur libero incidunt, in, quod. Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eos nobis officiis, autem earum tenetur quidem. Quae non dicta earum. Ipsum autem eaque cum dolor placeat corporis quisquam dolorum at nesciunt.</p>
 										 -->
-										 <iframe width="100%" height="360" border="0" frameborder="0" src="${pageContext.request.contextPath}/api/apiCommon/html?type=BT04&id=${activity.id}">
+										 <iframe id="frame_${activity.id}" width="100%" height="360" border="0" frameborder="0" src="">
 										 </iframe>
 									</div>
 									<div class="col-md-6">
@@ -87,6 +87,14 @@
 
 		<!-- Custom Scripts -->
 		<script type="text/javascript" src="${pageContext.request.contextPath}/web/js/custom.js"></script>
+		<script type="text/javascript">
+			$(function(){
+				$(".viewDetail").click(function(){
+					var activetyId = $(this).attr("activetyId");
+					$("#frame_" + activetyId).attr('src', '${pageContext.request.contextPath}/api/apiCommon/html?type=BT04&id='+activetyId);
+				});
+			});
+		</script>
 	
 </body>
 </html>
