@@ -223,10 +223,10 @@
 											<ul class="nav navbar-nav navbar-right">
 												<li class="active"><a href="#banner">首页</a></li>
 												<li><a href="#services">新闻资讯</a></li>
-                                                                                                <li><a href="#portfolio">最新活动</a></li>
+                                                <li><a href="#portfolio">最新活动</a></li>
 												<li><a href="#clients">品牌介绍</a></li>
 												<li><a href="#contact">关于我们</a></li>
-                                                                                                <li><a href="#about">登录</a></li>
+                                                <li><a data-toggle="modal" data-target="#project-login">登录</a></li>
 											</ul>
 										</div>
 
@@ -271,74 +271,76 @@
 
 		<!-- section start 登录-->
 		<!-- ================ -->
-		<div class="section clearfix object-non-visible loginclass" data-animation-effect="fadeIn">
-			<div class="container " >
-				<h1 id="about" class="title text-center"></h1>
-				<div class="row " >
-					<div class="col-md-12">
-						<div class="space"></div>
-						<div class="row">
-                                                        <!--logo images-->							
-                                                        <div style="position:absolute;top:0px;left:0px;">
-                                                              <!--   <img u="image" src="${pageContext.request.contextPath}/web/images/qianchenglogo.png" /> -->
-                                                        </div>
-                                                        <!--login layer-->
-                                                        <div  class="loginlayer">
-                                                             <div class="wrap"> 
-                                                                  <form action="" method="post" id="loginForm"> 
-                                                                    <section class="loginForm"> 
-                                                                      <header> 
-                                                                        <h1>登录</h1> 
-                                                                      </header> 
-                                                                      <div class="loginForm_content"> 
-                                                                        <fieldset> 
-                                                                          <div class="inputWrap"> 
-                                                                            <input type="text" name="name" placeholder="邮箱/会员帐号/手机号" autofocus required> 
-                                                                          </div> 
-                                                                          <div class="inputWrap"> 
-                                                                            <input type="password" name="pwd" placeholder="请输入密码" required> 
-                                                                          </div> 
-                                                                        </fieldset> 
-                                                                        <fieldset> 
-                                                                          <input type="checkbox" checked="checked"> 
-                                                                          <span>自动登录</span> 
-                                                                        </fieldset> 
-                                                                        <fieldset> 
-                                                                          <input type="button" value="登录" onclick="loginFun();"> 
-                                                                          <a href="javascript:void(0);">忘记密码？</a> <!-- <a href="javascript:void(0);">注册</a> --> 
-                                                                        </fieldset> 
-                                                                      </div> 
-                                                                    </section> 
-                                                                  </form> 
-                                                                  <script type="text/javascript">
-                                                                  $(function(){
-                                                                		$('#loginForm input').keyup(function(event) {
-                                                                			if (event.keyCode == '13') {
-                                                                				loginFun();
-                                                                			}
-                                                                		});
-                                                                	});
-
-                                                                	function loginFun() {
-                                                                		$.post('${pageContext.request.contextPath}/userController/login', $("#loginForm").serialize(), function(result) {
-                                                                			if (result.success) {
-                                                                				window.location.href = "${pageContext.request.contextPath}/index.jsp";
-                                                                			} else {
-                                                                				//$.messager.alert('错误', result.msg, 'error');
-                                                                				$("#msg").show();
-                                                                				$("#msg").text(result.msg);
-                                                                			}
-                                                                		}, "JSON");
-                                                                	}
-                                                                  </script>
-                                                                </div> 
-                                                        </div>
+		<div class="modal fade" id="project-login" tabindex="-1" role="dialog" aria-labelledby="project-login-label" aria-hidden="true">
+			<div class="modal-dialog">
+				<div class="modal-content">
+					<div class="modal-header">
+						<button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+						<h4 class="modal-title" id="project-login-label">登录</h4>
+					</div>
+					<div class="modal-body loginclass">
+						<div class="row " >
+							<div class="col-md-12">
+								<div class="row">
+		                            <div class="loginlayer">
+		                                 <div class="wrap"> 
+		                                      <form action="" method="post" id="loginForm"> 
+		                                        <section class="loginForm"> 
+		                                          <header> 
+		                                            <h1>登录</h1> 
+		                                          </header> 
+		                                          <div class="loginForm_content"> 
+		                                            <fieldset> 
+		                                              <div class="inputWrap"> 
+		                                                <input type="text" name="name" placeholder="邮箱/会员帐号/手机号" autofocus required> 
+		                                              </div> 
+		                                              <div class="inputWrap"> 
+		                                                <input type="password" name="pwd" placeholder="请输入密码" required> 
+		                                              </div> 
+		                                            </fieldset> 
+		                                            <fieldset> 
+		                                              <input type="checkbox" checked="checked"> 
+		                                              <span>自动登录</span> 
+		                                            </fieldset> 
+		                                            <fieldset> 
+		                                              <input type="button" value="登录" onclick="loginFun();"> 
+		                                              <a href="javascript:void(0);">忘记密码？</a> <!-- <a href="javascript:void(0);">注册</a> --> 
+		                                            </fieldset> 
+		                                          </div> 
+		                                        </section> 
+		                                      </form> 
+		                                      <script type="text/javascript">
+		                                      $(function(){
+		                                    		$('#loginForm input').keyup(function(event) {
+		                                    			if (event.keyCode == '13') {
+		                                    				loginFun();
+		                                    			}
+		                                    		});
+		                                    	});
+		
+		                                    	function loginFun() {
+		                                    		$.post('${pageContext.request.contextPath}/userController/login', $("#loginForm").serialize(), function(result) {
+		                                    			if (result.success) {
+		                                    				window.location.href = "${pageContext.request.contextPath}/index.jsp";
+		                                    			} else {
+		                                    				//$.messager.alert('错误', result.msg, 'error');
+		                                    				$("#msg").show();
+		                                    				$("#msg").text(result.msg);
+		                                    			}
+		                                    		}, "JSON");
+		                                    	}
+		                                      </script>
+		                                    </div> 
+		                            </div>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>
 			</div>
 		</div>
-		<!-- section end -->
+		<!-- section end 登录-->
+		
 
 		<!-- section start -->
 		<!-- ================ 新闻资讯-->
@@ -798,16 +800,6 @@
 									<li><i class="fa fa-fax pr-10"></i> +00 1234567891 </li>
 									<li><i class="fa fa-envelope-o pr-10"></i> your@email.com</li>
 								</ul>
-								<!-- <ul class="social-links">
-									<li class="facebook"><a target="_blank" href="https://www.facebook.com/pages/HtmlCoder/714570988650168"><i class="fa fa-facebook"></i></a></li>
-									<li class="twitter"><a target="_blank" href="https://twitter.com/HtmlcoderMe"><i class="fa fa-twitter"></i></a></li>
-									<li class="googleplus"><a target="_blank" href="http://plus.google.com"><i class="fa fa-google-plus"></i></a></li>
-									<li class="skype"><a target="_blank" href="http://www.skype.com"><i class="fa fa-skype"></i></a></li>
-									<li class="linkedin"><a target="_blank" href="http://www.linkedin.com"><i class="fa fa-linkedin"></i></a></li>
-									<li class="youtube"><a target="_blank" href="http://www.youtube.com"><i class="fa fa-youtube"></i></a></li>
-									<li class="flickr"><a target="_blank" href="http://www.flickr.com"><i class="fa fa-flickr"></i></a></li>
-									<li class="pinterest"><a target="_blank" href="http://www.pinterest.com"><i class="fa fa-pinterest"></i></a></li>
-								</ul> -->
 							</div>
 						</div>
 						<div class="col-sm-6">
