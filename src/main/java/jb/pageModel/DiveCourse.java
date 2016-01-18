@@ -20,7 +20,8 @@ public class DiveCourse implements java.io.Serializable {
 	private java.lang.String status;	
 	private Date addtime;			
 	private java.lang.String addUserId;
-
+	private java.lang.String fileId;
+	
 	private int commentNum; //评论数量
 	private int collectNum; //收藏数量
 	private int praiseNum;  //赞人数
@@ -115,6 +116,14 @@ public class DiveCourse implements java.io.Serializable {
 		this.addUserId = addUserId;
 	}
 	
+	public java.lang.String getFileId() {
+		return fileId;
+	}
+
+	public void setFileId(java.lang.String fileId) {
+		this.fileId = fileId;
+	}
+
 	public Date getAddtime() {
 		return this.addtime;
 	}

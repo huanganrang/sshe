@@ -33,6 +33,7 @@ public class TdiveCourse implements java.io.Serializable,IEntity{
 	public static final String ALIAS_FILE_PATH = "视频地址";
 	public static final String ALIAS_STATUS = "状态";
 	public static final String ALIAS_ADDTIME = "创建时间";
+	public static final String ALIAS_FILE_ID = "iQIYI";
 	
 	//date formats
 	public static final String FORMAT_ADDTIME = jb.util.Constants.DATE_FORMAT_FOR_ENTITY;
@@ -56,6 +57,8 @@ public class TdiveCourse implements java.io.Serializable,IEntity{
 	private java.lang.String introduce;
 	//@Length(max=128)
 	private java.lang.String filePath;
+	//@Length(max=128)
+	private java.lang.String fileId;
 	//@Length(max=4)
 	private java.lang.String status;
 	//
@@ -143,6 +146,15 @@ public class TdiveCourse implements java.io.Serializable,IEntity{
 	
 	public void setFilePath(java.lang.String filePath) {
 		this.filePath = filePath;
+	}
+	
+	@Column(name = "file_Id", unique = false, nullable = true, insertable = true, updatable = true, length = 128)
+	public java.lang.String getFileId() {
+		return this.fileId;
+	}
+	
+	public void setFileId(java.lang.String fileId) {
+		this.fileId = fileId;
 	}
 	
 	@Column(name = "status", unique = false, nullable = true, insertable = true, updatable = true, length = 4)

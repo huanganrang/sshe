@@ -128,6 +128,18 @@ public class DiveCourseController extends BaseController {
 		request.setAttribute("diveCourse", diveCourse);
 		return "/divecourse/diveCourseView";
 	}
+	
+	/**
+	 * 跳转到DiveCourse查看页面
+	 * 
+	 * @return
+	 */
+	@RequestMapping("/upload")
+	public String upload(HttpServletRequest request, String id) {
+		DiveCourse diveCourse = diveCourseService.get(id);
+		request.setAttribute("diveCourse", diveCourse);
+		return "/divecourse/diveCourseUpload";
+	}
 
 	/**
 	 * 跳转到DiveCourse修改页面
@@ -149,7 +161,7 @@ public class DiveCourseController extends BaseController {
 	 */
 	@RequestMapping("/edit")
 	@ResponseBody
-	public Json edit(DiveCourse diveCourse, @RequestParam MultipartFile filePathFile, @RequestParam MultipartFile iconFile, HttpServletRequest request) {
+	public Json edit(DiveCourse diveCourse, @RequestParam(required=false) MultipartFile filePathFile, @RequestParam(required=false) MultipartFile iconFile, HttpServletRequest request) {
 		Json j = new Json();	
 		diveCourse.setIcon(uploadFile(request, "course", iconFile));
 		diveCourse.setFilePath(uploadFile(request, "course/video", filePathFile, "video"));

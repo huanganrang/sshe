@@ -27,8 +27,15 @@
 		$.canView = true;
 	</script>
 </c:if>
+<c:if
+	test="${fn:contains(sessionInfo.resourceList, '/diveCourseController/upload')}">
+	<script type="text/javascript">
+		$.canUpload = true;
+	</script>
+</c:if>
 <script type="text/javascript">
 	var dataGrid;
+	var vcop = null;
 	$(function() {
 		dataGrid = $('#dataGrid').datagrid({
 			url : '${pageContext.request.contextPath}/diveCourseController/dataGrid',
@@ -71,6 +78,10 @@
 				title : '<%=TdiveCourse.ALIAS_STATUS%>',
 				width : 50		
 				}, {
+				field : 'fileId',
+				title : '<%=TdiveCourse.ALIAS_FILE_ID%>',
+				width : 50		
+				}, {
 				field : 'addtime',
 				title : '<%=TdiveCourse.ALIAS_ADDTIME%>',
 				width : 50,
@@ -86,11 +97,15 @@
 					}
 					str += '&nbsp;';
 					if ($.canDelete) {
-						str += $.formatString('<img onclick="deleteFun(\'{0}\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_delete.png');
+						str += $.formatString('<img onclick="deleteFun(\'{0}\',\'{1}\');" src="{2}" title="删除"/>', row.id, row.fileId, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_delete.png');
 					}
 					str += '&nbsp;';
 					if ($.canView) {
 						str += $.formatString('<img onclick="viewFun(\'{0}\');" src="{1}" title="查看"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_link.png');
+					}
+					str += '&nbsp;';
+					if ($.canUpload) {
+						str += $.formatString('<a onclick="uploadFun(\'{0}\');" style="color:red;cursor: pointer;">上传iQIYI</a>', row.id);
 					}
 					return str;
 				}
@@ -103,9 +118,24 @@
 				$(this).datagrid('tooltip');
 			}
 		});
+		
+		vcop = new Q.vcopClient({
+	        appKey:"2a1b15cfc6154a2088f82f9eab17a52d",  // 填写申请的app key 
+	        appSecret:"2fcf5d737755ef904167bf570a90b2f0" // 填写app secret
+	    });
+		getEntAuth();
 	});
+	
+	// 5-27 企业级授权
+    function getEntAuth(){
+        vcop.getAuthEnterprise(function (data) {
+            if(data){
+                vcop.authtoken = data.data.access_token;
+            }
+        });
+    }
 
-	function deleteFun(id) {
+	function deleteFun(id, fileId) {
 		if (id == undefined) {
 			var rows = dataGrid.datagrid('getSelections');
 			id = rows[0].id;
@@ -120,6 +150,14 @@
 					id : id
 				}, function(result) {
 					if (result.success) {
+						if(fileId) {
+							vcop.delVideoById({delete_type:1, file_ids:fileId},
+						        function (data) {
+									console.log(data);
+						        }
+					       	);
+						}
+						
 						parent.$.messager.alert('提示', result.msg, 'info');
 						dataGrid.datagrid('reload');
 					}
@@ -161,6 +199,16 @@
 			height : 500,
 			href : '${pageContext.request.contextPath}/diveCourseController/view?id=' + id
 		});
+	}
+	
+	function uploadFun(id) {
+		parent.$.modalDialog({
+			title : '上传爱奇艺',
+			width : 780,
+			height : 500,
+			href : '${pageContext.request.contextPath}/diveCourseController/upload?id=' + id
+		});
+		parent.$.modalDialog.openner_dataGrid = dataGrid;
 	}
 
 	function addFun() {

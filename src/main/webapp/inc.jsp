@@ -28,6 +28,9 @@
 <script
 	src="${pageContext.request.contextPath}/jslib/Highcharts-3.0.1/js/highcharts.js"
 	type="text/javascript" charset="utf-8"></script>
+<script
+	src="${pageContext.request.contextPath}/jslib/iQIYI_min.js"
+	type="text/javascript" charset="utf-8"></script>
 
 <!-- 引入bootstrap样式 -->
 <link
