@@ -36,6 +36,7 @@ import jb.service.DiveEquipServiceI;
 import jb.service.DiveLogServiceI;
 import jb.service.DiveStoreServiceI;
 import jb.service.DiveTravelServiceI;
+import jb.util.HttpUtil;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -146,6 +147,7 @@ public class ApiCommonController extends BaseController {
 	 * @param type
 	 * @param id
 	 * @return
+	 * eg: http://www.e-diving.com.cn/api/apiCommon/share?businessId=4fa21103-c7cb-495c-a35d-691c73d32f37&businessType=BT06
 	 */
 	@RequestMapping("/share")
 	public String share(String businessId,String businessType,HttpServletRequest request) {
@@ -178,11 +180,12 @@ public class ApiCommonController extends BaseController {
 			content = t.getDescription();
 			title = t.getName();
 			date = t.getAddtime();
-		} else if("BT06".equals(businessType)) { // 学习
+		} else if("BT06".equals(businessType)) { // 视频
 			DiveCourse t = diveCourseService.get(businessId);
-			content = t.getIntroduce();
-			title = t.getTitle();
-			date = t.getAddtime();
+			request.setAttribute("title", t.getTitle());
+			request.setAttribute("date", t.getAddtime());
+			request.setAttribute("fileId", t.getFileId());
+			return "/diveshare/courseshare";
 		} else if("BT07".equals(businessType)) { // 潜水日志
 			DiveLog t = diveLogService.get(businessId);
 			List<String> imageList = new ArrayList<String>();
@@ -261,6 +264,21 @@ public class ApiCommonController extends BaseController {
 			} 
 			
 			j.setObj(result);
+			j.success();
+		}catch(Exception e){
+			j.fail();
+			e.printStackTrace();
+		}		
+		return j;
+	}
+	
+	
+	@ResponseBody
+	@RequestMapping("/getIQiYiMP4Url")
+	public Json getIQiYiMP4Url(String src, HttpServletRequest request) {
+		Json j = new Json();
+		try{
+			j.setObj(HttpUtil.httpRequest(src, "GET", null));
 			j.success();
 		}catch(Exception e){
 			j.fail();
