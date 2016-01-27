@@ -253,14 +253,9 @@
 			<div class="banner-caption">
 				<div class="container">
 					<div  class="device_style">
-						<a href="<%=iosDownloadUrl %>" target="blank" border="0">
-							<div class="device_banner" style="float:left;position:absolute;top:90%;left:30%;">
-	                       		<img  src="${pageContext.request.contextPath}/web/images/loginimgs/ios_img.png" />
-	                         </div>
-                         
                          <a href="${pageContext.request.contextPath}/<%=androidFilePath %>" target="blank" border="0">
-                         <div class="device_banner" style="float:left;position:absolute;top:90%;left:60%;">
-                             <img  src="${pageContext.request.contextPath}/web/images/loginimgs/android_img.png" />
+                         <div class="device_banner" style="position:absolute;top:82%;left:42%;">
+                             <img  src="${pageContext.request.contextPath}/web/images/loginimgs/ewm_img.png" width="280" height="160"/>
                          </div>
                        	</a>
 					</div>
