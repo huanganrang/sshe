@@ -253,10 +253,10 @@
 			<div class="banner-caption">
 				<div class="container">
 					<div  class="device_style">
-                         <a href="${pageContext.request.contextPath}/<%=androidFilePath %>" target="blank" border="0">
-                         <div class="device_banner" style="position:absolute;top:82%;left:42%;">
-                             <img  src="${pageContext.request.contextPath}/web/images/loginimgs/ewm_img.png" width="280" height="160"/>
-                         </div>
+                         <a href="javascript:void(0);" border="0">
+	                         <div class="device_banner" style="position:absolute;top:82%;left:42%;">
+	                             <img  src="${pageContext.request.contextPath}/web/images/loginimgs/ewm_img.png" width="280" height="160"/>
+	                         </div>
                        	</a>
 					</div>
 				</div>
