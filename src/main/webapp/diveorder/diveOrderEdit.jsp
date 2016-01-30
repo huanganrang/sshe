@@ -2,6 +2,7 @@
 <%@ page import="jb.model.TdiveOrder" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/fmt" prefix="fmt" %>
 <%@ taglib prefix="jb" uri="http://www.jb.cn/jbtag"%> 
 <script type="text/javascript">
 	$(function() {
@@ -38,61 +39,58 @@
 				<input type="hidden" name="id" value = "${diveOrder.id}"/>
 			<table class="table table-hover table-condensed">
 				<tr>	
-					<th><%=TdiveOrder.ALIAS_ACCOUNT_ID%></th>	
-					<td>
-											<input class="span2" name="accountId" type="text" value="${diveOrder.accountId}"/>
-					</td>							
-					<th><%=TdiveOrder.ALIAS_ADDRESS%></th>	
-					<td>
-											<input class="span2" name="address" type="text" value="${diveOrder.address}"/>
-					</td>							
-			</tr>	
-				<tr>	
-					<th><%=TdiveOrder.ALIAS_EXPRESS_NAME%></th>	
-					<td>
-											<input class="span2" name="expressName" type="text" value="${diveOrder.expressName}"/>
-					</td>							
-					<th><%=TdiveOrder.ALIAS_EXPRESS_NO%></th>	
-					<td>
-											<input class="span2" name="expressNo" type="text" value="${diveOrder.expressNo}"/>
-					</td>							
-			</tr>	
-				<tr>	
-					<th><%=TdiveOrder.ALIAS_PAY_WAY%></th>	
-					<td>
-											<input class="span2" name="payWay" type="text" value="${diveOrder.payWay}"/>
-					</td>							
-					<th><%=TdiveOrder.ALIAS_REMARK%></th>	
-					<td>
-											<input class="span2" name="remark" type="text" value="${diveOrder.remark}"/>
-					</td>							
-			</tr>	
+					<th width="10%">订单号</th>	
+					<td width="40%">
+						${diveOrder.orderNo}							
+					</td>	
+					<th width="10%">下单人账号</th>	
+					<td width="40%">
+						${diveOrder.userName}							
+					</td>
+				</tr>
 				<tr>	
 					<th><%=TdiveOrder.ALIAS_PAY_STATUS%></th>	
 					<td>
-											<jb:select dataType="PS" name="payStatus" value="${diveOrder.payStatus}"></jb:select>	
-					</td>							
-					<th><%=TdiveOrder.ALIAS_ORDER_STATUS%></th>	
-					<td>
-											<jb:select dataType="OS" name="orderStatus" value="${diveOrder.orderStatus}"></jb:select>	
-					</td>							
-			</tr>	
-				<tr>	
-					<th><%=TdiveOrder.ALIAS_SEND_STATUS%></th>	
-					<td>
-											<jb:select dataType="SS" name="sendStatus" value="${diveOrder.sendStatus}"></jb:select>	
-					</td>							
-					<th><%=TdiveOrder.ALIAS_PAYTIME%></th>	
-					<td>
-					<input class="span2" name="paytime" type="text" onclick="WdatePicker({dateFmt:'<%=TdiveOrder.FORMAT_PAYTIME%>'})"   maxlength="0" value="${diveOrder.paytime}"/>
-					</td>							
-			</tr>	
-				<tr>	
+						${diveOrder.payStatusZh}	
+					</td>					
 					<th><%=TdiveOrder.ALIAS_ADDTIME%></th>	
 					<td>
-					<input class="span2" name="addtime" type="text" onclick="WdatePicker({dateFmt:'<%=TdiveOrder.FORMAT_ADDTIME%>'})"   maxlength="0" value="${diveOrder.addtime}"/>
+						<fmt:formatDate value="${diveOrder.addtime}" pattern="yyyy-MM-dd HH:mm:ss"/>						
+					</td>					
+				</tr>
+				<tr>	
+					<th><%=TdiveOrder.ALIAS_ORDER_STATUS%></th>	
+					<td>
+						<jb:select dataType="OS" name="orderStatus" value="${diveOrder.orderStatus}"></jb:select>	
+					</td>				
+					<th><%=TdiveOrder.ALIAS_SEND_STATUS%></th>	
+					<td>
+						<jb:select dataType="SS" name="sendStatus" value="${diveOrder.sendStatus}"></jb:select>	
+					</td>				
+				</tr>
+				<tr>	
+					<th><%=TdiveOrder.ALIAS_EXPRESS_NAME%></th>	
+					<td>
+						<input class="span2" name="expressName" type="text" value="${diveOrder.expressName}"/>						
 					</td>							
-			</tr>	
+					<th><%=TdiveOrder.ALIAS_EXPRESS_NO%></th>	
+					<td>
+						<input class="span2" name="expressNo" type="text" value="${diveOrder.expressNo}"/>					
+					</td>							
+				</tr>
+				<tr>	
+					<th><%=TdiveOrder.ALIAS_ADDRESS%></th>	
+					<td colspan="3">
+						<textarea style="width: 500px;" name="address">${diveOrder.address}</textarea>
+					</td>							
+				</tr>
+				<tr>	
+					<th><%=TdiveOrder.ALIAS_REMARK%></th>
+					<td colspan="3">
+						<textarea style="width: 500px;" name="remark">${diveOrder.remark}</textarea>
+					</td>							
+				</tr>	
+					
 			</table>				
 		</form>
 	</div>

@@ -75,7 +75,7 @@
 				}, {
 				field : 'remark',
 				title : '<%=TdiveOrder.ALIAS_REMARK%>',
-				width : 100	
+				width : 80	
 				}, {
 				field : 'payStatusZh',
 				title : '<%=TdiveOrder.ALIAS_PAY_STATUS%>',
@@ -84,6 +84,10 @@
 				field : 'orderStatusZh',
 				title : '<%=TdiveOrder.ALIAS_ORDER_STATUS%>',
 				width : 50		
+				}, {
+				field : 'sendStatusZh',
+				title : '<%=TdiveOrder.ALIAS_SEND_STATUS%>',
+				width : 60		
 				}, {
 				field : 'paytime',
 				title : '<%=TdiveOrder.ALIAS_PAYTIME%>',
@@ -97,13 +101,14 @@
 			}, {
 				field : 'action',
 				title : '操作',
-				width : 30,
+				width : 40,
 				formatter : function(value, row, index) {
 					var str = '';
-					/*if ($.canEdit) {
+					if ($.canEdit) {
 						str += $.formatString('<img onclick="editFun(\'{0}\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_edit.png');
 					}
 					str += '&nbsp;';
+					/*
 					if ($.canDelete) {
 						str += $.formatString('<img onclick="deleteFun(\'{0}\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_delete.png');
 					}
