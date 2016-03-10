@@ -76,12 +76,14 @@
 					<td colspan="4">
 						<table style="width: 100%; margin-top: 10px;">
 							<tr>
-								<th width="25%">商品图片</th>	
-								<th width="25%">商品名称</th>	
-								<th width="10%">商品类型</th>	
-								<th width="15%">商品单价（元）</th>	
-								<th width="10%">商品数量</th>	
-								<th width="15%">商品总价</th>	
+								<th width="20%">商品图片</th>	
+								<th width="20%">名称</th>	
+								<th width="10%">类型</th>	
+								<th width="10%">单价（元）</th>	
+								<th width="10%">数量</th>	
+								<th width="10%">总价</th>	
+								<th width="10%">颜色</th>	
+								<th width="10%">尺寸</th>	
 							</tr>
 							<c:forEach items="${diveOrder.detail_list}" var="detail" varStatus="vs">
 								<tr>
@@ -102,6 +104,12 @@
 									</td>
 									<td>
 										${detail.price*detail.number}
+									</td>
+									<td>
+										${detail.colorZh}
+									</td>
+									<td>
+										${detail.sizeZh}
 									</td>
 								</tr>
 								

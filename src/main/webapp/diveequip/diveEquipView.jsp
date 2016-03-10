@@ -50,9 +50,19 @@
 				</td>
 			</tr>
 			<tr>
-				<th><%=TdiveEquip.ALIAS_EQUIP_ICON%></th>	
+				<th>颜色属性</th>	
 				<td colspan="3">
-					<img alt="" src="${diveEquip.equipIcon}"> 							
+					<c:forEach items="${diveEquip.colorList}" var="color" varStatus="vs">
+						${color.value}&nbsp;&nbsp;
+					</c:forEach>						
+				</td>
+			</tr>
+			<tr>
+				<th>尺寸属性</th>	
+				<td colspan="3">
+					<c:forEach items="${diveEquip.sizeList}" var="size" varStatus="vs">
+						${size.value}&nbsp;&nbsp;
+					</c:forEach>						
 				</td>
 			</tr>
 			<tr>	

@@ -105,7 +105,7 @@ public class DiveOrderDetailServiceImpl extends BaseServiceImpl<DiveOrderDetail>
 	public List<DiveOrderDetail> getOrderDetail(String orderId) {
 		List<DiveOrderDetail> rl = new ArrayList<DiveOrderDetail>();
 		String sql = "select t.id id, t.order_id orderId, t.business_id businessId, "
-				+ " t.business_type businessType, t.number number, t.price price, "
+				+ " t.business_type businessType, t.number number, t.price price, t.goods_color goodsColor, t.goods_size goodsSize,  "
 				+ " (case t.business_type when 'BT01' then (select concat(dt.name, concat('--', dt.icon)) from dive_travel dt where dt.id = t.business_id) "
 				+ " when 'BT03' then (select concat(de.equip_name, concat('--', de.equip_icon)) from dive_equip de where de.id = t.business_id) "
 				+ " when 'BT06' then (select concat(dc.title, concat('--', dc.icon)) from dive_course dc where dc.id = t.business_id) end) name_icon"

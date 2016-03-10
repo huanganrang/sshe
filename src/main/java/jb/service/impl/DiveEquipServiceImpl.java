@@ -10,7 +10,9 @@ import java.util.UUID;
 import jb.absx.F;
 import jb.dao.DiveCollectDaoI;
 import jb.dao.DiveEquipDaoI;
+import jb.listener.Application;
 import jb.model.TdiveEquip;
+import jb.pageModel.AttrInfo;
 import jb.pageModel.DataGrid;
 import jb.pageModel.DiveEquip;
 import jb.pageModel.PageHelper;
@@ -104,11 +106,41 @@ public class DiveEquipServiceImpl extends BaseServiceImpl<DiveEquip> implements 
 
 	@Override
 	public DiveEquip get(String id) {
+		return get(id, false);
+	}
+	
+	public DiveEquip get(String id, boolean flag) {
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", id);
 		TdiveEquip t = diveEquipDao.get("from TdiveEquip t  where t.id = :id", params);
 		DiveEquip o = new DiveEquip();
 		BeanUtils.copyProperties(t, o);
+		if(flag) {
+			if(!F.empty(t.getColors())) {
+				List<AttrInfo> colorList = new ArrayList<AttrInfo>();
+				String[] colors = t.getColors().split(",");
+				for(String str : colors) {
+					if(F.empty(str)) continue;
+					AttrInfo color = new AttrInfo();
+					color.setCode(str);
+					color.setValue(Application.getString(str));
+					colorList.add(color);
+				}
+				o.setColorList(colorList);
+			}
+			if(!F.empty(t.getSizes())) {
+				List<AttrInfo> sizeList = new ArrayList<AttrInfo>();
+				String[] sizes = t.getSizes().split(",");
+				for(String str : sizes) {
+					if(F.empty(str)) continue;
+					AttrInfo size = new AttrInfo();
+					size.setCode(str);
+					size.setValue(Application.getString(str));
+					sizeList.add(size);
+				}
+				o.setSizeList(sizeList);
+			}
+		}
 		return o;
 	}
 
@@ -130,7 +162,7 @@ public class DiveEquipServiceImpl extends BaseServiceImpl<DiveEquip> implements 
 	 * 获取详情信息
 	 */
 	public DiveEquip getDetail(String id, String accountId) {
-		DiveEquip d = get(id);
+		DiveEquip d = get(id, true);
 		String hql = "select count(*) from TdiveCollect t ";
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("businessId", id);

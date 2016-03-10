@@ -29,6 +29,18 @@
 					parent.$.messager.progress('close');
 				}
 				editor.sync();
+				var selColors = $("#selColors").combo('getValues');
+				if(selColors != '') {
+					$("#colors").val(selColors);
+				} else {
+					$("#colors").val('');
+				}
+				var selSizes = $("#selSizes").combo('getValues');
+				if(selSizes != '') {
+					$("#sizes").val(selSizes);
+				} else {
+					$("#sizes").val('');
+				}
 				return isValid;
 			},
 			success : function(result) {
@@ -57,7 +69,52 @@
 		$(document).delegate('#iconFile','change',function () {
 			ProcessFile();
 		});
+		
+		setTimeout(function(){
+			var colors = $("#colors").val(),
+				sizes = $("#sizes").val(),
+				cr = [], ct = '', sr = [], st = '';
+			if(colors != '') {
+				var colorArr = colors.split(",");
+				$("#selColors").combo('panel').find(".combobox-item").each(function(){
+					var v = $(this).attr("value");
+					var t = $(this).html();
+					if(colorArr.contains(v)) {
+						cr.push(v);
+						if(ct != '') ct += ',';
+						ct += t;
+						$(this).addClass('combobox-item-selected');
+					}
+				});
+			}
+			$("#selColors").combo('setValues',cr).combo('setText', ct);
+			
+			if(sizes != '') {
+				var sizeArr = sizes.split(",");
+				$("#selSizes").combo('panel').find(".combobox-item").each(function(){
+					var v = $(this).attr("value");
+					var t = $(this).html();
+					if(sizeArr.contains(v)) {
+						sr.push(v);
+						if(st != '') st += ',';
+						st += t;
+						$(this).addClass('combobox-item-selected');
+					}
+				});
+			}
+			$("#selSizes").combo('setValues',sr).combo('setText', st);
+		},50);
 	});
+	
+	Array.prototype.contains = function (obj) {  
+	    var i = this.length;  
+	    while (i-- && i >= 0) {  
+	        if (this[i] === obj) {  
+	            return true;  
+	        }  
+	    }  
+	    return false;  
+	} 
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
 	<div data-options="region:'center',border:false" title="" style="overflow: auto;">
@@ -96,7 +153,19 @@
 					<td colspan="3">
 						<jb:select dataType="ST" name="status" value="${diveEquip.status}"></jb:select>	
 					</td>						
-				</tr>	
+				</tr>
+				<tr>	
+					<th>所属颜色</th>	
+					<td>
+						<jb:select dataType="CL" name="selColors" multiple="true"></jb:select>	
+						<input type="hidden" name="colors" id="colors" value="${diveEquip.colors}"/>
+					</td>
+					<th>所属尺寸</th>	
+					<td>
+						<jb:select dataType="SZ" name="selSizes" multiple="true"></jb:select>	
+						<input type="hidden" name="sizes" id="sizes" value="${diveEquip.sizes}"/>
+					</td>	
+				</tr>		
 				<tr>
 					<th><%=TdiveEquip.ALIAS_HOT%></th>	
 					<td>

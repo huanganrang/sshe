@@ -1,6 +1,7 @@
 package jb.tag;
 
 import java.io.IOException;
+import java.util.Arrays;
 import java.util.List;
 
 import javax.servlet.jsp.JspException;
@@ -23,6 +24,7 @@ public class SelectTag extends TagSupport{
 	private String dataType;
 	private String value;
 	private boolean mustSelect;
+	private boolean multiple;
 	public String getDataType() {
 		return dataType;
 	}
@@ -39,7 +41,7 @@ public class SelectTag extends TagSupport{
     public int doStartTag() throws JspException {  
 		JspWriter out = pageContext.getOut();  		  
         try{
-        	out.print("<select name=\""+name+"\" id=\""+name+"\" class=\"easyui-combobox\" data-options=\"width:140,height:29,editable:false,panelHeight:'auto'\">");
+        	out.print("<select name=\""+name+"\" id=\""+name+"\" class=\"easyui-combobox\" data-options=\"width:140,height:29,multiple:"+multiple+",editable:false,panelHeight:'auto'\">");
         	BasedataServiceI service = Application.getBasedataService();
         	BaseData baseData = new BaseData();
 			baseData.setBasetypeCode(dataType);
@@ -47,11 +49,16 @@ public class SelectTag extends TagSupport{
         	if(!mustSelect)
         	out.print("<option value=\"\">    </option>");
         	for(BaseData bd : baseDataList){
-        		if(F.empty(value)||!value.equals(bd.getId())){
+        		if(multiple) {
                 	out.print("<option value=\""+bd.getId()+"\">"+bd.getName()+"</option>");
-        		}else{
-                	out.print("<option value=\""+bd.getId()+"\" selected=\"selected\">"+bd.getName()+"</option>");
+        		} else {
+        			if(F.empty(value)||!value.equals(bd.getId())){
+                    	out.print("<option value=\""+bd.getId()+"\">"+bd.getName()+"</option>");
+            		}else{
+                    	out.print("<option value=\""+bd.getId()+"\" selected=\"selected\">"+bd.getName()+"</option>");
+            		}
         		}
+        		
         	}
         	out.print("</select>");  
         } catch (IOException e) {  
@@ -72,6 +79,12 @@ public class SelectTag extends TagSupport{
 	}
 	public void setMustSelect(boolean mustSelect) {
 		this.mustSelect = mustSelect;
+	}
+	public boolean isMultiple() {
+		return multiple;
+	}
+	public void setMultiple(boolean multiple) {
+		this.multiple = multiple;
 	}  
 	
 	

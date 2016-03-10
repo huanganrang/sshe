@@ -60,6 +60,14 @@ String url = request.getContextPath()+"/api/apiOrderController/addShopCart";
 						<td align="right" style="width: 180px;"><label>price(单件价格)：</label></td>
 						<td><input name="price" type="text" class="span2" value="" /></td>
 					</tr>
+					<tr>
+						<td align="right" style="width: 180px;"><label>goodsColor(颜色编码)：</label></td>
+						<td><input name="goodsColor" type="text" class="span2" value="" /></td>
+					</tr>
+					<tr>
+						<td align="right" style="width: 180px;"><label>goodsSize(尺寸编码)：</label></td>
+						<td><input name="goodsSize" type="text" class="span2" value="" /></td>
+					</tr>
 
 					<tr>
 						<td colspan="2" align="center"><input type="button"

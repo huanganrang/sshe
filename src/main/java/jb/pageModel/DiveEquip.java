@@ -1,6 +1,7 @@
 package jb.pageModel;
 
 import java.util.Date;
+import java.util.List;
 
 import jb.listener.Application;
 
@@ -21,7 +22,11 @@ public class DiveEquip implements java.io.Serializable {
 	private java.lang.String equipBrand;	
 	private Date addtime;		
 	private java.lang.String addUserId;
-
+	private java.lang.String colors;
+	private java.lang.String sizes;
+	private List<AttrInfo> colorList;
+	private List<AttrInfo> sizeList;
+	
 	private boolean isCollect;
 	private int collectNum; //收藏数量
 	
@@ -129,6 +134,18 @@ public class DiveEquip implements java.io.Serializable {
 		this.addUserId = addUserId;
 	}
 
+	public java.lang.String getColors() {
+		return colors;
+	}
+	public void setColors(java.lang.String colors) {
+		this.colors = colors;
+	}
+	public java.lang.String getSizes() {
+		return sizes;
+	}
+	public void setSizes(java.lang.String sizes) {
+		this.sizes = sizes;
+	}
 	public boolean isCollect() {
 		return isCollect;
 	}
@@ -141,6 +158,18 @@ public class DiveEquip implements java.io.Serializable {
 	}
 	public void setCollectNum(int collectNum) {
 		this.collectNum = collectNum;
+	}
+	public List<AttrInfo> getColorList() {
+		return colorList;
+	}
+	public void setColorList(List<AttrInfo> colorList) {
+		this.colorList = colorList;
+	}
+	public List<AttrInfo> getSizeList() {
+		return sizeList;
+	}
+	public void setSizeList(List<AttrInfo> sizeList) {
+		this.sizeList = sizeList;
 	}
 
 }

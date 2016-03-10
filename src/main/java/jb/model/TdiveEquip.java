@@ -68,6 +68,8 @@ public class TdiveEquip implements java.io.Serializable,IEntity{
 	private java.util.Date addtime;
 	//@Length(max=36)
 	private java.lang.String addUserId;
+	private java.lang.String colors;
+	private java.lang.String sizes;
 	//columns END
 
 
@@ -195,6 +197,22 @@ public class TdiveEquip implements java.io.Serializable,IEntity{
 	public void setAddUserId(java.lang.String addUserId) {
 		this.addUserId = addUserId;
 	}
+	@Column(name = "colors", unique = false, nullable = true, insertable = true, updatable = true, length = 256)
+	public java.lang.String getColors() {
+		return colors;
+	}
+	public void setColors(java.lang.String colors) {
+		this.colors = colors;
+	}
+	@Column(name = "sizes", unique = false, nullable = true, insertable = true, updatable = true, length = 256)
+	public java.lang.String getSizes() {
+		return sizes;
+	}
+	public void setSizes(java.lang.String sizes) {
+		this.sizes = sizes;
+	}
+	
+	
 	/*
 	public String toString() {
 		return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)

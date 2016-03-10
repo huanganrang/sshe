@@ -47,6 +47,8 @@ public class TdiveOrderDetail implements java.io.Serializable{
 	private java.lang.Integer number;
 	//
 	private java.lang.Float price;
+	private java.lang.String goodsColor;
+	private java.lang.String goodsSize;
 	//columns END
 
 
@@ -110,6 +112,20 @@ public class TdiveOrderDetail implements java.io.Serializable{
 	
 	public void setPrice(java.lang.Float price) {
 		this.price = price;
+	}
+	@Column(name = "goods_color", unique = false, nullable = true, insertable = true, updatable = true, length = 6)
+	public java.lang.String getGoodsColor() {
+		return goodsColor;
+	}
+	public void setGoodsColor(java.lang.String goodsColor) {
+		this.goodsColor = goodsColor;
+	}
+	@Column(name = "goods_size", unique = false, nullable = true, insertable = true, updatable = true, length = 6)
+	public java.lang.String getGoodsSize() {
+		return goodsSize;
+	}
+	public void setGoodsSize(java.lang.String goodsSize) {
+		this.goodsSize = goodsSize;
 	}
 	
 	

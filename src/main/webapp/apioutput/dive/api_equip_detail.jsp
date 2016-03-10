@@ -263,6 +263,73 @@ String url = request.getContextPath()+"/api/apiEquipController/getEquipDetail";
                 收藏数量
             </td>
         </tr>
+        <tr height="19" style="height:19px">
+            <td height="19" style="">
+                colorList
+            </td>
+            <td style="border-left:none">
+                List&lt;AttrInfo&gt;
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+                颜色列表
+            </td>
+        </tr>
+        <tr height="19" style="height:19px">
+            <td height="19" style="">
+                sizeList
+            </td>
+            <td style="border-left:none">
+                List&lt;AttrInfo&gt;
+            </td>
+            <td></td>
+            <td></td>
+            <td>
+                尺寸列表
+            </td>
+        </tr>
+    </tbody>
+</table>
+颜色/尺寸属性列表
+<table x:str="" cellpadding="0" cellspacing="0" width="673">
+    <colgroup>
+        <col width="192" style=";width:192px"/>
+        <col width="117" style=";width:117px"/>
+        <col width="72" span="2" style="width:72px"/>
+        <col width="148" style=";width:148px"/>
+        <col width="72" style="width:72px"/>
+    </colgroup>
+    <tbody>
+        <tr height="19" style="height:19px" class="firstRow">
+            <td height="19" width="192" style="">
+                code
+            </td>
+            <td width="117" style="border-left-style: none;">
+                varchar
+            </td>
+            <td width="72" style="border-left-style: none;" x:num="">
+            </td>
+            <td width="72" style="border-left-style: none;">
+            </td>
+            <td width="148" style="border-left-style: none;">
+                属性编码
+            </td>
+        </tr>
+        <tr height="19" style="height:19px">
+            <td height="19" style="border-top-style: none;">
+                value
+            </td>
+            <td style="border-top:none;border-left:none">
+                varchar
+            </td>
+            <td style="border-top:none;border-left:none" x:num="">
+            </td>
+            <td style="border-top:none;border-left:none"></td>
+            <td style="border-top:none;border-left:none">
+                属性值
+            </td>
+        </tr>
     </tbody>
 </table>
 

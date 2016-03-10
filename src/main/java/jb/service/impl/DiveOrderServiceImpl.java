@@ -167,8 +167,8 @@ public class DiveOrderServiceImpl extends BaseServiceImpl<DiveOrder> implements 
 			if(F.empty(cardId)) continue;
 			inWhere += ",'" + cardId + "'";
 		}
-		String sql = "insert into dive_order_detail(order_id, id, business_id, business_type, number, price) "
-				+ "select '" + order.getId() + "', t.id, t.business_id, t.business_type, t.number, t.price "
+		String sql = "insert into dive_order_detail(order_id, id, business_id, business_type, number, price, goods_color, goods_size) "
+				+ "select '" + order.getId() + "', t.id, t.business_id, t.business_type, t.number, t.price, t.goods_color, t.goods_size "
 				+ "from dive_shop_cart t where t.id in (" + inWhere.substring(1) + ")";
 		diveOrderDao.executeSql(sql);
 		
@@ -299,7 +299,7 @@ public class DiveOrderServiceImpl extends BaseServiceImpl<DiveOrder> implements 
 	
 	public List<Map> queryImportData(DiveOrder diveOrder) {
 		String sql = "select o.order_no orderNo, concat('商品',t.rank) rank, (case t.business_type when 'BT01' then dt.name when 'BT03' then de.equip_name end) name,"
-				+ " t.business_type type, t.price price, t.number number, t.price*t.number totalAmount, (case t.business_type when 'BT01' then ut.NAME when 'BT03' then ue.NAME end) merchant, "
+				+ " t.business_type type, t.goods_color color, t.goods_size size, t.price price, t.number number, t.price*t.number totalAmount, (case t.business_type when 'BT01' then ut.NAME when 'BT03' then ue.NAME end) merchant, "
 				+ " a.user_name userName, o.address, o.express_name expressName, o.express_no expressNo, o.payWay, o.remark,  o.pay_status payStatus,o.order_status orderStatus, o.paytime paytime, o.addtime addtime "
 				+ "  from (select a.*, if(@order_id = a.order_id, @rank \\:= @rank + 1, @rank \\:= 1) as rank, @order_id \\:= a.order_id from (select * from dive_order_detail  order by order_id asc) a, (select @rownum \\:= 0, @order_id \\:= null, @rank \\:= 0) b) t "
 				+ " left join dive_order o on o.id = t.order_id "
@@ -313,6 +313,10 @@ public class DiveOrderServiceImpl extends BaseServiceImpl<DiveOrder> implements 
 		if(lm != null && lm.size() > 0) {
 			for(Map m : lm) {
 				m.put("type", Application.getString(m.get("type").toString()));
+				if(m.get("color") != null)
+					m.put("color", Application.getString(m.get("color").toString()));
+				if(m.get("size") != null)
+					m.put("size", Application.getString(m.get("size").toString()));
 				m.put("payStatus", Application.getString(m.get("payStatus").toString()));
 				m.put("orderStatus", Application.getString(m.get("orderStatus").toString()));
 			}

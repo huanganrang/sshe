@@ -365,6 +365,32 @@ String url = request.getContextPath()+"/api/apiOrderController/getOrderDetail";
                业务商品图片地址
             </td>
         </tr>
+        <tr height="19" style="height:14.25pt">
+            <td height="14" class="xl22" style="border-top-style: none;">
+                colorZh
+            </td>
+            <td class="xl22" style="border-top:none;border-left:none">
+                varchar
+            </td>
+            <td class="xl22" style="border-top:none;border-left:none"></td>
+            <td class="xl22" style="border-top:none;border-left:none"></td>
+            <td class="xl22" style="border-top:none;border-left:none" width="117">
+               颜色值
+            </td>
+        </tr>
+        <tr height="19" style="height:14.25pt">
+            <td height="14" class="xl22" style="border-top-style: none;">
+                sizeZh
+            </td>
+            <td class="xl22" style="border-top:none;border-left:none">
+                varchar
+            </td>
+            <td class="xl22" style="border-top:none;border-left:none"></td>
+            <td class="xl22" style="border-top:none;border-left:none"></td>
+            <td class="xl22" style="border-top:none;border-left:none" width="117">
+               尺寸值
+            </td>
+        </tr>
     </tbody>
 </table>
 

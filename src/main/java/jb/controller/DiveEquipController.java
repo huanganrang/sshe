@@ -123,7 +123,7 @@ public class DiveEquipController extends BaseController {
 	 */
 	@RequestMapping("/view")
 	public String view(HttpServletRequest request, String id) {
-		DiveEquip diveEquip = diveEquipService.get(id);
+		DiveEquip diveEquip = diveEquipService.get(id, true);
 		request.setAttribute("diveEquip", diveEquip);
 		return "/diveequip/diveEquipView";
 	}

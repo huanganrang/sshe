@@ -38,6 +38,13 @@ public interface DiveEquipServiceI {
 	 * @return
 	 */
 	public DiveEquip get(String id);
+	/**
+	 * 获得DiveEquip对象
+	 * 
+	 * @param id
+	 * @return
+	 */
+	public DiveEquip get(String id, boolean flag);
 
 	/**
 	 * 修改DiveEquip

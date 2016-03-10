@@ -13,12 +13,22 @@ public class DiveOrderDetail implements java.io.Serializable {
 	private java.lang.String businessType;	
 	private java.lang.Integer number;	
 	private java.lang.Float price;	
+	private java.lang.String goodsColor;
+	private java.lang.String goodsSize;
 
 	private String businessName;
 	private String businessIcon;
 	
 	public String getBusinessTypeZh() {
 		return Application.getString(businessType);
+	}
+	
+	public String getColorZh() {
+		return Application.getString(this.goodsColor);
+	}
+	
+	public String getSizeZh() {
+		return Application.getString(this.goodsSize);
 	}
 
 	public void setId(java.lang.String value) {
@@ -65,6 +75,23 @@ public class DiveOrderDetail implements java.io.Serializable {
 	public java.lang.Float getPrice() {
 		return this.price;
 	}
+	
+	public java.lang.String getGoodsColor() {
+		return goodsColor;
+	}
+
+	public void setGoodsColor(java.lang.String goodsColor) {
+		this.goodsColor = goodsColor;
+	}
+
+	public java.lang.String getGoodsSize() {
+		return goodsSize;
+	}
+
+	public void setGoodsSize(java.lang.String goodsSize) {
+		this.goodsSize = goodsSize;
+	}
+
 	public String getBusinessName() {
 		return businessName;
 	}

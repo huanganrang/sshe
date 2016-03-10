@@ -100,7 +100,7 @@ public class DiveOrderController extends BaseController {
 //		List<Colum> colums = JSON.parseArray(downloadFields, Colum.class);
 //		downloadTable(colums, dg, response);
 		List<Map> lm = diveOrderService.queryImportData(diveOrder);
-		String[] colums = {"订单号_orderNo", "商品号_rank","商品名称_name","商品类型_type","单价_price","数量_number","总价_totalAmount","商家名称_merchant",
+		String[] colums = {"订单号_orderNo", "商品号_rank","商品名称_name","商品类型_type","颜色_color","尺寸_size","单价_price","数量_number","总价_totalAmount","商家名称_merchant",
 				"下单人账号_userName","地址_address","快递公司_expressName","快递单号_expressNo","支付方式_payWay","备注_remark",
 				"支付状态_payStatus","订单状态_orderStatus","支付时间_paytime","下单时间_addtime"};
 		

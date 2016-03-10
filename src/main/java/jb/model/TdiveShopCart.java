@@ -51,6 +51,8 @@ public class TdiveShopCart implements java.io.Serializable,IEntity{
 	private java.lang.Float price;
 	//
 	private java.util.Date addtime;
+	private java.lang.String goodsColor;
+	private java.lang.String goodsSize;
 	//columns END
 
 
@@ -125,7 +127,20 @@ public class TdiveShopCart implements java.io.Serializable,IEntity{
 	public void setAddtime(java.util.Date addtime) {
 		this.addtime = addtime;
 	}
-	
+	@Column(name = "goods_color", unique = false, nullable = true, insertable = true, updatable = true, length = 6)
+	public java.lang.String getGoodsColor() {
+		return goodsColor;
+	}
+	public void setGoodsColor(java.lang.String goodsColor) {
+		this.goodsColor = goodsColor;
+	}
+	@Column(name = "goods_size", unique = false, nullable = true, insertable = true, updatable = true, length = 6)
+	public java.lang.String getGoodsSize() {
+		return goodsSize;
+	}
+	public void setGoodsSize(java.lang.String goodsSize) {
+		this.goodsSize = goodsSize;
+	}
 	
 	/*
 	public String toString() {

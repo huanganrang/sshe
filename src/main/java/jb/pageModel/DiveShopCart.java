@@ -2,6 +2,8 @@ package jb.pageModel;
 
 import java.util.Date;
 
+import jb.listener.Application;
+
 public class DiveShopCart implements java.io.Serializable {
 
 	private static final long serialVersionUID = 5454155825314635342L;
@@ -12,10 +14,20 @@ public class DiveShopCart implements java.io.Serializable {
 	private java.lang.String businessType;	
 	private java.lang.Integer number;	
 	private java.lang.Float price;	
-	private Date addtime;			
+	private Date addtime;
+	private java.lang.String goodsColor;
+	private java.lang.String goodsSize;
 
 	private String businessName;
 	private String businessIcon;
+	
+	public String getColorZh() {
+		return Application.getString(this.goodsColor);
+	}
+	
+	public String getSizeZh() {
+		return Application.getString(this.goodsSize);
+	}
 
 	public void setId(java.lang.String value) {
 		this.id = value;
@@ -69,6 +81,22 @@ public class DiveShopCart implements java.io.Serializable {
 		return this.addtime;
 	}
 	
+	public java.lang.String getGoodsColor() {
+		return goodsColor;
+	}
+
+	public void setGoodsColor(java.lang.String goodsColor) {
+		this.goodsColor = goodsColor;
+	}
+
+	public java.lang.String getGoodsSize() {
+		return goodsSize;
+	}
+
+	public void setGoodsSize(java.lang.String goodsSize) {
+		this.goodsSize = goodsSize;
+	}
+
 	public String getBusinessName() {
 		return businessName;
 	}

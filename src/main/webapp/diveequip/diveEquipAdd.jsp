@@ -29,6 +29,15 @@
 					parent.$.messager.progress('close');
 				}
 				editor.sync();
+				var selColors = $("#selColors").combo('getValues');
+				if(selColors != '') {
+					$("#colors").val(selColors);
+				}
+				var selSizes = $("#selSizes").combo('getValues');
+				if(selSizes != '') {
+					$("#sizes").val(selSizes);
+				}
+				
 				return isValid;
 			},
 			success : function(result) {
@@ -57,6 +66,18 @@
 		$(document).delegate('#iconFile','change',function () {
 			ProcessFile();
 		});
+		
+		setTimeout(function(){
+			$("#selColors").combo('setValues',[]).combo('setText', '');
+			$("#selSizes").combo('setValues',[]).combo('setText', '');
+			/* var values = [];
+			$("#selColors").combo('panel').find(".combobox-item").each(function(){
+				var v = $(this).attr("value");
+				var t = $(this).html();
+			});
+			
+			$("#selColors").combo('setValues',['CL01', 'CL02']); */
+		},50);
 	});
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
@@ -98,6 +119,18 @@
 					</td>		
 				</tr>
 				<tr>	
+					<th>所属颜色</th>	
+					<td>
+						<jb:select dataType="CL" name="selColors" multiple="true"></jb:select>	
+						<input type="hidden" name="colors" id="colors"/>
+					</td>
+					<th>所属尺寸</th>	
+					<td>
+						<jb:select dataType="SZ" name="selSizes" multiple="true"></jb:select>	
+						<input type="hidden" name="sizes" id="sizes"/>
+					</td>	
+				</tr>	
+				<tr>	
 					<th><%=TdiveEquip.ALIAS_HOT%></th>	
 					<td>
 						<input class="span2" name="hot" type="text" class="span2"/>
@@ -106,7 +139,7 @@
 					<td>
 						<input class="span2" name="saleNum" type="text" class="span2"/>
 					</td>	
-				</tr>	
+				</tr>
 				<tr>	
 					<th><%=TdiveEquip.ALIAS_EQUIP_SUMARY%></th>	
 					<td colspan="3">
