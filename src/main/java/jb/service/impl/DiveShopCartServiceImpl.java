@@ -143,12 +143,22 @@ public class DiveShopCartServiceImpl extends BaseServiceImpl<DiveShopCart> imple
 		params.put("accountId", diveShopCart.getAccountId());
 		params.put("businessId", diveShopCart.getBusinessId());
 		params.put("businessType", diveShopCart.getBusinessType());
-		TdiveShopCart t = diveShopCartDao.get("from TdiveShopCart t where t.accountId = :accountId and t.businessId = :businessId and t.businessType = :businessType", params);
+		String where = "";
+		if(!F.empty(diveShopCart.getGoodsColor())) {
+			where += " and t.goodsColor = :goodsColor";
+			params.put("goodsColor", diveShopCart.getGoodsColor());
+		}
+		if(!F.empty(diveShopCart.getGoodsSize())) {
+			where += " and t.goodsSize = :goodsSize";
+			params.put("goodsSize", diveShopCart.getGoodsSize());
+		}
+		TdiveShopCart t = diveShopCartDao.get("from TdiveShopCart t where t.accountId = :accountId and t.businessId = :businessId and t.businessType = :businessType" + where, params);
+		int number = (diveShopCart.getNumber() != null && diveShopCart.getNumber() != 0) ? diveShopCart.getNumber() : 1;
 		if(t != null) {
-			diveShopCart.setNumber(t.getNumber() + 1);
+			diveShopCart.setNumber(t.getNumber() + number);
 			MyBeanUtils.copyProperties(diveShopCart, t, new String[] { "id" },true);
 		} else {
-			diveShopCart.setNumber(1);
+			diveShopCart.setNumber(number);
 			this.add(diveShopCart);
 		}
 	}
