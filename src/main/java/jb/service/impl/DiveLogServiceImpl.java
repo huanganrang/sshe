@@ -1,32 +1,19 @@
 package jb.service.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
 import jb.absx.F;
-import jb.dao.DiveAccountDaoI;
-import jb.dao.DiveCollectDaoI;
-import jb.dao.DiveLogCommentDaoI;
-import jb.dao.DiveLogDaoI;
-import jb.dao.DivePraiseDaoI;
+import jb.dao.*;
+import jb.listener.Application;
 import jb.model.TdiveAccount;
 import jb.model.TdiveLog;
 import jb.model.TdiveLogComment;
-import jb.pageModel.DataGrid;
-import jb.pageModel.DiveAccount;
-import jb.pageModel.DiveLog;
-import jb.pageModel.DiveLogComment;
-import jb.pageModel.PageHelper;
+import jb.pageModel.*;
 import jb.service.DiveLogServiceI;
 import jb.util.MyBeanUtils;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.*;
 
 @Service
 public class DiveLogServiceImpl extends BaseServiceImpl<DiveLog> implements DiveLogServiceI {
@@ -188,7 +175,7 @@ public class DiveLogServiceImpl extends BaseServiceImpl<DiveLog> implements Dive
 			} else {
 				log.setPraise(false); // 未赞
 			}
-			
+
 		}
 		
 		// 评论列表
@@ -196,7 +183,35 @@ public class DiveLogServiceImpl extends BaseServiceImpl<DiveLog> implements Dive
 		
 		return log;
 	}
-	
+
+	/**
+	 * 更新阅读数
+	 * @param log
+	 */
+	public void updateLogRead(DiveLog log) {
+		int addNum = 1;
+		try {
+			String numStr = Application.getString("SV500");
+			if(!F.empty(numStr)) {
+				int num = Integer.valueOf(numStr);
+				if(num > 0) {
+					addNum = num;
+				} else if(num < 0) {
+					Random random = new Random();
+					addNum = random.nextInt(-num) + 1;
+				}
+			}
+		} catch(Exception e) {
+			e.printStackTrace();
+		}
+
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", log.getId());
+		diveLogDao.executeSql("update dive_log t set t.log_read = ifnull(t.log_read, 0) + "+addNum+" where t.id=:id", params);
+
+		log.setLogRead(log.getLogRead() + addNum);
+	}
+
 	private void setCommentList(DiveLog diveLog) {
 		List<DiveAccount> commentUsers = convert(diveAccountDao.getDiveAccountByLogComment(diveLog.getId()));
 		Map<String,DiveAccount> commentUsersMap = new HashMap<String,DiveAccount>();

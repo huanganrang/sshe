@@ -1,9 +1,9 @@
 package jb.pageModel;
 
+import jb.listener.Application;
+
 import java.util.Date;
 import java.util.List;
-
-import jb.listener.Application;
 
 public class DiveLog implements java.io.Serializable {
 
@@ -30,6 +30,7 @@ public class DiveLog implements java.io.Serializable {
 	private java.lang.String diveAddress;
 	private java.lang.String highGas;
 	private java.lang.String sumary;
+	private Integer logRead;
 	
 	private int commentNum; //评论数量
 	private int collectNum; //收藏数量
@@ -207,6 +208,15 @@ public class DiveLog implements java.io.Serializable {
 	public void setSumary(java.lang.String sumary) {
 		this.sumary = sumary;
 	}
+
+	public Integer getLogRead() {
+		return logRead == null ? 0 : logRead;
+	}
+
+	public void setLogRead(Integer logRead) {
+		this.logRead = logRead;
+	}
+
 	public int getCommentNum() {
 		return commentNum;
 	}

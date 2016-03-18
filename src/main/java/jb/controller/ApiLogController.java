@@ -81,6 +81,8 @@ public class ApiLogController extends BaseController {
 		try{
 			SessionInfo s = getSessionInfo(request);
 			DiveLog diveLog = diveLogService.getDetail(id, s.getId());
+			if(!s.getId().equals(diveLog.getAccountId()))
+				diveLogService.updateLogRead(diveLog);
 			j.setObj(diveLog);
 			j.success();
 		}catch(Exception e){

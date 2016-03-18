@@ -6,13 +6,13 @@
 
 package jb.model;
 
+import org.hibernate.annotations.DynamicInsert;
+import org.hibernate.annotations.DynamicUpdate;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
-
-import org.hibernate.annotations.DynamicInsert;
-import org.hibernate.annotations.DynamicUpdate;
 
 @Entity
 @Table(name = "dive_log")
@@ -95,6 +95,8 @@ public class TdiveLog implements java.io.Serializable,IEntity{
 	private java.lang.String highGas;
 	//@Length(max=256)
 	private java.lang.String sumary;
+
+	private Integer logRead;
 	//columns END
 
 
@@ -298,7 +300,15 @@ public class TdiveLog implements java.io.Serializable,IEntity{
 	public void setSumary(java.lang.String sumary) {
 		this.sumary = sumary;
 	}
-	
+
+	@Column(name = "log_read", unique = false, nullable = true, insertable = true, updatable = true, length = 10)
+	public Integer getLogRead() {
+		return logRead;
+	}
+
+	public void setLogRead(Integer logRead) {
+		this.logRead = logRead;
+	}
 	/*
 	public String toString() {
 		return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)

@@ -59,4 +59,5 @@ public interface DiveLogServiceI {
 
 	public DataGrid dataGridCollect(DiveLog log, String accountId, PageHelper ph);
 
+	void updateLogRead(DiveLog diveLog);
 }

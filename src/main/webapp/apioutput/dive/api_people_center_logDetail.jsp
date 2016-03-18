@@ -360,6 +360,20 @@ String url = request.getContextPath()+"/api/apiLogController/logDetail";
             </td>
         </tr>
         <tr height="19" style="height:19px">
+            <td height="19" style="border-top-style: none;">
+                logRead
+            </td>
+            <td style="border-top:none;border-left:none">
+                int
+            </td>
+            <td style="border-top:none;border-left:none" x:num="">
+            </td>
+            <td style="border-top:none;border-left:none"></td>
+            <td style="border-top:none;border-left:none">
+                阅读数
+            </td>
+        </tr>
+        <tr height="19" style="height:19px">
             <td height="19" style="">
                 commentList
             </td>
