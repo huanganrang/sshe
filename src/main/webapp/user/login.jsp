@@ -116,7 +116,7 @@
 							});
 						}
 						$('#loginDialog').dialog('close');
-						$('#sessionInfoDiv').html($.formatString('[<strong>{0}</strong>]，欢迎你！您使用[<strong>{1}</strong>]IP登录！', result.obj.name, result.obj.ip));
+						$('#sessionInfoDiv').html($.formatString('[<strong>{0}</strong>]，欢迎你！', result.obj.name));
 					} else {
 						$.messager.alert('错误', result.msg, 'error');
 					}
