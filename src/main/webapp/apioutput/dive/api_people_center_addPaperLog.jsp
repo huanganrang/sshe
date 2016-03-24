@@ -61,7 +61,7 @@ String url = request.getContextPath()+"/api/apiLogController/addPaperLog";
 						<td><input name="fileSrcFile" type="file" class="span2" value=""/></td>
 					</tr>
 					<tr>
-						<td align="right" style="width: 180px;"><label>sumary(描述)：</label>
+						<td align="right" style="width: 180px;"><label>sumary(描述/标题)：</label>
 						<td><input name="sumary" type="text" class="span2"  value=""/></td>
 					</tr>
 

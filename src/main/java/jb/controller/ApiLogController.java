@@ -4,13 +4,9 @@ import javax.servlet.http.HttpServletRequest;
 
 import jb.absx.F;
 import jb.interceptors.TokenManage;
-import jb.pageModel.DataGrid;
-import jb.pageModel.DiveLog;
-import jb.pageModel.DiveLogComment;
-import jb.pageModel.Json;
-import jb.pageModel.PageHelper;
-import jb.pageModel.SessionInfo;
+import jb.pageModel.*;
 import jb.service.DiveLogCommentServiceI;
+import jb.service.DiveLogDetailServiceI;
 import jb.service.DiveLogServiceI;
 import jb.util.Constants;
 import jb.util.DateUtil;
@@ -38,6 +34,9 @@ public class ApiLogController extends BaseController {
 		
 	@Autowired
 	private DiveLogServiceI diveLogService;
+
+	@Autowired
+	private DiveLogDetailServiceI diveLogDetailService;
 	
 	@Autowired
 	private DiveLogCommentServiceI diveLogCommentService;
@@ -49,14 +48,10 @@ public class ApiLogController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping("/loglist")
-	public Json loglist(PageHelper ph, DiveLog diveLog, HttpServletRequest request) {
+	public Json loglist(PageHelper ph, DiveLog diveLog) {
 		Json j = new Json();
 		try{
-//			SessionInfo s = getSessionInfo(request);
-//			if(F.empty(diveLog.getAccountId())) {
-//				diveLog.setAccountId(s.getId());
-//			}
-			
+
 			ph.setSort("addtime");
 			ph.setOrder("desc");
 			DataGrid dg = diveLogService.dataGriComplex(diveLog, ph);
@@ -67,8 +62,8 @@ public class ApiLogController extends BaseController {
 			e.printStackTrace();
 		}		
 		return j;
-	}	
-	
+	}
+
 	/**
 	 * 潜水日志详情
 	 * @param ph
@@ -174,7 +169,83 @@ public class ApiLogController extends BaseController {
 			e.printStackTrace();
 		}		
 		return j;
-	}	
+	}
+
+	/**
+	 * 潜记明细列表
+	 * @param ph
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/logDetailList")
+	public Json logDetailList(PageHelper ph, DiveLogDetail diveLogDetail) {
+		Json j = new Json();
+		try{
+			ph.setSort("addtime");
+			ph.setOrder("asc");
+			DataGrid dg = diveLogDetailService.dataGrid(diveLogDetail, ph);
+			j.setObj(dg);
+			j.success();
+		}catch(Exception e){
+			j.fail();
+			e.printStackTrace();
+		}
+		return j;
+	}
+
+	/**
+	 * 潜记明细添加
+	 * @param
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/addLogDetail")
+	public Json addLogDetail(DiveLogDetail logDetail, HttpServletRequest request, @RequestParam MultipartFile[] imageFiles) {
+		Json j = new Json();
+		try{
+			SessionInfo s = getSessionInfo(request);
+			String fileSrc = "";
+			if(imageFiles != null) {
+				for(MultipartFile f : imageFiles){
+					if(!"".equals(fileSrc)) {
+						fileSrc += "||";
+					}
+					fileSrc += uploadFile(request, s.getName() + "/log/detail", f, "log_detail");
+				}
+			}
+
+			logDetail.setFileSrc(fileSrc);
+			diveLogDetailService.add(logDetail);
+			j.setMsg("潜记明细添加成功");
+
+			j.success();
+		}catch(Exception e){
+			j.fail();
+			e.printStackTrace();
+		}
+		return j;
+	}
+
+	/**
+	 * 潜记明细删除
+	 * @param
+	 * @return
+	 */
+	@ResponseBody
+	@RequestMapping("/delLogDetail")
+	public Json delLogDetail(String id) {
+		Json j = new Json();
+		try{
+			diveLogDetailService.delete(id);
+			j.setMsg("潜记明细删除成功");
+
+			j.success();
+		}catch(Exception e){
+			j.fail();
+			e.printStackTrace();
+		}
+		return j;
+	}
 	
 	/**
 	 * 潜水日志图片删除

@@ -117,7 +117,7 @@ String url = request.getContextPath()+"/api/apiLogController/addElectronLog";
 						<td><input name="imageFiles" type="file" class="span2" value=""/>（支持多个同时上传）</td>
 					</tr>
 					<tr>
-						<td align="right" style="width: 180px;"><label>sumary(描述)：</label>
+						<td align="right" style="width: 180px;"><label>sumary(描述/标题)：</label>
 						<td><input name="sumary" type="text" class="span2"  value=""/></td>
 					</tr>
 					

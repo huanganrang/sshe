@@ -41,7 +41,7 @@ public class SelectTag extends TagSupport{
     public int doStartTag() throws JspException {  
 		JspWriter out = pageContext.getOut();  		  
         try{
-        	out.print("<select name=\""+name+"\" id=\""+name+"\" class=\"easyui-combobox\" data-options=\"width:140,height:29,multiple:"+multiple+",editable:false,panelHeight:'auto'\">");
+        	out.print("<select name=\""+name+"\" id=\""+name+"\" class=\"easyui-combobox\" data-options=\"width:140,height:29,multiple:"+multiple+",editable:false\">");
         	BasedataServiceI service = Application.getBasedataService();
         	BaseData baseData = new BaseData();
 			baseData.setBasetypeCode(dataType);

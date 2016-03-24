@@ -46,18 +46,6 @@
 			style="padding: 1px"></div>
 		<div title="潜水日志收藏列表" data-options="href:'api_people_center_logCollectList.jsp'"
 			style="padding: 1px"></div>
-		<div title="潜水日志" data-options="href:'api_people_center_logList.jsp'"
-			style="padding: 1px"></div>
-		<div title="电子日志添加" data-options="href:'api_people_center_addElectronLog.jsp'"
-			style="padding: 1px"></div>
-		<div title="纸张日志添加" data-options="href:'api_people_center_addPaperLog.jsp'"
-			style="padding: 1px"></div>
-		<div title="日志详情" data-options="href:'api_people_center_logDetail.jsp'"
-			style="padding: 1px"></div>
-		<div title="日志图片删除" data-options="href:'api_people_center_del_logImage.jsp'"
-			style="padding: 1px"></div>
-		<div title="添加日志评论" data-options="href:'api_people_center_add_logcomment.jsp'"
-			style="padding: 1px"></div>
 		<div title="退出登录" data-options="href:'api_logout.jsp'"
 			style="padding: 1px"></div>
 	</div>
