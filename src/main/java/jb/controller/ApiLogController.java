@@ -200,7 +200,7 @@ public class ApiLogController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping("/addLogDetail")
-	public Json addLogDetail(DiveLogDetail logDetail, HttpServletRequest request, @RequestParam MultipartFile[] imageFiles) {
+	public Json addLogDetail(DiveLogDetail logDetail, HttpServletRequest request, @RequestParam(required=false) MultipartFile[] imageFiles) {
 		Json j = new Json();
 		try{
 			SessionInfo s = getSessionInfo(request);
