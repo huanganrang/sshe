@@ -131,7 +131,7 @@ h3 {font-size:15px;font-family: "Microsoft YaHei",arial; color:#333333;}
 .scrollBox li{white-space:nowrap; overflow:hidden;text-overflow:ellipsis;word-break:breakall;}
 /*===============页面公共框架================*/
 body {-webkit-text-size-adjust: none;-webkit-tap-highlight-color: rgba(0,0,0,0);-webkit-font-smoothing: antialiased;-moz-user-select: none;color: #666666;}
-body, button, input, select, textarea {font:400 14px/1.4 "Microsoft YaHei",arial;}
+body, button, input, select, textarea {font:400 14pt/1.4 "Microsoft YaHei",arial;}
 /*水平排列 div 元素的子元素 可伸缩子元素*/
 .orient{width:100%; display:box; display:-moz-box; display:-webkit-box; display:-o-box; display:-ms-box;box-orient:horizontal; -moz-box-orient:horizontal; -webkit-box-orient:horizontal; -o-box-orient:horizontal; -ms-box-orient:horizontal;}
 .cmt_con{box-flex:1; -moz-box-flex:1; -webkit-box-flex:1; -o-box-flex:1; -ms-box-flex:1;}

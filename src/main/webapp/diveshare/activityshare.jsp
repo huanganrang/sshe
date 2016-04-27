@@ -101,7 +101,7 @@ dd,dl,dt{ margin:0 ; padding:0;}
   		 	</div>
    			<div class="con1">
        			<dt><fmt:formatDate value="${activity.startDate}" pattern="yyyy-MM-dd"/>至<fmt:formatDate value="${activity.endDate}" pattern="yyyy-MM-dd"/> 从${activity.startAddr}出发,目的地:${activity.endAddr}</dt><dt></dt>
-       			<dt class="xxjh">${activity.description}</dt>
+       			<dt class="xxjh">${activity.introduce}</dt>
    			</div>
  		</div>
 	</div>

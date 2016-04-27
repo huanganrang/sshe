@@ -1,49 +1,23 @@
 package jb.controller;
 
-import java.io.PrintWriter;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import jb.absx.F;
 import jb.interceptors.TokenManage;
 import jb.listener.Application;
-import jb.pageModel.BaseData;
-import jb.pageModel.Bug;
-import jb.pageModel.DiveAccount;
-import jb.pageModel.DiveActivity;
-import jb.pageModel.DiveAddress;
-import jb.pageModel.DiveCourse;
-import jb.pageModel.DiveEquip;
-import jb.pageModel.DiveLog;
-import jb.pageModel.DiveStore;
-import jb.pageModel.DiveTravel;
-import jb.pageModel.Json;
-import jb.service.BugServiceI;
-import jb.service.DiveAccountServiceI;
-import jb.service.DiveActivityServiceI;
-import jb.service.DiveAddressServiceI;
-import jb.service.DiveCourseServiceI;
-import jb.service.DiveEquipServiceI;
-import jb.service.DiveLogServiceI;
-import jb.service.DiveStoreServiceI;
-import jb.service.DiveTravelServiceI;
+import jb.pageModel.*;
+import jb.service.*;
 import jb.util.HttpUtil;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.PrintWriter;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 /**
  * 公共模块接口
@@ -73,6 +47,8 @@ public class ApiCommonController extends BaseController {
 	private DiveCourseServiceI diveCourseService;
 	@Autowired
 	private DiveLogServiceI diveLogService;
+	@Autowired
+	private DiveLogDetailServiceI diveLogDetailService;
 	@Autowired
 	private DiveAccountServiceI diveAccountService;
 	
@@ -128,8 +104,8 @@ public class ApiCommonController extends BaseController {
 	
 	/**
 	 * 
-	 * @param lvAccount
-	 * @param request
+	 * @param
+	 * @param
 	 * @return
 	 */
 	@ResponseBody
@@ -144,8 +120,8 @@ public class ApiCommonController extends BaseController {
 	
 	/**
 	 * 分享统一入口
-	 * @param type
-	 * @param id
+	 * @param
+	 * @param
 	 * @return
 	 * eg: http://www.e-diving.com.cn/api/apiCommon/share?businessId=4fa21103-c7cb-495c-a35d-691c73d32f37&businessType=BT06
 	 */
@@ -170,7 +146,7 @@ public class ApiCommonController extends BaseController {
 			title = t.getEquipName();
 			date = t.getAddtime();
 		} else if("BT04".equals(businessType)) { // 活动
-			DiveActivity t = diveActivityService.getDetail(businessId, null);
+			DiveActivity t = diveActivityService.getDetail(businessId, null, false);
 			request.setAttribute("activity", t);
 			return "/diveshare/activityshare";
 //			content = t.getEquipDes();
@@ -197,10 +173,20 @@ public class ApiCommonController extends BaseController {
 				}
 			}
 			DiveAccount account = diveAccountService.get(t.getAccountId());
+
+			PageHelper ph = new PageHelper();
+			ph.setSort("addtime");
+			ph.setOrder("asc");
+			ph.setPage(1);
+			ph.setRows(100);
+			DiveLogDetail diveLogDetail = new DiveLogDetail();
+			diveLogDetail.setLogId(businessId);
+			List<DiveLogDetail> details =  diveLogDetailService.dataGrid(diveLogDetail, ph).getRows();
 			
 			request.setAttribute("log", t);
 			request.setAttribute("imageList", imageList);
 			request.setAttribute("account", account);
+			request.setAttribute("details", details);
 			if(t.getOutTime() != null && t.getInTime() != null)
 				request.setAttribute("duration", (t.getOutTime().getTime()-t.getInTime().getTime())/(60*1000));
 			return "/diveshare/divelog/logshare";

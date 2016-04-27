@@ -71,17 +71,28 @@
 	                	<p class="record_text">${log.sumary}</p>
 	                	<div class="dive_imgs_item follow_img_item clearfix">
 	                   		<div class="note_img clearfix ">
-	                   			<c:forEach items="${imageList}" var="image" varStatus="s">
-		                   			<a href="javascript:void(0);">
-										<img original="${pageContext.request.contextPath}/<c:out value="${image}" />" 
-												simage="${pageContext.request.contextPath}/<c:out value="${image}" />" 
-												src="${pageContext.request.contextPath}/<c:out value="${image}" />"  
+								<c:forEach items="${imageList}" var="image" varStatus="s">
+									<a href="javascript:void(0);">
+										<img original="${pageContext.request.contextPath}/<c:out value="${image}" />"
+												simage="${pageContext.request.contextPath}/<c:out value="${image}" />"
+												src="${pageContext.request.contextPath}/<c:out value="${image}" />"
 											/>
 									</a>
 								</c:forEach>
 							</div>
+							<div class="write_time t_r">发布时间：<fmt:formatDate value="${log.addtime}" pattern="yyyy-MM-dd HH:mm:ss"/></div>
+							<c:forEach items="${details}" var="detail" varStatus="vs">
+								<hr style="margin: 30px 0px 20px 0px;">
+								<a href="javascript:void(0);">
+									<img original="${pageContext.request.contextPath}/<c:out value="${detail.fileSrc}" />"
+										 simage="${pageContext.request.contextPath}/<c:out value="${detail.fileSrc}" />"
+										 src="${pageContext.request.contextPath}/<c:out value="${detail.fileSrc}" />"
+										 style="width:100%;height: inherit;"/>
+								</a>
+								<div>${detail.sumary}</div>
+							</c:forEach>
 	                	</div>
-	                	<div class="write_time t_r">发布时间：<fmt:formatDate value="${log.addtime}" pattern="yyyy-MM-dd HH:mm:ss"/></div>
+
 						<div class="dive_tags clearfix">
 							<ul>
 								<li><span class="tag_img iconfont"></span></li>
@@ -118,12 +129,12 @@
 				var l = 3;
 				var m = 10;
 				var w = $(window).width() / l - (m * (l - 1));
-				$('.dive_imgs_item img').css({
+				$('.note_img img').css({
 					width : (w + 'px'),
 					height : (w + 'px')
 				});
 			} else {
-				$('.dive_imgs_item img').css({
+				$('.note_img img').css({
 					width : '100%',
 					height : 'inherit'
 				});

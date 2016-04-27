@@ -1,36 +1,19 @@
 package jb.service.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
 import jb.absx.F;
-import jb.dao.DiveAccountDaoI;
-import jb.dao.DiveActivityApplyDaoI;
-import jb.dao.DiveActivityCommentDaoI;
-import jb.dao.DiveActivityDaoI;
-import jb.dao.DiveCollectDaoI;
-import jb.dao.DivePraiseDaoI;
-import jb.dao.DiveStoreDaoI;
-import jb.dao.DiveTravelDaoI;
+import jb.dao.*;
 import jb.model.TdiveAccount;
 import jb.model.TdiveActivity;
 import jb.model.TdiveActivityComment;
-import jb.pageModel.DataGrid;
-import jb.pageModel.DiveAccount;
-import jb.pageModel.DiveActivity;
-import jb.pageModel.DiveActivityComment;
-import jb.pageModel.PageHelper;
+import jb.pageModel.*;
 import jb.service.DiveActivityServiceI;
 import jb.util.Constants;
 import jb.util.MyBeanUtils;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.*;
 
 @Service
 public class DiveActivityServiceImpl extends BaseServiceImpl<DiveActivity> implements DiveActivityServiceI {
@@ -239,11 +222,9 @@ public class DiveActivityServiceImpl extends BaseServiceImpl<DiveActivity> imple
 		return dg;
 	}
 
-
-	@Override
-	public DiveActivity getDetail(String id, String accountId) {
+	public DiveActivity getDetail(String id, String accountId, boolean f) {
 		DiveActivity diveActivity = get(id);
-		
+
 		Map<String, Object> params = new HashMap<String, Object>();
 		if(!F.empty(accountId)) {
 			String cHql = "select count(*) from TdiveCollect t ";
@@ -253,7 +234,7 @@ public class DiveActivityServiceImpl extends BaseServiceImpl<DiveActivity> imple
 			String where = " where t.businessId = :businessId and t.businessType = :businessType ";
 			diveActivity.setCollectNum(diveCollectDao.count(cHql + where, params).intValue()); // 收藏数
 			diveActivity.setPraiseNum(divePraiseDao.count(pHql + where, params).intValue()); // 赞数
-			
+
 			params.put("accountId", accountId);
 			where += " and t.accountId = :accountId ";
 			if(diveCollectDao.count(cHql + where, params) > 0) {
@@ -261,13 +242,13 @@ public class DiveActivityServiceImpl extends BaseServiceImpl<DiveActivity> imple
 			} else {
 				diveActivity.setCollect(false); // 未收藏
 			}
-			
+
 			if(divePraiseDao.count(pHql + where, params) > 0) {
 				diveActivity.setPraise(true); // 已赞
 			} else {
 				diveActivity.setPraise(false); // 未赞
 			}
-			
+
 			params = new HashMap<String, Object>();
 			params.put("activityId", id);
 			params.put("userId", accountId);
@@ -277,14 +258,20 @@ public class DiveActivityServiceImpl extends BaseServiceImpl<DiveActivity> imple
 				diveActivity.setApply(false); // 未报名
 			}
 		}
-		
+
 		List<TdiveAccount> applies = diveAccountDao.getDiveAccountByApply(id);
 		diveActivity.setApplies(convert(applies));
-		
+
 		setCommentList(diveActivity);
-		
-		diveActivity.setIntroduce(Constants.DETAIL_HTML_PATH.replace("TYPE", "BT04").replace("ID", id));
+
+		if(f)
+			diveActivity.setIntroduce(Constants.DETAIL_HTML_PATH.replace("TYPE", "BT04").replace("ID", id));
 		return diveActivity;
+	}
+
+	@Override
+	public DiveActivity getDetail(String id, String accountId) {
+		return getDetail(id, accountId, true);
 	}
 	
 	private void setCommentList(DiveActivity diveActivity) {

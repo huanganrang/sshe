@@ -53,6 +53,7 @@ public interface DiveActivityServiceI {
 	 * @return
 	 */
 	public DiveActivity getDetail(String id, String accountId);
+	public DiveActivity getDetail(String id, String accountId, boolean f);
 
 	/**
 	 * 修改DiveActivity
