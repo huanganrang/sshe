@@ -49,7 +49,7 @@ public class TdiveAccount implements java.io.Serializable,IEntity{
 	private java.lang.String userName;
 	//@Length(max=128)
 	private java.lang.String password;
-	//@Length(max=128)
+	//@Length(max=2147483647)
 	private java.lang.String icon;
 	//@Length(max=128)
 	private java.lang.String nickname;
@@ -115,7 +115,7 @@ public class TdiveAccount implements java.io.Serializable,IEntity{
 		this.password = password;
 	}
 	
-	@Column(name = "icon", unique = false, nullable = true, insertable = true, updatable = true, length = 128)
+	@Column(name = "icon", unique = false, nullable = true, insertable = true, updatable = true, length = 2147483647)
 	public java.lang.String getIcon() {
 		return this.icon;
 	}
