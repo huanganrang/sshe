@@ -109,6 +109,8 @@ public class DiveLogServiceImpl extends BaseServiceImpl<DiveLog> implements Dive
 	@Override
 	public void delete(String id) {
 		diveLogDao.delete(diveLogDao.get(TdiveLog.class, id));
+		diveLogDao.executeSql("delete from dive_log_detail where log_id = '" + id + "'");
+		diveLogDao.executeSql("delete from dive_log_comment where log_id = '" + id + "'");
 	}
 	
 	@SuppressWarnings("unchecked")

@@ -232,6 +232,34 @@ public class ApiLogController extends BaseController {
 	 * @return
 	 */
 	@ResponseBody
+	@RequestMapping("/delLog")
+	public Json delLog(String id, HttpServletRequest request) {
+		Json j = new Json();
+		try{
+			SessionInfo s = getSessionInfo(request);
+			DiveLog log = diveLogService.get(id);
+			if(!log.getAccountId().equals(s.getId())) {
+				j.fail();
+				j.setMsg("无权删除他人潜记");
+				return j;
+			}
+			diveLogService.delete(id);
+			j.setMsg("删除成功");
+			j.success();
+		}catch(Exception e){
+			j.setMsg("删除失败");
+			j.fail();
+			e.printStackTrace();
+		}
+		return j;
+	}
+
+	/**
+	 * 潜记明细删除
+	 * @param
+	 * @return
+	 */
+	@ResponseBody
 	@RequestMapping("/delLogDetail")
 	public Json delLogDetail(String id) {
 		Json j = new Json();
@@ -262,6 +290,7 @@ public class ApiLogController extends BaseController {
 			if(!log.getAccountId().equals(s.getId())) {
 				j.fail();
 				j.setMsg("无权删除他人图片");
+				return j;
 			}
 			String fileSrc = "";
 			if(!F.empty(imagePath) && !F.empty(log.getFileSrc())) {
