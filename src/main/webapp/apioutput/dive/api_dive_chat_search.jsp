@@ -52,6 +52,10 @@ String url = request.getContextPath()+"/api/apiChatController/search";
 						<td align="right" style="width: 180px;"><label>searchValue(账号/昵称/邮箱)：</label></td>
 						<td><input name="searchValue" type="text" class="span2" value="" /></td>
 					</tr>
+                    <tr>
+						<td align="right" style="width: 180px;"><label>searchType(搜索类型)：</label></td>
+						<td><input name="searchType" type="text" class="span2" value="" />（二维码搜索值传1，不传或其他则为普通搜索）</td>
+					</tr>
 
 					<tr>
 						<td colspan="2" align="center"><input type="button"

@@ -98,9 +98,14 @@ public class DiveAccountServiceImpl extends BaseServiceImpl<DiveAccount> impleme
 				params.put("hxStatus", diveAccount.getHxStatus());
 			}		
 			if (!F.empty(diveAccount.getSearchValue())) {
-				whereHql += " and (t.userName like :searchValue or t.nickname like :searchValue or t.email like :searchValue)";
-				params.put("searchValue", "%%" + diveAccount.getSearchValue() + "%%");
-			}		
+				if("1".equals(diveAccount.getSearchType())) { // 二维码搜索
+					whereHql += " and t.userName = :searchValue";
+					params.put("searchValue", diveAccount.getSearchValue());
+				} else {
+					whereHql += " and (t.userName like :searchValue or t.nickname like :searchValue or t.email like :searchValue)";
+					params.put("searchValue", "%%" + diveAccount.getSearchValue() + "%%");
+				}
+			}
 				
 		}	
 		return whereHql;
