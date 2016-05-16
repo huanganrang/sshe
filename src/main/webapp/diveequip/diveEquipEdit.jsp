@@ -30,12 +30,13 @@
 				}
 				editor.sync();
 				var selColors = $("#selColors").combo('getValues');
+				var selSizes = $("#selSizes").combo('getValues');
 				if(selColors != '') {
 					$("#colors").val(selColors);
 				} else {
 					$("#colors").val('');
 				}
-				var selSizes = $("#selSizes").combo('getValues');
+
 				if(selSizes != '') {
 					$("#sizes").val(selSizes);
 				} else {
@@ -124,11 +125,11 @@
 				<tr>	
 					<th width="8%"><%=TdiveEquip.ALIAS_EQUIP_NAME%></th>	
 					<td width="42%">
-						<input class="span2" name="equipName" type="text" class="span2"  value="${diveEquip.equipName}"/>
+						<input class="easyui-validatebox span2" name="equipName" type="text" value="${diveEquip.equipName}" data-options="required:true"/>
 					</td>
-					<th width="8%"><%=TdiveEquip.ALIAS_PRICE%></th>	
+					<th width="8%"><%=TdiveEquip.ALIAS_PRICE%></th>
 					<td width="42%">
-						<input class="span2" name="price" type="text" class="span2"  value="${diveEquip.price}"/>
+						<input class="easyui-validatebox span2" name="price" type="text" value="${diveEquip.price}" data-options="required:true"/>
 					</td>	
 				</tr>	
 				<tr>	

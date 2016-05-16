@@ -88,11 +88,11 @@
 				<tr>	
 					<th width="8%"><%=TdiveEquip.ALIAS_EQUIP_NAME%></th>	
 					<td width="42%">
-						<input class="span2" name="equipName" type="text" class="span2"/>
+						<input class="easyui-validatebox span2" name="equipName" type="text" data-options="required:true"/>
 					</td>
 					<th width="8%"><%=TdiveEquip.ALIAS_PRICE%></th>	
 					<td width="42%">
-						<input class="span2" name="price" type="text" class="span2"/>
+						<input class="easyui-validatebox span2" name="price" type="text" data-options="required:true"/>
 					</td>	
 				</tr>	
 				<tr>	
