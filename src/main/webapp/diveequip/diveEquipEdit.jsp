@@ -27,21 +27,33 @@
 				var isValid = $(this).form('validate');
 				if (!isValid) {
 					parent.$.messager.progress('close');
-				}
-				editor.sync();
-				var selColors = $("#selColors").combo('getValues');
-				var selSizes = $("#selSizes").combo('getValues');
-				if(selColors != '') {
-					$("#colors").val(selColors);
 				} else {
-					$("#colors").val('');
+					editor.sync();
+					var selColors = $("#selColors").combo('getValues');
+					var selSizes = $("#selSizes").combo('getValues');
+					if(selColors != '') {
+						$("#colors").val(selColors);
+						if(selSizes == '') {
+							isValid = false;
+						}
+					} else {
+						$("#colors").val('');
+					}
+
+					if(selSizes != '') {
+						$("#sizes").val(selSizes);
+						if(selColors == '') {
+							isValid = false;
+						}
+					} else {
+						$("#sizes").val('');
+					}
+					if (!isValid) {
+						parent.$.messager.progress('close');
+						alert("所属颜色、所属尺寸需要同时选择！");
+					}
 				}
 
-				if(selSizes != '') {
-					$("#sizes").val(selSizes);
-				} else {
-					$("#sizes").val('');
-				}
 				return isValid;
 			},
 			success : function(result) {
