@@ -35,6 +35,7 @@ public class DiveAccount implements java.io.Serializable {
 	private String certificate; // 潜水等级信息
 	
 	private String searchValue;
+	private String searchType;
 	
 	public String getSexZh() {
 		return Application.getString(this.sex);
@@ -222,5 +223,13 @@ public class DiveAccount implements java.io.Serializable {
 
 	public void setAddress(java.lang.String address) {
 		this.address = address;
+	}
+
+	public String getSearchType() {
+		return searchType;
+	}
+
+	public void setSearchType(String searchType) {
+		this.searchType = searchType;
 	}
 }

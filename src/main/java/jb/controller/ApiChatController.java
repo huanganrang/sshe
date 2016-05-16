@@ -33,11 +33,12 @@ public class ApiChatController extends BaseController {
 	 */
 	@ResponseBody
 	@RequestMapping("/search")
-	public Json search(String searchValue) {
+	public Json search(String searchValue, String searchType) {
 		Json j = new Json();
 		try {
 			DiveAccount account = new DiveAccount();
 			account.setSearchValue(searchValue);
+			account.setSearchType(searchType);
 			j.setObj(accountService.findListByParams(account));
 			j.setMsg("潜友搜索成功");
 			j.success();
