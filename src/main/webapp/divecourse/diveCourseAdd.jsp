@@ -91,7 +91,7 @@
 						<input type="file" id="iconFile" name="iconFile">
 					</td>
 				</tr>
-				<tr>
+				<tr style="display: none;">
 					<th><%=TdiveCourse.ALIAS_FILE_PATH%></th>
 					<td colspan="3">
 						<input type="file" name="filePathFile">
