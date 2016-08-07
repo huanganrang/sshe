@@ -49,10 +49,7 @@ public class FmUserServiceImpl extends BaseServiceImpl<FmUser> implements FmUser
 		String whereHql = "";	
 		if (fmUser != null) {
 			whereHql += " where t.isdeleted = 0 ";
-			if (!F.empty(fmUser.getIsdeleted())) {
-				whereHql += " and t.isdeleted = :isdeleted";
-				params.put("isdeleted", fmUser.getIsdeleted());
-			}		
+
 			if (!F.empty(fmUser.getAccount())) {
 				whereHql += " and t.account = :account";
 				params.put("account", fmUser.getAccount());
@@ -89,10 +86,10 @@ public class FmUserServiceImpl extends BaseServiceImpl<FmUser> implements FmUser
 				whereHql += " and t.hxPassword = :hxPassword";
 				params.put("hxPassword", fmUser.getHxPassword());
 			}		
-			if (!F.empty(fmUser.getHxStatus())) {
+			/*if (!F.empty(fmUser.getHxStatus())) {
 				whereHql += " and t.hxStatus = :hxStatus";
 				params.put("hxStatus", fmUser.getHxStatus());
-			}		
+			}*/
 		}	
 		return whereHql;
 	}

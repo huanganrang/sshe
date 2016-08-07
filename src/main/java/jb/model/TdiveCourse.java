@@ -14,6 +14,8 @@ import javax.persistence.Table;
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
 
+import java.util.Date;
+
 @Entity
 @Table(name = "dive_course")
 @DynamicInsert(true)
@@ -171,7 +173,12 @@ public class TdiveCourse implements java.io.Serializable,IEntity{
 	public java.util.Date getAddtime() {
 		return this.addtime;
 	}
-	
+
+	@Override
+	public void setUpdatetime(Date date) {
+
+	}
+
 	public void setAddtime(java.util.Date addtime) {
 		this.addtime = addtime;
 	}

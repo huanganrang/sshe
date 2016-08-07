@@ -49,10 +49,7 @@ public class FmMarketServiceImpl extends BaseServiceImpl<FmMarket> implements Fm
 		String whereHql = "";	
 		if (fmMarket != null) {
 			whereHql += " where t.isdeleted = 0 ";
-			if (!F.empty(fmMarket.getIsdeleted())) {
-				whereHql += " and t.isdeleted = :isdeleted";
-				params.put("isdeleted", fmMarket.getIsdeleted());
-			}		
+
 			if (!F.empty(fmMarket.getName())) {
 				whereHql += " and t.name = :name";
 				params.put("name", fmMarket.getName());
@@ -71,6 +68,7 @@ public class FmMarketServiceImpl extends BaseServiceImpl<FmMarket> implements Fm
 		BeanUtils.copyProperties(fmMarket, t);
 		t.setId(jb.absx.UUID.uuid());
 		t.setAddtime(new Date());
+		t.setIsdeleted(false);
 		fmMarketDao.save(t);
 	}
 

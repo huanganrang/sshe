@@ -37,7 +37,10 @@ public class BaseDaoImpl<T> implements BaseDaoI<T> {
 	public Serializable save(T o) {
 		if (o != null) {
 			if(o instanceof IEntity){
-				((IEntity) o).setAddtime(new Date());
+				IEntity entity = (IEntity) o;
+				if(entity.getAddtime() == null)
+					entity.setAddtime(new Date());
+					entity.setUpdatetime(entity.getAddtime());
 			}
 			return this.getCurrentSession().save(o);
 		}

@@ -49,10 +49,7 @@ public class FmGoodsUserServiceImpl extends BaseServiceImpl<FmGoodsUser> impleme
 		String whereHql = "";	
 		if (fmGoodsUser != null) {
 			whereHql += " where t.isdeleted = 0 ";
-			if (!F.empty(fmGoodsUser.getIsdeleted())) {
-				whereHql += " and t.isdeleted = :isdeleted";
-				params.put("isdeleted", fmGoodsUser.getIsdeleted());
-			}		
+
 			if (!F.empty(fmGoodsUser.getGoodsId())) {
 				whereHql += " and t.goodsId = :goodsId";
 				params.put("goodsId", fmGoodsUser.getGoodsId());

@@ -121,7 +121,12 @@ public class TdiveLogDetail implements java.io.Serializable,IEntity{
 	public Date getAddtime() {
 		return this.addtime;
 	}
-	
+
+	@Override
+	public void setUpdatetime(Date date) {
+
+	}
+
 	public void setAddtime(Date addtime) {
 		this.addtime = addtime;
 	}

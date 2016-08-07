@@ -37,30 +37,15 @@
 		<form id="form" method="post">
 				<input type="hidden" name="id" value = "${fmMarket.id}"/>
 			<table class="table table-hover table-condensed">
-				<tr>	
-					<th><%=TfmMarket.ALIAS_ADDTIME%></th>	
-					<td>
-					<input class="span2" name="addtime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmMarket.FORMAT_ADDTIME%>'})"   maxlength="0" value="${fmMarket.addtime}"/>
-					</td>							
-					<th><%=TfmMarket.ALIAS_UPDATETIME%></th>	
-					<td>
-					<input class="span2" name="updatetime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmMarket.FORMAT_UPDATETIME%>'})"   maxlength="0" value="${fmMarket.updatetime}"/>
-					</td>							
-			</tr>	
-				<tr>	
-					<th><%=TfmMarket.ALIAS_ISDELETED%></th>	
-					<td>
-											<input class="span2" name="isdeleted" type="text" class="easyui-validatebox span2" data-options="required:true" value="${fmMarket.isdeleted}"/>
-					</td>							
+
+				<tr>
 					<th><%=TfmMarket.ALIAS_NAME%></th>	
 					<td>
-											<input class="span2" name="name" type="text" value="${fmMarket.name}"/>
-					</td>							
-			</tr>	
-				<tr>	
+						<input class="span2" name="name" type="text" value="${fmMarket.name}"/>
+					</td>
 					<th><%=TfmMarket.ALIAS_AREA%></th>	
 					<td>
-											<input class="span2" name="area" type="text" value="${fmMarket.area}"/>
+						<input class="span2" name="area" type="text" value="${fmMarket.area}"/>
 					</td>							
 			</tr>	
 			</table>				

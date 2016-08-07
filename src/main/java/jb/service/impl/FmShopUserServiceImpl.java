@@ -49,10 +49,7 @@ public class FmShopUserServiceImpl extends BaseServiceImpl<FmShopUser> implement
 		String whereHql = "";	
 		if (fmShopUser != null) {
 			whereHql += " where t.isdeleted = 0 ";
-			if (!F.empty(fmShopUser.getIsdeleted())) {
-				whereHql += " and t.isdeleted = :isdeleted";
-				params.put("isdeleted", fmShopUser.getIsdeleted());
-			}		
+
 			if (!F.empty(fmShopUser.getShopId())) {
 				whereHql += " and t.shopId = :shopId";
 				params.put("shopId", fmShopUser.getShopId());

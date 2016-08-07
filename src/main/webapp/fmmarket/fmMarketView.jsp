@@ -9,32 +9,26 @@
 <div class="easyui-layout" data-options="fit:true,border:false">
 	<div data-options="region:'center',border:false">
 		<table class="table table-hover table-condensed">
-				<tr>	
-					<th><%=TfmMarket.ALIAS_ADDTIME%></th>	
-					<td>
-						${fmMarket.addtime}							
-					</td>							
-					<th><%=TfmMarket.ALIAS_UPDATETIME%></th>	
-					<td>
-						${fmMarket.updatetime}							
-					</td>							
-				</tr>		
-				<tr>	
-					<th><%=TfmMarket.ALIAS_ISDELETED%></th>	
-					<td>
-						${fmMarket.isdeleted}							
-					</td>							
+				<tr>
 					<th><%=TfmMarket.ALIAS_NAME%></th>	
 					<td>
 						${fmMarket.name}							
-					</td>							
-				</tr>		
-				<tr>	
+					</td>
 					<th><%=TfmMarket.ALIAS_AREA%></th>	
 					<td>
 						${fmMarket.area}							
 					</td>							
-				</tr>		
+				</tr>
+				<tr>
+					<th><%=TfmMarket.ALIAS_ADDTIME%></th>
+					<td>
+						${fmMarket.addtime}
+					</td>
+					<th><%=TfmMarket.ALIAS_UPDATETIME%></th>
+					<td>
+						${fmMarket.updatetime}
+					</td>
+				</tr>
 		</table>
 	</div>
 </div>

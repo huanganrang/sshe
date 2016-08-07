@@ -57,10 +57,6 @@
 				title : '<%=TfmMarket.ALIAS_UPDATETIME%>',
 				width : 50		
 				}, {
-				field : 'isdeleted',
-				title : '<%=TfmMarket.ALIAS_ISDELETED%>',
-				width : 50		
-				}, {
 				field : 'name',
 				title : '<%=TfmMarket.ALIAS_NAME%>',
 				width : 50		
@@ -130,7 +126,7 @@
 		parent.$.modalDialog({
 			title : '编辑数据',
 			width : 780,
-			height : 500,
+			height : 300,
 			href : '${pageContext.request.contextPath}/fmMarketController/editPage?id=' + id,
 			buttons : [ {
 				text : '编辑',
@@ -151,7 +147,7 @@
 		parent.$.modalDialog({
 			title : '查看数据',
 			width : 780,
-			height : 500,
+			height : 300,
 			href : '${pageContext.request.contextPath}/fmMarketController/view?id=' + id
 		});
 	}
@@ -160,7 +156,7 @@
 		parent.$.modalDialog({
 			title : '添加数据',
 			width : 780,
-			height : 500,
+			height : 300,
 			href : '${pageContext.request.contextPath}/fmMarketController/addPage',
 			buttons : [ {
 				text : '添加',
@@ -200,30 +196,16 @@
 </head>
 <body>
 	<div class="easyui-layout" data-options="fit : true,border : false">
-		<div data-options="region:'north',title:'查询条件',border:false" style="height: 160px; overflow: hidden;">
+		<div data-options="region:'north',title:'查询条件',border:false" style="height: 65px; overflow: hidden;">
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
 						<tr>	
-							<th><%=TfmMarket.ALIAS_ADDTIME%></th>	
-							<td>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmMarket.FORMAT_ADDTIME%>'})" id="addtimeBegin" name="addtimeBegin"/>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmMarket.FORMAT_ADDTIME%>'})" id="addtimeEnd" name="addtimeEnd"/>
-							</td>
-							<th><%=TfmMarket.ALIAS_UPDATETIME%></th>	
-							<td>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmMarket.FORMAT_UPDATETIME%>'})" id="updatetimeBegin" name="updatetimeBegin"/>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmMarket.FORMAT_UPDATETIME%>'})" id="updatetimeEnd" name="updatetimeEnd"/>
-							</td>
-							<th><%=TfmMarket.ALIAS_ISDELETED%></th>	
-							<td>
-											<input type="text" name="isdeleted" maxlength="0" class="span2"/>
-							</td>
+
 							<th><%=TfmMarket.ALIAS_NAME%></th>	
 							<td>
 											<input type="text" name="name" maxlength="100" class="span2"/>
 							</td>
-						</tr>	
-						<tr>	
+
 							<th><%=TfmMarket.ALIAS_AREA%></th>	
 							<td>
 											<input type="text" name="area" maxlength="36" class="span2"/>

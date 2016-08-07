@@ -37,31 +37,15 @@
 		<form id="form" method="post">		
 				<input type="hidden" name="id"/>
 			<table class="table table-hover table-condensed">
-				<tr>	
-					<th><%=TfmMarket.ALIAS_ADDTIME%></th>	
-					<td>
-					<input class="span2" name="addtime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmMarket.FORMAT_ADDTIME%>'})"  maxlength="0" class="required " />
-					</td>							
-					<th><%=TfmMarket.ALIAS_UPDATETIME%></th>	
-					<td>
-					<input class="span2" name="updatetime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmMarket.FORMAT_UPDATETIME%>'})"  maxlength="0" class="required " />
-					</td>							
-				</tr>	
-				<tr>	
-					<th><%=TfmMarket.ALIAS_ISDELETED%></th>	
-					<td>
-					
-											<input  name="isdeleted" type="text" class="easyui-validatebox span2" data-options="required:true"/>
-					</td>							
+				<tr>
 					<th><%=TfmMarket.ALIAS_NAME%></th>	
 					<td>
-											<input class="span2" name="name" type="text"/>
+						<input class="span2" name="name" type="text"/>
 					</td>							
-				</tr>	
-				<tr>	
+
 					<th><%=TfmMarket.ALIAS_AREA%></th>	
 					<td>
-											<input class="span2" name="area" type="text"/>
+						<input class="span2" name="area" type="text"/>
 					</td>							
 				</tr>	
 			</table>		

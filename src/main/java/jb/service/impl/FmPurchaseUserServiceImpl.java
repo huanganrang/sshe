@@ -49,10 +49,7 @@ public class FmPurchaseUserServiceImpl extends BaseServiceImpl<FmPurchaseUser> i
 		String whereHql = "";	
 		if (fmPurchaseUser != null) {
 			whereHql += " where t.isdeleted = 0 ";
-			if (!F.empty(fmPurchaseUser.getIsdeleted())) {
-				whereHql += " and t.isdeleted = :isdeleted";
-				params.put("isdeleted", fmPurchaseUser.getIsdeleted());
-			}		
+
 			if (!F.empty(fmPurchaseUser.getPurchaseId())) {
 				whereHql += " and t.purchaseId = :purchaseId";
 				params.put("purchaseId", fmPurchaseUser.getPurchaseId());

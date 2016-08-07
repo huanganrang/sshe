@@ -49,10 +49,7 @@ public class FmUserHobbyServiceImpl extends BaseServiceImpl<FmUserHobby> impleme
 		String whereHql = "";	
 		if (fmUserHobby != null) {
 			whereHql += " where t.isdeleted = 0 ";
-			if (!F.empty(fmUserHobby.getIsdeleted())) {
-				whereHql += " and t.isdeleted = :isdeleted";
-				params.put("isdeleted", fmUserHobby.getIsdeleted());
-			}		
+
 			if (!F.empty(fmUserHobby.getUserId())) {
 				whereHql += " and t.userId = :userId";
 				params.put("userId", fmUserHobby.getUserId());

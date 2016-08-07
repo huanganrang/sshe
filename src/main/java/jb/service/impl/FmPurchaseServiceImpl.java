@@ -49,34 +49,17 @@ public class FmPurchaseServiceImpl extends BaseServiceImpl<FmPurchase> implement
 		String whereHql = "";	
 		if (fmPurchase != null) {
 			whereHql += " where t.isdeleted = 0 ";
-			if (!F.empty(fmPurchase.getIsdeleted())) {
-				whereHql += " and t.isdeleted = :isdeleted";
-				params.put("isdeleted", fmPurchase.getIsdeleted());
-			}		
+
 			if (!F.empty(fmPurchase.getName())) {
 				whereHql += " and t.name = :name";
 				params.put("name", fmPurchase.getName());
 			}		
-			if (!F.empty(fmPurchase.getStartPrice())) {
-				whereHql += " and t.startPrice = :startPrice";
-				params.put("startPrice", fmPurchase.getStartPrice());
-			}		
-			if (!F.empty(fmPurchase.getEndPrice())) {
-				whereHql += " and t.endPrice = :endPrice";
-				params.put("endPrice", fmPurchase.getEndPrice());
-			}		
+
 			if (!F.empty(fmPurchase.getUnit())) {
 				whereHql += " and t.unit = :unit";
 				params.put("unit", fmPurchase.getUnit());
 			}		
-			if (!F.empty(fmPurchase.getMinNum())) {
-				whereHql += " and t.minNum = :minNum";
-				params.put("minNum", fmPurchase.getMinNum());
-			}		
-			if (!F.empty(fmPurchase.getMaxNum())) {
-				whereHql += " and t.maxNum = :maxNum";
-				params.put("maxNum", fmPurchase.getMaxNum());
-			}		
+
 			if (!F.empty(fmPurchase.getStatus())) {
 				whereHql += " and t.status = :status";
 				params.put("status", fmPurchase.getStatus());
@@ -125,10 +108,7 @@ public class FmPurchaseServiceImpl extends BaseServiceImpl<FmPurchase> implement
 				whereHql += " and t.voiceUrl = :voiceUrl";
 				params.put("voiceUrl", fmPurchase.getVoiceUrl());
 			}		
-			if (!F.empty(fmPurchase.getVoiceDuration())) {
-				whereHql += " and t.voiceDuration = :voiceDuration";
-				params.put("voiceDuration", fmPurchase.getVoiceDuration());
-			}		
+
 			if (!F.empty(fmPurchase.getUserId())) {
 				whereHql += " and t.userId = :userId";
 				params.put("userId", fmPurchase.getUserId());

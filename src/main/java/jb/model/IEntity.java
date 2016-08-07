@@ -3,5 +3,7 @@ package jb.model;
 import java.util.Date;
 
 public interface IEntity {
-	public void setAddtime(Date date);
+	void setAddtime(Date date);
+	Date getAddtime();
+	void setUpdatetime(Date date);
 }

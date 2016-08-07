@@ -13,6 +13,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 import javax.persistence.Table;
+import java.util.Date;
 
 @Entity
 @Table(name = "dive_log")
@@ -269,7 +270,12 @@ public class TdiveLog implements java.io.Serializable,IEntity{
 	public java.util.Date getAddtime() {
 		return this.addtime;
 	}
-	
+
+	@Override
+	public void setUpdatetime(Date date) {
+
+	}
+
 	public void setAddtime(java.util.Date addtime) {
 		this.addtime = addtime;
 	}
