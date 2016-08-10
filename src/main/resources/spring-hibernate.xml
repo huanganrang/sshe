@@ -29,7 +29,6 @@
 		<property name="url" value="${jdbc_url}" />
 		<property name="username" value="${jdbc_username}" />
 		<property name="password" value="${jdbc_password}" />
-
 		<!-- 初始化连接大小 -->
 		<property name="initialSize" value="0" />
 		<!-- 连接池最大使用连接数量 -->
@@ -78,6 +77,10 @@
 				<prop key="hibernate.show_sql">${hibernate.show_sql}</prop>
 				<prop key="hibernate.format_sql">${hibernate.format_sql}</prop>
 				<prop key="hibernate.use_sql_comments">${hibernate.use_sql_comments}</prop>
+<!--
+				<prop key="hibernate.default_schema">dbo</prop>
+-->
+
 			</props>
 		</property>
 

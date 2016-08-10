@@ -57,10 +57,6 @@
 				title : '<%=TfmGoods.ALIAS_UPDATETIME%>',
 				width : 50		
 				}, {
-				field : 'isdeleted',
-				title : '<%=TfmGoods.ALIAS_ISDELETED%>',
-				width : 50		
-				}, {
 				field : 'name',
 				title : '<%=TfmGoods.ALIAS_NAME%>',
 				width : 50		
@@ -93,14 +89,6 @@
 				title : '<%=TfmGoods.ALIAS_OFFLINE_TIME%>',
 				width : 50		
 				}, {
-				field : 'contactor',
-				title : '<%=TfmGoods.ALIAS_CONTACTOR%>',
-				width : 50		
-				}, {
-				field : 'contactorMobile',
-				title : '<%=TfmGoods.ALIAS_CONTACTOR_MOBILE%>',
-				width : 50		
-				}, {
 				field : 'goalArea',
 				title : '<%=TfmGoods.ALIAS_GOAL_AREA%>',
 				width : 50		
@@ -121,74 +109,10 @@
 				title : '<%=TfmGoods.ALIAS_TRANSACTION_TIME%>',
 				width : 50		
 				}, {
-				field : 'carNo',
-				title : '<%=TfmGoods.ALIAS_CAR_NO%>',
-				width : 50		
-				}, {
-				field : 'images',
-				title : '<%=TfmGoods.ALIAS_IMAGES%>',
-				width : 50		
-				}, {
-				field : 'description',
-				title : '<%=TfmGoods.ALIAS_DESCRIPTION%>',
-				width : 50		
-				}, {
-				field : 'diameter',
-				title : '<%=TfmGoods.ALIAS_DIAMETER%>',
-				width : 50		
-				}, {
-				field : 'diameterUnit',
-				title : '<%=TfmGoods.ALIAS_DIAMETER_UNIT%>',
-				width : 50		
-				}, {
-				field : 'color',
-				title : '<%=TfmGoods.ALIAS_COLOR%>',
-				width : 50		
-				}, {
-				field : 'isPack',
-				title : '<%=TfmGoods.ALIAS_IS_PACK%>',
-				width : 50		
-				}, {
-				field : 'pack',
-				title : '<%=TfmGoods.ALIAS_PACK%>',
-				width : 50		
-				}, {
-				field : 'formatDesc',
-				title : '<%=TfmGoods.ALIAS_FORMAT_DESC%>',
-				width : 50		
-				}, {
 				field : 'onlineStatus',
 				title : '<%=TfmGoods.ALIAS_ONLINE_STATUS%>',
 				width : 50		
 				}, {
-				field : 'userId',
-				title : '<%=TfmGoods.ALIAS_USER_ID%>',
-				width : 50		
-				}, {
-				field : 'parentId',
-				title : '<%=TfmGoods.ALIAS_PARENT_ID%>',
-				width : 50		
-				}, {
-				field : 'accessNum',
-				title : '<%=TfmGoods.ALIAS_ACCESS_NUM%>',
-				width : 50		
-				}, {
-				field : 'source',
-				title : '<%=TfmGoods.ALIAS_SOURCE%>',
-				width : 50		
-				}, {
-				field : 'outerId',
-				title : '<%=TfmGoods.ALIAS_OUTER_ID%>',
-				width : 50		
-				}, {
-				field : 'outerNumber',
-				title : '<%=TfmGoods.ALIAS_OUTER_NUMBER%>',
-				width : 50		
-				}, {
-				field : 'grade',
-				title : '<%=TfmGoods.ALIAS_GRADE%>',
-				width : 50		
-			}, {
 				field : 'action',
 				title : '操作',
 				width : 100,
