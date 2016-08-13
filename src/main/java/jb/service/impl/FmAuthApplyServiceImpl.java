@@ -96,6 +96,7 @@ public class FmAuthApplyServiceImpl extends BaseServiceImpl<FmAuthApply> impleme
 		BeanUtils.copyProperties(fmAuthApply, t);
 		t.setId(jb.absx.UUID.uuid());
 		t.setIsdeleted(false);
+		t.setStatus("AU01");
 		fmAuthApplyDao.save(t);
 	}
 

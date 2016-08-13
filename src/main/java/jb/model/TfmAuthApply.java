@@ -35,7 +35,7 @@ public class TfmAuthApply implements java.io.Serializable,IEntity{
 	public static final String ALIAS_IMAGES = "图片";
 	public static final String ALIAS_USER_CARD = "身份证号";
 	public static final String ALIAS_AUTH_REMARK = "认证结果";
-	public static final String ALIAS_STATUS = "状态（审核状态）";
+	public static final String ALIAS_STATUS = "审核状态";
 	
 	//date formats
 	public static final String FORMAT_ADDTIME = jb.util.Constants.DATE_FORMAT_FOR_ENTITY;

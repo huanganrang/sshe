@@ -136,6 +136,6 @@
 <div id="layout_north_zxMenu" style="width: 100px; display: none;">
 	<div onclick="logoutFun();">锁定窗口</div>
 	<div class="menu-sep"></div>
-	<div onclick="logoutFun();">重新登录</div>
+	<%--<div onclick="logoutFun();">重新登录</div>--%>
 	<div onclick="logoutFun(true);">退出系统</div>
 </div>

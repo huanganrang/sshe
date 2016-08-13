@@ -51,23 +51,19 @@
 				}, {
 				field : 'addtime',
 				title : '<%=TfmAuthApply.ALIAS_ADDTIME%>',
-				width : 50		
+				width : 60
 				}, {
 				field : 'updatetime',
 				title : '<%=TfmAuthApply.ALIAS_UPDATETIME%>',
-				width : 50		
-				}, {
-				field : 'isdeleted',
-				title : '<%=TfmAuthApply.ALIAS_ISDELETED%>',
-				width : 50		
+				width : 60
 				}, {
 				field : 'userId',
 				title : '<%=TfmAuthApply.ALIAS_USER_ID%>',
 				width : 50		
 				}, {
-				field : 'type',
+				field : 'typeName',
 				title : '<%=TfmAuthApply.ALIAS_TYPE%>',
-				width : 50		
+				width : 30
 				}, {
 				field : 'userName',
 				title : '<%=TfmAuthApply.ALIAS_USER_NAME%>',
@@ -77,12 +73,8 @@
 				title : '<%=TfmAuthApply.ALIAS_PHONE%>',
 				width : 50		
 				}, {
-				field : 'companyType',
+				field : 'companyTypeName',
 				title : '<%=TfmAuthApply.ALIAS_COMPANY_TYPE%>',
-				width : 50		
-				}, {
-				field : 'images',
-				title : '<%=TfmAuthApply.ALIAS_IMAGES%>',
 				width : 50		
 				}, {
 				field : 'userCard',
@@ -93,13 +85,13 @@
 				title : '<%=TfmAuthApply.ALIAS_AUTH_REMARK%>',
 				width : 50		
 				}, {
-				field : 'status',
+				field : 'statusName',
 				title : '<%=TfmAuthApply.ALIAS_STATUS%>',
-				width : 50		
+				width : 30
 			}, {
 				field : 'action',
 				title : '操作',
-				width : 100,
+				width : 50,
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {
@@ -161,12 +153,22 @@
 			height : 500,
 			href : '${pageContext.request.contextPath}/fmAuthApplyController/editPage?id=' + id,
 			buttons : [ {
-				text : '编辑',
+				text : '通过',
 				handler : function() {
 					parent.$.modalDialog.openner_dataGrid = dataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
 					var f = parent.$.modalDialog.handler.find('#form');
+					f.find("input[name=status]").val("AU02");
 					f.submit();
 				}
+			},{
+				text : '不通过',
+				handler : function() {
+					parent.$.modalDialog.openner_dataGrid = dataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
+					var f = parent.$.modalDialog.handler.find('#form');
+					f.find("input[name=status]").val("AU03");
+					f.submit();
+				}
+
 			} ]
 		});
 	}
@@ -228,65 +230,19 @@
 </head>
 <body>
 	<div class="easyui-layout" data-options="fit : true,border : false">
-		<div data-options="region:'north',title:'查询条件',border:false" style="height: 160px; overflow: hidden;">
+		<div data-options="region:'north',title:'查询条件',border:false" style="height: 65px; overflow: hidden;">
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
-						<tr>	
-							<th><%=TfmAuthApply.ALIAS_ADDTIME%></th>	
-							<td>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmAuthApply.FORMAT_ADDTIME%>'})" id="addtimeBegin" name="addtimeBegin"/>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmAuthApply.FORMAT_ADDTIME%>'})" id="addtimeEnd" name="addtimeEnd"/>
-							</td>
-							<th><%=TfmAuthApply.ALIAS_UPDATETIME%></th>	
-							<td>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmAuthApply.FORMAT_UPDATETIME%>'})" id="updatetimeBegin" name="updatetimeBegin"/>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmAuthApply.FORMAT_UPDATETIME%>'})" id="updatetimeEnd" name="updatetimeEnd"/>
-							</td>
-							<th><%=TfmAuthApply.ALIAS_ISDELETED%></th>	
-							<td>
-											<input type="text" name="isdeleted" maxlength="0" class="span2"/>
-							</td>
+						<tr>
 							<th><%=TfmAuthApply.ALIAS_USER_ID%></th>	
 							<td>
-											<input type="text" name="userId" maxlength="36" class="span2"/>
+										<input type="text" name="userId" maxlength="36" class="span2"/>
 							</td>
-						</tr>	
-						<tr>	
-							<th><%=TfmAuthApply.ALIAS_TYPE%></th>	
+							<th><%=TfmAuthApply.ALIAS_STATUS%></th>
 							<td>
-											<jb:select dataType="AT" name="type"></jb:select>	
+								<jb:select dataType="AU" name="status"></jb:select>
 							</td>
-							<th><%=TfmAuthApply.ALIAS_USER_NAME%></th>	
-							<td>
-											<input type="text" name="userName" maxlength="10" class="span2"/>
-							</td>
-							<th><%=TfmAuthApply.ALIAS_PHONE%></th>	
-							<td>
-											<input type="text" name="phone" maxlength="20" class="span2"/>
-							</td>
-							<th><%=TfmAuthApply.ALIAS_COMPANY_TYPE%></th>	
-							<td>
-											<jb:select dataType="CT" name="companyType"></jb:select>	
-							</td>
-						</tr>	
-						<tr>	
-							<th><%=TfmAuthApply.ALIAS_IMAGES%></th>	
-							<td>
-											<input type="text" name="images" maxlength="500" class="span2"/>
-							</td>
-							<th><%=TfmAuthApply.ALIAS_USER_CARD%></th>	
-							<td>
-											<input type="text" name="userCard" maxlength="36" class="span2"/>
-							</td>
-							<th><%=TfmAuthApply.ALIAS_AUTH_REMARK%></th>	
-							<td>
-											<input type="text" name="authRemark" maxlength="100" class="span2"/>
-							</td>
-							<th><%=TfmAuthApply.ALIAS_STATUS%></th>	
-							<td>
-											<jb:select dataType="AU" name="status"></jb:select>	
-							</td>
-						</tr>	
+						</tr>
 				</table>
 			</form>
 		</div>

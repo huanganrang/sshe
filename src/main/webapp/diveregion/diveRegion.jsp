@@ -51,15 +51,16 @@
 				}, {
 				field : 'regionLevel',
 				title : '<%=TdiveRegion.ALIAS_REGION_LEVEL%>',
-				width : 50		
+				width : 30
 				}, {
 				field : 'regionNameZh',
 				title : '<%=TdiveRegion.ALIAS_REGION_NAME_ZH%>',
-				width : 50		
+				width : 150
 				}, {
 				field : 'regionNameEn',
 				title : '<%=TdiveRegion.ALIAS_REGION_NAME_EN%>',
-				width : 50		
+				width : 50	,
+				hidden : true
 				}, {
 				field : 'regionParentId',
 				title : '<%=TdiveRegion.ALIAS_REGION_PARENT_ID%>',
@@ -71,7 +72,7 @@
 			}, {
 				field : 'action',
 				title : '操作',
-				width : 100,
+				width : 80,
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {
@@ -200,7 +201,7 @@
 </head>
 <body>
 	<div class="easyui-layout" data-options="fit : true,border : false">
-		<div data-options="region:'north',title:'查询条件',border:false" style="height: 160px; overflow: hidden;">
+		<div data-options="region:'north',title:'查询条件',border:false" style="height: 65px; overflow: hidden;">
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
 						<tr>	
@@ -212,21 +213,16 @@
 							<td>
 											<input type="text" name="regionNameZh" maxlength="128" class="span2"/>
 							</td>
-							<th><%=TdiveRegion.ALIAS_REGION_NAME_EN%></th>	
+							<th><%=TdiveRegion.ALIAS_REGION_ID%></th>
 							<td>
-											<input type="text" name="regionNameEn" maxlength="128" class="span2"/>
+								<input type="text" name="regionId" maxlength="10" class="span2"/>
 							</td>
 							<th><%=TdiveRegion.ALIAS_REGION_PARENT_ID%></th>	
 							<td>
 											<input type="text" name="regionParentId" maxlength="10" class="span2"/>
 							</td>
-						</tr>	
-						<tr>	
-							<th><%=TdiveRegion.ALIAS_REGION_ID%></th>	
-							<td>
-											<input type="text" name="regionId" maxlength="10" class="span2"/>
-							</td>
-						</tr>	
+						</tr>
+
 				</table>
 			</form>
 		</div>

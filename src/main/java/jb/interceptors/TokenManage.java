@@ -12,7 +12,7 @@ public class TokenManage {
 	
 	public static final String TOKEN_FIELD = "tokenId";
 	
-	public static final String DEFAULT_TOKEN = "1D96DACB84F21890ED9F4928FA8B352B";
+	public static String DEFAULT_TOKEN = null;
 
 	
 	private ConcurrentHashMap<String, TokenWrap> tokenMap = new ConcurrentHashMap<String, TokenWrap>();
@@ -22,7 +22,7 @@ public class TokenManage {
 	 */
 	private long freeTime = 1000*60*60*24;
 	
-	private void buidDefaultToken(){
+	private void buildDefaultToken(){
 		buildToken(DEFAULT_TOKEN, "1","system");
 	}	
 	
@@ -73,7 +73,7 @@ public class TokenManage {
 			token.retime();
 		}else{
 			if(DEFAULT_TOKEN.equals(tid)){
-				buidDefaultToken();
+				buildDefaultToken();
 				token = tokenMap.get(DEFAULT_TOKEN);
 			}			
 		}

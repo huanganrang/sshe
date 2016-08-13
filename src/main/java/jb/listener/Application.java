@@ -6,6 +6,7 @@ import javax.servlet.ServletContext;
 import javax.servlet.ServletContextEvent;
 import javax.servlet.ServletContextListener;
 
+import jb.interceptors.TokenManage;
 import jb.pageModel.BaseData;
 import jb.service.BasedataServiceI;
 
@@ -38,6 +39,7 @@ public class Application implements ServletContextListener {
 		for(String key : map.keySet()){
 			context.setAttribute(PREFIX+key, map.get(key));
 		}
+		TokenManage.DEFAULT_TOKEN = getString("SV010","1D96DACB84F21890ED9F4928FA8B352B");
 	}
 	
 	/**
@@ -58,6 +60,16 @@ public class Application implements ServletContextListener {
 		if(bd != null){
 			val = bd.getName();
 		}
+		return val;
+	}
+
+	public static String getString(String key,String defaultVal){
+		BaseData bd = (BaseData)context.getAttribute(PREFIX+key);
+		String val = null;
+		if(bd != null){
+			val = bd.getName();
+		}
+		val = val == null?defaultVal:val;
 		return val;
 	}
 	

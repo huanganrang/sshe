@@ -55,11 +55,11 @@
 				}, {
 				field : 'addtime',
 				title : '<%=TfmFeedback.ALIAS_ADDTIME%>',
-				width : 50		
+				width : 60
 				}, {
 				field : 'updatetime',
 				title : '<%=TfmFeedback.ALIAS_UPDATETIME%>',
-				width : 50		
+				width : 60
 				}, {
 				field : 'userAccount',
 				title : '用户账号',
@@ -71,7 +71,7 @@
 				}, {
 				field : 'statusName',
 				title : '<%=TfmFeedback.ALIAS_STATUS%>',
-				width : 50		
+				width : 30
 				}, {
 				field: 'loginName',
 				title: '处理人',
@@ -79,11 +79,11 @@
 				}, {
 					field : 'reply',
 					title : '<%=TfmFeedback.ALIAS_REPLY%>',
-					width : 50
+					width : 150
 				}, {
 				field : 'action',
 				title : '操作',
-				width : 100,
+				width : 30,
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {
