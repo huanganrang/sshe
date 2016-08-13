@@ -1,24 +1,21 @@
 package jb.service.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
 import jb.absx.F;
 import jb.dao.FmUserDaoI;
 import jb.model.TfmUser;
-import jb.pageModel.FmUser;
 import jb.pageModel.DataGrid;
+import jb.pageModel.FmUser;
 import jb.pageModel.PageHelper;
 import jb.service.FmUserServiceI;
-
+import jb.util.MyBeanUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import jb.util.MyBeanUtils;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class FmUserServiceImpl extends BaseServiceImpl<FmUser> implements FmUserServiceI {
@@ -49,10 +46,10 @@ public class FmUserServiceImpl extends BaseServiceImpl<FmUser> implements FmUser
 		String whereHql = "";	
 		if (fmUser != null) {
 			whereHql += " where t.isdeleted = 0 ";
-			if (!F.empty(fmUser.getIsdeleted())) {
+			/*if (!F.empty(fmUser.getIsdeleted())) {
 				whereHql += " and t.isdeleted = :isdeleted";
 				params.put("isdeleted", fmUser.getIsdeleted());
-			}		
+			}*/
 			if (!F.empty(fmUser.getAccount())) {
 				whereHql += " and t.account = :account";
 				params.put("account", fmUser.getAccount());
@@ -89,7 +86,8 @@ public class FmUserServiceImpl extends BaseServiceImpl<FmUser> implements FmUser
 				whereHql += " and t.hxPassword = :hxPassword";
 				params.put("hxPassword", fmUser.getHxPassword());
 			}		
-			if (!F.empty(fmUser.getHxStatus())) {
+			//if (!F.empty(fmUser.getHxStatus())) {
+			if (fmUser.getHxStatus() != null) {
 				whereHql += " and t.hxStatus = :hxStatus";
 				params.put("hxStatus", fmUser.getHxStatus());
 			}		

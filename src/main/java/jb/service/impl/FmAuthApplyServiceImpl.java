@@ -1,24 +1,21 @@
 package jb.service.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
 import jb.absx.F;
 import jb.dao.FmAuthApplyDaoI;
 import jb.model.TfmAuthApply;
-import jb.pageModel.FmAuthApply;
 import jb.pageModel.DataGrid;
+import jb.pageModel.FmAuthApply;
 import jb.pageModel.PageHelper;
 import jb.service.FmAuthApplyServiceI;
-
+import jb.util.MyBeanUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import jb.util.MyBeanUtils;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class FmAuthApplyServiceImpl extends BaseServiceImpl<FmAuthApply> implements FmAuthApplyServiceI {
@@ -49,10 +46,10 @@ public class FmAuthApplyServiceImpl extends BaseServiceImpl<FmAuthApply> impleme
 		String whereHql = "";	
 		if (fmAuthApply != null) {
 			whereHql += " where t.isdeleted = 0 ";
-			if (!F.empty(fmAuthApply.getIsdeleted())) {
+			/*if (!F.empty(fmAuthApply.getIsdeleted())) {
 				whereHql += " and t.isdeleted = :isdeleted";
 				params.put("isdeleted", fmAuthApply.getIsdeleted());
-			}		
+			}*/
 			if (!F.empty(fmAuthApply.getUserId())) {
 				whereHql += " and t.userId = :userId";
 				params.put("userId", fmAuthApply.getUserId());
