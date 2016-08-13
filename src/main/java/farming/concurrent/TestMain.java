@@ -1,13 +1,13 @@
 package farming.concurrent;
 
-import java.util.concurrent.Executors;
+import jb.service.impl.CompletionFactory;
 
 /**
  * Created by john on 16/8/7.
  */
 public class TestMain {
     public static void main(String[] args) {
-        final CompletionService completionService = new ExecutorCompletionServiceImpl(Executors.newFixedThreadPool(10));
+        final CompletionService completionService = CompletionFactory.initCompletion();
         for (int i = 0;i<10;i++){
             completionService.submit(new Task<String,String>("1"){
                 @Override

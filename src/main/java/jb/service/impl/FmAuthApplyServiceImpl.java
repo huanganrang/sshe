@@ -49,10 +49,7 @@ public class FmAuthApplyServiceImpl extends BaseServiceImpl<FmAuthApply> impleme
 		String whereHql = "";	
 		if (fmAuthApply != null) {
 			whereHql += " where t.isdeleted = 0 ";
-			if (!F.empty(fmAuthApply.getIsdeleted())) {
-				whereHql += " and t.isdeleted = :isdeleted";
-				params.put("isdeleted", fmAuthApply.getIsdeleted());
-			}		
+
 			if (!F.empty(fmAuthApply.getUserId())) {
 				whereHql += " and t.userId = :userId";
 				params.put("userId", fmAuthApply.getUserId());

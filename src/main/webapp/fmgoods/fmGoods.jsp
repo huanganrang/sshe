@@ -244,173 +244,33 @@
 </head>
 <body>
 	<div class="easyui-layout" data-options="fit : true,border : false">
-		<div data-options="region:'north',title:'查询条件',border:false" style="height: 160px; overflow: hidden;">
+		<div data-options="region:'north',title:'查询条件',border:false" style="height: 120px; overflow: hidden;">
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
-						<tr>	
-							<th><%=TfmGoods.ALIAS_ADDTIME%></th>	
+						<tr>
+							<th><%=TfmGoods.ALIAS_NAME%></th>
+							<td>
+								<jb:select dataType="GN" name="name"></jb:select>
+							</td>
+
+							<th><%=TfmGoods.ALIAS_BORN_AREA%></th>
+							<td>
+								<input type="text" name="bornArea" maxlength="36" class="span2"/>
+							</td>
+
+						</tr>	
+						<tr>
+							<th><%=TfmGoods.ALIAS_USER_ID%></th>
+							<td>
+								<input type="text" name="userId" maxlength="36" class="span2"/>
+							</td>
+							<th><%=TfmGoods.ALIAS_ADDTIME%></th>
 							<td>
 								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmGoods.FORMAT_ADDTIME%>'})" id="addtimeBegin" name="addtimeBegin"/>
 								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmGoods.FORMAT_ADDTIME%>'})" id="addtimeEnd" name="addtimeEnd"/>
 							</td>
-							<th><%=TfmGoods.ALIAS_UPDATETIME%></th>	
-							<td>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmGoods.FORMAT_UPDATETIME%>'})" id="updatetimeBegin" name="updatetimeBegin"/>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmGoods.FORMAT_UPDATETIME%>'})" id="updatetimeEnd" name="updatetimeEnd"/>
-							</td>
-							<th><%=TfmGoods.ALIAS_ISDELETED%></th>	
-							<td>
-											<input type="text" name="isdeleted" maxlength="0" class="span2"/>
-							</td>
-							<th><%=TfmGoods.ALIAS_NAME%></th>	
-							<td>
-											<jb:select dataType="GN" name="name"></jb:select>	
-							</td>
-						</tr>	
-						<tr>	
-							<th><%=TfmGoods.ALIAS_PRICE%></th>	
-							<td>
-											<input type="text" name="price" maxlength="12" class="span2"/>
-							</td>
-							<th><%=TfmGoods.ALIAS_UNIT%></th>	
-							<td>
-											<jb:select dataType="GU" name="unit"></jb:select>	
-							</td>
-							<th><%=TfmGoods.ALIAS_MIN_BATCH%></th>	
-							<td>
-											<input type="text" name="minBatch" maxlength="12" class="span2"/>
-							</td>
-							<th><%=TfmGoods.ALIAS_STATUS%></th>	
-							<td>
-											<jb:select dataType="GS" name="status"></jb:select>	
-							</td>
-						</tr>	
-						<tr>	
-							<th><%=TfmGoods.ALIAS_BORN_AREA%></th>	
-							<td>
-											<input type="text" name="bornArea" maxlength="36" class="span2"/>
-							</td>
-							<th><%=TfmGoods.ALIAS_STORAGE%></th>	
-							<td>
-											<input type="text" name="storage" maxlength="100" class="span2"/>
-							</td>
-							<th><%=TfmGoods.ALIAS_OFFLINE_TIME%></th>	
-							<td>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmGoods.FORMAT_OFFLINE_TIME%>'})" id="offlineTimeBegin" name="offlineTimeBegin"/>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmGoods.FORMAT_OFFLINE_TIME%>'})" id="offlineTimeEnd" name="offlineTimeEnd"/>
-							</td>
-							<th><%=TfmGoods.ALIAS_CONTACTOR%></th>	
-							<td>
-											<input type="text" name="contactor" maxlength="20" class="span2"/>
-							</td>
-						</tr>	
-						<tr>	
-							<th><%=TfmGoods.ALIAS_CONTACTOR_MOBILE%></th>	
-							<td>
-											<input type="text" name="contactorMobile" maxlength="20" class="span2"/>
-							</td>
-							<th><%=TfmGoods.ALIAS_GOAL_AREA%></th>	
-							<td>
-											<input type="text" name="goalArea" maxlength="36" class="span2"/>
-							</td>
-							<th><%=TfmGoods.ALIAS_PRE_ONLINE_TIME%></th>	
-							<td>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmGoods.FORMAT_PRE_ONLINE_TIME%>'})" id="preOnlineTimeBegin" name="preOnlineTimeBegin"/>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmGoods.FORMAT_PRE_ONLINE_TIME%>'})" id="preOnlineTimeEnd" name="preOnlineTimeEnd"/>
-							</td>
-							<th><%=TfmGoods.ALIAS_TRANSACTION_AREA%></th>	
-							<td>
-											<input type="text" name="transactionArea" maxlength="100" class="span2"/>
-							</td>
-						</tr>	
-						<tr>	
-							<th><%=TfmGoods.ALIAS_SEND_TIME%></th>	
-							<td>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmGoods.FORMAT_SEND_TIME%>'})" id="sendTimeBegin" name="sendTimeBegin"/>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmGoods.FORMAT_SEND_TIME%>'})" id="sendTimeEnd" name="sendTimeEnd"/>
-							</td>
-							<th><%=TfmGoods.ALIAS_TRANSACTION_TIME%></th>	
-							<td>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmGoods.FORMAT_TRANSACTION_TIME%>'})" id="transactionTimeBegin" name="transactionTimeBegin"/>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmGoods.FORMAT_TRANSACTION_TIME%>'})" id="transactionTimeEnd" name="transactionTimeEnd"/>
-							</td>
-							<th><%=TfmGoods.ALIAS_CAR_NO%></th>	
-							<td>
-											<input type="text" name="carNo" maxlength="20" class="span2"/>
-							</td>
-							<th><%=TfmGoods.ALIAS_IMAGES%></th>	
-							<td>
-											<input type="text" name="images" maxlength="500" class="span2"/>
-							</td>
-						</tr>	
-						<tr>	
-							<th><%=TfmGoods.ALIAS_DESCRIPTION%></th>	
-							<td>
-											<input type="text" name="description" maxlength="500" class="span2"/>
-							</td>
-							<th><%=TfmGoods.ALIAS_DIAMETER%></th>	
-							<td>
-											<input type="text" name="diameter" maxlength="10" class="span2"/>
-							</td>
-							<th><%=TfmGoods.ALIAS_DIAMETER_UNIT%></th>	
-							<td>
-											<jb:select dataType="ZU" name="diameterUnit"></jb:select>	
-							</td>
-							<th><%=TfmGoods.ALIAS_COLOR%></th>	
-							<td>
-											<jb:select dataType="CR" name="color"></jb:select>	
-							</td>
-						</tr>	
-						<tr>	
-							<th><%=TfmGoods.ALIAS_IS_PACK%></th>	
-							<td>
-											<jb:select dataType="IS" name="isPack"></jb:select>	
-							</td>
-							<th><%=TfmGoods.ALIAS_PACK%></th>	
-							<td>
-											<jb:select dataType="PK" name="pack"></jb:select>	
-							</td>
-							<th><%=TfmGoods.ALIAS_FORMAT_DESC%></th>	
-							<td>
-											<input type="text" name="formatDesc" maxlength="500" class="span2"/>
-							</td>
-							<th><%=TfmGoods.ALIAS_ONLINE_STATUS%></th>	
-							<td>
-											<jb:select dataType="OS" name="onlineStatus"></jb:select>	
-							</td>
-						</tr>	
-						<tr>	
-							<th><%=TfmGoods.ALIAS_USER_ID%></th>	
-							<td>
-											<input type="text" name="userId" maxlength="36" class="span2"/>
-							</td>
-							<th><%=TfmGoods.ALIAS_PARENT_ID%></th>	
-							<td>
-											<input type="text" name="parentId" maxlength="36" class="span2"/>
-							</td>
-							<th><%=TfmGoods.ALIAS_ACCESS_NUM%></th>	
-							<td>
-											<input type="text" name="accessNum" maxlength="10" class="span2"/>
-							</td>
-							<th><%=TfmGoods.ALIAS_SOURCE%></th>	
-							<td>
-											<input type="text" name="source" maxlength="4" class="span2"/>
-							</td>
-						</tr>	
-						<tr>	
-							<th><%=TfmGoods.ALIAS_OUTER_ID%></th>	
-							<td>
-											<input type="text" name="outerId" maxlength="36" class="span2"/>
-							</td>
-							<th><%=TfmGoods.ALIAS_OUTER_NUMBER%></th>	
-							<td>
-											<input type="text" name="outerNumber" maxlength="36" class="span2"/>
-							</td>
-							<th><%=TfmGoods.ALIAS_GRADE%></th>	
-							<td>
-											<jb:select dataType="GD" name="grade"></jb:select>	
-							</td>
-						</tr>	
+
+						</tr>
 				</table>
 			</form>
 		</div>

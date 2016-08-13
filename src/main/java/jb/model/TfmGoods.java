@@ -24,7 +24,7 @@ public class TfmGoods implements java.io.Serializable,IEntity{
 	//alias
 	public static final String TABLE_ALIAS = "FmGoods";
 	public static final String ALIAS_ID = "id";
-	public static final String ALIAS_ADDTIME = "创建时间";
+	public static final String ALIAS_ADDTIME = "发布时间";
 	public static final String ALIAS_UPDATETIME = "修改时间";
 	public static final String ALIAS_ISDELETED = "是否删除,1删除，0未删除";
 	public static final String ALIAS_NAME = "名称";

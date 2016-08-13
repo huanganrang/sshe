@@ -4,17 +4,22 @@ import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.util.List;
 import java.util.UUID;
+import java.util.Vector;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import jb.pageModel.Colum;
-import jb.pageModel.FmFeedback;
-import jb.pageModel.DataGrid;
-import jb.pageModel.Json;
-import jb.pageModel.PageHelper;
+import farming.concurrent.CacheKey;
+import farming.concurrent.CompletionService;
+import farming.concurrent.Task;
+import jb.pageModel.*;
 import jb.service.FmFeedbackServiceI;
 
+import jb.service.UserServiceI;
+import jb.service.impl.CompletionFactory;
+import jb.util.ConfigUtil;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +40,8 @@ public class FmFeedbackController extends BaseController {
 	@Autowired
 	private FmFeedbackServiceI fmFeedbackService;
 
-
+	@Autowired
+	private UserServiceI userService;
 	/**
 	 * 跳转到FmFeedback管理页面
 	 * 
@@ -49,18 +55,37 @@ public class FmFeedbackController extends BaseController {
 	/**
 	 * 获取FmFeedback数据表格
 	 * 
-	 * @param user
 	 * @return
 	 */
 	@RequestMapping("/dataGrid")
 	@ResponseBody
 	public DataGrid dataGrid(FmFeedback fmFeedback, PageHelper ph) {
-		return fmFeedbackService.dataGrid(fmFeedback, ph);
+
+		DataGrid dataGrid = fmFeedbackService.dataGrid(fmFeedback, ph);
+		if (!CollectionUtils.isEmpty(dataGrid.getRows())) {
+			final CompletionService completionService = CompletionFactory.initCompletion();
+			for (FmFeedback feedback : (List<FmFeedback>) dataGrid.getRows()) {
+				completionService.submit(new Task<FmFeedback, User>(new CacheKey("user",feedback.getLoginId()),feedback) {
+					@Override
+					public User call() throws Exception {
+						User user = userService.get(getD().getLoginId());
+						return user;
+					}
+
+					protected void set(FmFeedback d, User v) {
+						if (v != null)
+							d.setLoginName(v.getName());
+					}
+
+				});
+			}
+			completionService.sync();
+		}
+		return dataGrid;
 	}
 	/**
 	 * 获取FmFeedback数据表格excel
 	 * 
-	 * @param user
 	 * @return
 	 * @throws NoSuchMethodException 
 	 * @throws SecurityException 
@@ -97,7 +122,9 @@ public class FmFeedbackController extends BaseController {
 	 */
 	@RequestMapping("/add")
 	@ResponseBody
-	public Json add(FmFeedback fmFeedback) {
+	public Json add(FmFeedback fmFeedback,HttpSession session) {
+		SessionInfo sessionInfo = (SessionInfo)session.getAttribute(ConfigUtil.getSessionInfoName());
+		fmFeedback.setLoginId(sessionInfo.getId());
 		Json j = new Json();		
 		fmFeedbackService.add(fmFeedback);
 		j.setSuccess(true);
@@ -137,7 +164,9 @@ public class FmFeedbackController extends BaseController {
 	 */
 	@RequestMapping("/edit")
 	@ResponseBody
-	public Json edit(FmFeedback fmFeedback) {
+	public Json edit(FmFeedback fmFeedback,HttpSession session) {
+		SessionInfo sessionInfo = (SessionInfo)session.getAttribute(ConfigUtil.getSessionInfoName());
+		fmFeedback.setLoginId(sessionInfo.getId());
 		Json j = new Json();		
 		fmFeedbackService.edit(fmFeedback);
 		j.setSuccess(true);

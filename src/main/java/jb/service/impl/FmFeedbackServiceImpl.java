@@ -49,10 +49,7 @@ public class FmFeedbackServiceImpl extends BaseServiceImpl<FmFeedback> implement
 		String whereHql = "";	
 		if (fmFeedback != null) {
 			whereHql += " where t.isdeleted = 0 ";
-			if (!F.empty(fmFeedback.getIsdeleted())) {
-				whereHql += " and t.isdeleted = :isdeleted";
-				params.put("isdeleted", fmFeedback.getIsdeleted());
-			}		
+
 			if (!F.empty(fmFeedback.getContent())) {
 				whereHql += " and t.content = :content";
 				params.put("content", fmFeedback.getContent());
@@ -79,6 +76,7 @@ public class FmFeedbackServiceImpl extends BaseServiceImpl<FmFeedback> implement
 		BeanUtils.copyProperties(fmFeedback, t);
 		t.setId(jb.absx.UUID.uuid());
 		t.setIsdeleted(false);
+		t.setStatus("CS01");
 		fmFeedbackDao.save(t);
 	}
 

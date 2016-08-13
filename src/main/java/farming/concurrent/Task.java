@@ -7,16 +7,27 @@ package farming.concurrent;
 import java.util.concurrent.Callable;
 
 public abstract class Task<D, V> implements Callable<V> {
-    private D d;
 
+
+    private D d;
+    private CacheKey cacheKey;
     Task() {
 
     }
 
-    Task(D d) {
+    public Task(D d) {
         this.d = d;
     }
 
+
+    public Task(CacheKey key,D d) {
+        this.cacheKey = key;
+        this.d = d;
+    }
+
+    public CacheKey getCacheKey() {
+        return cacheKey;
+    }
 
     public void handle(V v) {
         if (d != null)
@@ -25,6 +36,10 @@ public abstract class Task<D, V> implements Callable<V> {
 
     protected void set(D d, V v) {
 
+    }
+
+    public D getD() {
+        return d;
     }
 
 }

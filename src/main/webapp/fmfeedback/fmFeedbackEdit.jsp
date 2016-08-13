@@ -37,42 +37,18 @@
 		<form id="form" method="post">
 				<input type="hidden" name="id" value = "${fmFeedback.id}"/>
 			<table class="table table-hover table-condensed">
-				<tr>	
-					<th><%=TfmFeedback.ALIAS_ADDTIME%></th>	
-					<td>
-					<input class="span2" name="addtime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmFeedback.FORMAT_ADDTIME%>'})"   maxlength="0" value="${fmFeedback.addtime}"/>
-					</td>							
-					<th><%=TfmFeedback.ALIAS_UPDATETIME%></th>	
-					<td>
-					<input class="span2" name="updatetime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmFeedback.FORMAT_UPDATETIME%>'})"   maxlength="0" value="${fmFeedback.updatetime}"/>
-					</td>							
-			</tr>	
-				<tr>	
-					<th><%=TfmFeedback.ALIAS_ISDELETED%></th>	
-					<td>
-											<input class="span2" name="isdeleted" type="text" class="easyui-validatebox span2" data-options="required:true" value="${fmFeedback.isdeleted}"/>
-					</td>							
-					<th><%=TfmFeedback.ALIAS_CONTENT%></th>	
-					<td>
-											<input class="span2" name="content" type="text" value="${fmFeedback.content}"/>
-					</td>							
-			</tr>	
-				<tr>	
-					<th><%=TfmFeedback.ALIAS_USER_ID%></th>	
-					<td>
-											<input class="span2" name="userId" type="text" value="${fmFeedback.userId}"/>
-					</td>							
+				<tr>
 					<th><%=TfmFeedback.ALIAS_STATUS%></th>	
 					<td>
-											<jb:select dataType="CS" name="status" value="${fmFeedback.status}"></jb:select>	
+						<jb:select dataType="CS" name="status" value="${fmFeedback.status}"></jb:select>
 					</td>							
-			</tr>	
+				</tr>
 				<tr>	
 					<th><%=TfmFeedback.ALIAS_REPLY%></th>	
-					<td>
-											<input class="span2" name="reply" type="text" value="${fmFeedback.reply}"/>
+					<td colspan="3">
+						<textarea class="span2" name="reply"  value="${fmFeedback.reply}"/>
 					</td>							
-			</tr>	
+				</tr>
 			</table>				
 		</form>
 	</div>

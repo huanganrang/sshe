@@ -49,6 +49,10 @@
 				width : 150,
 				hidden : true
 				}, {
+				field : 'content',
+				title : '<%=TfmFeedback.ALIAS_CONTENT%>',
+				width : 100
+				}, {
 				field : 'addtime',
 				title : '<%=TfmFeedback.ALIAS_ADDTIME%>',
 				width : 50		
@@ -57,26 +61,26 @@
 				title : '<%=TfmFeedback.ALIAS_UPDATETIME%>',
 				width : 50		
 				}, {
-				field : 'isdeleted',
-				title : '<%=TfmFeedback.ALIAS_ISDELETED%>',
+				field : 'userAccount',
+				title : '用户账号',
 				width : 50		
 				}, {
-				field : 'content',
-				title : '<%=TfmFeedback.ALIAS_CONTENT%>',
-				width : 50		
+				field : 'mobile',
+				title : '手机号',
+				width : 50
 				}, {
-				field : 'userId',
-				title : '<%=TfmFeedback.ALIAS_USER_ID%>',
-				width : 50		
-				}, {
-				field : 'status',
+				field : 'statusName',
 				title : '<%=TfmFeedback.ALIAS_STATUS%>',
 				width : 50		
 				}, {
-				field : 'reply',
-				title : '<%=TfmFeedback.ALIAS_REPLY%>',
-				width : 50		
-			}, {
+				field: 'loginName',
+				title: '处理人',
+				width: 50
+				}, {
+					field : 'reply',
+					title : '<%=TfmFeedback.ALIAS_REPLY%>',
+					width : 50
+				}, {
 				field : 'action',
 				title : '操作',
 				width : 100,
@@ -137,8 +141,8 @@
 		}
 		parent.$.modalDialog({
 			title : '编辑数据',
-			width : 780,
-			height : 500,
+			width : 300,
+			height : 350,
 			href : '${pageContext.request.contextPath}/fmFeedbackController/editPage?id=' + id,
 			buttons : [ {
 				text : '编辑',
@@ -208,41 +212,21 @@
 </head>
 <body>
 	<div class="easyui-layout" data-options="fit : true,border : false">
-		<div data-options="region:'north',title:'查询条件',border:false" style="height: 160px; overflow: hidden;">
+		<div data-options="region:'north',title:'查询条件',border:false" style="height: 65px; overflow: hidden;">
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
 						<tr>	
-							<th><%=TfmFeedback.ALIAS_ADDTIME%></th>	
+							<th>用户手机号</th>
 							<td>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmFeedback.FORMAT_ADDTIME%>'})" id="addtimeBegin" name="addtimeBegin"/>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmFeedback.FORMAT_ADDTIME%>'})" id="addtimeEnd" name="addtimeEnd"/>
+								<input type="text" name="mobile" maxlength="36" class="span2"/>
 							</td>
-							<th><%=TfmFeedback.ALIAS_UPDATETIME%></th>	
+							<th>用户账号</th>
 							<td>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmFeedback.FORMAT_UPDATETIME%>'})" id="updatetimeBegin" name="updatetimeBegin"/>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmFeedback.FORMAT_UPDATETIME%>'})" id="updatetimeEnd" name="updatetimeEnd"/>
-							</td>
-							<th><%=TfmFeedback.ALIAS_ISDELETED%></th>	
-							<td>
-											<input type="text" name="isdeleted" maxlength="0" class="span2"/>
-							</td>
-							<th><%=TfmFeedback.ALIAS_CONTENT%></th>	
-							<td>
-											<input type="text" name="content" maxlength="1000" class="span2"/>
-							</td>
-						</tr>	
-						<tr>	
-							<th><%=TfmFeedback.ALIAS_USER_ID%></th>	
-							<td>
-											<input type="text" name="userId" maxlength="36" class="span2"/>
+								<input type="text" name="userAccount" maxlength="36" class="span2"/>
 							</td>
 							<th><%=TfmFeedback.ALIAS_STATUS%></th>	
 							<td>
-											<jb:select dataType="CS" name="status"></jb:select>	
-							</td>
-							<th><%=TfmFeedback.ALIAS_REPLY%></th>	
-							<td>
-											<input type="text" name="reply" maxlength="1000" class="span2"/>
+									<jb:select dataType="CS" name="status"></jb:select>
 							</td>
 						</tr>	
 				</table>

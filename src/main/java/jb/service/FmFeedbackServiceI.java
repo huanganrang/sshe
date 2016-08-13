@@ -20,14 +20,14 @@ public interface FmFeedbackServiceI {
 	 *            分页帮助类
 	 * @return
 	 */
-	public DataGrid dataGrid(FmFeedback fmFeedback, PageHelper ph);
+	DataGrid dataGrid(FmFeedback fmFeedback, PageHelper ph);
 
 	/**
 	 * 添加FmFeedback
 	 * 
 	 * @param fmFeedback
 	 */
-	public void add(FmFeedback fmFeedback);
+	void add(FmFeedback fmFeedback);
 
 	/**
 	 * 获得FmFeedback对象
@@ -35,20 +35,20 @@ public interface FmFeedbackServiceI {
 	 * @param id
 	 * @return
 	 */
-	public FmFeedback get(String id);
+	FmFeedback get(String id);
 
 	/**
 	 * 修改FmFeedback
 	 * 
 	 * @param fmFeedback
 	 */
-	public void edit(FmFeedback fmFeedback);
+	void edit(FmFeedback fmFeedback);
 
 	/**
 	 * 删除FmFeedback
 	 * 
 	 * @param id
 	 */
-	public void delete(String id);
+	void delete(String id);
 
 }

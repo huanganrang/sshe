@@ -24,13 +24,13 @@ public class TfmFeedback implements java.io.Serializable,IEntity{
 	//alias
 	public static final String TABLE_ALIAS = "FmFeedback";
 	public static final String ALIAS_ID = "id";
-	public static final String ALIAS_ADDTIME = "创建时间";
-	public static final String ALIAS_UPDATETIME = "修改时间";
+	public static final String ALIAS_ADDTIME = "反馈提交时间";
+	public static final String ALIAS_UPDATETIME = "处理时间";
 	public static final String ALIAS_ISDELETED = "是否删除,1删除，0未删除";
 	public static final String ALIAS_CONTENT = "用户问题";
 	public static final String ALIAS_USER_ID = "用户ID";
 	public static final String ALIAS_STATUS = "处理状态";
-	public static final String ALIAS_REPLY = "回复内容";
+	public static final String ALIAS_REPLY = "回复结果";
 	
 	//date formats
 	public static final String FORMAT_ADDTIME = jb.util.Constants.DATE_FORMAT_FOR_ENTITY;
@@ -57,6 +57,11 @@ public class TfmFeedback implements java.io.Serializable,IEntity{
 	private java.lang.String reply;
 	//columns END
 
+	private String userAccount;
+
+	private String mobile;
+
+	private String loginId;
 
 		public TfmFeedback(){
 		}
@@ -139,35 +144,35 @@ public class TfmFeedback implements java.io.Serializable,IEntity{
 	public void setReply(java.lang.String reply) {
 		this.reply = reply;
 	}
-	
-	
-	/*
-	public String toString() {
-		return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-			.append("Id",getId())
-			.append("Addtime",getAddtime())
-			.append("Updatetime",getUpdatetime())
-			.append("Isdeleted",getIsdeleted())
-			.append("Content",getContent())
-			.append("UserId",getUserId())
-			.append("Status",getStatus())
-			.append("Reply",getReply())
-			.toString();
+
+
+
+	@Column(name = "user_account", unique = false, nullable = true, insertable = true, updatable = true, length = 100)
+	public java.lang.String getUserAccount() {
+		return this.userAccount;
 	}
-	
-	public int hashCode() {
-		return new HashCodeBuilder()
-			.append(getId())
-			.toHashCode();
+
+	public void setUserAccount(java.lang.String userAccount) {
+		this.userAccount = userAccount;
 	}
-	
-	public boolean equals(Object obj) {
-		if(obj instanceof FmFeedback == false) return false;
-		if(this == obj) return true;
-		FmFeedback other = (FmFeedback)obj;
-		return new EqualsBuilder()
-			.append(getId(),other.getId())
-			.isEquals();
-	}*/
+
+
+	@Column(name = "mobile", unique = false, nullable = true, insertable = true, updatable = true, length = 20)
+	public java.lang.String getMobile() {
+		return this.mobile;
+	}
+
+	public void setMobile(java.lang.String mobile) {
+		this.mobile = mobile;
+	}
+
+	@Column(name = "login_id", unique = false, nullable = true, insertable = true, updatable = true, length = 36)
+	public java.lang.String getLoginId() {
+		return this.loginId;
+	}
+
+	public void setLoginId(java.lang.String loginId) {
+		this.loginId = loginId;
+	}
 }
 
