@@ -74,6 +74,16 @@
 					<td>
 						${fmUser.hxStatus}							
 					</td>							
+					<th><%=TfmUser.ALIAS_AUTH_STATUS%></th>	
+					<td>
+						${fmUser.authStatus}							
+					</td>							
+				</tr>		
+				<tr>	
+					<th><%=TfmUser.ALIAS_STATUS%></th>	
+					<td>
+						${fmUser.status}							
+					</td>							
 				</tr>		
 		</table>
 	</div>

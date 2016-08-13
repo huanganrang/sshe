@@ -102,6 +102,16 @@
 					<td>
 											<jb:select dataType="IS" name="hxStatus" value="${fmUser.hxStatus}"></jb:select>	
 					</td>							
+					<th><%=TfmUser.ALIAS_AUTH_STATUS%></th>	
+					<td>
+											<jb:select dataType="AU" name="authStatus" value="${fmUser.authStatus}"></jb:select>	
+					</td>							
+			</tr>	
+				<tr>	
+					<th><%=TfmUser.ALIAS_STATUS%></th>	
+					<td>
+											<jb:select dataType="AS" name="status" value="${fmUser.status}"></jb:select>	
+					</td>							
 			</tr>	
 			</table>				
 		</form>

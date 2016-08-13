@@ -1,7 +1,7 @@
 
 /*
  * @author John
- * @date - 2016-08-07
+ * @date - 2016-08-13
  */
 
 package jb.model;
@@ -37,6 +37,8 @@ public class TfmUser implements java.io.Serializable,IEntity{
 	public static final String ALIAS_USER_ROLE = "用户类型（普通用户/采购商、供应商）";
 	public static final String ALIAS_HX_PASSWORD = "环信密码";
 	public static final String ALIAS_HX_STATUS = "环信注册状态（1：成功，2：失败）";
+	public static final String ALIAS_AUTH_STATUS = "认证状态";
+	public static final String ALIAS_STATUS = "状态（冻结）";
 	
 	//date formats
 	public static final String FORMAT_ADDTIME = jb.util.Constants.DATE_FORMAT_FOR_ENTITY;
@@ -73,6 +75,10 @@ public class TfmUser implements java.io.Serializable,IEntity{
 	private java.lang.String hxPassword;
 	//
 	private java.lang.Integer hxStatus;
+	//@Length(max=4)
+	private java.lang.String authStatus;
+	//@Length(max=4)
+	private java.lang.String status;
 	//columns END
 
 
@@ -212,6 +218,24 @@ public class TfmUser implements java.io.Serializable,IEntity{
 		this.hxStatus = hxStatus;
 	}
 	
+	@Column(name = "auth_status", unique = false, nullable = true, insertable = true, updatable = true, length = 4)
+	public java.lang.String getAuthStatus() {
+		return this.authStatus;
+	}
+	
+	public void setAuthStatus(java.lang.String authStatus) {
+		this.authStatus = authStatus;
+	}
+	
+	@Column(name = "status", unique = false, nullable = true, insertable = true, updatable = true, length = 4)
+	public java.lang.String getStatus() {
+		return this.status;
+	}
+	
+	public void setStatus(java.lang.String status) {
+		this.status = status;
+	}
+	
 	
 	/*
 	public String toString() {
@@ -230,6 +254,8 @@ public class TfmUser implements java.io.Serializable,IEntity{
 			.append("UserRole",getUserRole())
 			.append("HxPassword",getHxPassword())
 			.append("HxStatus",getHxStatus())
+			.append("AuthStatus",getAuthStatus())
+			.append("Status",getStatus())
 			.toString();
 	}
 	

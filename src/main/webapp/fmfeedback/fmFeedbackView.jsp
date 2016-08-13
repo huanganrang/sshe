@@ -34,6 +34,16 @@
 					<td>
 						${fmFeedback.userId}							
 					</td>							
+					<th><%=TfmFeedback.ALIAS_STATUS%></th>	
+					<td>
+						${fmFeedback.status}							
+					</td>							
+				</tr>		
+				<tr>	
+					<th><%=TfmFeedback.ALIAS_REPLY%></th>	
+					<td>
+						${fmFeedback.reply}							
+					</td>							
 				</tr>		
 		</table>
 	</div>

@@ -21,6 +21,8 @@ public class FmUser implements java.io.Serializable {
 	private java.lang.String userRole;	
 	private java.lang.String hxPassword;	
 	private java.lang.Integer hxStatus;	
+	private java.lang.String authStatus;	
+	private java.lang.String status;	
 
 	
 
@@ -123,6 +125,20 @@ public class FmUser implements java.io.Serializable {
 	
 	public java.lang.Integer getHxStatus() {
 		return this.hxStatus;
+	}
+	public void setAuthStatus(java.lang.String authStatus) {
+		this.authStatus = authStatus;
+	}
+	
+	public java.lang.String getAuthStatus() {
+		return this.authStatus;
+	}
+	public void setStatus(java.lang.String status) {
+		this.status = status;
+	}
+	
+	public java.lang.String getStatus() {
+		return this.status;
 	}
 
 }

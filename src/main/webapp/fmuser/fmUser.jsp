@@ -100,6 +100,14 @@
 				field : 'hxStatus',
 				title : '<%=TfmUser.ALIAS_HX_STATUS%>',
 				width : 50		
+				}, {
+				field : 'authStatus',
+				title : '<%=TfmUser.ALIAS_AUTH_STATUS%>',
+				width : 50		
+				}, {
+				field : 'status',
+				title : '<%=TfmUser.ALIAS_STATUS%>',
+				width : 50		
 			}, {
 				field : 'action',
 				title : '操作',
@@ -295,6 +303,14 @@
 							<th><%=TfmUser.ALIAS_HX_STATUS%></th>	
 							<td>
 											<jb:select dataType="IS" name="hxStatus"></jb:select>	
+							</td>
+							<th><%=TfmUser.ALIAS_AUTH_STATUS%></th>	
+							<td>
+											<jb:select dataType="AU" name="authStatus"></jb:select>	
+							</td>
+							<th><%=TfmUser.ALIAS_STATUS%></th>	
+							<td>
+											<jb:select dataType="AS" name="status"></jb:select>	
 							</td>
 						</tr>	
 				</table>

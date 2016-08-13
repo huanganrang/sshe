@@ -48,7 +48,11 @@ public class FmFeedbackServiceImpl extends BaseServiceImpl<FmFeedback> implement
 	protected String whereHql(FmFeedback fmFeedback, Map<String, Object> params) {
 		String whereHql = "";	
 		if (fmFeedback != null) {
-			whereHql += " where t.isdeleted = 0 ";	
+			whereHql += " where t.isdeleted = 0 ";
+			if (!F.empty(fmFeedback.getIsdeleted())) {
+				whereHql += " and t.isdeleted = :isdeleted";
+				params.put("isdeleted", fmFeedback.getIsdeleted());
+			}		
 			if (!F.empty(fmFeedback.getContent())) {
 				whereHql += " and t.content = :content";
 				params.put("content", fmFeedback.getContent());
@@ -56,6 +60,14 @@ public class FmFeedbackServiceImpl extends BaseServiceImpl<FmFeedback> implement
 			if (!F.empty(fmFeedback.getUserId())) {
 				whereHql += " and t.userId = :userId";
 				params.put("userId", fmFeedback.getUserId());
+			}		
+			if (!F.empty(fmFeedback.getStatus())) {
+				whereHql += " and t.status = :status";
+				params.put("status", fmFeedback.getStatus());
+			}		
+			if (!F.empty(fmFeedback.getReply())) {
+				whereHql += " and t.reply = :reply";
+				params.put("reply", fmFeedback.getReply());
 			}		
 		}	
 		return whereHql;
@@ -66,7 +78,7 @@ public class FmFeedbackServiceImpl extends BaseServiceImpl<FmFeedback> implement
 		TfmFeedback t = new TfmFeedback();
 		BeanUtils.copyProperties(fmFeedback, t);
 		t.setId(jb.absx.UUID.uuid());
-		t.setAddtime(new Date());
+		t.setIsdeleted(false);
 		fmFeedbackDao.save(t);
 	}
 

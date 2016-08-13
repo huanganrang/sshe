@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ page import="jb.model.TfmUser" %>
+<%@ page import="jb.model.TfmAuthApply" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="jb" uri="http://www.jb.cn/jbtag"%>  
@@ -7,7 +7,7 @@
 	$(function() {
 	 parent.$.messager.progress('close');
 		$('#form').form({
-			url : '${pageContext.request.contextPath}/fmUserController/add',
+			url : '${pageContext.request.contextPath}/fmAuthApplyController/add',
 			onSubmit : function() {
 				parent.$.messager.progress({
 					title : '提示',
@@ -38,80 +38,64 @@
 				<input type="hidden" name="id"/>
 			<table class="table table-hover table-condensed">
 				<tr>	
-					<th><%=TfmUser.ALIAS_ADDTIME%></th>	
+					<th><%=TfmAuthApply.ALIAS_ADDTIME%></th>	
 					<td>
-					<input class="span2" name="addtime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmUser.FORMAT_ADDTIME%>'})"  maxlength="0" class="required " />
+					<input class="span2" name="addtime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmAuthApply.FORMAT_ADDTIME%>'})"  maxlength="0" class="required " />
 					</td>							
-					<th><%=TfmUser.ALIAS_UPDATETIME%></th>	
+					<th><%=TfmAuthApply.ALIAS_UPDATETIME%></th>	
 					<td>
-					<input class="span2" name="updatetime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmUser.FORMAT_UPDATETIME%>'})"  maxlength="0" class="required " />
+					<input class="span2" name="updatetime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmAuthApply.FORMAT_UPDATETIME%>'})"  maxlength="0" class="required " />
 					</td>							
 				</tr>	
 				<tr>	
-					<th><%=TfmUser.ALIAS_ISDELETED%></th>	
+					<th><%=TfmAuthApply.ALIAS_ISDELETED%></th>	
 					<td>
 					
 											<input  name="isdeleted" type="text" class="easyui-validatebox span2" data-options="required:true"/>
 					</td>							
-					<th><%=TfmUser.ALIAS_ACCOUNT%></th>	
+					<th><%=TfmAuthApply.ALIAS_USER_ID%></th>	
 					<td>
-											<input class="span2" name="account" type="text"/>
+											<input class="span2" name="userId" type="text"/>
 					</td>							
 				</tr>	
 				<tr>	
-					<th><%=TfmUser.ALIAS_NICK_NAME%></th>	
+					<th><%=TfmAuthApply.ALIAS_TYPE%></th>	
 					<td>
-											<input class="span2" name="nickName" type="text"/>
+											<jb:select dataType="AT" name="type"></jb:select>	
 					</td>							
-					<th><%=TfmUser.ALIAS_LOCAL_AREA%></th>	
+					<th><%=TfmAuthApply.ALIAS_USER_NAME%></th>	
 					<td>
-											<input class="span2" name="localArea" type="text"/>
+											<input class="span2" name="userName" type="text"/>
 					</td>							
 				</tr>	
 				<tr>	
-					<th><%=TfmUser.ALIAS_ICON%></th>	
-					<td>
-											<input class="span2" name="icon" type="text"/>
-					</td>							
-					<th><%=TfmUser.ALIAS_PHONE%></th>	
+					<th><%=TfmAuthApply.ALIAS_PHONE%></th>	
 					<td>
 											<input class="span2" name="phone" type="text"/>
 					</td>							
-				</tr>	
-				<tr>	
-					<th><%=TfmUser.ALIAS_REAL_NAME%></th>	
+					<th><%=TfmAuthApply.ALIAS_COMPANY_TYPE%></th>	
 					<td>
-											<input class="span2" name="realName" type="text"/>
-					</td>							
-					<th><%=TfmUser.ALIAS_CARD_ID%></th>	
-					<td>
-											<input class="span2" name="cardId" type="text"/>
+											<jb:select dataType="CT" name="companyType"></jb:select>	
 					</td>							
 				</tr>	
 				<tr>	
-					<th><%=TfmUser.ALIAS_USER_ROLE%></th>	
+					<th><%=TfmAuthApply.ALIAS_IMAGES%></th>	
 					<td>
-											<jb:select dataType="UR" name="userRole"></jb:select>	
+											<input class="span2" name="images" type="text"/>
 					</td>							
-					<th><%=TfmUser.ALIAS_HX_PASSWORD%></th>	
+					<th><%=TfmAuthApply.ALIAS_USER_CARD%></th>	
 					<td>
-											<input class="span2" name="hxPassword" type="text"/>
-					</td>							
-				</tr>	
-				<tr>	
-					<th><%=TfmUser.ALIAS_HX_STATUS%></th>	
-					<td>
-											<jb:select dataType="IS" name="hxStatus"></jb:select>	
-					</td>							
-					<th><%=TfmUser.ALIAS_AUTH_STATUS%></th>	
-					<td>
-											<jb:select dataType="AU" name="authStatus"></jb:select>	
+											<input class="span2" name="userCard" type="text"/>
 					</td>							
 				</tr>	
 				<tr>	
-					<th><%=TfmUser.ALIAS_STATUS%></th>	
+					<th><%=TfmAuthApply.ALIAS_AUTH_REMARK%></th>	
 					<td>
-											<jb:select dataType="AS" name="status"></jb:select>	
+											<input class="span2" name="authRemark" type="text"/>
+					</td>							
+					<th><%=TfmAuthApply.ALIAS_STATUS%></th>	
+					<td>
+											<jb:select dataType="AU" name="status"></jb:select>	
 					</td>							
 				</tr>	
 			</table>		

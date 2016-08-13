@@ -49,7 +49,10 @@ public class FmUserServiceImpl extends BaseServiceImpl<FmUser> implements FmUser
 		String whereHql = "";	
 		if (fmUser != null) {
 			whereHql += " where t.isdeleted = 0 ";
-
+			if (!F.empty(fmUser.getIsdeleted())) {
+				whereHql += " and t.isdeleted = :isdeleted";
+				params.put("isdeleted", fmUser.getIsdeleted());
+			}		
 			if (!F.empty(fmUser.getAccount())) {
 				whereHql += " and t.account = :account";
 				params.put("account", fmUser.getAccount());
@@ -86,10 +89,18 @@ public class FmUserServiceImpl extends BaseServiceImpl<FmUser> implements FmUser
 				whereHql += " and t.hxPassword = :hxPassword";
 				params.put("hxPassword", fmUser.getHxPassword());
 			}		
-			/*if (!F.empty(fmUser.getHxStatus())) {
+			if (!F.empty(fmUser.getHxStatus())) {
 				whereHql += " and t.hxStatus = :hxStatus";
 				params.put("hxStatus", fmUser.getHxStatus());
-			}*/
+			}		
+			if (!F.empty(fmUser.getAuthStatus())) {
+				whereHql += " and t.authStatus = :authStatus";
+				params.put("authStatus", fmUser.getAuthStatus());
+			}		
+			if (!F.empty(fmUser.getStatus())) {
+				whereHql += " and t.status = :status";
+				params.put("status", fmUser.getStatus());
+			}		
 		}	
 		return whereHql;
 	}
@@ -99,7 +110,7 @@ public class FmUserServiceImpl extends BaseServiceImpl<FmUser> implements FmUser
 		TfmUser t = new TfmUser();
 		BeanUtils.copyProperties(fmUser, t);
 		t.setId(jb.absx.UUID.uuid());
-		t.setAddtime(new Date());
+		t.setIsdeleted(false);
 		fmUserDao.save(t);
 	}
 

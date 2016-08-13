@@ -63,6 +63,16 @@
 					<td>
 											<input class="span2" name="userId" type="text"/>
 					</td>							
+					<th><%=TfmFeedback.ALIAS_STATUS%></th>	
+					<td>
+											<jb:select dataType="CS" name="status"></jb:select>	
+					</td>							
+				</tr>	
+				<tr>	
+					<th><%=TfmFeedback.ALIAS_REPLY%></th>	
+					<td>
+											<input class="span2" name="reply" type="text"/>
+					</td>							
 				</tr>	
 			</table>		
 		</form>

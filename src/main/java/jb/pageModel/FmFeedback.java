@@ -13,6 +13,8 @@ public class FmFeedback implements java.io.Serializable {
 	private java.lang.Boolean isdeleted;	
 	private java.lang.String content;	
 	private java.lang.String userId;	
+	private java.lang.String status;	
+	private java.lang.String reply;	
 
 	
 
@@ -59,6 +61,20 @@ public class FmFeedback implements java.io.Serializable {
 	
 	public java.lang.String getUserId() {
 		return this.userId;
+	}
+	public void setStatus(java.lang.String status) {
+		this.status = status;
+	}
+	
+	public java.lang.String getStatus() {
+		return this.status;
+	}
+	public void setReply(java.lang.String reply) {
+		this.reply = reply;
+	}
+	
+	public java.lang.String getReply() {
+		return this.reply;
 	}
 
 }

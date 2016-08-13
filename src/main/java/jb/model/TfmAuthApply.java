@@ -15,22 +15,27 @@ import org.hibernate.annotations.DynamicUpdate;
 
 @SuppressWarnings("serial")
 @Entity
-@Table(name = "fm_feedback")
+@Table(name = "fm_auth_apply")
 @DynamicInsert(true)
 @DynamicUpdate(true)
-public class TfmFeedback implements java.io.Serializable,IEntity{
+public class TfmAuthApply implements java.io.Serializable,IEntity{
 	private static final long serialVersionUID = 5454155825314635342L;
 	
 	//alias
-	public static final String TABLE_ALIAS = "FmFeedback";
+	public static final String TABLE_ALIAS = "FmAuthApply";
 	public static final String ALIAS_ID = "id";
 	public static final String ALIAS_ADDTIME = "创建时间";
 	public static final String ALIAS_UPDATETIME = "修改时间";
 	public static final String ALIAS_ISDELETED = "是否删除,1删除，0未删除";
-	public static final String ALIAS_CONTENT = "用户问题";
 	public static final String ALIAS_USER_ID = "用户ID";
-	public static final String ALIAS_STATUS = "处理状态";
-	public static final String ALIAS_REPLY = "回复内容";
+	public static final String ALIAS_TYPE = "认证类型";
+	public static final String ALIAS_USER_NAME = "负责人姓名";
+	public static final String ALIAS_PHONE = "手机号";
+	public static final String ALIAS_COMPANY_TYPE = "企业经营类型";
+	public static final String ALIAS_IMAGES = "图片";
+	public static final String ALIAS_USER_CARD = "身份证号";
+	public static final String ALIAS_AUTH_REMARK = "认证结果";
+	public static final String ALIAS_STATUS = "状态（审核状态）";
 	
 	//date formats
 	public static final String FORMAT_ADDTIME = jb.util.Constants.DATE_FORMAT_FOR_ENTITY;
@@ -47,20 +52,30 @@ public class TfmFeedback implements java.io.Serializable,IEntity{
 	private java.util.Date updatetime;
 	//@NotNull 
 	private java.lang.Boolean isdeleted;
-	//@Length(max=1000)
-	private java.lang.String content;
 	//@Length(max=36)
 	private java.lang.String userId;
 	//@Length(max=4)
+	private java.lang.String type;
+	//@Length(max=10)
+	private java.lang.String userName;
+	//@Length(max=20)
+	private java.lang.String phone;
+	//@Length(max=4)
+	private java.lang.String companyType;
+	//@Length(max=500)
+	private java.lang.String images;
+	//@Length(max=36)
+	private java.lang.String userCard;
+	//@Length(max=100)
+	private java.lang.String authRemark;
+	//@Length(max=4)
 	private java.lang.String status;
-	//@Length(max=1000)
-	private java.lang.String reply;
 	//columns END
 
 
-		public TfmFeedback(){
+		public TfmAuthApply(){
 		}
-		public TfmFeedback(String id) {
+		public TfmAuthApply(String id) {
 			this.id = id;
 		}
 	
@@ -104,15 +119,6 @@ public class TfmFeedback implements java.io.Serializable,IEntity{
 		this.isdeleted = isdeleted;
 	}
 	
-	@Column(name = "content", unique = false, nullable = true, insertable = true, updatable = true, length = 1000)
-	public java.lang.String getContent() {
-		return this.content;
-	}
-	
-	public void setContent(java.lang.String content) {
-		this.content = content;
-	}
-	
 	@Column(name = "user_id", unique = false, nullable = true, insertable = true, updatable = true, length = 36)
 	public java.lang.String getUserId() {
 		return this.userId;
@@ -120,6 +126,69 @@ public class TfmFeedback implements java.io.Serializable,IEntity{
 	
 	public void setUserId(java.lang.String userId) {
 		this.userId = userId;
+	}
+	
+	@Column(name = "type", unique = false, nullable = true, insertable = true, updatable = true, length = 4)
+	public java.lang.String getType() {
+		return this.type;
+	}
+	
+	public void setType(java.lang.String type) {
+		this.type = type;
+	}
+	
+	@Column(name = "user_name", unique = false, nullable = true, insertable = true, updatable = true, length = 10)
+	public java.lang.String getUserName() {
+		return this.userName;
+	}
+	
+	public void setUserName(java.lang.String userName) {
+		this.userName = userName;
+	}
+	
+	@Column(name = "phone", unique = false, nullable = true, insertable = true, updatable = true, length = 20)
+	public java.lang.String getPhone() {
+		return this.phone;
+	}
+	
+	public void setPhone(java.lang.String phone) {
+		this.phone = phone;
+	}
+	
+	@Column(name = "company_type", unique = false, nullable = true, insertable = true, updatable = true, length = 4)
+	public java.lang.String getCompanyType() {
+		return this.companyType;
+	}
+	
+	public void setCompanyType(java.lang.String companyType) {
+		this.companyType = companyType;
+	}
+	
+	@Column(name = "images", unique = false, nullable = true, insertable = true, updatable = true, length = 500)
+	public java.lang.String getImages() {
+		return this.images;
+	}
+	
+	public void setImages(java.lang.String images) {
+		this.images = images;
+	}
+	
+	@Column(name = "user_card", unique = false, nullable = true, insertable = true, updatable = true, length = 36)
+	public java.lang.String getUserCard() {
+		return this.userCard;
+	}
+	
+	public void setUserCard(java.lang.String userCard) {
+		this.userCard = userCard;
+	}
+	
+	@Column(name = "auth_remark", unique = false, nullable = true, insertable = true, updatable = true, length = 100)
+	public java.lang.String getAuthRemark() {
+		return this.authRemark;
+	}
+	
+	public void setAuthRemark(java.lang.String authRemark) {
+		this.authRemark = authRemark;
 	}
 	
 	@Column(name = "status", unique = false, nullable = true, insertable = true, updatable = true, length = 4)
@@ -131,15 +200,6 @@ public class TfmFeedback implements java.io.Serializable,IEntity{
 		this.status = status;
 	}
 	
-	@Column(name = "reply", unique = false, nullable = true, insertable = true, updatable = true, length = 1000)
-	public java.lang.String getReply() {
-		return this.reply;
-	}
-	
-	public void setReply(java.lang.String reply) {
-		this.reply = reply;
-	}
-	
 	
 	/*
 	public String toString() {
@@ -148,10 +208,15 @@ public class TfmFeedback implements java.io.Serializable,IEntity{
 			.append("Addtime",getAddtime())
 			.append("Updatetime",getUpdatetime())
 			.append("Isdeleted",getIsdeleted())
-			.append("Content",getContent())
 			.append("UserId",getUserId())
+			.append("Type",getType())
+			.append("UserName",getUserName())
+			.append("Phone",getPhone())
+			.append("CompanyType",getCompanyType())
+			.append("Images",getImages())
+			.append("UserCard",getUserCard())
+			.append("AuthRemark",getAuthRemark())
 			.append("Status",getStatus())
-			.append("Reply",getReply())
 			.toString();
 	}
 	
@@ -162,9 +227,9 @@ public class TfmFeedback implements java.io.Serializable,IEntity{
 	}
 	
 	public boolean equals(Object obj) {
-		if(obj instanceof FmFeedback == false) return false;
+		if(obj instanceof FmAuthApply == false) return false;
 		if(this == obj) return true;
-		FmFeedback other = (FmFeedback)obj;
+		FmAuthApply other = (FmAuthApply)obj;
 		return new EqualsBuilder()
 			.append(getId(),other.getId())
 			.isEquals();
