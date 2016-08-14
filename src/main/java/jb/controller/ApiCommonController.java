@@ -272,4 +272,22 @@ public class ApiCommonController extends BaseController {
 		}		
 		return j;
 	}
+
+	@ResponseBody
+	@RequestMapping("/upload")
+	public Json upload(String bizType, @RequestParam(required = false) MultipartFile[] iconFiles, HttpServletRequest request) {
+		Json j = new Json();
+		try {
+			List<String> iconList = new ArrayList<String>();
+			for (MultipartFile iconFile : iconFiles) {
+				String icon = uploadFile(request, bizType, iconFile);
+				iconList.add(icon);
+			}
+			j.setSuccess(true);
+			j.setObj(iconList);
+		} catch (Exception e) {
+			j.setMsg(e.getMessage());
+		}
+		return j;
+	}
 }
