@@ -20,7 +20,7 @@ public interface BasedataServiceI {
 	 * 
 	 * @param baseData
 	 */
-	public void add(BaseData baseData);
+	void add(BaseData baseData);
 
 	/**
 	 * 获得基础数据
@@ -28,14 +28,14 @@ public interface BasedataServiceI {
 	 * @param id
 	 * @return
 	 */
-	public BaseData get(String id);
+	BaseData get(String id);
 
 	/**
 	 * 编辑基础数据
 	 * 
 	 * @param baseData
 	 */
-	public void edit(BaseData baseData);
+	void edit(BaseData baseData);
 
 	/**
 	 * 获取BUG数据表格
@@ -46,21 +46,21 @@ public interface BasedataServiceI {
 	 *            分页帮助类
 	 * @return
 	 */
-	public DataGrid dataGrid(BaseData baseData, PageHelper ph);
+	DataGrid dataGrid(BaseData baseData, PageHelper ph);
 
 	/**
 	 * 删除基础数据
 	 * 
 	 * @param id
 	 */
-	public void delete(String id);
+	void delete(String id);
 	
 	/**
 	 * 根据类型取基础数据
 	 * @param baseData
 	 * @return
 	 */
-	public List<BaseData> getBaseDatas(BaseData baseData);
+	List<BaseData> getBaseDatas(BaseData baseData);
 	
 	/**
 	 * 根据动态sql查找结果
@@ -69,11 +69,11 @@ public interface BasedataServiceI {
 	 * @return
 	 */
 	@SuppressWarnings("rawtypes")
-	public List<Map> getSelectMapList(String sql,Map params);
+	List<Map> getSelectMapList(String sql,Map params);
 	
 	/**
 	 * 获取系统环境变量
 	 */
-	public Map<String,BaseData> getAppVariable();
+	Map<String,BaseData> getAppVariable();
 	
 }

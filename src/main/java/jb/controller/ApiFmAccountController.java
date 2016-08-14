@@ -58,7 +58,7 @@ public class ApiFmAccountController extends BaseController {
 			//Vector<User>
 			Vector vector = new Vector();
 			long start = System.currentTimeMillis();
-			for(int i = 0;i<0;i++){
+			for(int i = 0;i<10;i++){
 				FmUser fmUser = fmUserService.get("E076C427AE8A41BD85619ED0C813F1A4");
 				//vector.add(fmUser);
 			}

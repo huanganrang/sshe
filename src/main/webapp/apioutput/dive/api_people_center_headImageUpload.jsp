@@ -11,7 +11,7 @@
 	$(function() {
 	 	parent.$.messager.progress('close');
 		$('#headImgUpload_Form').form({
-			url : '${pageContext.request.contextPath}/api/apiAccountController/headImgUpload',
+			url : '${pageContext.request.contextPath}/api/apiCommon/upload',
 			onSubmit : function() {
 				parent.$.messager.progress({
 					title : '提示',
@@ -46,8 +46,16 @@
 						<td><input name="tokenId" type="text" class="span2" value=""/></td>
 					</tr>
 					<tr>
-						<td align="right" style="width: 180px;"><label>icon(头像地址)：</label></td>
-						<td><input name="iconFile" type="file" class="span2" value=""/></td>
+						<td align="right" style="width: 180px;"><label>bizType(业务类型)：</label></td>
+						<td><input name="bizType" type="text" class="span2" value=""/></td>
+					</tr>
+					<tr>
+						<td align="right" style="width: 180px;"><label>iconFiles(图片地址)：</label></td>
+						<td><input name="iconFiles" type="file" class="span2" value=""/></td>
+					</tr>
+					<tr>
+						<td align="right" style="width: 180px;"><label>iconFiles(图片地址)：</label></td>
+						<td><input name="iconFiles" type="file" class="span2" value=""/></td>
 					</tr>
 					
 					<tr>
