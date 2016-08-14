@@ -1,34 +1,14 @@
 package jb.controller;
 
-import java.io.File;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.lang.reflect.InvocationTargetException;
-import java.lang.reflect.Method;
-import java.text.SimpleDateFormat;
-import java.util.Collection;
-import java.util.Date;
-import java.util.HashSet;
-import java.util.Iterator;
-import java.util.List;
-import java.util.Set;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
 import jb.absx.F;
+import jb.absx.Objectx;
 import jb.android.push.NotificationManager;
 import jb.interceptors.TokenManage;
 import jb.listener.Application;
-import jb.pageModel.BaseData;
-import jb.pageModel.Colum;
-import jb.pageModel.DataGrid;
-import jb.pageModel.Json;
-import jb.pageModel.SessionInfo;
+import jb.pageModel.*;
 import jb.util.Constants;
 import jb.util.StringEscapeEditor;
 import jb.util.Util;
-
 import org.androidpn.server.xmpp.XmppServer;
 import org.androidpn.server.xmpp.session.ClientSession;
 import org.androidpn.server.xmpp.session.SessionManager;
@@ -44,6 +24,16 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.File;
+import java.io.IOException;
+import java.io.OutputStream;
+import java.lang.reflect.InvocationTargetException;
+import java.lang.reflect.Method;
+import java.text.SimpleDateFormat;
+import java.util.*;
+
 /**
  * 基础控制器
  * 
@@ -54,8 +44,10 @@ import org.springframework.web.multipart.MultipartFile;
  */
 @Controller
 @RequestMapping("/baseController")
-public class BaseController {
+public class BaseController extends Objectx {
 
+	protected static final String EX_0001 = "EX0001";
+	protected static final String SUCCESS_MESSAGE = "操作成功";
 	public static final String DEFAULT_TOKEN = TokenManage.DEFAULT_TOKEN;
 	private String _publishSettingVal = "2"; //生产环境
 	
