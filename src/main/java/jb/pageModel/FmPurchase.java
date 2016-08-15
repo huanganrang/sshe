@@ -33,9 +33,8 @@ public class FmPurchase implements java.io.Serializable {
 	private java.lang.String voiceUrl;	
 	private java.lang.Integer voiceDuration;	
 	private java.lang.String userId;	
-	private java.lang.String onlineStatus;	
-
-	
+	private java.lang.String onlineStatus;
+	private DataGrid fmPurchaseUserDataGrid;
 
 	public void setId(java.lang.String value) {
 		this.id = value;
@@ -229,4 +228,11 @@ public class FmPurchase implements java.io.Serializable {
 		return this.onlineStatus;
 	}
 
+	public DataGrid getFmPurchaseUserDataGrid() {
+		return fmPurchaseUserDataGrid;
+	}
+
+	public void setFmPurchaseUserDataGrid(DataGrid fmPurchaseUserDataGrid) {
+		this.fmPurchaseUserDataGrid = fmPurchaseUserDataGrid;
+	}
 }
