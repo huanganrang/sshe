@@ -25,6 +25,7 @@ public class ApiFmPurchaseController extends BaseController {
     public Json add(FmPurchase fmPurchase) {
         Json j = new Json();
         try {
+            fmPurchase.setIsdeleted(false);
             fmPurchaseService.add(fmPurchase);
             j.setSuccess(true);
             j.setMsg(SUCCESS_MESSAGE);
