@@ -56,6 +56,7 @@
 		<mvc:interceptor>
 			<mvc:mapping path="/**" />
 			<mvc:exclude-mapping path="/api/**" />
+			<mvc:exclude-mapping path="/farming/api/**" />
 			<bean class="jb.interceptors.SecurityInterceptor">
 				<!-- 不需要权限验证的地址 -->
 				<property name="excludeUrls">
@@ -83,6 +84,7 @@
 		</mvc:interceptor>
 		<mvc:interceptor>
 			<mvc:mapping path="/api/**" />
+			<mvc:mapping path="/farming/api/**" />
 			<bean class="jb.interceptors.TokenInterceptor">
 				<property name="excludeUrls">
 					<list>
