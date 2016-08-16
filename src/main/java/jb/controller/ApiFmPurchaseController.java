@@ -61,7 +61,7 @@ public class ApiFmPurchaseController extends BaseController {
                 List<FmPurchase> list = dg.getRows();
                 DataGrid dataGrid = new DataGrid();
                 if(list != null && list.size() > 0) {
-                    List<FmPurchase> lt = new ArrayList<>();
+                    List<FmPurchase> lt = new ArrayList<FmPurchase>();
                     for (int i=0; i<list.size(); i++) {
                         FmPurchase fp = list.get(i);
                         FmPurchaseUser fmPurchaseUser = new FmPurchaseUser();
@@ -72,7 +72,7 @@ public class ApiFmPurchaseController extends BaseController {
                         List<FmPurchaseUser> fmPurchaseUserList = dd.getRows();
                         if(fmPurchaseUserList != null && fmPurchaseUserList.size() > 0) {
                             DataGrid du = new DataGrid();
-                            List<FmUser> fuList = new ArrayList<>();
+                            List<FmUser> fuList = new ArrayList<FmUser>();
                             for (int m=0; m<fmPurchaseUserList.size(); m++) {
                                 //根据用户id查询用户信息
                                 FmUser fmUser = fmUserServiceI.get(fmPurchaseUserList.get(m).getUserId());
