@@ -57,10 +57,6 @@
 				title : '<%=TfmMarquee.ALIAS_UPDATETIME%>',
 				width : 50		
 				}, {
-				field : 'isdeleted',
-				title : '<%=TfmMarquee.ALIAS_ISDELETED%>',
-				width : 50		
-				}, {
 				field : 'imageName',
 				title : '<%=TfmMarquee.ALIAS_IMAGE_NAME%>',
 				width : 50		
@@ -212,47 +208,15 @@
 </head>
 <body>
 	<div class="easyui-layout" data-options="fit : true,border : false">
-		<div data-options="region:'north',title:'查询条件',border:false" style="height: 160px; overflow: hidden;">
+		<div data-options="region:'north',title:'查询条件',border:false" style="height: 65px; overflow: hidden;">
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
-						<tr>	
-							<th><%=TfmMarquee.ALIAS_ADDTIME%></th>	
-							<td>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmMarquee.FORMAT_ADDTIME%>'})" id="addtimeBegin" name="addtimeBegin"/>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmMarquee.FORMAT_ADDTIME%>'})" id="addtimeEnd" name="addtimeEnd"/>
-							</td>
-							<th><%=TfmMarquee.ALIAS_UPDATETIME%></th>	
-							<td>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmMarquee.FORMAT_UPDATETIME%>'})" id="updatetimeBegin" name="updatetimeBegin"/>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmMarquee.FORMAT_UPDATETIME%>'})" id="updatetimeEnd" name="updatetimeEnd"/>
-							</td>
-							<th><%=TfmMarquee.ALIAS_ISDELETED%></th>	
-							<td>
-											<input type="text" name="isdeleted" maxlength="0" class="span2"/>
-							</td>
+						<tr>
 							<th><%=TfmMarquee.ALIAS_IMAGE_NAME%></th>	
 							<td>
 											<input type="text" name="imageName" maxlength="100" class="span2"/>
 							</td>
-						</tr>	
-						<tr>	
-							<th><%=TfmMarquee.ALIAS_URL%></th>	
-							<td>
-											<input type="text" name="url" maxlength="100" class="span2"/>
-							</td>
-							<th><%=TfmMarquee.ALIAS_SEQ%></th>	
-							<td>
-											<input type="text" name="seq" maxlength="10" class="span2"/>
-							</td>
-							<th><%=TfmMarquee.ALIAS_LOGIN_ID%></th>	
-							<td>
-											<input type="text" name="loginId" maxlength="36" class="span2"/>
-							</td>
-							<th><%=TfmMarquee.ALIAS_GOODS_ID%></th>	
-							<td>
-											<input type="text" name="goodsId" maxlength="36" class="span2"/>
-							</td>
-						</tr>	
+						</tr>
 				</table>
 			</form>
 		</div>

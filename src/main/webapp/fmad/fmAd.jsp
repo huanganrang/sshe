@@ -57,10 +57,6 @@
 				title : '<%=TfmAd.ALIAS_UPDATETIME%>',
 				width : 50		
 				}, {
-				field : 'isdeleted',
-				title : '<%=TfmAd.ALIAS_ISDELETED%>',
-				width : 50		
-				}, {
 				field : 'goodsName',
 				title : '<%=TfmAd.ALIAS_GOODS_NAME%>',
 				width : 50		
