@@ -49,10 +49,7 @@ public class FmMessageServiceImpl extends BaseServiceImpl<FmMessage> implements 
 		String whereHql = "";	
 		if (fmMessage != null) {
 			whereHql += " where t.isdeleted = 0 ";
-			if (!F.empty(fmMessage.getIsdeleted())) {
-				whereHql += " and t.isdeleted = :isdeleted";
-				params.put("isdeleted", fmMessage.getIsdeleted());
-			}		
+
 			if (!F.empty(fmMessage.getContent())) {
 				whereHql += " and t.content = :content";
 				params.put("content", fmMessage.getContent());

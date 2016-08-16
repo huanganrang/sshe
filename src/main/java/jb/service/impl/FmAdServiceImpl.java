@@ -49,10 +49,7 @@ public class FmAdServiceImpl extends BaseServiceImpl<FmAd> implements FmAdServic
 		String whereHql = "";	
 		if (fmAd != null) {
 			whereHql += " where t.isdeleted = 0 ";
-			if (!F.empty(fmAd.getIsdeleted())) {
-				whereHql += " and t.isdeleted = :isdeleted";
-				params.put("isdeleted", fmAd.getIsdeleted());
-			}		
+
 			if (!F.empty(fmAd.getGoodsName())) {
 				whereHql += " and t.goodsName = :goodsName";
 				params.put("goodsName", fmAd.getGoodsName());

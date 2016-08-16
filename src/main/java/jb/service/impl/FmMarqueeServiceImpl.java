@@ -49,10 +49,7 @@ public class FmMarqueeServiceImpl extends BaseServiceImpl<FmMarquee> implements 
 		String whereHql = "";	
 		if (fmMarquee != null) {
 			whereHql += " where t.isdeleted = 0 ";
-			if (!F.empty(fmMarquee.getIsdeleted())) {
-				whereHql += " and t.isdeleted = :isdeleted";
-				params.put("isdeleted", fmMarquee.getIsdeleted());
-			}		
+
 			if (!F.empty(fmMarquee.getImageName())) {
 				whereHql += " and t.imageName = :imageName";
 				params.put("imageName", fmMarquee.getImageName());
@@ -61,10 +58,7 @@ public class FmMarqueeServiceImpl extends BaseServiceImpl<FmMarquee> implements 
 				whereHql += " and t.url = :url";
 				params.put("url", fmMarquee.getUrl());
 			}		
-			if (!F.empty(fmMarquee.getSeq())) {
-				whereHql += " and t.seq = :seq";
-				params.put("seq", fmMarquee.getSeq());
-			}		
+
 			if (!F.empty(fmMarquee.getLoginId())) {
 				whereHql += " and t.loginId = :loginId";
 				params.put("loginId", fmMarquee.getLoginId());
