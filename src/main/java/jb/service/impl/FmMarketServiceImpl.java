@@ -9,12 +9,15 @@ import java.util.UUID;
 
 import jb.absx.F;
 import jb.dao.FmMarketDaoI;
+import jb.model.TfmGoodsUser;
 import jb.model.TfmMarket;
+import jb.pageModel.FmGoodsUser;
 import jb.pageModel.FmMarket;
 import jb.pageModel.DataGrid;
 import jb.pageModel.PageHelper;
 import jb.service.FmMarketServiceI;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -80,6 +83,22 @@ public class FmMarketServiceImpl extends BaseServiceImpl<FmMarket> implements Fm
 		FmMarket o = new FmMarket();
 		BeanUtils.copyProperties(t, o);
 		return o;
+	}
+
+	@Override
+	public List<FmMarket> query(FmMarket fmMarket) {
+		List<FmMarket> ol = new ArrayList<FmMarket>();
+		String hql = " from TfmMarket t ";
+		@SuppressWarnings("unchecked")
+		List<TfmMarket> l = query(hql, fmMarket, fmMarketDao);
+		if (CollectionUtils.isNotEmpty(l)) {
+			for (TfmMarket t : l) {
+				FmMarket o = new FmMarket();
+				BeanUtils.copyProperties(t, o);
+				ol.add(o);
+			}
+		}
+		return ol;
 	}
 
 	@Override
