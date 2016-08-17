@@ -1,8 +1,11 @@
 package jb.service;
 
+import jb.pageModel.FmGoodsUser;
 import jb.pageModel.FmShopUser;
 import jb.pageModel.DataGrid;
 import jb.pageModel.PageHelper;
+
+import java.util.List;
 
 /**
  * 
@@ -20,14 +23,14 @@ public interface FmShopUserServiceI {
 	 *            分页帮助类
 	 * @return
 	 */
-	public DataGrid dataGrid(FmShopUser fmShopUser, PageHelper ph);
+	DataGrid dataGrid(FmShopUser fmShopUser, PageHelper ph);
 
 	/**
 	 * 添加FmShopUser
 	 * 
 	 * @param fmShopUser
 	 */
-	public void add(FmShopUser fmShopUser);
+	void add(FmShopUser fmShopUser);
 
 	/**
 	 * 获得FmShopUser对象
@@ -35,20 +38,36 @@ public interface FmShopUserServiceI {
 	 * @param id
 	 * @return
 	 */
-	public FmShopUser get(String id);
+	FmShopUser get(String id);
 
 	/**
 	 * 修改FmShopUser
 	 * 
 	 * @param fmShopUser
 	 */
-	public void edit(FmShopUser fmShopUser);
+	void edit(FmShopUser fmShopUser);
 
 	/**
 	 * 删除FmShopUser
 	 * 
 	 * @param id
 	 */
-	public void delete(String id);
+	void delete(String id);
+
+	void delete(FmShopUser fmShopUser);
+
+	/**
+	 *  通过条件get
+	 * @param fmGoodsUser
+	 * @return
+	 */
+	FmShopUser get(FmShopUser fmGoodsUser);
+
+	/**
+	 * 查询
+	 * @param fmGoodsUser
+	 * @return
+	 */
+	List<FmShopUser> query(FmShopUser fmGoodsUser);
 
 }

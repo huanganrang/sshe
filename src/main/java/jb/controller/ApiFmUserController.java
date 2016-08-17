@@ -2,9 +2,9 @@ package jb.controller;
 
 import jb.absx.F;
 import jb.listener.Application;
-import jb.pageModel.DataGrid;
-import jb.pageModel.FmUser;
-import jb.pageModel.Json;
+import jb.pageModel.*;
+import jb.service.FmGoodsUserServiceI;
+import jb.service.FmShopUserServiceI;
 import jb.service.FmUserServiceI;
 import jb.util.HttpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,6 +25,12 @@ public class ApiFmUserController extends BaseController {
 
     @Autowired
     private FmUserServiceI fmUserService;
+
+    @Autowired
+    private FmGoodsUserServiceI fmGoodsUserService;
+
+    @Autowired
+    private FmShopUserServiceI fmShopUserService;
 
     @RequestMapping("/userLogin")
     @ResponseBody
@@ -105,4 +111,85 @@ public class ApiFmUserController extends BaseController {
         return j;
     }
 
+    /**
+     * 关联
+     *
+     * @return
+     */
+    @RequestMapping("/relation")
+    @ResponseBody
+    public Json relation(String userId, String bizId, String bizType) {
+        Json j = new Json();
+        try {
+            if (!F.empty(userId) && !F.empty(bizId) && !F.empty(bizType)) {
+
+                if("FmGoodsUserServiceI".equals(bizType)){
+                    FmGoodsUser fmGoodsUser = new FmGoodsUser();
+                    fmGoodsUser.setUserId(userId);
+                    fmGoodsUser.setGoodsId(bizId);
+                    FmGoodsUser old =  fmGoodsUserService.get(fmGoodsUser);
+                    if(old == null){
+                        fmGoodsUserService.add(fmGoodsUser);
+                    }else{
+                        j.fail();
+                        j.setMsg("已关联上");
+                        return j;
+                    }
+                }else if("FmShopUserServiceI".equals(bizType)){
+                    FmShopUser fmShopUser = new FmShopUser();
+                    fmShopUser.setShopId(bizId);
+                    fmShopUser.setUserId(userId);
+                    FmShopUser old = fmShopUserService.get(fmShopUser);
+                    if(old == null){
+                        fmShopUserService.add(fmShopUser);
+                    }else{
+                        j.fail();
+                        j.setMsg("已关联上");
+                        return j;
+                    }
+                }
+
+                j.setSuccess(true);
+                j.setMsg(SUCCESS_MESSAGE);
+            }
+        } catch (Exception e) {
+            j.setMsg(Application.getString(EX_0001));
+            logger.error("关联异常", e);
+        }
+
+        return j;
+    }
+
+    /**
+     * 取消关联
+     *
+     * @return
+     */
+    @RequestMapping("/disRelation")
+    @ResponseBody
+    public Json disRelation(String userId, String bizId, String bizType) {
+        Json j = new Json();
+        try {
+            if (!F.empty(userId) && !F.empty(bizId) && !F.empty(bizType)) {
+                if("FmGoodsUserServiceI".equals(bizType)){
+                    FmGoodsUser fmGoodsUser = new FmGoodsUser();
+                    fmGoodsUser.setUserId(userId);
+                    fmGoodsUser.setGoodsId(bizId);
+                    fmGoodsUserService.delete(fmGoodsUser);
+                }else if("FmShopUserServiceI".equals(bizType)){
+                    FmShopUser fmShopUser = new FmShopUser();
+                    fmShopUser.setShopId(bizId);
+                    fmShopUser.setUserId(userId);
+                    fmShopUserService.delete(fmShopUser);
+                }
+                j.setSuccess(true);
+                j.setMsg(SUCCESS_MESSAGE);
+            }
+        } catch (Exception e) {
+            j.setMsg(Application.getString(EX_0001));
+            logger.error("取消关联异常", e);
+        }
+
+        return j;
+    }
 }

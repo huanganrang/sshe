@@ -4,6 +4,8 @@ import jb.pageModel.FmGoodsUser;
 import jb.pageModel.DataGrid;
 import jb.pageModel.PageHelper;
 
+import java.util.List;
+
 /**
  * 
  * @author John
@@ -20,14 +22,29 @@ public interface FmGoodsUserServiceI {
 	 *            分页帮助类
 	 * @return
 	 */
-	public DataGrid dataGrid(FmGoodsUser fmGoodsUser, PageHelper ph);
+	DataGrid dataGrid(FmGoodsUser fmGoodsUser, PageHelper ph);
 
 	/**
-	 * 添加FmGoodsUser
-	 * 
+	 *  通过条件get
 	 * @param fmGoodsUser
+	 * @return
 	 */
-	public void add(FmGoodsUser fmGoodsUser);
+	FmGoodsUser get(FmGoodsUser fmGoodsUser);
+
+	/**
+	 * 查询
+	 * @param fmGoodsUser
+	 * @return
+	 */
+	List<FmGoodsUser> query(FmGoodsUser fmGoodsUser);
+
+
+		/**
+         * 添加FmGoodsUser
+         *
+         * @param fmGoodsUser
+         */
+	void add(FmGoodsUser fmGoodsUser);
 
 	/**
 	 * 获得FmGoodsUser对象
@@ -35,20 +52,22 @@ public interface FmGoodsUserServiceI {
 	 * @param id
 	 * @return
 	 */
-	public FmGoodsUser get(String id);
+	FmGoodsUser get(String id);
 
 	/**
 	 * 修改FmGoodsUser
 	 * 
 	 * @param fmGoodsUser
 	 */
-	public void edit(FmGoodsUser fmGoodsUser);
+	void edit(FmGoodsUser fmGoodsUser);
 
 	/**
 	 * 删除FmGoodsUser
 	 * 
 	 * @param id
 	 */
-	public void delete(String id);
+	void delete(String id);
+
+	void delete(FmGoodsUser fmGoodsUser);
 
 }

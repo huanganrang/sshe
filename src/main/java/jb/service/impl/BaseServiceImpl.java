@@ -29,4 +29,12 @@ public abstract class BaseServiceImpl<T> {
 		dg.setRows(l);
 		return dg;
 	}
+
+
+	protected List query(String hql,T t,BaseDaoI dao){
+		Map<String, Object> params = new HashMap<String, Object>();
+		String where = whereHql(t, params);
+		List<T> l = dao.find(hql  + where, params);
+		return l;
+	}
 }

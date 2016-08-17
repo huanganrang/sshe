@@ -9,12 +9,15 @@ import java.util.UUID;
 
 import jb.absx.F;
 import jb.dao.FmShopUserDaoI;
+import jb.model.TfmGoodsUser;
 import jb.model.TfmShopUser;
+import jb.pageModel.FmGoodsUser;
 import jb.pageModel.FmShopUser;
 import jb.pageModel.DataGrid;
 import jb.pageModel.PageHelper;
 import jb.service.FmShopUserServiceI;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,6 +71,7 @@ public class FmShopUserServiceImpl extends BaseServiceImpl<FmShopUser> implement
 		BeanUtils.copyProperties(fmShopUser, t);
 		t.setId(jb.absx.UUID.uuid());
 		t.setAddtime(new Date());
+		t.setIsdeleted(false);
 		fmShopUserDao.save(t);
 	}
 
@@ -94,7 +98,43 @@ public class FmShopUserServiceImpl extends BaseServiceImpl<FmShopUser> implement
 		Map<String, Object> params = new HashMap<String, Object>();
 		params.put("id", id);
 		fmShopUserDao.executeHql("update TfmShopUser t set t.isdeleted = 1 where t.id = :id",params);
-		//fmShopUserDao.delete(fmShopUserDao.get(TfmShopUser.class, id));
+	}
+
+	@Override
+	public void delete(FmShopUser fmShopUser) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("userId", fmShopUser.getUserId());
+		params.put("shopId",fmShopUser.getShopId());
+		fmShopUserDao.executeHql("update TfmShopUser t set t.isdeleted = 1 where t.userId = :userId and t.shopId = :shopId",params);
+	}
+
+	@Override
+	public FmShopUser get(FmShopUser fmShopUser) {
+		String hql = " from TfmShopUser t ";
+		@SuppressWarnings("unchecked")
+		List<TfmShopUser> l = query(hql, fmShopUser, fmShopUserDao);
+		FmShopUser o = null;
+		if (CollectionUtils.isNotEmpty(l)) {
+			o = new FmShopUser();
+			BeanUtils.copyProperties(l.get(0), o);
+		}
+		return o;
+	}
+
+	@Override
+	public List<FmShopUser> query(FmShopUser fmShopUser) {
+		List<FmShopUser> ol = new ArrayList<FmShopUser>();
+		String hql = " from TfmShopUser t ";
+		@SuppressWarnings("unchecked")
+		List<TfmShopUser> l = query(hql, fmShopUser, fmShopUserDao);
+		if (CollectionUtils.isNotEmpty(l)) {
+			for (TfmShopUser t : l) {
+				FmShopUser o = new FmShopUser();
+				BeanUtils.copyProperties(t, o);
+				ol.add(o);
+			}
+		}
+		return ol;
 	}
 
 }

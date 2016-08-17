@@ -15,6 +15,7 @@ import jb.pageModel.DataGrid;
 import jb.pageModel.PageHelper;
 import jb.service.FmGoodsUserServiceI;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,7 +44,36 @@ public class FmGoodsUserServiceImpl extends BaseServiceImpl<FmGoodsUser> impleme
 		dg.setRows(ol);
 		return dg;
 	}
-	
+
+	@Override
+	public FmGoodsUser get(FmGoodsUser fmGoodsUser) {
+		String hql = " from TfmGoodsUser t ";
+		@SuppressWarnings("unchecked")
+		List<TfmGoodsUser> l = query(hql, fmGoodsUser, fmGoodsUserDao);
+		FmGoodsUser o = null;
+		if (CollectionUtils.isNotEmpty(l)) {
+			o = new FmGoodsUser();
+			BeanUtils.copyProperties(l.get(0), o);
+		}
+		return o;
+	}
+
+	@Override
+	public List<FmGoodsUser> query(FmGoodsUser fmGoodsUser) {
+		List<FmGoodsUser> ol = new ArrayList<FmGoodsUser>();
+		String hql = " from TfmGoodsUser t ";
+		@SuppressWarnings("unchecked")
+		List<TfmGoodsUser> l = query(hql, fmGoodsUser, fmGoodsUserDao);
+		if (CollectionUtils.isNotEmpty(l)) {
+			for (TfmGoodsUser t : l) {
+				FmGoodsUser o = new FmGoodsUser();
+				BeanUtils.copyProperties(t, o);
+				ol.add(o);
+			}
+		}
+		return ol;
+	}
+
 
 	protected String whereHql(FmGoodsUser fmGoodsUser, Map<String, Object> params) {
 		String whereHql = "";	
@@ -68,6 +98,7 @@ public class FmGoodsUserServiceImpl extends BaseServiceImpl<FmGoodsUser> impleme
 		BeanUtils.copyProperties(fmGoodsUser, t);
 		t.setId(jb.absx.UUID.uuid());
 		t.setAddtime(new Date());
+		t.setIsdeleted(false);
 		fmGoodsUserDao.save(t);
 	}
 
@@ -95,6 +126,14 @@ public class FmGoodsUserServiceImpl extends BaseServiceImpl<FmGoodsUser> impleme
 		params.put("id", id);
 		fmGoodsUserDao.executeHql("update TfmGoodsUser t set t.isdeleted = 1 where t.id = :id",params);
 		//fmGoodsUserDao.delete(fmGoodsUserDao.get(TfmGoodsUser.class, id));
+	}
+
+	@Override
+	public void delete(FmGoodsUser fmGoodsUser) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("userId", fmGoodsUser.getUserId());
+		params.put("goodsId", fmGoodsUser.getGoodsId());
+		fmGoodsUserDao.executeHql("update TfmGoodsUser t set t.isdeleted = 1 where t.userId = :userId and t.goodsId = :goodsId",params);
 	}
 
 }

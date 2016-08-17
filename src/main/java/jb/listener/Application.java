@@ -93,4 +93,9 @@ public class Application implements ServletContextListener {
 
 	}
 
+	public static Object getBean(String name){
+		ApplicationContext app = WebApplicationContextUtils.getWebApplicationContext(context);
+		return app.getBean(name);
+	}
+
 }
