@@ -12,7 +12,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by lenovo on 2016/8/15.
@@ -32,20 +34,107 @@ public class ApiFmUserController extends BaseController {
     @Autowired
     private FmShopUserServiceI fmShopUserService;
 
+    /**
+     * 用户登陆
+     */
     @RequestMapping("/userLogin")
     @ResponseBody
-    public Json userLogin(String Dto_Mobile, String Dto_Password) {
+    public Json userLogin(String dtoMobile, String dtoPassword) {
         Json j = new Json();
         try {
             //String url = "http://yizhuisu.com/api/Ba/userLogin";
             String url = "http://t149127q79.51mypc.cn:11169/api/Ba/userLogin";
-            String result = HttpUtil.httpRequest(url, "post", "{\"Dto_Mobile\":\"17717039216\",\"Dto_Password\":\"123456\"}");
+            String result = HttpUtil.httpRequest(url, "post", "{\"Dto_Mobile\":\""+dtoMobile+"\",\"Dto_Password\":\""+dtoPassword+"\"}");
+            if(!F.empty(result)) {
+                Map<String, Object> map = new HashMap<String, Object>();
+                map.put("centerUser", result);
+                FmUser fmUser = new FmUser();
+                fmUser.setAccount(dtoMobile);
+                DataGrid dg = fmUserService.dataGrid(fmUser, null);
+                List<FmUser> list = dg.getRows();
+                if(list != null && list.size() > 0) {
+                    FmUser fu = list.get(0);
+                    map.put("farmingUser", fu);
+                }
+                j.setSuccess(true);
+                j.setMsg(SUCCESS_MESSAGE);
+                j.setObj(map);
+            }
+        } catch (Exception e) {
+            j.setMsg(Application.getString(EX_0001));
+            logger.error("登陆异常", e);
+        }
+
+        return j;
+    }
+
+    /**
+     * 发送短信验证码，dtoVerifyType为1时注册，2时找回密码
+     */
+    @RequestMapping("/sendVerifyCode")
+    @ResponseBody
+    public Json sendVerifyCode(String dtoMobile, String dtoVerifyType) {
+        Json j = new Json();
+        try {
+            //String url = "http://yizhuisu.com/api/Ba/sendVerifyCode";
+            String url = "http://t149127q79.51mypc.cn:11169/api/Ba/sendVerifyCode";
+            String result = HttpUtil.httpRequest(url, "post", "{\"Dto_UserId\":0,\"Dto_Mobile\":\""+dtoMobile+"\",\"Dto_VerifyType\":"+dtoVerifyType+"}");
             j.setSuccess(true);
             j.setMsg(SUCCESS_MESSAGE);
             j.setObj(result);
         } catch (Exception e) {
             j.setMsg(Application.getString(EX_0001));
-            logger.error("登陆异常", e);
+            logger.error("获取验证码异常", e);
+        }
+
+        return j;
+    }
+
+    /**
+     * 用户注册、找回密码，dtoOperateType为1时注册，为2时找回密码
+     */
+    @RequestMapping("/userRegister")
+    @ResponseBody
+    public Json userRegister(String dtoMobile, String dtoPassword, String dtoVerificationCode, String dtoOperateType) {
+        Json j = new Json();
+        try {
+            //String url = "http://yizhuisu.com/api/Ba/userRegister";
+            String url = "http://t149127q79.51mypc.cn:11169/api/Ba/userRegister";
+            String result = HttpUtil.httpRequest(url, "post", "{\"Dto_Mobile\":\""+dtoMobile+"\",\"Dto_Password\":\""+dtoPassword+"\",\"Dto_VerificationCode\":\""+dtoVerificationCode+"\",\"Dto_OperateType\":"+dtoOperateType+"}");
+            j.setSuccess(true);
+            j.setMsg(SUCCESS_MESSAGE);
+            j.setObj(result);
+        } catch (Exception e) {
+            j.setMsg(Application.getString(EX_0001));
+            String errorMg = "";
+            if("1".equals(dtoOperateType)) {
+                errorMg = "用户注册异常";
+            } else if("2".equals(dtoOperateType)) {
+                errorMg = "找回密码异常";
+            }
+            logger.error(errorMg, e);
+        }
+
+        return j;
+    }
+
+    /**
+     * 修改密码接口
+     */
+    @RequestMapping("/userResetPassword")
+    @ResponseBody
+    public Json userResetPassword(String dtoID, String dtoMobile, String dtoOldPassword, String dtoPassword) {
+        Json j = new Json();
+        try {
+            //String url = "http://yizhuisu.com/api/BA/userResetPassword";
+            String url = "http://t149127q79.51mypc.cn:11169/api/BA/userResetPassword";
+            String result = HttpUtil.httpRequest(url, "post", "{\"Dto_ID\":"+dtoID+",\"Dto_Mobile\":\""+dtoMobile+"\",\"Dto_OldPassword\":\""+dtoOldPassword+"\",\"Dto_Password\":\""+dtoPassword+"\"}");
+            j.setSuccess(true);
+            j.setMsg(SUCCESS_MESSAGE);
+            j.setObj(result);
+        } catch (Exception e) {
+            j.setMsg(Application.getString(EX_0001));
+            logger.error("修改密码异常", e);
         }
 
         return j;

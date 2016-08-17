@@ -1,18 +1,21 @@
 package jb.controller;
 
+import farming.concurrent.CompletionService;
+import farming.concurrent.Task;
 import jb.absx.F;
 import jb.listener.Application;
 import jb.pageModel.*;
 import jb.service.FmPurchaseServiceI;
 import jb.service.FmPurchaseUserServiceI;
 import jb.service.FmUserServiceI;
+import jb.service.impl.CompletionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Vector;
 
 /**
  * Created by guxin on 2016/8/14.
@@ -23,7 +26,6 @@ import java.util.List;
 @RequestMapping("/api/apiFmPurchaseController")
 public class ApiFmPurchaseController extends BaseController {
 
-
     @Autowired
     private FmPurchaseServiceI fmPurchaseService;
 
@@ -33,6 +35,14 @@ public class ApiFmPurchaseController extends BaseController {
     @Autowired
     private FmUserServiceI fmUserServiceI;
 
+    /**
+     * 发布采购(我要采购)
+     *
+     * 必要参数:isdeleted,
+     * 可选参数:name,startPrice,endPrice,unit,minNum,maxNum,status,bornArea,transactionArea,
+     * startTime,endTime,images,require,diameter,diameterUnit,color,isPack,pack,formatDesc,
+     * voiceUrl,voiceDuration,userId,onlineStatus
+     */
     @RequestMapping("/add")
     @ResponseBody
     public Json add(FmPurchase fmPurchase) {
@@ -49,6 +59,12 @@ public class ApiFmPurchaseController extends BaseController {
         return j;
     }
 
+    /**
+     * 采购发布记录
+     *
+     * 必要参数:userId
+     * 可选参数:onlineStatus,isdeleted,page,rows,sort,order
+     */
     @RequestMapping("/dataGrid")
     @ResponseBody
     public Json dataGrid(FmPurchase fmPurchase, PageHelper ph) {
@@ -60,31 +76,52 @@ public class ApiFmPurchaseController extends BaseController {
                 List<FmPurchase> list = dg.getRows();
                 DataGrid dataGrid = new DataGrid();
                 if(list != null && list.size() > 0) {
-                    List<FmPurchase> lt = new ArrayList<FmPurchase>();
+                    Vector vector = new Vector();
+                    final CompletionService completionService = CompletionFactory.initCompletion();
                     for (int i=0; i<list.size(); i++) {
-                        FmPurchase fp = list.get(i);
-                        FmPurchaseUser fmPurchaseUser = new FmPurchaseUser();
-                        fmPurchaseUser.setIsdeleted(false);
-                        fmPurchaseUser.setPurchaseId(fp.getId());
+                        final FmPurchase fp = list.get(i);
                         //根据采购id查询询价用户id
-                        DataGrid dd = fmPurchaseUserServiceI.dataGrid(fmPurchaseUser, null);
-                        List<FmPurchaseUser> fmPurchaseUserList = dd.getRows();
-                        if(fmPurchaseUserList != null && fmPurchaseUserList.size() > 0) {
-                            DataGrid du = new DataGrid();
-                            List<FmUser> fuList = new ArrayList<FmUser>();
-                            for (int m=0; m<fmPurchaseUserList.size(); m++) {
-                                //根据用户id查询用户信息
-                                FmUser fmUser = fmUserServiceI.get(fmPurchaseUserList.get(m).getUserId());
-                                fuList.add(fmUser);
+                        completionService.submit(new Task<Vector, FmPurchase>(vector){
+                            @Override
+                            public FmPurchase call() throws Exception {
+                                FmPurchaseUser fmPurchaseUser = new FmPurchaseUser();
+                                fmPurchaseUser.setIsdeleted(false);
+                                fmPurchaseUser.setPurchaseId(fp.getId());
+                                DataGrid dd = fmPurchaseUserServiceI.dataGrid(fmPurchaseUser, null);
+                                List<FmPurchaseUser> fmPurchaseUserList = dd.getRows();
+                                if(fmPurchaseUserList != null && fmPurchaseUserList.size() > 0) {
+                                    DataGrid du = new DataGrid();
+                                    Vector vt = new Vector();
+                                    final CompletionService cls = CompletionFactory.initCompletion();
+                                    for (int m=0; m<fmPurchaseUserList.size(); m++) {
+                                        final String userId = fmPurchaseUserList.get(m).getUserId();
+                                        //根据用户id查询用户信息
+                                        cls.submit(new Task<Vector, FmUser>(vt){
+                                            @Override
+                                            public FmUser call() throws Exception {
+                                                FmUser fmUser = fmUserServiceI.get(userId);
+                                                return fmUser;
+                                            }
+                                            protected void set(Vector d, FmUser v) {
+                                                d.add(v);
+                                            }
+                                        });
+                                    }
+                                    cls.sync();
+                                    du.setRows(vt);
+                                    du.setTotal(new Long(vt.size()));
+                                    fp.setFmPurchaseUserDataGrid(du);
+                                }
+                                return fp;
                             }
-                            du.setRows(fuList);
-                            du.setTotal(new Long(fuList.size()));
-                            fp.setFmPurchaseUserDataGrid(du);
-                        }
-                        lt.add(fp);
+                            protected void set(Vector d, FmPurchase v) {
+                                d.add(v);
+                            }
+                        });
                     }
-                    dataGrid.setRows(lt);
-                    dataGrid.setTotal(new Long(lt.size()));
+                    completionService.sync();
+                    dataGrid.setRows(vector);
+                    dataGrid.setTotal(new Long(vector.size()));
                 }
                 j.setSuccess(true);
                 j.setMsg(SUCCESS_MESSAGE);
