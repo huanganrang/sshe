@@ -20,14 +20,14 @@ public interface FmAdServiceI {
 	 *            分页帮助类
 	 * @return
 	 */
-	public DataGrid dataGrid(FmAd fmAd, PageHelper ph);
+	DataGrid dataGrid(FmAd fmAd, PageHelper ph);
 
 	/**
 	 * 添加FmAd
 	 * 
 	 * @param fmAd
 	 */
-	public void add(FmAd fmAd);
+	void add(FmAd fmAd);
 
 	/**
 	 * 获得FmAd对象
@@ -35,20 +35,20 @@ public interface FmAdServiceI {
 	 * @param id
 	 * @return
 	 */
-	public FmAd get(String id);
+	FmAd get(String id);
 
 	/**
 	 * 修改FmAd
 	 * 
 	 * @param fmAd
 	 */
-	public void edit(FmAd fmAd);
+	void edit(FmAd fmAd);
 
 	/**
 	 * 删除FmAd
 	 * 
 	 * @param id
 	 */
-	public void delete(String id);
+	void delete(String id);
 
 }

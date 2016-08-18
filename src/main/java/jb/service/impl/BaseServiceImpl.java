@@ -25,6 +25,7 @@ public abstract class BaseServiceImpl<T> {
 		Map<String, Object> params = new HashMap<String, Object>();
 		String where = whereHql(t, params);
 		List<T> l = dao.find(hql  + where + orderHql(ph), params, ph.getPage(), ph.getRows());
+		if(!ph.isHiddenTotal())
 		dg.setTotal(dao.count("select count(*) " + hql + where, params));
 		dg.setRows(l);
 		return dg;
