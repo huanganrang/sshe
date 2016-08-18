@@ -101,9 +101,26 @@ public class ApiFmUserController extends BaseController {
             //String url = "http://yizhuisu.com/api/Ba/userRegister";
             String url = "http://t149127q79.51mypc.cn:11169/api/Ba/userRegister";
             String result = HttpUtil.httpRequest(url, "post", "{\"Dto_Mobile\":\""+dtoMobile+"\",\"Dto_Password\":\""+dtoPassword+"\",\"Dto_VerificationCode\":\""+dtoVerificationCode+"\",\"Dto_OperateType\":"+dtoOperateType+"}");
+            if("1".equals(dtoOperateType)) {
+                FmUser fmUser = new FmUser();
+                fmUser.setAccount(dtoMobile);
+                fmUserService.add(fmUser);
+                Map<String, Object> map = new HashMap<String, Object>();
+                map.put("centerUser", result);
+                FmUser fu = new FmUser();
+                fu.setAccount(dtoMobile);
+                DataGrid dg = fmUserService.dataGrid(fu, null);
+                List<FmUser> list = dg.getRows();
+                if(list != null && list.size() > 0) {
+                    FmUser f = list.get(0);
+                    map.put("farmingUser", f);
+                }
+                j.setObj(map);
+            } else {
+                j.setObj(result);
+            }
             j.setSuccess(true);
             j.setMsg(SUCCESS_MESSAGE);
-            j.setObj(result);
         } catch (Exception e) {
             j.setMsg(Application.getString(EX_0001));
             String errorMg = "";

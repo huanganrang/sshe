@@ -38,8 +38,7 @@ public class ApiFmPurchaseController extends BaseController {
     /**
      * 发布采购(我要采购)
      *
-     * 必要参数:isdeleted,
-     * 可选参数:name,startPrice,endPrice,unit,minNum,maxNum,status,bornArea,transactionArea,
+     *参数:name,startPrice,endPrice,unit,minNum,maxNum,status,bornArea,transactionArea,
      * startTime,endTime,images,require,diameter,diameterUnit,color,isPack,pack,formatDesc,
      * voiceUrl,voiceDuration,userId,onlineStatus
      */
