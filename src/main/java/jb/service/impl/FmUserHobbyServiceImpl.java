@@ -9,12 +9,15 @@ import java.util.UUID;
 
 import jb.absx.F;
 import jb.dao.FmUserHobbyDaoI;
+import jb.model.TfmMarket;
 import jb.model.TfmUserHobby;
+import jb.pageModel.FmMarket;
 import jb.pageModel.FmUserHobby;
 import jb.pageModel.DataGrid;
 import jb.pageModel.PageHelper;
 import jb.service.FmUserHobbyServiceI;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -68,6 +71,7 @@ public class FmUserHobbyServiceImpl extends BaseServiceImpl<FmUserHobby> impleme
 		BeanUtils.copyProperties(fmUserHobby, t);
 		t.setId(jb.absx.UUID.uuid());
 		t.setAddtime(new Date());
+		t.setIsdeleted(false);
 		fmUserHobbyDao.save(t);
 	}
 
@@ -79,6 +83,24 @@ public class FmUserHobbyServiceImpl extends BaseServiceImpl<FmUserHobby> impleme
 		FmUserHobby o = new FmUserHobby();
 		BeanUtils.copyProperties(t, o);
 		return o;
+	}
+
+	@Override
+	public List<FmUserHobby> query(String userId) {
+		List<FmUserHobby> ol = new ArrayList<FmUserHobby>();
+		FmUserHobby fmUserHobby = new FmUserHobby();
+		fmUserHobby.setUserId(userId);
+		String hql = " from TfmUserHobby t ";
+		@SuppressWarnings("unchecked")
+		List<TfmUserHobby> l = query(hql, fmUserHobby, fmUserHobbyDao);
+		if (CollectionUtils.isNotEmpty(l)) {
+			for (TfmUserHobby t : l) {
+				FmUserHobby o = new FmUserHobby();
+				BeanUtils.copyProperties(t, o);
+				ol.add(o);
+			}
+		}
+		return ol;
 	}
 
 	@Override
@@ -95,6 +117,13 @@ public class FmUserHobbyServiceImpl extends BaseServiceImpl<FmUserHobby> impleme
 		params.put("id", id);
 		fmUserHobbyDao.executeHql("update TfmUserHobby t set t.isdeleted = 1 where t.id = :id",params);
 		//fmUserHobbyDao.delete(fmUserHobbyDao.get(TfmUserHobby.class, id));
+	}
+
+	@Override
+	public void delete(FmUserHobby fmUserHobby) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("userId", fmUserHobby.getUserId());
+		fmUserHobbyDao.executeHql("update TfmUserHobby t set t.isdeleted = 1 where t.userId = :userId",params);
 	}
 
 }

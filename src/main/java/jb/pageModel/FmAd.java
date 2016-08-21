@@ -18,7 +18,9 @@ public class FmAd implements java.io.Serializable {
 	private java.lang.String channel;	
 	private java.lang.String type;	
 	private java.lang.String goodsId;	
-	private java.lang.String loginId;	
+	private java.lang.String loginId;
+
+	private FmGoods fmGoods;
 
 	
 
@@ -109,4 +111,11 @@ public class FmAd implements java.io.Serializable {
 		return this.loginId;
 	}
 
+	public FmGoods getFmGoods() {
+		return fmGoods;
+	}
+
+	public void setFmGoods(FmGoods fmGoods) {
+		this.fmGoods = fmGoods;
+	}
 }
