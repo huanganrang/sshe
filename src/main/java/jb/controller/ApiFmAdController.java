@@ -51,8 +51,8 @@ public class ApiFmAdController extends BaseController {
                     completionService.submit(new Task<FmMarquee, FmGoods>(new CacheKey("goods",fmMarquee1.getGoodsId()),fmMarquee1) {
                         @Override
                         public FmGoods call() throws Exception {
-                            FmGoods user = fmGoodsService.get(getD().getLoginId());
-                            return user;
+                            FmGoods goods = fmGoodsService.get(getD().getGoodsId());
+                            return goods;
                         }
 
                         protected void set(FmMarquee d, FmGoods v) {
@@ -88,8 +88,8 @@ public class ApiFmAdController extends BaseController {
                     completionService.submit(new Task<FmAd, FmGoods>(new CacheKey("goods",fmAd1.getGoodsId()),fmAd1) {
                         @Override
                         public FmGoods call() throws Exception {
-                            FmGoods user = fmGoodsService.get(getD().getLoginId());
-                            return user;
+                            FmGoods goods = fmGoodsService.get(getD().getGoodsId());
+                            return goods;
                         }
 
                         protected void set(FmAd d, FmGoods v) {
