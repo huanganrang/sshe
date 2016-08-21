@@ -1,5 +1,6 @@
 package jb.controller;
 
+import farming.concurrent.CacheKey;
 import farming.concurrent.CompletionService;
 import farming.concurrent.Task;
 import jb.absx.F;
@@ -15,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.List;
-import java.util.Vector;
 
 /**
  * Created by guxin on 2016/8/14.
@@ -62,7 +62,7 @@ public class ApiFmPurchaseController extends BaseController {
      * 采购发布记录
      *
      * 必要参数:userId
-     * 可选参数:onlineStatus,isdeleted,page,rows,sort,order
+     * 可选参数:onlineStatus,page,rows,sort,order
      */
     @RequestMapping("/dataGrid")
     @ResponseBody
@@ -73,58 +73,47 @@ public class ApiFmPurchaseController extends BaseController {
                 //根据用户id和采购状态查询采购记录
                 DataGrid dg = fmPurchaseService.dataGrid(fmPurchase, ph);
                 List<FmPurchase> list = dg.getRows();
-                DataGrid dataGrid = new DataGrid();
                 if(list != null && list.size() > 0) {
-                    Vector vector = new Vector();
                     final CompletionService completionService = CompletionFactory.initCompletion();
                     for (int i=0; i<list.size(); i++) {
                         final FmPurchase fp = list.get(i);
                         //根据采购id查询询价用户id
-                        completionService.submit(new Task<Vector, FmPurchase>(vector){
+                        completionService.submit(new Task<FmPurchase, List<FmPurchaseUser>>(fp){
                             @Override
-                            public FmPurchase call() throws Exception {
+                            public List<FmPurchaseUser> call() throws Exception {
                                 FmPurchaseUser fmPurchaseUser = new FmPurchaseUser();
-                                fmPurchaseUser.setIsdeleted(false);
                                 fmPurchaseUser.setPurchaseId(fp.getId());
-                                DataGrid dd = fmPurchaseUserServiceI.dataGrid(fmPurchaseUser, null);
-                                List<FmPurchaseUser> fmPurchaseUserList = dd.getRows();
+                                List<FmPurchaseUser> fmPurchaseUserList = fmPurchaseUserServiceI.query(fmPurchaseUser);
+                                return fmPurchaseUserList;
+                            }
+                            protected void set(FmPurchase d, List<FmPurchaseUser> fmPurchaseUserList) {
                                 if(fmPurchaseUserList != null && fmPurchaseUserList.size() > 0) {
-                                    DataGrid du = new DataGrid();
-                                    Vector vt = new Vector();
-                                    final CompletionService cls = CompletionFactory.initCompletion();
                                     for (int m=0; m<fmPurchaseUserList.size(); m++) {
-                                        final String userId = fmPurchaseUserList.get(m).getUserId();
+                                        final FmPurchaseUser fmPurchaseUser = fmPurchaseUserList.get(m);
                                         //根据用户id查询用户信息
-                                        cls.submit(new Task<Vector, FmUser>(vt){
+                                        completionService.submit(new Task<FmPurchaseUser, FmUser>(new CacheKey("user",fmPurchaseUser.getUserId()),fmPurchaseUser){
                                             @Override
                                             public FmUser call() throws Exception {
-                                                FmUser fmUser = fmUserServiceI.get(userId);
+                                                FmUser fmUser = fmUserServiceI.get(getD().getUserId());
                                                 return fmUser;
                                             }
-                                            protected void set(Vector d, FmUser v) {
-                                                d.add(v);
+                                            protected void set(FmPurchaseUser d, FmUser v) {
+                                                if(v != null){
+                                                    d.setFmUser(v);
+                                                }
                                             }
                                         });
                                     }
-                                    cls.sync();
-                                    du.setRows(vt);
-                                    du.setTotal(new Long(vt.size()));
-                                    fp.setFmPurchaseUserDataGrid(du);
+                                    d.setFmPurchaseUserList(fmPurchaseUserList);
                                 }
-                                return fp;
-                            }
-                            protected void set(Vector d, FmPurchase v) {
-                                d.add(v);
                             }
                         });
                     }
                     completionService.sync();
-                    dataGrid.setRows(vector);
-                    dataGrid.setTotal(new Long(vector.size()));
                 }
                 j.setSuccess(true);
                 j.setMsg(SUCCESS_MESSAGE);
-                j.setObj(dataGrid);
+                j.setObj(dg);
             }
         } catch (Exception e) {
             j.setMsg(Application.getString(EX_0001));

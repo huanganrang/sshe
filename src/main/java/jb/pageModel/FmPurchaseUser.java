@@ -14,6 +14,7 @@ public class FmPurchaseUser implements java.io.Serializable {
 	private java.lang.String purchaseId;	
 	private java.lang.String userId;	
 
+	private FmUser fmUser;
 	
 
 	public void setId(java.lang.String value) {
@@ -59,6 +60,14 @@ public class FmPurchaseUser implements java.io.Serializable {
 	
 	public java.lang.String getUserId() {
 		return this.userId;
+	}
+
+	public FmUser getFmUser() {
+		return fmUser;
+	}
+
+	public void setFmUser(FmUser fmUser) {
+		this.fmUser = fmUser;
 	}
 
 }

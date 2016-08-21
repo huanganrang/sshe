@@ -1,7 +1,7 @@
 package jb.service;
 
-import jb.pageModel.FmUser;
 import jb.pageModel.DataGrid;
+import jb.pageModel.FmUser;
 import jb.pageModel.PageHelper;
 
 /**
@@ -50,5 +50,12 @@ public interface FmUserServiceI {
 	 * @param id
 	 */
 	public void delete(String id);
+
+	/**
+	 * 获取FmUser
+	 *
+	 * @param fmUser
+	 */
+	public FmUser get(FmUser fmUser);
 
 }

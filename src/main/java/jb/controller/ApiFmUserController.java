@@ -1,19 +1,23 @@
 package jb.controller;
 
 import jb.absx.F;
+import jb.interceptors.TokenManage;
 import jb.listener.Application;
-import jb.pageModel.*;
+import jb.pageModel.FmGoodsUser;
+import jb.pageModel.FmShopUser;
+import jb.pageModel.FmUser;
+import jb.pageModel.Json;
 import jb.service.FmGoodsUserServiceI;
 import jb.service.FmShopUserServiceI;
 import jb.service.FmUserServiceI;
 import jb.util.HttpUtil;
+import jb.util.easemob.HuanxinUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -34,6 +38,9 @@ public class ApiFmUserController extends BaseController {
     @Autowired
     private FmShopUserServiceI fmShopUserService;
 
+    @Autowired
+    private TokenManage tokenManage;
+
     /**
      * 用户登陆
      */
@@ -45,17 +52,25 @@ public class ApiFmUserController extends BaseController {
             //String url = "http://yizhuisu.com/api/Ba/userLogin";
             String url = "http://t149127q79.51mypc.cn:11169/api/Ba/userLogin";
             String result = HttpUtil.httpRequest(url, "post", "{\"Dto_Mobile\":\""+dtoMobile+"\",\"Dto_Password\":\""+dtoPassword+"\"}");
-            if(!F.empty(result)) {
+            if(!F.empty(result) && result.contains("In_UserID") && result.contains("In_UserName")) {
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put("centerUser", result);
                 FmUser fmUser = new FmUser();
                 fmUser.setAccount(dtoMobile);
-                DataGrid dg = fmUserService.dataGrid(fmUser, null);
-                List<FmUser> list = dg.getRows();
-                if(list != null && list.size() > 0) {
-                    FmUser fu = list.get(0);
+                FmUser fu = fmUserService.get(fmUser);
+                if(fu != null && !F.empty(fu.getAccount())) {
                     map.put("farmingUser", fu);
+                } else {
+                    if(!F.empty(HuanxinUtil.createUser(dtoMobile, dtoPassword))) {
+                        fmUser.setHxPassword(dtoPassword);
+                        fmUser.setHxStatus(1);
+                    } else {
+                        fmUser.setHxStatus(2);
+                    }
+                    fmUserService.add(fmUser);
+                    map.put("farmingUser", fmUser);
                 }
+                map.put("tokenId", tokenManage.buildToken(fmUser.getId(), fmUser.getAccount()));
                 j.setSuccess(true);
                 j.setMsg(SUCCESS_MESSAGE);
                 j.setObj(map);
@@ -102,20 +117,18 @@ public class ApiFmUserController extends BaseController {
             String url = "http://t149127q79.51mypc.cn:11169/api/Ba/userRegister";
             String result = HttpUtil.httpRequest(url, "post", "{\"Dto_Mobile\":\""+dtoMobile+"\",\"Dto_Password\":\""+dtoPassword+"\",\"Dto_VerificationCode\":\""+dtoVerificationCode+"\",\"Dto_OperateType\":"+dtoOperateType+"}");
             if("1".equals(dtoOperateType)) {
-                FmUser fmUser = new FmUser();
-                fmUser.setAccount(dtoMobile);
-                fmUserService.add(fmUser);
-                Map<String, Object> map = new HashMap<String, Object>();
-                map.put("centerUser", result);
-                FmUser fu = new FmUser();
-                fu.setAccount(dtoMobile);
-                DataGrid dg = fmUserService.dataGrid(fu, null);
-                List<FmUser> list = dg.getRows();
-                if(list != null && list.size() > 0) {
-                    FmUser f = list.get(0);
-                    map.put("farmingUser", f);
+                if(!F.empty(result) && result.contains("true")) {
+                    FmUser fmUser = new FmUser();
+                    fmUser.setAccount(dtoMobile);
+                    if(!F.empty(HuanxinUtil.createUser(dtoMobile, dtoPassword))) {
+                        fmUser.setHxPassword(dtoPassword);
+                        fmUser.setHxStatus(1);
+                    } else {
+                        fmUser.setHxStatus(2);
+                    }
+                    fmUserService.add(fmUser);
+                    j.setObj(fmUser);
                 }
-                j.setObj(map);
             } else {
                 j.setObj(result);
             }
@@ -157,29 +170,9 @@ public class ApiFmUserController extends BaseController {
         return j;
     }
 
-    @RequestMapping("/add")
-    @ResponseBody
-    public Json add(FmUser fmUser) {
-        Json j = new Json();
-        try {
-            if(!F.empty(fmUser.getAccount())) {
-                fmUserService.add(fmUser);
-                j.setSuccess(true);
-                j.setMsg(SUCCESS_MESSAGE);
-                DataGrid dg = fmUserService.dataGrid(fmUser, null);
-                List<FmUser> list =  dg.getRows();
-                if(list != null && list.size() > 0) {
-                    j.setObj(list.get(0));
-                }
-            }
-        } catch (Exception e) {
-            j.setMsg(Application.getString(EX_0001));
-            logger.error("注册用户信息异常", e);
-        }
-
-        return j;
-    }
-
+    /**
+     * 获取个人信息接口
+     */
     @RequestMapping("/get")
     @ResponseBody
     public Json get(FmUser fmUser) {
@@ -199,6 +192,9 @@ public class ApiFmUserController extends BaseController {
         return j;
     }
 
+    /**
+     * 修改个人信息接口
+     */
     @RequestMapping("/edit")
     @ResponseBody
     public Json edit(FmUser fmUser) {
