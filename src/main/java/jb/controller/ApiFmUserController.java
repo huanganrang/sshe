@@ -5,6 +5,7 @@ import jb.listener.Application;
 import jb.pageModel.*;
 import jb.service.FmGoodsUserServiceI;
 import jb.service.FmShopUserServiceI;
+import jb.service.FmUserHobbyServiceI;
 import jb.service.FmUserServiceI;
 import jb.util.HttpUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -33,6 +34,9 @@ public class ApiFmUserController extends BaseController {
 
     @Autowired
     private FmShopUserServiceI fmShopUserService;
+
+    @Autowired
+    private FmUserHobbyServiceI fmUserHobbyService;
 
     /**
      * 用户登陆
@@ -298,4 +302,52 @@ public class ApiFmUserController extends BaseController {
 
         return j;
     }
+
+
+    @RequestMapping("/saveOrUpdate")
+    @ResponseBody
+    public Json saveOrUpdateHobby(String userId,String goodsIds) {
+        Json j = new Json();
+        try {
+            if (!F.empty(userId) && !F.empty(goodsIds)) {
+                FmUserHobby fmUserHobby = new FmUserHobby();
+                fmUserHobby.setUserId(userId);
+                fmUserHobbyService.delete(fmUserHobby);
+                String[] goodsIdList = goodsIds.split("[;|]");
+                for (String s : goodsIdList) {
+                    fmUserHobby = new FmUserHobby();
+                    fmUserHobby.setGoodName(s);
+                    fmUserHobby.setUserId(userId);
+                    fmUserHobbyService.add(fmUserHobby);
+                }
+                j.setSuccess(true);
+                j.setMsg(SUCCESS_MESSAGE);
+            }
+        } catch (Exception e) {
+            j.setMsg(Application.getString(EX_0001));
+            logger.error("取消关联异常", e);
+        }
+
+        return j;
+    }
+
+
+    @RequestMapping("/getHobbyList")
+    @ResponseBody
+    public Json getHobbyList(String userId) {
+        Json j = new Json();
+        try {
+            if (!F.empty(userId)) {
+                j.setObj(fmUserHobbyService.query(userId));
+                j.setSuccess(true);
+                j.setMsg(SUCCESS_MESSAGE);
+            }
+        } catch (Exception e) {
+            j.setMsg(Application.getString(EX_0001));
+            logger.error("取消关联异常", e);
+        }
+
+        return j;
+    }
+
 }

@@ -4,6 +4,8 @@ import jb.pageModel.FmUserHobby;
 import jb.pageModel.DataGrid;
 import jb.pageModel.PageHelper;
 
+import java.util.List;
+
 /**
  * 
  * @author John
@@ -20,14 +22,14 @@ public interface FmUserHobbyServiceI {
 	 *            分页帮助类
 	 * @return
 	 */
-	public DataGrid dataGrid(FmUserHobby fmUserHobby, PageHelper ph);
+	DataGrid dataGrid(FmUserHobby fmUserHobby, PageHelper ph);
 
 	/**
 	 * 添加FmUserHobby
 	 * 
 	 * @param fmUserHobby
 	 */
-	public void add(FmUserHobby fmUserHobby);
+	void add(FmUserHobby fmUserHobby);
 
 	/**
 	 * 获得FmUserHobby对象
@@ -35,20 +37,28 @@ public interface FmUserHobbyServiceI {
 	 * @param id
 	 * @return
 	 */
-	public FmUserHobby get(String id);
+	FmUserHobby get(String id);
+
+	List<FmUserHobby> query(String userId);
 
 	/**
 	 * 修改FmUserHobby
 	 * 
 	 * @param fmUserHobby
 	 */
-	public void edit(FmUserHobby fmUserHobby);
+	void edit(FmUserHobby fmUserHobby);
 
 	/**
 	 * 删除FmUserHobby
 	 * 
 	 * @param id
 	 */
-	public void delete(String id);
+	void delete(String id);
+
+	/**
+	 * 删除FmUserHobby
+	 *
+	 */
+	void delete(FmUserHobby fmUserHobby);
 
 }
