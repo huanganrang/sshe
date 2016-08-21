@@ -30,52 +30,57 @@
 				}
 			}
 		});
+
+		function ProcessFile() {
+			var file = document.getElementById('iconFile').files[0];
+			if (file) {
+				var reader = new FileReader();
+				reader.onload = function ( event ) {
+					var txt = event.target.result;
+					$('.img-preview').attr('src',txt);
+				};
+			}
+			reader.readAsDataURL(file);
+		}
+		$(document).delegate('#iconFile','change',function () {
+			ProcessFile();
+		});
 	});
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
 	<div data-options="region:'center',border:false" title="" style="overflow: hidden;">	
-		<form id="form" method="post">		
+		<form id="form" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="id"/>
 			<table class="table table-hover table-condensed">
-				<tr>	
-					<th><%=TfmMarquee.ALIAS_ADDTIME%></th>	
-					<td>
-					<input class="span2" name="addtime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmMarquee.FORMAT_ADDTIME%>'})"  maxlength="0" class="required " />
-					</td>							
-					<th><%=TfmMarquee.ALIAS_UPDATETIME%></th>	
-					<td>
-					<input class="span2" name="updatetime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmMarquee.FORMAT_UPDATETIME%>'})"  maxlength="0" class="required " />
-					</td>							
-				</tr>	
-				<tr>	
-					<th><%=TfmMarquee.ALIAS_ISDELETED%></th>	
-					<td>
-					
-											<input  name="isdeleted" type="text" class="easyui-validatebox span2" data-options="required:true"/>
-					</td>							
+				<tr>
 					<th><%=TfmMarquee.ALIAS_IMAGE_NAME%></th>	
 					<td>
-											<input class="span2" name="imageName" type="text"/>
+						<input class="span2" name="imageName" type="text"/>
 					</td>							
 				</tr>	
 				<tr>	
-					<th><%=TfmMarquee.ALIAS_URL%></th>	
+					<td colspan="2" height="155">
+
+					<img class="img-preview" src="" width="100%" height="100%"/>
+
+					</td>
+				</tr>
+				<tr>
+					<th><%=TfmMarquee.ALIAS_URL%></th>
 					<td>
-											<input class="span2" name="url" type="text"/>
-					</td>							
+						<input type="file" id="iconFile" name="equipIconFile">
+					</td>
+				</tr>
+				<tr>
 					<th><%=TfmMarquee.ALIAS_SEQ%></th>	
 					<td>
-											<input class="span2" name="seq" type="text"/>
+						<input class="span2" name="seq" type="number"/>
 					</td>							
 				</tr>	
-				<tr>	
-					<th><%=TfmMarquee.ALIAS_LOGIN_ID%></th>	
-					<td>
-											<input class="span2" name="loginId" type="text"/>
-					</td>							
+				<tr>
 					<th><%=TfmMarquee.ALIAS_GOODS_ID%></th>	
 					<td>
-											<input class="span2" name="goodsId" type="text"/>
+						<input class="span2" name="goodsId" type="text"/>
 					</td>							
 				</tr>	
 			</table>		

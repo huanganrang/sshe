@@ -63,13 +63,13 @@
 				}, {
 				field : 'url',
 				title : '<%=TfmMarquee.ALIAS_URL%>',
-				width : 50		
+				width : 120
 				}, {
 				field : 'seq',
 				title : '<%=TfmMarquee.ALIAS_SEQ%>',
-				width : 50		
+				width : 20
 				}, {
-				field : 'loginId',
+				field : 'loginName',
 				title : '<%=TfmMarquee.ALIAS_LOGIN_ID%>',
 				width : 50		
 				}, {
@@ -79,7 +79,7 @@
 			}, {
 				field : 'action',
 				title : '操作',
-				width : 100,
+				width : 50,
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {
@@ -137,8 +137,8 @@
 		}
 		parent.$.modalDialog({
 			title : '编辑数据',
-			width : 780,
-			height : 500,
+			width : 350,
+			height : 450,
 			href : '${pageContext.request.contextPath}/fmMarqueeController/editPage?id=' + id,
 			buttons : [ {
 				text : '编辑',
@@ -158,8 +158,8 @@
 		}
 		parent.$.modalDialog({
 			title : '查看数据',
-			width : 780,
-			height : 500,
+			width : 300,
+			height : 300,
 			href : '${pageContext.request.contextPath}/fmMarqueeController/view?id=' + id
 		});
 	}
@@ -167,8 +167,8 @@
 	function addFun() {
 		parent.$.modalDialog({
 			title : '添加数据',
-			width : 780,
-			height : 500,
+			width : 350,
+			height : 450,
 			href : '${pageContext.request.contextPath}/fmMarqueeController/addPage',
 			buttons : [ {
 				text : '添加',

@@ -85,7 +85,7 @@
 				title : '<%=TfmAd.ALIAS_GOODS_ID%>',
 				width : 50		
 				}, {
-				field : 'loginId',
+				field : 'loginName',
 				title : '<%=TfmAd.ALIAS_LOGIN_ID%>',
 				width : 50		
 			}, {
@@ -224,33 +224,13 @@
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
 						<tr>	
-							<th><%=TfmAd.ALIAS_ADDTIME%></th>	
-							<td>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmAd.FORMAT_ADDTIME%>'})" id="addtimeBegin" name="addtimeBegin"/>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmAd.FORMAT_ADDTIME%>'})" id="addtimeEnd" name="addtimeEnd"/>
-							</td>
-							<th><%=TfmAd.ALIAS_UPDATETIME%></th>	
-							<td>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmAd.FORMAT_UPDATETIME%>'})" id="updatetimeBegin" name="updatetimeBegin"/>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmAd.FORMAT_UPDATETIME%>'})" id="updatetimeEnd" name="updatetimeEnd"/>
-							</td>
-							<th><%=TfmAd.ALIAS_ISDELETED%></th>	
-							<td>
-											<input type="text" name="isdeleted" maxlength="0" class="span2"/>
-							</td>
-							<th><%=TfmAd.ALIAS_GOODS_NAME%></th>	
-							<td>
-											<jb:select dataType="GN" name="goodsName"></jb:select>	
-							</td>
+
+
 						</tr>	
-						<tr>	
-							<th><%=TfmAd.ALIAS_URL%></th>	
+						<tr>
+							<th><%=TfmAd.ALIAS_GOODS_NAME%></th>
 							<td>
-											<input type="text" name="url" maxlength="100" class="span2"/>
-							</td>
-							<th><%=TfmAd.ALIAS_LOCAL%></th>	
-							<td>
-											<input type="text" name="local" maxlength="10" class="span2"/>
+								<jb:select dataType="GN" name="goodsName"></jb:select>
 							</td>
 							<th><%=TfmAd.ALIAS_STATUS%></th>	
 							<td>
@@ -264,15 +244,7 @@
 						<tr>	
 							<th><%=TfmAd.ALIAS_TYPE%></th>	
 							<td>
-											<jb:select dataType="GS" name="type"></jb:select>	
-							</td>
-							<th><%=TfmAd.ALIAS_GOODS_ID%></th>	
-							<td>
-											<input type="text" name="goodsId" maxlength="36" class="span2"/>
-							</td>
-							<th><%=TfmAd.ALIAS_LOGIN_ID%></th>	
-							<td>
-											<input type="text" name="loginId" maxlength="36" class="span2"/>
+								<jb:select dataType="GS" name="type"></jb:select>
 							</td>
 						</tr>	
 				</table>

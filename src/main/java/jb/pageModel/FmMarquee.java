@@ -14,7 +14,8 @@ public class FmMarquee implements java.io.Serializable {
 	private java.lang.String imageName;	
 	private java.lang.String url;	
 	private java.lang.Integer seq;	
-	private java.lang.String loginId;	
+	private java.lang.String loginId;
+	private String loginName;
 	private java.lang.String goodsId;
 
 	private FmGoods fmGoods;
@@ -93,5 +94,13 @@ public class FmMarquee implements java.io.Serializable {
 
 	public void setFmGoods(FmGoods fmGoods) {
 		this.fmGoods = fmGoods;
+	}
+
+	public String getLoginName() {
+		return loginName;
+	}
+
+	public void setLoginName(String loginName) {
+		this.loginName = loginName;
 	}
 }

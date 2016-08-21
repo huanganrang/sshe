@@ -7,20 +7,26 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
-import jb.pageModel.Colum;
-import jb.pageModel.FmMarquee;
-import jb.pageModel.DataGrid;
-import jb.pageModel.Json;
-import jb.pageModel.PageHelper;
+import farming.concurrent.CacheKey;
+import farming.concurrent.CompletionService;
+import farming.concurrent.Task;
+import jb.pageModel.*;
 import jb.service.FmMarqueeServiceI;
 
+import jb.service.UserServiceI;
+import jb.service.impl.CompletionFactory;
+import jb.util.ConfigUtil;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.alibaba.fastjson.JSON;
+import org.springframework.web.multipart.MultipartFile;
 
 /**
  * FmMarquee管理控制器
@@ -32,10 +38,12 @@ import com.alibaba.fastjson.JSON;
 @RequestMapping("/fmMarqueeController")
 public class FmMarqueeController extends BaseController {
 
+	public static final String MARQUEE = "marquee";
 	@Autowired
 	private FmMarqueeServiceI fmMarqueeService;
 
-
+	@Autowired
+	private UserServiceI userService;
 	/**
 	 * 跳转到FmMarquee管理页面
 	 * 
@@ -48,19 +56,37 @@ public class FmMarqueeController extends BaseController {
 
 	/**
 	 * 获取FmMarquee数据表格
-	 * 
-	 * @param user
+	 *
 	 * @return
 	 */
 	@RequestMapping("/dataGrid")
 	@ResponseBody
 	public DataGrid dataGrid(FmMarquee fmMarquee, PageHelper ph) {
-		return fmMarqueeService.dataGrid(fmMarquee, ph);
+		DataGrid dataGrid = fmMarqueeService.dataGrid(fmMarquee, ph);
+		if (!CollectionUtils.isEmpty(dataGrid.getRows())) {
+			final CompletionService completionService = CompletionFactory.initCompletion();
+			for (FmMarquee fmMarquee1 : (List<FmMarquee>) dataGrid.getRows()) {
+				completionService.submit(new Task<FmMarquee, User>(new CacheKey("user",fmMarquee1.getLoginId()),fmMarquee1) {
+					@Override
+					public User call() throws Exception {
+						User user = userService.get(getD().getLoginId());
+						return user;
+					}
+
+					protected void set(FmMarquee d, User v) {
+						if (v != null)
+							d.setLoginName(v.getName());
+					}
+
+				});
+			}
+			completionService.sync();
+		}
+		return dataGrid;
 	}
 	/**
 	 * 获取FmMarquee数据表格excel
 	 * 
-	 * @param user
 	 * @return
 	 * @throws NoSuchMethodException 
 	 * @throws SecurityException 
@@ -97,8 +123,11 @@ public class FmMarqueeController extends BaseController {
 	 */
 	@RequestMapping("/add")
 	@ResponseBody
-	public Json add(FmMarquee fmMarquee) {
-		Json j = new Json();		
+	public Json add(FmMarquee fmMarquee,@RequestParam MultipartFile equipIconFile,HttpServletRequest request,HttpSession session) {
+		SessionInfo sessionInfo = (SessionInfo)session.getAttribute(ConfigUtil.getSessionInfoName());
+		fmMarquee.setLoginId(sessionInfo.getId());
+		Json j = new Json();
+		fmMarquee.setUrl(uploadFile(request, "marquee", equipIconFile));
 		fmMarqueeService.add(fmMarquee);
 		j.setSuccess(true);
 		j.setMsg("添加成功！");		
@@ -137,8 +166,11 @@ public class FmMarqueeController extends BaseController {
 	 */
 	@RequestMapping("/edit")
 	@ResponseBody
-	public Json edit(FmMarquee fmMarquee) {
-		Json j = new Json();		
+	public Json edit(FmMarquee fmMarquee,@RequestParam MultipartFile equipIconFile,HttpServletRequest request,HttpSession session) {
+		SessionInfo sessionInfo = (SessionInfo)session.getAttribute(ConfigUtil.getSessionInfoName());
+		fmMarquee.setLoginId(sessionInfo.getId());
+		Json j = new Json();
+		fmMarquee.setUrl(uploadFile(request, MARQUEE, equipIconFile));
 		fmMarqueeService.edit(fmMarquee);
 		j.setSuccess(true);
 		j.setMsg("编辑成功！");		
