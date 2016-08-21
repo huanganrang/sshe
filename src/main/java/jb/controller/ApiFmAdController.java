@@ -56,8 +56,7 @@ public class ApiFmAdController extends BaseController {
                         }
 
                         protected void set(FmMarquee d, FmGoods v) {
-                            if (v != null)
-                                d.setFmGoods(v);
+                            d.setFmGoods(v);
                         }
 
                     });
@@ -93,8 +92,7 @@ public class ApiFmAdController extends BaseController {
                         }
 
                         protected void set(FmAd d, FmGoods v) {
-                            if (v != null)
-                                d.setFmGoods(v);
+                            d.setFmGoods(v);
                         }
 
                     });
