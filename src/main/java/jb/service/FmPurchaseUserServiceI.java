@@ -4,6 +4,8 @@ import jb.pageModel.FmPurchaseUser;
 import jb.pageModel.DataGrid;
 import jb.pageModel.PageHelper;
 
+import java.util.List;
+
 /**
  * 
  * @author John
@@ -50,5 +52,12 @@ public interface FmPurchaseUserServiceI {
 	 * @param id
 	 */
 	public void delete(String id);
+
+	/**
+	 * 获取FmPurchaseUser集合
+	 *
+	 * @param fmPurchaseUser
+	 */
+	public List<FmPurchaseUser> query(FmPurchaseUser fmPurchaseUser);
 
 }

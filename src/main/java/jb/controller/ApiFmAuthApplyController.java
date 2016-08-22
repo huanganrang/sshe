@@ -21,6 +21,9 @@ public class ApiFmAuthApplyController extends BaseController {
     @Autowired
     private FmAuthApplyServiceI fmAuthApplyService;
 
+    /**
+     * 申请实名认证接口
+     */
     @RequestMapping("/add")
     @ResponseBody
     public Json add(FmAuthApply fmAuthApply) {

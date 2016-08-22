@@ -1,24 +1,21 @@
 package jb.service.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
 import jb.absx.F;
 import jb.dao.FmUserDaoI;
 import jb.model.TfmUser;
-import jb.pageModel.FmUser;
 import jb.pageModel.DataGrid;
+import jb.pageModel.FmUser;
 import jb.pageModel.PageHelper;
 import jb.service.FmUserServiceI;
-
+import jb.util.MyBeanUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import jb.util.MyBeanUtils;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class FmUserServiceImpl extends BaseServiceImpl<FmUser> implements FmUserServiceI {
@@ -132,6 +129,16 @@ public class FmUserServiceImpl extends BaseServiceImpl<FmUser> implements FmUser
 		params.put("id", id);
 		fmUserDao.executeHql("update TfmUser t set t.isdeleted = 1 where t.id = :id",params);
 		//fmUserDao.delete(fmUserDao.get(TfmUser.class, id));
+	}
+
+	@Override
+	public FmUser get(FmUser fmUser) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		String sql = whereHql(fmUser, params);
+		TfmUser t = fmUserDao.get("from TfmUser t " + sql, params);
+		FmUser o = new FmUser();
+		BeanUtils.copyProperties(t, o);
+		return o;
 	}
 
 }

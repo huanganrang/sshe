@@ -1,24 +1,19 @@
 package jb.service.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
 import jb.absx.F;
 import jb.dao.FmPurchaseUserDaoI;
 import jb.model.TfmPurchaseUser;
-import jb.pageModel.FmPurchaseUser;
 import jb.pageModel.DataGrid;
+import jb.pageModel.FmPurchaseUser;
 import jb.pageModel.PageHelper;
 import jb.service.FmPurchaseUserServiceI;
-
+import jb.util.MyBeanUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import jb.util.MyBeanUtils;
+
+import java.util.*;
 
 @Service
 public class FmPurchaseUserServiceImpl extends BaseServiceImpl<FmPurchaseUser> implements FmPurchaseUserServiceI {
@@ -95,6 +90,22 @@ public class FmPurchaseUserServiceImpl extends BaseServiceImpl<FmPurchaseUser> i
 		params.put("id", id);
 		fmPurchaseUserDao.executeHql("update TfmPurchaseUser t set t.isdeleted = 1 where t.id = :id",params);
 		//fmPurchaseUserDao.delete(fmPurchaseUserDao.get(TfmPurchaseUser.class, id));
+	}
+
+	@Override
+	public List<FmPurchaseUser> query(FmPurchaseUser fmPurchaseUser) {
+		List<FmPurchaseUser> fu = new ArrayList<FmPurchaseUser>();
+		String hql = " from TfmPurchaseUser t ";
+		@SuppressWarnings("unchecked")
+		List<TfmPurchaseUser> l = query(hql, fmPurchaseUser, fmPurchaseUserDao);
+		if (CollectionUtils.isNotEmpty(l)) {
+			for (TfmPurchaseUser t : l) {
+				FmPurchaseUser o = new FmPurchaseUser();
+				BeanUtils.copyProperties(t, o);
+				fu.add(o);
+			}
+		}
+		return fu;
 	}
 
 }

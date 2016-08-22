@@ -98,6 +98,9 @@
 						<value>/api/apiCommon/checkUpdate</value><!-- 检查更新 -->
 						<value>/api/apiCommon/upload_errorlog</value><!-- 上传错误日志 -->
 						<value>/api/apiOrderController/pay_success</value><!-- 支付成功回调 -->
+						<value>/api/apiFmUserController/userLogin</value><!-- app登陆 -->
+						<value>/api/apiFmUserController/sendVerifyCode</value><!-- app发送验证码 -->
+						<value>/api/apiFmUserController/userRegister</value><!-- app注册 -->
 					</list>
 				</property>
 				<property name="tokenManage" ref="tokenManage" />

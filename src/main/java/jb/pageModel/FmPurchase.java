@@ -1,6 +1,7 @@
 package jb.pageModel;
 
 import java.util.Date;
+import java.util.List;
 
 @SuppressWarnings("serial")
 public class FmPurchase implements java.io.Serializable {
@@ -34,7 +35,7 @@ public class FmPurchase implements java.io.Serializable {
 	private java.lang.Integer voiceDuration;	
 	private java.lang.String userId;	
 	private java.lang.String onlineStatus;
-	private DataGrid fmPurchaseUserDataGrid;
+	private List fmPurchaseUserList;
 
 	public void setId(java.lang.String value) {
 		this.id = value;
@@ -228,11 +229,11 @@ public class FmPurchase implements java.io.Serializable {
 		return this.onlineStatus;
 	}
 
-	public DataGrid getFmPurchaseUserDataGrid() {
-		return fmPurchaseUserDataGrid;
+	public List getFmPurchaseUserList() {
+		return fmPurchaseUserList;
 	}
 
-	public void setFmPurchaseUserDataGrid(DataGrid fmPurchaseUserDataGrid) {
-		this.fmPurchaseUserDataGrid = fmPurchaseUserDataGrid;
+	public void setFmPurchaseUserList(List fmPurchaseUserList) {
+		this.fmPurchaseUserList = fmPurchaseUserList;
 	}
 }
