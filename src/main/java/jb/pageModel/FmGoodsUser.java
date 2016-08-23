@@ -12,9 +12,9 @@ public class FmGoodsUser implements java.io.Serializable {
 	private Date updatetime;			
 	private java.lang.Boolean isdeleted;	
 	private java.lang.String goodsId;	
-	private java.lang.String userId;	
+	private java.lang.String userId;
 
-	
+	private FmGoods fmGoods;
 
 	public void setId(java.lang.String value) {
 		this.id = value;
@@ -59,6 +59,14 @@ public class FmGoodsUser implements java.io.Serializable {
 	
 	public java.lang.String getUserId() {
 		return this.userId;
+	}
+
+	public FmGoods getFmGoods() {
+		return fmGoods;
+	}
+
+	public void setFmGoods(FmGoods fmGoods) {
+		this.fmGoods = fmGoods;
 	}
 
 }

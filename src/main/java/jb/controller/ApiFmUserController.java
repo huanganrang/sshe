@@ -129,12 +129,14 @@ public class ApiFmUserController extends BaseController {
                     }
                     fmUserService.add(fmUser);
                     j.setObj(fmUser);
+                    j.setSuccess(true);
+                    j.setMsg(SUCCESS_MESSAGE);
                 }
             } else {
                 j.setObj(result);
+                j.setSuccess(true);
+                j.setMsg(SUCCESS_MESSAGE);
             }
-            j.setSuccess(true);
-            j.setMsg(SUCCESS_MESSAGE);
         } catch (Exception e) {
             j.setMsg(Application.getString(EX_0001));
             String errorMg = "";
