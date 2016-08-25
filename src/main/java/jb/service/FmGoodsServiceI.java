@@ -1,8 +1,10 @@
 package jb.service;
 
-import jb.pageModel.FmGoods;
 import jb.pageModel.DataGrid;
+import jb.pageModel.FmGoods;
 import jb.pageModel.PageHelper;
+
+import java.util.List;
 
 /**
  * 
@@ -50,5 +52,12 @@ public interface FmGoodsServiceI {
 	 * @param id
 	 */
 	public void delete(String id);
+
+	/**
+	 * 获取FmGoods集合
+	 *
+	 * @param fmGoods
+	 */
+	public List<FmGoods> query(FmGoods fmGoods);
 
 }

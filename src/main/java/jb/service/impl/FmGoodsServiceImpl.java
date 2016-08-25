@@ -1,11 +1,5 @@
 package jb.service.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import jb.absx.F;
 import jb.dao.FmGoodsDaoI;
 import jb.model.TfmGoods;
@@ -14,10 +8,12 @@ import jb.pageModel.FmGoods;
 import jb.pageModel.PageHelper;
 import jb.service.FmGoodsServiceI;
 import jb.util.MyBeanUtils;
-
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.*;
 
 @Service
 public class FmGoodsServiceImpl extends BaseServiceImpl<FmGoods> implements FmGoodsServiceI {
@@ -190,6 +186,22 @@ public class FmGoodsServiceImpl extends BaseServiceImpl<FmGoods> implements FmGo
 		params.put("id", id);
 		fmGoodsDao.executeHql("update TfmGoods t set t.isdeleted = 1 where t.id = :id",params);
 		//fmGoodsDao.delete(fmGoodsDao.get(TfmGoods.class, id));
+	}
+
+	@Override
+	public List<FmGoods> query(FmGoods fmGoods) {
+		List<FmGoods> fg = new ArrayList<FmGoods>();
+		String hql = " from TfmGoods t ";
+		@SuppressWarnings("unchecked")
+		List<TfmGoods> l = query(hql, fmGoods, fmGoodsDao);
+		if (CollectionUtils.isNotEmpty(l)) {
+			for (TfmGoods t : l) {
+				FmGoods o = new FmGoods();
+				BeanUtils.copyProperties(t, o);
+				fg.add(o);
+			}
+		}
+		return fg;
 	}
 
 }

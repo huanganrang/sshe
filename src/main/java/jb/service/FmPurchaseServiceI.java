@@ -1,8 +1,10 @@
 package jb.service;
 
-import jb.pageModel.FmPurchase;
 import jb.pageModel.DataGrid;
+import jb.pageModel.FmPurchase;
 import jb.pageModel.PageHelper;
+
+import java.util.List;
 
 /**
  * 
@@ -50,5 +52,12 @@ public interface FmPurchaseServiceI {
 	 * @param id
 	 */
 	public void delete(String id);
+
+	/**
+	 * 获取FmPurchase集合
+	 *
+	 * @param fmPurchase
+	 */
+	public List<FmPurchase> query(FmPurchase fmPurchase);
 
 }

@@ -1,6 +1,7 @@
 package jb.pageModel;
 
 import java.util.Date;
+import java.util.List;
 
 @SuppressWarnings("serial")
 public class FmShopUser implements java.io.Serializable {
@@ -14,6 +15,9 @@ public class FmShopUser implements java.io.Serializable {
 	private java.lang.String shopId;	
 	private java.lang.String userId;	
 
+	private FmUser fmShopUser;
+	private List<FmPurchase> fmShopPurchaseList;
+	private List<FmGoods> fmShopGoodsList;
 	
 
 	public void setId(java.lang.String value) {
@@ -59,6 +63,30 @@ public class FmShopUser implements java.io.Serializable {
 	
 	public java.lang.String getUserId() {
 		return this.userId;
+	}
+
+	public FmUser getFmShopUser() {
+		return fmShopUser;
+	}
+
+	public void setFmShopUser(FmUser fmShopUser) {
+		this.fmShopUser = fmShopUser;
+	}
+
+	public List<FmPurchase> getFmShopPurchaseList() {
+		return fmShopPurchaseList;
+	}
+
+	public void setFmShopPurchaseList(List<FmPurchase> fmShopPurchaseList) {
+		this.fmShopPurchaseList = fmShopPurchaseList;
+	}
+
+	public List<FmGoods> getFmShopGoodsList() {
+		return fmShopGoodsList;
+	}
+
+	public void setFmShopGoodsList(List<FmGoods> fmShopGoodsList) {
+		this.fmShopGoodsList = fmShopGoodsList;
 	}
 
 }
