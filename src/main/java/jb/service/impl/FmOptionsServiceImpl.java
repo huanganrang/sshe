@@ -49,10 +49,7 @@ public class FmOptionsServiceImpl extends BaseServiceImpl<FmOptions> implements 
 		String whereHql = "";	
 		if (fmOptions != null) {
 			whereHql += " where t.isdeleted = 0 ";
-			if (!F.empty(fmOptions.getIsdeleted())) {
-				whereHql += " and t.isdeleted = :isdeleted";
-				params.put("isdeleted", fmOptions.getIsdeleted());
-			}		
+
 			if (!F.empty(fmOptions.getPropertiesId())) {
 				whereHql += " and t.propertiesId = :propertiesId";
 				params.put("propertiesId", fmOptions.getPropertiesId());
@@ -61,10 +58,7 @@ public class FmOptionsServiceImpl extends BaseServiceImpl<FmOptions> implements 
 				whereHql += " and t.value = :value";
 				params.put("value", fmOptions.getValue());
 			}		
-			if (!F.empty(fmOptions.getSeq())) {
-				whereHql += " and t.seq = :seq";
-				params.put("seq", fmOptions.getSeq());
-			}		
+
 		}	
 		return whereHql;
 	}

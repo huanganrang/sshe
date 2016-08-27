@@ -49,10 +49,7 @@ public class FmPropertiesServiceImpl extends BaseServiceImpl<FmProperties> imple
 		String whereHql = "";	
 		if (fmProperties != null) {
 			whereHql += " where t.isdeleted = 0 ";
-			if (!F.empty(fmProperties.getIsdeleted())) {
-				whereHql += " and t.isdeleted = :isdeleted";
-				params.put("isdeleted", fmProperties.getIsdeleted());
-			}		
+
 			if (!F.empty(fmProperties.getName())) {
 				whereHql += " and t.name = :name";
 				params.put("name", fmProperties.getName());
@@ -69,10 +66,7 @@ public class FmPropertiesServiceImpl extends BaseServiceImpl<FmProperties> imple
 				whereHql += " and t.fieldType = :fieldType";
 				params.put("fieldType", fmProperties.getFieldType());
 			}		
-			if (!F.empty(fmProperties.getRequire())) {
-				whereHql += " and t.require = :require";
-				params.put("require", fmProperties.getRequire());
-			}		
+
 			if (!F.empty(fmProperties.getDefaultValue())) {
 				whereHql += " and t.defaultValue = :defaultValue";
 				params.put("defaultValue", fmProperties.getDefaultValue());
