@@ -38,7 +38,8 @@ public class FmPurchase implements java.io.Serializable {
 	private java.lang.String userId;	
 	private java.lang.String onlineStatus;
 	private java.lang.String extFields;
-	private List fmPurchaseUserList;
+	private List<FmPurchaseUser> fmPurchaseUserList;
+	private FmUser fmUser;
 
 	public void setId(java.lang.String value) {
 		this.id = value;
@@ -271,11 +272,20 @@ public class FmPurchase implements java.io.Serializable {
 		this.extFields = extFields;
 	}
 
-	public List getFmPurchaseUserList() {
+	public List<FmPurchaseUser> getFmPurchaseUserList() {
 		return fmPurchaseUserList;
 	}
 
-	public void setFmPurchaseUserList(List fmPurchaseUserList) {
+	public void setFmPurchaseUserList(List<FmPurchaseUser> fmPurchaseUserList) {
 		this.fmPurchaseUserList = fmPurchaseUserList;
 	}
+
+	public FmUser getFmUser() {
+		return fmUser;
+	}
+
+	public void setFmUser(FmUser fmUser) {
+		this.fmUser = fmUser;
+	}
+
 }
