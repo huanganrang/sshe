@@ -7,7 +7,7 @@
 	$(function() {
 	 parent.$.messager.progress('close');
 		$('#form').form({
-			url : '${pageContext.request.contextPath}/fmAdController/add',
+			url : '${pageContext.request.contextPath}/fmAd2Controller/add',
 			onSubmit : function() {
 				parent.$.messager.progress({
 					title : '提示',
@@ -51,7 +51,7 @@
 	<div data-options="region:'center',border:false" title="" style="overflow: hidden;">	
 		<form id="form" method="post" enctype="multipart/form-data">
 			<input type="hidden" name="id"/>
-			<input type="hidden" name="type" value="AD01">
+			<input type="hidden" name="type" value="AD02">
 
 			<table class="table table-hover table-condensed">
 				<tr>
@@ -76,7 +76,8 @@
 				<tr>
 					<th><%=TfmAd.ALIAS_LOCAL%></th>	
 					<td>
-						<input class="span2" name="local" type="number"/>
+						<jb:select dataType="LS" name="local"></jb:select>
+
 					</td>							
 				</tr>	
 				<tr>	
@@ -88,7 +89,7 @@
 				<tr>
 					<th><%=TfmAd.ALIAS_CHANNEL%></th>	
 					<td>
-						<jb:select dataType="GS" name="channel"></jb:select>
+						<jb:select dataType="GD" name="channel"></jb:select>
 					</td>							
 				</tr>	
 				<tr>

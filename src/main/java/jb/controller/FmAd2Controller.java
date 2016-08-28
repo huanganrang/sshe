@@ -1,20 +1,11 @@
 package jb.controller;
 
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.util.List;
-import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-import javax.servlet.http.HttpSession;
-
+import com.alibaba.fastjson.JSON;
 import farming.concurrent.CacheKey;
 import farming.concurrent.CompletionService;
 import farming.concurrent.Task;
 import jb.pageModel.*;
 import jb.service.FmAdServiceI;
-
 import jb.service.UserServiceI;
 import jb.service.impl.CompletionFactory;
 import jb.util.ConfigUtil;
@@ -24,9 +15,15 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-
-import com.alibaba.fastjson.JSON;
 import org.springframework.web.multipart.MultipartFile;
+
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * FmAd管理控制器
@@ -35,8 +32,8 @@ import org.springframework.web.multipart.MultipartFile;
  * 
  */
 @Controller
-@RequestMapping("/fmAdController")
-public class FmAdController extends BaseController {
+@RequestMapping("/fmAd2Controller")
+public class FmAd2Controller extends BaseController {
 
 	@Autowired
 	private FmAdServiceI fmAdService;
@@ -50,7 +47,7 @@ public class FmAdController extends BaseController {
 	 */
 	@RequestMapping("/manager")
 	public String manager(HttpServletRequest request) {
-		return "/fmad/fmAd";
+		return "/fmad2/fmAd";
 	}
 
 	/**
@@ -62,7 +59,7 @@ public class FmAdController extends BaseController {
 	@RequestMapping("/dataGrid")
 	@ResponseBody
 	public DataGrid dataGrid(FmAd fmAd, PageHelper ph) {
-		fmAd.setType("AD01");
+		fmAd.setType("AD02");
 		DataGrid dataGrid = fmAdService.dataGrid(fmAd, ph);
 		if (!CollectionUtils.isEmpty(dataGrid.getRows())) {
 			final CompletionService completionService = CompletionFactory.initCompletion();
@@ -115,7 +112,7 @@ public class FmAdController extends BaseController {
 	public String addPage(HttpServletRequest request) {
 		FmAd fmAd = new FmAd();
 		fmAd.setId(UUID.randomUUID().toString());
-		return "/fmad/fmAdAdd";
+		return "/fmad2/fmAdAdd";
 	}
 
 	/**
@@ -146,7 +143,7 @@ public class FmAdController extends BaseController {
 	public String view(HttpServletRequest request, String id) {
 		FmAd fmAd = fmAdService.get(id);
 		request.setAttribute("fmAd", fmAd);
-		return "/fmad/fmAdView";
+		return "/fmad2/fmAdView";
 	}
 
 	/**
@@ -158,7 +155,7 @@ public class FmAdController extends BaseController {
 	public String editPage(HttpServletRequest request, String id) {
 		FmAd fmAd = fmAdService.get(id);
 		request.setAttribute("fmAd", fmAd);
-		return "/fmad/fmAdEdit";
+		return "/fmad2/fmAdEdit";
 	}
 
 	/**

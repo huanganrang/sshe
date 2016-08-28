@@ -51,35 +51,31 @@
 				}, {
 				field : 'addtime',
 				title : '<%=TfmAd.ALIAS_ADDTIME%>',
-				width : 50		
+				width : 60
 				}, {
 				field : 'updatetime',
 				title : '<%=TfmAd.ALIAS_UPDATETIME%>',
-				width : 50		
+				width : 60
 				}, {
-				field : 'goodsName',
+				field : 'goodsNameName',
 				title : '<%=TfmAd.ALIAS_GOODS_NAME%>',
 				width : 50		
 				}, {
 				field : 'url',
 				title : '<%=TfmAd.ALIAS_URL%>',
-				width : 50		
+				width : 100
 				}, {
 				field : 'local',
 				title : '<%=TfmAd.ALIAS_LOCAL%>',
 				width : 50		
 				}, {
-				field : 'status',
+				field : 'statusName',
 				title : '<%=TfmAd.ALIAS_STATUS%>',
-				width : 50		
+				width : 30
 				}, {
-				field : 'channel',
-				title : '<%=TfmAd.ALIAS_CHANNEL%>',
-				width : 50		
-				}, {
-				field : 'type',
-				title : '<%=TfmAd.ALIAS_TYPE%>',
-				width : 50		
+				field : 'channelName',
+				title : '广告区',
+				width : 30
 				}, {
 				field : 'goodsId',
 				title : '<%=TfmAd.ALIAS_GOODS_ID%>',
@@ -91,7 +87,7 @@
 			}, {
 				field : 'action',
 				title : '操作',
-				width : 100,
+				width : 50,
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {
@@ -220,7 +216,7 @@
 </head>
 <body>
 	<div class="easyui-layout" data-options="fit : true,border : false">
-		<div data-options="region:'north',title:'查询条件',border:false" style="height: 160px; overflow: hidden;">
+		<div data-options="region:'north',title:'查询条件',border:false" style="height: 65px; overflow: hidden;">
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
 						<tr>	
@@ -234,17 +230,12 @@
 							</td>
 							<th><%=TfmAd.ALIAS_STATUS%></th>	
 							<td>
-											<jb:select dataType="FS" name="status"></jb:select>	
+								<jb:select dataType="FS" name="status"></jb:select>
 							</td>
-							<th><%=TfmAd.ALIAS_CHANNEL%></th>	
+
+							<th>广告区</th>
 							<td>
-											<input type="text" name="channel" maxlength="4" class="span2"/>
-							</td>
-						</tr>	
-						<tr>	
-							<th><%=TfmAd.ALIAS_TYPE%></th>	
-							<td>
-								<jb:select dataType="GS" name="type"></jb:select>
+								<jb:select dataType="GS" name="channel"></jb:select>
 							</td>
 						</tr>	
 				</table>
