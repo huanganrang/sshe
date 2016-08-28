@@ -6,12 +6,13 @@
 
 package jb.model;
 
-import javax.persistence.*;
-
-import java.util.Date;
-
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @SuppressWarnings("serial")
 @Entity
@@ -50,6 +51,7 @@ public class TfmPurchase implements java.io.Serializable,IEntity{
 	public static final String ALIAS_VOICE_DURATION = "语音时长";
 	public static final String ALIAS_USER_ID = "用户ID";
 	public static final String ALIAS_ONLINE_STATUS = "上下线状态";
+	public static final String ALIAS_EXTFIELDS = "规格的json格式";
 	
 	//date formats
 	public static final String FORMAT_ADDTIME = jb.util.Constants.DATE_FORMAT_FOR_ENTITY;
@@ -114,6 +116,8 @@ public class TfmPurchase implements java.io.Serializable,IEntity{
 	private java.lang.String userId;
 	//@Length(max=4)
 	private java.lang.String onlineStatus;
+	//@Length(max=500)
+	private java.lang.String extFields;
 	//columns END
 
 
@@ -370,6 +374,15 @@ public class TfmPurchase implements java.io.Serializable,IEntity{
 	
 	public void setOnlineStatus(java.lang.String onlineStatus) {
 		this.onlineStatus = onlineStatus;
+	}
+
+	@Column(name = "ext_fields", unique = false, nullable = true, insertable = true, updatable = true, length = 500)
+	public String getExtFields() {
+		return extFields;
+	}
+
+	public void setExtFields(String extFields) {
+		this.extFields = extFields;
 	}
 	
 	

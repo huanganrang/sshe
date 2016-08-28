@@ -1,5 +1,7 @@
 package jb.pageModel;
 
+import jb.listener.Application;
+
 import java.util.Date;
 import java.util.List;
 
@@ -35,6 +37,7 @@ public class FmPurchase implements java.io.Serializable {
 	private java.lang.Integer voiceDuration;	
 	private java.lang.String userId;	
 	private java.lang.String onlineStatus;
+	private java.lang.String extFields;
 	private List fmPurchaseUserList;
 
 	public void setId(java.lang.String value) {
@@ -72,7 +75,7 @@ public class FmPurchase implements java.io.Serializable {
 	}
 	
 	public java.lang.String getName() {
-		return this.name;
+		return Application.getString(this.name);
 	}
 	public void setStartPrice(java.lang.Float startPrice) {
 		this.startPrice = startPrice;
@@ -93,7 +96,7 @@ public class FmPurchase implements java.io.Serializable {
 	}
 	
 	public java.lang.String getUnit() {
-		return this.unit;
+		return Application.getString(this.unit);
 	}
 	public void setMinNum(java.lang.Float minNum) {
 		this.minNum = minNum;
@@ -114,7 +117,7 @@ public class FmPurchase implements java.io.Serializable {
 	}
 	
 	public java.lang.String getStatus() {
-		return this.status;
+		return Application.getString(this.status);
 	}
 	public void setBornArea(java.lang.String bornArea) {
 		this.bornArea = bornArea;
@@ -170,14 +173,14 @@ public class FmPurchase implements java.io.Serializable {
 	}
 	
 	public java.lang.String getDiameterUnit() {
-		return this.diameterUnit;
+		return Application.getString(this.diameterUnit);
 	}
 	public void setColor(java.lang.String color) {
 		this.color = color;
 	}
 	
 	public java.lang.String getColor() {
-		return this.color;
+		return Application.getString(this.color);
 	}
 	public void setIsPack(java.lang.String isPack) {
 		this.isPack = isPack;
@@ -191,7 +194,7 @@ public class FmPurchase implements java.io.Serializable {
 	}
 	
 	public java.lang.String getPack() {
-		return this.pack;
+		return Application.getString(this.pack);
 	}
 	public void setFormatDesc(java.lang.String formatDesc) {
 		this.formatDesc = formatDesc;
@@ -226,7 +229,15 @@ public class FmPurchase implements java.io.Serializable {
 	}
 	
 	public java.lang.String getOnlineStatus() {
-		return this.onlineStatus;
+		return Application.getString(this.onlineStatus);
+	}
+
+	public String getExtFields() {
+		return extFields;
+	}
+
+	public void setExtFields(String extFields) {
+		this.extFields = extFields;
 	}
 
 	public List getFmPurchaseUserList() {
