@@ -1,5 +1,7 @@
 package jb.pageModel;
 
+import jb.listener.Application;
+
 import java.util.Date;
 
 @SuppressWarnings("serial")
@@ -43,6 +45,7 @@ public class FmGoods implements java.io.Serializable {
 	private java.lang.String outerId;	
 	private java.lang.String outerNumber;	
 	private java.lang.String grade;	
+	private java.lang.String extFields;
 
 	
 
@@ -83,6 +86,11 @@ public class FmGoods implements java.io.Serializable {
 	public java.lang.String getName() {
 		return this.name;
 	}
+
+	public java.lang.String getNameName() {
+		return Application.getString(this.name);
+	}
+
 	public void setPrice(java.lang.Float price) {
 		this.price = price;
 	}
@@ -97,6 +105,11 @@ public class FmGoods implements java.io.Serializable {
 	public java.lang.String getUnit() {
 		return this.unit;
 	}
+
+	public java.lang.String getUnitName() {
+		return Application.getString(this.unit);
+	}
+
 	public void setMinBatch(java.lang.Float minBatch) {
 		this.minBatch = minBatch;
 	}
@@ -111,6 +124,11 @@ public class FmGoods implements java.io.Serializable {
 	public java.lang.String getStatus() {
 		return this.status;
 	}
+
+	public java.lang.String getStatusName() {
+		return Application.getString(this.status);
+	}
+
 	public void setBornArea(java.lang.String bornArea) {
 		this.bornArea = bornArea;
 	}
@@ -216,6 +234,11 @@ public class FmGoods implements java.io.Serializable {
 	public java.lang.String getDiameterUnit() {
 		return this.diameterUnit;
 	}
+
+	public java.lang.String getDiameterUnitName() {
+		return Application.getString(this.diameterUnit);
+	}
+
 	public void setColor(java.lang.String color) {
 		this.color = color;
 	}
@@ -223,6 +246,11 @@ public class FmGoods implements java.io.Serializable {
 	public java.lang.String getColor() {
 		return this.color;
 	}
+
+	public java.lang.String getColorName() {
+		return Application.getString(this.color);
+	}
+
 	public void setIsPack(java.lang.String isPack) {
 		this.isPack = isPack;
 	}
@@ -230,6 +258,11 @@ public class FmGoods implements java.io.Serializable {
 	public java.lang.String getIsPack() {
 		return this.isPack;
 	}
+
+	public java.lang.String getIsPackName() {
+		return Application.getString(this.isPack);
+	}
+
 	public void setPack(java.lang.String pack) {
 		this.pack = pack;
 	}
@@ -237,6 +270,11 @@ public class FmGoods implements java.io.Serializable {
 	public java.lang.String getPack() {
 		return this.pack;
 	}
+
+	public java.lang.String getPackName() {
+		return Application.getString(this.pack);
+	}
+
 	public void setFormatDesc(java.lang.String formatDesc) {
 		this.formatDesc = formatDesc;
 	}
@@ -251,6 +289,11 @@ public class FmGoods implements java.io.Serializable {
 	public java.lang.String getOnlineStatus() {
 		return this.onlineStatus;
 	}
+
+	public java.lang.String getOnlineStatusName() {
+		return Application.getString(this.onlineStatus);
+	}
+
 	public void setUserId(java.lang.String userId) {
 		this.userId = userId;
 	}
@@ -299,6 +342,18 @@ public class FmGoods implements java.io.Serializable {
 	
 	public java.lang.String getGrade() {
 		return this.grade;
+	}
+
+	public java.lang.String getGradeName() {
+		return Application.getString(this.grade);
+	}
+
+	public String getExtFields() {
+		return extFields;
+	}
+
+	public void setExtFields(String extFields) {
+		this.extFields = extFields;
 	}
 
 }

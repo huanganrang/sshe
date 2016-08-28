@@ -6,12 +6,13 @@
 
 package jb.model;
 
-import javax.persistence.*;
-
-import java.util.Date;
-
 import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.DynamicUpdate;
+
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
 @SuppressWarnings("serial")
 @Entity
@@ -59,7 +60,8 @@ public class TfmGoods implements java.io.Serializable,IEntity{
 	public static final String ALIAS_OUTER_ID = "外部ID";
 	public static final String ALIAS_OUTER_NUMBER = "外部号（批次号）";
 	public static final String ALIAS_GRADE = "商品级别（有机、无机）";
-	
+	public static final String ALIAS_EXTFIELDS = "规格的json格式";
+
 	//date formats
 	public static final String FORMAT_ADDTIME = jb.util.Constants.DATE_FORMAT_FOR_ENTITY;
 	public static final String FORMAT_UPDATETIME = jb.util.Constants.DATE_FORMAT_FOR_ENTITY;
@@ -143,6 +145,8 @@ public class TfmGoods implements java.io.Serializable,IEntity{
 	private java.lang.String outerNumber;
 	//@Length(max=4)
 	private java.lang.String grade;
+	//@Length(max=500)
+	private java.lang.String extFields;
 	//columns END
 
 
@@ -483,8 +487,16 @@ public class TfmGoods implements java.io.Serializable,IEntity{
 	public void setGrade(java.lang.String grade) {
 		this.grade = grade;
 	}
-	
-	
+
+	@Column(name = "ext_fields", unique = false, nullable = true, insertable = true, updatable = true, length = 500)
+	public String getExtFields() {
+		return extFields;
+	}
+
+	public void setExtFields(String extFields) {
+		this.extFields = extFields;
+	}
+
 	/*
 	public String toString() {
 		return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)

@@ -1,5 +1,7 @@
 package jb.pageModel;
 
+import jb.listener.Application;
+
 import java.util.Date;
 
 @SuppressWarnings("serial")
@@ -112,6 +114,11 @@ public class FmUser implements java.io.Serializable {
 	public java.lang.String getUserRole() {
 		return this.userRole;
 	}
+
+	public java.lang.String getUserRoleName() {
+		return Application.getString(this.userRole);
+	}
+
 	public void setHxPassword(java.lang.String hxPassword) {
 		this.hxPassword = hxPassword;
 	}

@@ -1,5 +1,7 @@
 package jb.pageModel;
 
+import jb.listener.Application;
+
 import java.util.Date;
 import java.util.List;
 
@@ -35,6 +37,7 @@ public class FmPurchase implements java.io.Serializable {
 	private java.lang.Integer voiceDuration;	
 	private java.lang.String userId;	
 	private java.lang.String onlineStatus;
+	private java.lang.String extFields;
 	private List fmPurchaseUserList;
 
 	public void setId(java.lang.String value) {
@@ -44,7 +47,6 @@ public class FmPurchase implements java.io.Serializable {
 	public java.lang.String getId() {
 		return this.id;
 	}
-
 	
 	public void setAddtime(Date addtime) {
 		this.addtime = addtime;
@@ -67,13 +69,19 @@ public class FmPurchase implements java.io.Serializable {
 	public java.lang.Boolean getIsdeleted() {
 		return this.isdeleted;
 	}
+
 	public void setName(java.lang.String name) {
 		this.name = name;
 	}
-	
+
 	public java.lang.String getName() {
 		return this.name;
 	}
+
+	public java.lang.String getNameName() {
+		return Application.getString(this.name);
+	}
+
 	public void setStartPrice(java.lang.Float startPrice) {
 		this.startPrice = startPrice;
 	}
@@ -91,9 +99,13 @@ public class FmPurchase implements java.io.Serializable {
 	public void setUnit(java.lang.String unit) {
 		this.unit = unit;
 	}
-	
+
 	public java.lang.String getUnit() {
 		return this.unit;
+	}
+
+	public java.lang.String getUnitName() {
+		return Application.getString(this.unit);
 	}
 	public void setMinNum(java.lang.Float minNum) {
 		this.minNum = minNum;
@@ -112,9 +124,13 @@ public class FmPurchase implements java.io.Serializable {
 	public void setStatus(java.lang.String status) {
 		this.status = status;
 	}
-	
+
 	public java.lang.String getStatus() {
 		return this.status;
+	}
+
+	public java.lang.String getStatusName() {
+		return Application.getString(this.status);
 	}
 	public void setBornArea(java.lang.String bornArea) {
 		this.bornArea = bornArea;
@@ -172,13 +188,23 @@ public class FmPurchase implements java.io.Serializable {
 	public java.lang.String getDiameterUnit() {
 		return this.diameterUnit;
 	}
+
+	public java.lang.String getDiameterUnitName() {
+		return Application.getString(this.diameterUnit);
+	}
+
 	public void setColor(java.lang.String color) {
 		this.color = color;
 	}
-	
+
 	public java.lang.String getColor() {
 		return this.color;
 	}
+
+	public java.lang.String getColorName() {
+		return Application.getString(this.color);
+	}
+
 	public void setIsPack(java.lang.String isPack) {
 		this.isPack = isPack;
 	}
@@ -189,9 +215,13 @@ public class FmPurchase implements java.io.Serializable {
 	public void setPack(java.lang.String pack) {
 		this.pack = pack;
 	}
-	
+
 	public java.lang.String getPack() {
 		return this.pack;
+	}
+
+	public java.lang.String getPackName() {
+		return Application.getString(this.pack);
 	}
 	public void setFormatDesc(java.lang.String formatDesc) {
 		this.formatDesc = formatDesc;
@@ -224,9 +254,21 @@ public class FmPurchase implements java.io.Serializable {
 	public void setOnlineStatus(java.lang.String onlineStatus) {
 		this.onlineStatus = onlineStatus;
 	}
-	
+
 	public java.lang.String getOnlineStatus() {
 		return this.onlineStatus;
+	}
+
+	public java.lang.String getOnlineStatusName() {
+		return Application.getString(this.onlineStatus);
+	}
+
+	public String getExtFields() {
+		return extFields;
+	}
+
+	public void setExtFields(String extFields) {
+		this.extFields = extFields;
 	}
 
 	public List getFmPurchaseUserList() {
