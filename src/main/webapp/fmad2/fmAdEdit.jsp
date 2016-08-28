@@ -2,12 +2,12 @@
 <%@ page import="jb.model.TfmAd" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
-<%@ taglib prefix="jb" uri="http://www.jb.cn/jbtag"%>  
+<%@ taglib prefix="jb" uri="http://www.jb.cn/jbtag"%> 
 <script type="text/javascript">
 	$(function() {
-	 parent.$.messager.progress('close');
+		parent.$.messager.progress('close');
 		$('#form').form({
-			url : '${pageContext.request.contextPath}/fmAdController/add',
+			url : '${pageContext.request.contextPath}/fmAd2Controller/edit',
 			onSubmit : function() {
 				parent.$.messager.progress({
 					title : '提示',
@@ -48,23 +48,23 @@
 	});
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
-	<div data-options="region:'center',border:false" title="" style="overflow: hidden;">	
+	<div data-options="region:'center',border:false" title="" style="overflow: hidden;">
 		<form id="form" method="post" enctype="multipart/form-data">
-			<input type="hidden" name="id"/>
-			<input type="hidden" name="type" value="AD01">
+			<input type="hidden" name="id" value = "${fmAd.id}"/>
+			<input type="hidden" name="type" value="AD02">
 
 			<table class="table table-hover table-condensed">
-				<tr>
+
+				<tr>	
+
 					<th><%=TfmAd.ALIAS_GOODS_NAME%></th>	
 					<td>
-						<jb:select dataType="GN" name="goodsName"></jb:select>
+						<jb:select dataType="GN" name="goodsName" value="${fmAd.goodsName}"></jb:select>
 					</td>							
 				</tr>
 				<tr>
 					<td colspan="2" height="155">
-
-						<img class="img-preview" src="" width="100%" height="100%"/>
-
+						<img class="img-preview" src="${fmAd.url}" width="100%" height="100%"/>
 					</td>
 				</tr>
 				<tr>
@@ -76,28 +76,30 @@
 				<tr>
 					<th><%=TfmAd.ALIAS_LOCAL%></th>	
 					<td>
-						<input class="span2" name="local" type="number"/>
+						<jb:select dataType="LS" name="local" value="${fmAd.local}"></jb:select>
 					</td>							
-				</tr>	
+				</tr>
 				<tr>	
 					<th><%=TfmAd.ALIAS_STATUS%></th>	
 					<td>
-						<jb:select dataType="FS" name="status"></jb:select>
+						<jb:select dataType="FS" name="status" value="${fmAd.status}"></jb:select>
 					</td>
 				</tr>
 				<tr>
 					<th><%=TfmAd.ALIAS_CHANNEL%></th>	
 					<td>
-						<jb:select dataType="GS" name="channel"></jb:select>
-					</td>							
-				</tr>	
-				<tr>
+						<jb:select dataType="GD" name="channel" value="${fmAd.channel}"></jb:select>
+
+					</td>
+				</tr>
+				<tr>	
+
 					<th><%=TfmAd.ALIAS_GOODS_ID%></th>	
 					<td>
-						<input class="span2" name="goodsId" type="text"/>
+						<input class="span2" name="goodsId" type="text" value="${fmAd.goodsId}"/>
 					</td>							
 				</tr>
-			</table>		
+			</table>				
 		</form>
 	</div>
 </div>

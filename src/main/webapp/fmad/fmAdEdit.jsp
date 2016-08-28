@@ -30,69 +30,75 @@
 				}
 			}
 		});
+
+		function ProcessFile() {
+			var file = document.getElementById('iconFile').files[0];
+			if (file) {
+				var reader = new FileReader();
+				reader.onload = function ( event ) {
+					var txt = event.target.result;
+					$('.img-preview').attr('src',txt);
+				};
+			}
+			reader.readAsDataURL(file);
+		}
+		$(document).delegate('#iconFile','change',function () {
+			ProcessFile();
+		});
 	});
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
 	<div data-options="region:'center',border:false" title="" style="overflow: hidden;">
-		<form id="form" method="post">
-				<input type="hidden" name="id" value = "${fmAd.id}"/>
+		<form id="form" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="id" value = "${fmAd.id}"/>
+			<input type="hidden" name="type" value="AD01">
+
 			<table class="table table-hover table-condensed">
+
 				<tr>	
-					<th><%=TfmAd.ALIAS_ADDTIME%></th>	
-					<td>
-					<input class="span2" name="addtime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmAd.FORMAT_ADDTIME%>'})"   maxlength="0" value="${fmAd.addtime}"/>
-					</td>							
-					<th><%=TfmAd.ALIAS_UPDATETIME%></th>	
-					<td>
-					<input class="span2" name="updatetime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmAd.FORMAT_UPDATETIME%>'})"   maxlength="0" value="${fmAd.updatetime}"/>
-					</td>							
-			</tr>	
-				<tr>	
-					<th><%=TfmAd.ALIAS_ISDELETED%></th>	
-					<td>
-											<input class="span2" name="isdeleted" type="text" class="easyui-validatebox span2" data-options="required:true" value="${fmAd.isdeleted}"/>
-					</td>							
+
 					<th><%=TfmAd.ALIAS_GOODS_NAME%></th>	
 					<td>
-											<jb:select dataType="GN" name="goodsName" value="${fmAd.goodsName}"></jb:select>	
+						<jb:select dataType="GN" name="goodsName" value="${fmAd.goodsName}"></jb:select>
 					</td>							
-			</tr>	
-				<tr>	
-					<th><%=TfmAd.ALIAS_URL%></th>	
+				</tr>
+				<tr>
+					<td colspan="2" height="155">
+						<img class="img-preview" src="${fmAd.url}" width="100%" height="100%"/>
+					</td>
+				</tr>
+				<tr>
+					<th><%=TfmAd.ALIAS_URL%></th>
 					<td>
-											<input class="span2" name="url" type="text" value="${fmAd.url}"/>
-					</td>							
+						<input type="file" id="iconFile" name="equipIconFile">
+					</td>
+				</tr>
+				<tr>
 					<th><%=TfmAd.ALIAS_LOCAL%></th>	
 					<td>
-											<input class="span2" name="local" type="text" value="${fmAd.local}"/>
+						<input class="span2" name="local" type="number" value="${fmAd.local}"/>
 					</td>							
-			</tr>	
+				</tr>
 				<tr>	
 					<th><%=TfmAd.ALIAS_STATUS%></th>	
 					<td>
-											<jb:select dataType="FS" name="status" value="${fmAd.status}"></jb:select>	
-					</td>							
+							<jb:select dataType="FS" name="status" value="${fmAd.status}"></jb:select>
+					</td>
+				</tr>
+				<tr>
 					<th><%=TfmAd.ALIAS_CHANNEL%></th>	
 					<td>
-											<input class="span2" name="channel" type="text" value="${fmAd.channel}"/>
-					</td>							
-			</tr>	
+						<jb:select dataType="GS" name="channel" value="${fmAd.type}"></jb:select>
+
+					</td>
+				</tr>
 				<tr>	
-					<th><%=TfmAd.ALIAS_TYPE%></th>	
-					<td>
-											<jb:select dataType="GS" name="type" value="${fmAd.type}"></jb:select>	
-					</td>							
+
 					<th><%=TfmAd.ALIAS_GOODS_ID%></th>	
 					<td>
-											<input class="span2" name="goodsId" type="text" value="${fmAd.goodsId}"/>
+						<input class="span2" name="goodsId" type="text" value="${fmAd.goodsId}"/>
 					</td>							
-			</tr>	
-				<tr>	
-					<th><%=TfmAd.ALIAS_LOGIN_ID%></th>	
-					<td>
-											<input class="span2" name="loginId" type="text" value="${fmAd.loginId}"/>
-					</td>							
-			</tr>	
+				</tr>
 			</table>				
 		</form>
 	</div>
