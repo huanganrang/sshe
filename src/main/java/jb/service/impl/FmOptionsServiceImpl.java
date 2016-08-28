@@ -10,11 +10,14 @@ import java.util.UUID;
 import jb.absx.F;
 import jb.dao.FmOptionsDaoI;
 import jb.model.TfmOptions;
+import jb.model.TfmProperties;
 import jb.pageModel.FmOptions;
 import jb.pageModel.DataGrid;
+import jb.pageModel.FmProperties;
 import jb.pageModel.PageHelper;
 import jb.service.FmOptionsServiceI;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,7 +46,23 @@ public class FmOptionsServiceImpl extends BaseServiceImpl<FmOptions> implements 
 		dg.setRows(ol);
 		return dg;
 	}
-	
+
+	@Override
+	public List<FmOptions> query(FmOptions fmOptions) {
+		List<FmOptions> ol = new ArrayList<FmOptions>();
+		String hql = " from TfmOptions t ";
+		@SuppressWarnings("unchecked")
+		List<TfmOptions> l = query(hql, fmOptions, fmOptionsDao);
+		if (CollectionUtils.isNotEmpty(l)) {
+			for (TfmOptions t : l) {
+				FmOptions o = new FmOptions();
+				BeanUtils.copyProperties(t, o);
+				ol.add(o);
+			}
+		}
+		return ol;
+	}
+
 
 	protected String whereHql(FmOptions fmOptions, Map<String, Object> params) {
 		String whereHql = "";	

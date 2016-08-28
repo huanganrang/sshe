@@ -2,7 +2,10 @@ package jb.service;
 
 import jb.pageModel.FmOptions;
 import jb.pageModel.DataGrid;
+import jb.pageModel.FmProperties;
 import jb.pageModel.PageHelper;
+
+import java.util.List;
 
 /**
  * 
@@ -20,14 +23,18 @@ public interface FmOptionsServiceI {
 	 *            分页帮助类
 	 * @return
 	 */
-	public DataGrid dataGrid(FmOptions fmOptions, PageHelper ph);
+	DataGrid dataGrid(FmOptions fmOptions, PageHelper ph);
+
+
+	List<FmOptions> query(FmOptions fmOptions);
+
 
 	/**
 	 * 添加FmOptions
 	 * 
 	 * @param fmOptions
 	 */
-	public void add(FmOptions fmOptions);
+	void add(FmOptions fmOptions);
 
 	/**
 	 * 获得FmOptions对象
@@ -35,20 +42,20 @@ public interface FmOptionsServiceI {
 	 * @param id
 	 * @return
 	 */
-	public FmOptions get(String id);
+	FmOptions get(String id);
 
 	/**
 	 * 修改FmOptions
 	 * 
 	 * @param fmOptions
 	 */
-	public void edit(FmOptions fmOptions);
+	void edit(FmOptions fmOptions);
 
 	/**
 	 * 删除FmOptions
 	 * 
 	 * @param id
 	 */
-	public void delete(String id);
+	void delete(String id);
 
 }

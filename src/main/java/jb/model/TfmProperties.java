@@ -63,6 +63,10 @@ public class TfmProperties implements java.io.Serializable,IEntity{
 	private java.lang.String defaultValue;
 	//columns END
 
+	private java.lang.String groupId;
+
+	private Integer seq;
+
 
 		public TfmProperties(){
 		}
@@ -163,37 +167,22 @@ public class TfmProperties implements java.io.Serializable,IEntity{
 	public void setDefaultValue(java.lang.String defaultValue) {
 		this.defaultValue = defaultValue;
 	}
-	
-	
-	/*
-	public String toString() {
-		return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-			.append("Id",getId())
-			.append("Addtime",getAddtime())
-			.append("Updatetime",getUpdatetime())
-			.append("Isdeleted",getIsdeleted())
-			.append("Name",getName())
-			.append("GoodName",getGoodName())
-			.append("Description",getDescription())
-			.append("FieldType",getFieldType())
-			.append("Require",getRequire())
-			.append("DefaultValue",getDefaultValue())
-			.toString();
+
+	@Column(name = "group_id", unique = false, nullable = true, insertable = true, updatable = true, length = 36)
+	public String getGroupId() {
+		return groupId;
 	}
-	
-	public int hashCode() {
-		return new HashCodeBuilder()
-			.append(getId())
-			.toHashCode();
+
+	public void setGroupId(String groupId) {
+		this.groupId = groupId;
 	}
-	
-	public boolean equals(Object obj) {
-		if(obj instanceof FmProperties == false) return false;
-		if(this == obj) return true;
-		FmProperties other = (FmProperties)obj;
-		return new EqualsBuilder()
-			.append(getId(),other.getId())
-			.isEquals();
-	}*/
+	@Column(name = "seq", unique = false, nullable = true, insertable = true, updatable = true, length = 10)
+	public Integer getSeq() {
+		return seq;
+	}
+
+	public void setSeq(Integer seq) {
+		this.seq = seq;
+	}
 }
 

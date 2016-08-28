@@ -4,6 +4,8 @@ import jb.pageModel.FmProperties;
 import jb.pageModel.DataGrid;
 import jb.pageModel.PageHelper;
 
+import java.util.List;
+
 /**
  * 
  * @author John
@@ -20,14 +22,21 @@ public interface FmPropertiesServiceI {
 	 *            分页帮助类
 	 * @return
 	 */
-	public DataGrid dataGrid(FmProperties fmProperties, PageHelper ph);
+	DataGrid dataGrid(FmProperties fmProperties, PageHelper ph);
+
+	/**
+	 * 查询
+	 * @param fmProperties
+	 * @return
+	 */
+	List<FmProperties> query(FmProperties fmProperties);
 
 	/**
 	 * 添加FmProperties
 	 * 
 	 * @param fmProperties
 	 */
-	public void add(FmProperties fmProperties);
+	void add(FmProperties fmProperties);
 
 	/**
 	 * 获得FmProperties对象
@@ -35,20 +44,20 @@ public interface FmPropertiesServiceI {
 	 * @param id
 	 * @return
 	 */
-	public FmProperties get(String id);
+	FmProperties get(String id);
 
 	/**
 	 * 修改FmProperties
 	 * 
 	 * @param fmProperties
 	 */
-	public void edit(FmProperties fmProperties);
+	void edit(FmProperties fmProperties);
 
 	/**
 	 * 删除FmProperties
 	 * 
 	 * @param id
 	 */
-	public void delete(String id);
+	void delete(String id);
 
 }
