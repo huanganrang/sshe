@@ -1,6 +1,7 @@
 package jb.pageModel;
 
 import java.util.Date;
+import java.util.List;
 
 @SuppressWarnings("serial")
 public class FmProperties implements java.io.Serializable {
@@ -16,7 +17,14 @@ public class FmProperties implements java.io.Serializable {
 	private java.lang.String description;	
 	private java.lang.String fieldType;	
 	private java.lang.Boolean require;	
-	private java.lang.String defaultValue;	
+	private java.lang.String defaultValue;
+
+	private java.lang.String groupId;
+
+	private Integer seq;
+
+
+	private List<FmOptions> fmOptionsList;
 
 	
 
@@ -93,4 +101,27 @@ public class FmProperties implements java.io.Serializable {
 		return this.defaultValue;
 	}
 
+	public String getGroupId() {
+		return groupId;
+	}
+
+	public void setGroupId(String groupId) {
+		this.groupId = groupId;
+	}
+
+	public Integer getSeq() {
+		return seq;
+	}
+
+	public void setSeq(Integer seq) {
+		this.seq = seq;
+	}
+
+	public List<FmOptions> getFmOptionsList() {
+		return fmOptionsList;
+	}
+
+	public void setFmOptionsList(List<FmOptions> fmOptionsList) {
+		this.fmOptionsList = fmOptionsList;
+	}
 }

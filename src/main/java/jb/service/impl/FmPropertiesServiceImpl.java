@@ -9,12 +9,15 @@ import java.util.UUID;
 
 import jb.absx.F;
 import jb.dao.FmPropertiesDaoI;
+import jb.model.TfmGoodsUser;
 import jb.model.TfmProperties;
+import jb.pageModel.FmGoodsUser;
 import jb.pageModel.FmProperties;
 import jb.pageModel.DataGrid;
 import jb.pageModel.PageHelper;
 import jb.service.FmPropertiesServiceI;
 
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -43,7 +46,23 @@ public class FmPropertiesServiceImpl extends BaseServiceImpl<FmProperties> imple
 		dg.setRows(ol);
 		return dg;
 	}
-	
+
+	@Override
+	public List<FmProperties> query(FmProperties fmProperties) {
+		List<FmProperties> ol = new ArrayList<FmProperties>();
+		String hql = " from TfmProperties t ";
+		@SuppressWarnings("unchecked")
+		List<TfmProperties> l = query(hql, fmProperties, fmPropertiesDao);
+		if (CollectionUtils.isNotEmpty(l)) {
+			for (TfmProperties t : l) {
+				FmProperties o = new FmProperties();
+				BeanUtils.copyProperties(t, o);
+				ol.add(o);
+			}
+		}
+		return ol;
+	}
+
 
 	protected String whereHql(FmProperties fmProperties, Map<String, Object> params) {
 		String whereHql = "";	
