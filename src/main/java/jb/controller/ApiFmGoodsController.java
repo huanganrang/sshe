@@ -25,7 +25,8 @@ public class ApiFmGoodsController extends BaseController {
     /**
      * 发布商品接口
      *
-     *参数:
+     *参数:name,price,unit,minBatch,status,bornArea,storage,offlineTime,contactor,contactorMobile,goalArea,preOnlineTime,
+     * transactionArea,sendTime,transactionTime,carNo,images,description,formatDesc,onlineStatus,userId,grade,extFields
      *
      */
     @RequestMapping("/add")
@@ -46,6 +47,9 @@ public class ApiFmGoodsController extends BaseController {
 
     /**
      * 编辑商品信息接口
+     *
+     * 参数:name,price,unit,minBatch,status,bornArea,storage,offlineTime,contactor,contactorMobile,goalArea,preOnlineTime,
+     * transactionArea,sendTime,transactionTime,carNo,images,description,formatDesc,onlineStatus,userId,grade,extFields
      */
     @RequestMapping("/edit")
     @ResponseBody

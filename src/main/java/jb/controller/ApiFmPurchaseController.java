@@ -98,9 +98,7 @@ public class ApiFmPurchaseController extends BaseController {
                                                 return fmUser;
                                             }
                                             protected void set(FmPurchaseUser d, FmUser v) {
-                                                if(v != null){
-                                                    d.setFmUser(v);
-                                                }
+                                                d.setFmUser(v);
                                             }
                                         });
                                     }
@@ -118,6 +116,72 @@ public class ApiFmPurchaseController extends BaseController {
         } catch (Exception e) {
             j.setMsg(Application.getString(EX_0001));
             logger.error("查询采购记录异常", e);
+        }
+
+        return j;
+    }
+
+    /**
+     * 采购记录详情
+     *
+     * 必要参数:id
+     *
+     */
+    @RequestMapping("/get")
+    @ResponseBody
+    public Json get(final FmPurchase fmPurchase) {
+        Json j = new Json();
+        try {
+            final String  id = fmPurchase.getId();
+            if(!F.empty(id)) {
+                final FmPurchase fp = fmPurchaseService.get(id);
+                final CompletionService completionService = CompletionFactory.initCompletion();
+                completionService.submit(new Task<FmPurchase, List<FmPurchaseUser>>(fp){
+                    @Override
+                    public List<FmPurchaseUser> call() throws Exception {
+                        FmPurchaseUser fmPurchaseUser = new FmPurchaseUser();
+                        fmPurchaseUser.setPurchaseId(id);
+                        List<FmPurchaseUser> fmPurchaseUserList = fmPurchaseUserServiceI.query(fmPurchaseUser);
+                        return fmPurchaseUserList;
+                    }
+                    protected void set(FmPurchase d, List<FmPurchaseUser> fmPurchaseUserList) {
+                        if(fmPurchaseUserList != null && fmPurchaseUserList.size() > 0) {
+                            for (int m=0; m<fmPurchaseUserList.size(); m++) {
+                                final FmPurchaseUser fmPurchaseUser = fmPurchaseUserList.get(m);
+                                //根据用户id查询用户信息
+                                completionService.submit(new Task<FmPurchaseUser, FmUser>(fmPurchaseUser){
+                                    @Override
+                                    public FmUser call() throws Exception {
+                                        FmUser fmUser = fmUserServiceI.get(getD().getUserId());
+                                        return fmUser;
+                                    }
+                                    protected void set(FmPurchaseUser d, FmUser v) {
+                                        d.setFmUser(v);
+                                    }
+                                });
+                            }
+                            d.setFmPurchaseUserList(fmPurchaseUserList);
+                        }
+                    }
+                });
+                completionService.submit(new Task<FmPurchase, FmUser>(fp){
+                    @Override
+                    public FmUser call() throws Exception {
+                        FmUser fmUser = fmUserServiceI.get(fp.getUserId());
+                        return fmUser;
+                    }
+                    protected void set(FmPurchase d, FmUser v) {
+                        d.setFmUser(v);
+                    }
+                });
+                completionService.sync();
+                j.setSuccess(true);
+                j.setMsg(SUCCESS_MESSAGE);
+                j.setObj(fp);
+            }
+        } catch (Exception e) {
+            j.setMsg(Application.getString(EX_0001));
+            logger.error("查询采购记录详情异常", e);
         }
 
         return j;
