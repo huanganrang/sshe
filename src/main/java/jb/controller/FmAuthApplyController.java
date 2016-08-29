@@ -15,6 +15,7 @@ import jb.pageModel.Json;
 import jb.pageModel.PageHelper;
 import jb.service.FmAuthApplyServiceI;
 
+import jb.service.FmUserServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,6 +35,8 @@ public class FmAuthApplyController extends BaseController {
 
 	@Autowired
 	private FmAuthApplyServiceI fmAuthApplyService;
+	@Autowired
+	private FmUserServiceI fmUserService;
 
 
 	/**
@@ -49,7 +52,6 @@ public class FmAuthApplyController extends BaseController {
 	/**
 	 * 获取FmAuthApply数据表格
 	 * 
-	 * @param user
 	 * @return
 	 */
 	@RequestMapping("/dataGrid")
@@ -60,7 +62,6 @@ public class FmAuthApplyController extends BaseController {
 	/**
 	 * 获取FmAuthApply数据表格excel
 	 * 
-	 * @param user
 	 * @return
 	 * @throws NoSuchMethodException 
 	 * @throws SecurityException 
@@ -125,6 +126,7 @@ public class FmAuthApplyController extends BaseController {
 	@RequestMapping("/editPage")
 	public String editPage(HttpServletRequest request, String id) {
 		FmAuthApply fmAuthApply = fmAuthApplyService.get(id);
+		fmAuthApply.setFmUser(fmUserService.get(fmAuthApply.getUserId()));
 		request.setAttribute("fmAuthApply", fmAuthApply);
 		return "/fmauthapply/fmAuthApplyEdit";
 	}

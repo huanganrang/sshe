@@ -22,6 +22,7 @@ public class FmAuthApply implements java.io.Serializable {
     private java.lang.String userCard;
     private java.lang.String authRemark;
     private java.lang.String status;
+    private FmUser fmUser;
 
 
     public void setId(java.lang.String value) {
@@ -113,6 +114,11 @@ public class FmAuthApply implements java.io.Serializable {
         return this.images;
     }
 
+    public String[] getImageList() {
+        if (this.images == null) return new String[]{};
+        return this.images.split("[;]");
+    }
+
     public void setUserCard(java.lang.String userCard) {
         this.userCard = userCard;
     }
@@ -141,4 +147,11 @@ public class FmAuthApply implements java.io.Serializable {
         return Application.getString(this.status, this.status);
     }
 
+    public FmUser getFmUser() {
+        return fmUser;
+    }
+
+    public void setFmUser(FmUser fmUser) {
+        this.fmUser = fmUser;
+    }
 }

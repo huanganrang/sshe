@@ -37,66 +37,79 @@
 		<form id="form" method="post">
 				<input type="hidden" name="id" value = "${fmAuthApply.id}"/>
 			<table class="table table-hover table-condensed">
+				<tr>
+					<th>昵称</th>
+					<td>
+						${fmAuthApply.fmUser.nickName}
+					</td>
+
+					<th>注册手机号</th>
+					<td>
+						${fmAuthApply.fmUser.account}
+					</td>
+				</tr>
 				<tr>	
-					<th><%=TfmAuthApply.ALIAS_ADDTIME%></th>	
+					<th>提交认证时间</th>
 					<td>
-					<input class="span2" name="addtime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmAuthApply.FORMAT_ADDTIME%>'})"   maxlength="0" value="${fmAuthApply.addtime}"/>
-					</td>							
-					<th><%=TfmAuthApply.ALIAS_UPDATETIME%></th>	
+						${fmAuthApply.addtime}
+					</td>
+
+					<th>认证处理时间</th>
 					<td>
-					<input class="span2" name="updatetime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmAuthApply.FORMAT_UPDATETIME%>'})"   maxlength="0" value="${fmAuthApply.updatetime}"/>
-					</td>							
-			</tr>	
-				<tr>	
-					<th><%=TfmAuthApply.ALIAS_ISDELETED%></th>	
-					<td>
-											<input class="span2" name="isdeleted" type="text" class="easyui-validatebox span2" data-options="required:true" value="${fmAuthApply.isdeleted}"/>
-					</td>							
-					<th><%=TfmAuthApply.ALIAS_USER_ID%></th>	
-					<td>
-											<input class="span2" name="userId" type="text" value="${fmAuthApply.userId}"/>
-					</td>							
-			</tr>	
+						${fmAuthApply.updatetime}
+					</td>
+				</tr>
+				<tr>
+					<th><%=TfmAuthApply.ALIAS_STATUS%></th>
+					<td colspan="3">
+						${fmAuthApply.statusName}
+					</td>
+				</tr>
+
 				<tr>	
 					<th><%=TfmAuthApply.ALIAS_TYPE%></th>	
 					<td>
-											<jb:select dataType="AT" name="type" value="${fmAuthApply.type}"></jb:select>	
+						${fmAuthApply.typeName}
 					</td>							
-					<th><%=TfmAuthApply.ALIAS_USER_NAME%></th>	
+
+					<th>身份类型</th>
 					<td>
-											<input class="span2" name="userName" type="text" value="${fmAuthApply.userName}"/>
-					</td>							
-			</tr>	
-				<tr>	
-					<th><%=TfmAuthApply.ALIAS_PHONE%></th>	
+						${fmAuthApply.fmUser.userRoleName}
+					</td>
+				</tr>
+
+				<tr>
+					<th><%=TfmAuthApply.ALIAS_USER_NAME%></th>
 					<td>
-											<input class="span2" name="phone" type="text" value="${fmAuthApply.phone}"/>
-					</td>							
-					<th><%=TfmAuthApply.ALIAS_COMPANY_TYPE%></th>	
-					<td>
-											<jb:select dataType="CT" name="companyType" value="${fmAuthApply.companyType}"></jb:select>	
-					</td>							
-			</tr>	
-				<tr>	
-					<th><%=TfmAuthApply.ALIAS_IMAGES%></th>	
-					<td>
-											<input class="span2" name="images" type="text" value="${fmAuthApply.images}"/>
-					</td>							
+						${fmAuthApply.userName}
+					</td>
 					<th><%=TfmAuthApply.ALIAS_USER_CARD%></th>	
 					<td>
-											<input class="span2" name="userCard" type="text" value="${fmAuthApply.userCard}"/>
+						${fmAuthApply.userCard}
 					</td>							
-			</tr>	
+				</tr>
+				<tr>
+					<th><%=TfmAuthApply.ALIAS_COMPANY_TYPE%></th>
+					<td colspan="3">
+						${fmAuthApply.companyTypeName}
+					</td>
+
+				</tr>
+				<tr>
+
+					<td colspan="4">
+						<c:forEach items="${fmAuthApply.imageList}" var="image">
+							<img class="img-preview" src="${image}" width="100" height="100"/>
+						</c:forEach>
+					</td>
+				</tr>
 				<tr>	
 					<th><%=TfmAuthApply.ALIAS_AUTH_REMARK%></th>	
-					<td>
-											<input class="span2" name="authRemark" type="text" value="${fmAuthApply.authRemark}"/>
+					<td colspan="3">
+						<textarea class="span2" name="authRemark"  value="${fmAuthApply.authRemark}"/>
 					</td>							
-					<th><%=TfmAuthApply.ALIAS_STATUS%></th>	
-					<td>
-											<jb:select dataType="AU" name="status" value="${fmAuthApply.status}"></jb:select>	
-					</td>							
-			</tr>	
+
+				</tr>
 			</table>				
 		</form>
 	</div>
