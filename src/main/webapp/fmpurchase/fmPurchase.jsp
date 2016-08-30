@@ -48,46 +48,36 @@
 				title : '编号',
 				width : 150,
 				hidden : true
-				}, {
-				field : 'addtime',
-				title : '<%=TfmPurchase.ALIAS_ADDTIME%>',
-				width : 50		
-				}, {
-				field : 'updatetime',
-				title : '<%=TfmPurchase.ALIAS_UPDATETIME%>',
-				width : 50		
-				}, {
-				field : 'isdeleted',
-				title : '<%=TfmPurchase.ALIAS_ISDELETED%>',
-				width : 50		
-				}, {
-				field : 'name',
+				},  {
+				field : 'nameName',
 				title : '<%=TfmPurchase.ALIAS_NAME%>',
 				width : 50		
 				}, {
 				field : 'startPrice',
-				title : '<%=TfmPurchase.ALIAS_START_PRICE%>',
-				width : 50		
+				title : '期望价格',
+				width : 30,
+				formatter : function(value, row) {
+					return value+"-"+row.endPrice;
+				}
 				}, {
-				field : 'endPrice',
-				title : '<%=TfmPurchase.ALIAS_END_PRICE%>',
-				width : 50		
-				}, {
-				field : 'unit',
+				field : 'unitName',
 				title : '<%=TfmPurchase.ALIAS_UNIT%>',
-				width : 50		
+				width : 20
 				}, {
 				field : 'minNum',
-				title : '<%=TfmPurchase.ALIAS_MIN_NUM%>',
-				width : 50		
-				}, {
-				field : 'maxNum',
-				title : '<%=TfmPurchase.ALIAS_MAX_NUM%>',
-				width : 50		
-				}, {
+				title : '采购数量',
+				width : 30,
+				formatter : function(value, row) {
+					return value+"-"+row.maxNum;
+				}
+				},{
 				field : 'status',
-				title : '<%=TfmPurchase.ALIAS_STATUS%>',
-				width : 50		
+				title : '规格',
+				width : 100
+				}, {
+				field : 'statusName',
+				title : '状态',
+				width : 20
 				}, {
 				field : 'bornArea',
 				title : '<%=TfmPurchase.ALIAS_BORN_AREA%>',
@@ -97,65 +87,21 @@
 				title : '<%=TfmPurchase.ALIAS_TRANSACTION_AREA%>',
 				width : 50		
 				}, {
-				field : 'startTime',
-				title : '<%=TfmPurchase.ALIAS_START_TIME%>',
-				width : 50		
-				}, {
-				field : 'endTime',
-				title : '<%=TfmPurchase.ALIAS_END_TIME%>',
-				width : 50		
-				}, {
-				field : 'images',
-				title : '<%=TfmPurchase.ALIAS_IMAGES%>',
-				width : 50		
-				}, {
-				field : 'require',
-				title : '<%=TfmPurchase.ALIAS_REQUIRE%>',
-				width : 50		
-				}, {
-				field : 'diameter',
-				title : '<%=TfmPurchase.ALIAS_DIAMETER%>',
-				width : 50		
-				}, {
-				field : 'diameterUnit',
-				title : '<%=TfmPurchase.ALIAS_DIAMETER_UNIT%>',
-				width : 50		
-				}, {
-				field : 'color',
-				title : '<%=TfmPurchase.ALIAS_COLOR%>',
-				width : 50		
-				}, {
-				field : 'isPack',
-				title : '<%=TfmPurchase.ALIAS_IS_PACK%>',
-				width : 50		
-				}, {
-				field : 'pack',
-				title : '<%=TfmPurchase.ALIAS_PACK%>',
-				width : 50		
-				}, {
-				field : 'formatDesc',
-				title : '<%=TfmPurchase.ALIAS_FORMAT_DESC%>',
-				width : 50		
-				}, {
-				field : 'voiceUrl',
-				title : '<%=TfmPurchase.ALIAS_VOICE_URL%>',
-				width : 50		
-				}, {
-				field : 'voiceDuration',
-				title : '<%=TfmPurchase.ALIAS_VOICE_DURATION%>',
-				width : 50		
-				}, {
 				field : 'userId',
 				title : '<%=TfmPurchase.ALIAS_USER_ID%>',
 				width : 50		
 				}, {
-				field : 'onlineStatus',
+				field : 'onlineStatusName',
 				title : '<%=TfmPurchase.ALIAS_ONLINE_STATUS%>',
-				width : 50		
-			}, {
+				width : 30
+				},{
+				field : 'addtime',
+				title : '<%=TfmPurchase.ALIAS_ADDTIME%>',
+				width : 60
+				}, {
 				field : 'action',
 				title : '操作',
-				width : 100,
+				width : 30,
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {
@@ -284,131 +230,25 @@
 </head>
 <body>
 	<div class="easyui-layout" data-options="fit : true,border : false">
-		<div data-options="region:'north',title:'查询条件',border:false" style="height: 160px; overflow: hidden;">
+		<div data-options="region:'north',title:'查询条件',border:false" style="height: 65px; overflow: hidden;">
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
 						<tr>	
-							<th><%=TfmPurchase.ALIAS_ADDTIME%></th>	
-							<td>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmPurchase.FORMAT_ADDTIME%>'})" id="addtimeBegin" name="addtimeBegin"/>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmPurchase.FORMAT_ADDTIME%>'})" id="addtimeEnd" name="addtimeEnd"/>
-							</td>
-							<th><%=TfmPurchase.ALIAS_UPDATETIME%></th>	
-							<td>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmPurchase.FORMAT_UPDATETIME%>'})" id="updatetimeBegin" name="updatetimeBegin"/>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmPurchase.FORMAT_UPDATETIME%>'})" id="updatetimeEnd" name="updatetimeEnd"/>
-							</td>
-							<th><%=TfmPurchase.ALIAS_ISDELETED%></th>	
-							<td>
-											<input type="text" name="isdeleted" maxlength="0" class="span2"/>
-							</td>
+
 							<th><%=TfmPurchase.ALIAS_NAME%></th>	
 							<td>
 											<jb:select dataType="GN" name="name"></jb:select>	
 							</td>
-						</tr>	
-						<tr>	
-							<th><%=TfmPurchase.ALIAS_START_PRICE%></th>	
+							<th><%=TfmPurchase.ALIAS_BORN_AREA%></th>
 							<td>
-											<input type="text" name="startPrice" maxlength="12" class="span2"/>
+								<input type="text" name="bornArea" maxlength="36" class="span2"/>
 							</td>
-							<th><%=TfmPurchase.ALIAS_END_PRICE%></th>	
+							<th><%=TfmPurchase.ALIAS_USER_ID%></th>
 							<td>
-											<input type="text" name="endPrice" maxlength="12" class="span2"/>
-							</td>
-							<th><%=TfmPurchase.ALIAS_UNIT%></th>	
-							<td>
-											<jb:select dataType="GU" name="unit"></jb:select>	
-							</td>
-							<th><%=TfmPurchase.ALIAS_MIN_NUM%></th>	
-							<td>
-											<input type="text" name="minNum" maxlength="12" class="span2"/>
+								<input type="text" name="userId" maxlength="36" class="span2"/>
 							</td>
 						</tr>	
-						<tr>	
-							<th><%=TfmPurchase.ALIAS_MAX_NUM%></th>	
-							<td>
-											<input type="text" name="maxNum" maxlength="12" class="span2"/>
-							</td>
-							<th><%=TfmPurchase.ALIAS_STATUS%></th>	
-							<td>
-											<jb:select dataType="GS" name="status"></jb:select>	
-							</td>
-							<th><%=TfmPurchase.ALIAS_BORN_AREA%></th>	
-							<td>
-											<input type="text" name="bornArea" maxlength="36" class="span2"/>
-							</td>
-							<th><%=TfmPurchase.ALIAS_TRANSACTION_AREA%></th>	
-							<td>
-											<input type="text" name="transactionArea" maxlength="100" class="span2"/>
-							</td>
-						</tr>	
-						<tr>	
-							<th><%=TfmPurchase.ALIAS_START_TIME%></th>	
-							<td>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmPurchase.FORMAT_START_TIME%>'})" id="startTimeBegin" name="startTimeBegin"/>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmPurchase.FORMAT_START_TIME%>'})" id="startTimeEnd" name="startTimeEnd"/>
-							</td>
-							<th><%=TfmPurchase.ALIAS_END_TIME%></th>	
-							<td>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmPurchase.FORMAT_END_TIME%>'})" id="endTimeBegin" name="endTimeBegin"/>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmPurchase.FORMAT_END_TIME%>'})" id="endTimeEnd" name="endTimeEnd"/>
-							</td>
-							<th><%=TfmPurchase.ALIAS_IMAGES%></th>	
-							<td>
-											<input type="text" name="images" maxlength="500" class="span2"/>
-							</td>
-							<th><%=TfmPurchase.ALIAS_REQUIRE%></th>	
-							<td>
-											<input type="text" name="require" maxlength="500" class="span2"/>
-							</td>
-						</tr>	
-						<tr>	
-							<th><%=TfmPurchase.ALIAS_DIAMETER%></th>	
-							<td>
-											<input type="text" name="diameter" maxlength="100" class="span2"/>
-							</td>
-							<th><%=TfmPurchase.ALIAS_DIAMETER_UNIT%></th>	
-							<td>
-											<jb:select dataType="ZU" name="diameterUnit"></jb:select>	
-							</td>
-							<th><%=TfmPurchase.ALIAS_COLOR%></th>	
-							<td>
-											<jb:select dataType="CR" name="color"></jb:select>	
-							</td>
-							<th><%=TfmPurchase.ALIAS_IS_PACK%></th>	
-							<td>
-											<jb:select dataType="IS" name="isPack"></jb:select>	
-							</td>
-						</tr>	
-						<tr>	
-							<th><%=TfmPurchase.ALIAS_PACK%></th>	
-							<td>
-											<jb:select dataType="PK" name="pack"></jb:select>	
-							</td>
-							<th><%=TfmPurchase.ALIAS_FORMAT_DESC%></th>	
-							<td>
-											<input type="text" name="formatDesc" maxlength="500" class="span2"/>
-							</td>
-							<th><%=TfmPurchase.ALIAS_VOICE_URL%></th>	
-							<td>
-											<input type="text" name="voiceUrl" maxlength="100" class="span2"/>
-							</td>
-							<th><%=TfmPurchase.ALIAS_VOICE_DURATION%></th>	
-							<td>
-											<input type="text" name="voiceDuration" maxlength="10" class="span2"/>
-							</td>
-						</tr>	
-						<tr>	
-							<th><%=TfmPurchase.ALIAS_USER_ID%></th>	
-							<td>
-											<input type="text" name="userId" maxlength="36" class="span2"/>
-							</td>
-							<th><%=TfmPurchase.ALIAS_ONLINE_STATUS%></th>	
-							<td>
-											<jb:select dataType="OS" name="onlineStatus"></jb:select>	
-							</td>
-						</tr>	
+
 				</table>
 			</form>
 		</div>

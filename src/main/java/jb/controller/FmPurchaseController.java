@@ -15,6 +15,7 @@ import jb.pageModel.Json;
 import jb.pageModel.PageHelper;
 import jb.service.FmPurchaseServiceI;
 
+import jb.service.FmUserServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -34,7 +35,8 @@ public class FmPurchaseController extends BaseController {
 
 	@Autowired
 	private FmPurchaseServiceI fmPurchaseService;
-
+	@Autowired
+	private FmUserServiceI fmUserService;
 
 	/**
 	 * 跳转到FmPurchase管理页面
@@ -113,6 +115,7 @@ public class FmPurchaseController extends BaseController {
 	@RequestMapping("/view")
 	public String view(HttpServletRequest request, String id) {
 		FmPurchase fmPurchase = fmPurchaseService.get(id);
+		fmPurchase.setFmUser(fmUserService.get(fmPurchase.getUserId()));
 		request.setAttribute("fmPurchase", fmPurchase);
 		return "/fmpurchase/fmPurchaseView";
 	}

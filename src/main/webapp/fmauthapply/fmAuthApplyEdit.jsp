@@ -99,7 +99,7 @@
 
 					<td colspan="4">
 						<c:forEach items="${fmAuthApply.imageList}" var="image">
-							<img class="img-preview" src="${image}" width="100" height="100"/>
+							<img class="img-preview" src="${image}" width="200" height="150"/>
 						</c:forEach>
 					</td>
 				</tr>
