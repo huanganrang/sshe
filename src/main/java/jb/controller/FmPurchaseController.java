@@ -13,6 +13,7 @@ import jb.pageModel.FmPurchase;
 import jb.pageModel.DataGrid;
 import jb.pageModel.Json;
 import jb.pageModel.PageHelper;
+import jb.service.FmPropertiesServiceI;
 import jb.service.FmPurchaseServiceI;
 
 import jb.service.FmUserServiceI;
@@ -37,6 +38,8 @@ public class FmPurchaseController extends BaseController {
 	private FmPurchaseServiceI fmPurchaseService;
 	@Autowired
 	private FmUserServiceI fmUserService;
+	@Autowired
+	private FmPropertiesServiceI fmPropertiesService;
 
 	/**
 	 * 跳转到FmPurchase管理页面
@@ -51,7 +54,7 @@ public class FmPurchaseController extends BaseController {
 	/**
 	 * 获取FmPurchase数据表格
 	 * 
-	 * @param user
+	 * @param
 	 * @return
 	 */
 	@RequestMapping("/dataGrid")
@@ -62,7 +65,7 @@ public class FmPurchaseController extends BaseController {
 	/**
 	 * 获取FmPurchase数据表格excel
 	 * 
-	 * @param user
+	 * @param
 	 * @return
 	 * @throws NoSuchMethodException 
 	 * @throws SecurityException 
@@ -116,6 +119,8 @@ public class FmPurchaseController extends BaseController {
 	public String view(HttpServletRequest request, String id) {
 		FmPurchase fmPurchase = fmPurchaseService.get(id);
 		fmPurchase.setFmUser(fmUserService.get(fmPurchase.getUserId()));
+		String format = "<span>%s:%s</span>&nbsp;";
+		fmPurchase.setExtFields(fmPropertiesService.getAfterMatching(fmPurchase.getName(), JSON.parseObject(fmPurchase.getExtFields()),format));
 		request.setAttribute("fmPurchase", fmPurchase);
 		return "/fmpurchase/fmPurchaseView";
 	}

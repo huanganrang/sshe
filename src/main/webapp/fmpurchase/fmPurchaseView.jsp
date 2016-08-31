@@ -24,6 +24,7 @@
 				<tr>
 					<th>规格</th>
 					<td colspan="3">
+						${fmPurchase.extFields}
 					</td>
 				</tr>
 				<tr>	

@@ -1,7 +1,8 @@
 package jb.service;
 
-import jb.pageModel.FmProperties;
+import com.alibaba.fastjson.JSONObject;
 import jb.pageModel.DataGrid;
+import jb.pageModel.FmProperties;
 import jb.pageModel.PageHelper;
 
 import java.util.List;
@@ -30,6 +31,12 @@ public interface FmPropertiesServiceI {
 	 * @return
 	 */
 	List<FmProperties> query(FmProperties fmProperties);
+
+
+	List<FmProperties> getByGoodsId(String goodsId);
+
+
+	String getAfterMatching(String goodsId,JSONObject json,String format);
 
 	/**
 	 * 添加FmProperties

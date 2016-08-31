@@ -1,20 +1,18 @@
 package jb.service.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
+import java.util.*;
 
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.JSONObject;
+import farming.concurrent.CompletionService;
+import farming.concurrent.Task;
 import jb.absx.F;
 import jb.dao.FmPropertiesDaoI;
+import jb.enums.FieldType;
 import jb.model.TfmGoodsUser;
 import jb.model.TfmProperties;
-import jb.pageModel.FmGoodsUser;
-import jb.pageModel.FmProperties;
-import jb.pageModel.DataGrid;
-import jb.pageModel.PageHelper;
+import jb.pageModel.*;
+import jb.service.FmOptionsServiceI;
 import jb.service.FmPropertiesServiceI;
 
 import org.apache.commons.collections.CollectionUtils;
@@ -28,6 +26,9 @@ public class FmPropertiesServiceImpl extends BaseServiceImpl<FmProperties> imple
 
 	@Autowired
 	private FmPropertiesDaoI fmPropertiesDao;
+
+	@Autowired
+	private FmOptionsServiceI fmOptionsService;
 
 	@Override
 	public DataGrid dataGrid(FmProperties fmProperties, PageHelper ph) {
@@ -63,6 +64,78 @@ public class FmPropertiesServiceImpl extends BaseServiceImpl<FmProperties> imple
 		return ol;
 	}
 
+	@Override
+	public List<FmProperties> getByGoodsId(String goodsId) {
+		FmProperties fmProperties = new FmProperties();
+		fmProperties.setGoodName(goodsId);
+		List<FmProperties> fmPropertiesList = query(fmProperties);
+		if(!CollectionUtils.isEmpty(fmPropertiesList)){
+			final CompletionService completionService = CompletionFactory.initCompletion();
+			Collections.sort(fmPropertiesList, new Comparator<FmProperties>() {
+				@Override
+				public int compare(FmProperties o1, FmProperties o2) {
+					int seq1 = o1.getSeq() == null ? 0 : o1.getSeq();
+					int seq2 = o2.getSeq() == null ? 0 : o2.getSeq();
+					return seq1 - seq2;
+				}
+			});
+			for (FmProperties properties : fmPropertiesList) {
+
+				completionService.submit(new Task<FmProperties, List<FmOptions>>(properties){
+					@Override
+					public List<FmOptions> call() throws Exception {
+						FmOptions fmOptions = new FmOptions();
+						fmOptions.setPropertiesId(getD().getId());
+						return fmOptionsService.query(fmOptions);
+					}
+					protected void set(FmProperties d, List<FmOptions> v) {
+						Collections.sort(v, new Comparator<FmOptions>() {
+							@Override
+							public int compare(FmOptions o1, FmOptions o2) {
+								int seq1 = o1.getSeq() == null ? 0 : o1.getSeq();
+								int seq2 = o2.getSeq() == null ? 0 : o2.getSeq();
+								return seq1 - seq2;
+							}
+						});
+						d.setFmOptionsList(v);
+					}
+				});
+			}
+			completionService.sync();
+		}
+		return fmPropertiesList;
+	}
+
+	@Override
+	public String getAfterMatching(String goodsId, JSONObject json,String format) {
+		List<FmProperties> fmPropertiesList = getByGoodsId(goodsId);
+		StringBuffer sb = new StringBuffer();
+		for (FmProperties fmProperties : fmPropertiesList) {
+			String fieldType = fmProperties.getFieldType();
+			if (fieldType == null || FieldType.OPTION.getType().equals(fieldType)) {
+				sb.append(String.format(format,fmProperties.getName(),getValueName(json,fmProperties)));
+			} else if (FieldType.TEXT.getType().equals(fieldType)) {
+				String value = json.getString(fmProperties.getId());
+				sb.append(String.format(format,fmProperties.getName(),value == null ? "" : value));
+			} else if (FieldType.BOOLEAN.getType().equals(fieldType)) {
+				format = format.replaceFirst("%s^\\s%s","%s");
+				sb.append(String.format(format,getValueName(json, fmProperties)+fmProperties.getName()));
+			}
+		}
+		return sb.toString();
+	}
+
+	private String getValueName(JSONObject json,FmProperties fmProperties){
+		String name = "";
+		String value = json.getString(fmProperties.getId());
+		for (FmOptions fmOptions : fmProperties.getFmOptionsList()) {
+			if(fmOptions.getId().equals(value)){
+				name = fmOptions.getValue();
+				break;
+			}
+		}
+		return name;
+	}
 
 	protected String whereHql(FmProperties fmProperties, Map<String, Object> params) {
 		String whereHql = "";	

@@ -133,43 +133,7 @@ public class ApiBaseDataController extends BaseController {
 	public Json getExtFields(String goodsId) {
 		Json j = new Json();
 		try{
-			FmProperties fmProperties = new FmProperties();
-			fmProperties.setGoodName(goodsId);
-			List<FmProperties> fmPropertiesList = fmPropertiesService.query(fmProperties);
-			if(!CollectionUtils.isEmpty(fmPropertiesList)){
-				final CompletionService completionService = CompletionFactory.initCompletion();
-				Collections.sort(fmPropertiesList, new Comparator<FmProperties>() {
-					@Override
-					public int compare(FmProperties o1, FmProperties o2) {
-						int seq1 = o1.getSeq() == null ? 0 : o1.getSeq();
-						int seq2 = o2.getSeq() == null ? 0 : o2.getSeq();
-						return seq1 - seq2;
-					}
-				});
-				for (FmProperties properties : fmPropertiesList) {
-
-					completionService.submit(new Task<FmProperties, List<FmOptions>>(properties){
-						@Override
-						public List<FmOptions> call() throws Exception {
-							FmOptions fmOptions = new FmOptions();
-							fmOptions.setPropertiesId(getD().getId());
-							return fmOptionsService.query(fmOptions);
-						}
-						protected void set(FmProperties d, List<FmOptions> v) {
-							Collections.sort(v, new Comparator<FmOptions>() {
-								@Override
-								public int compare(FmOptions o1, FmOptions o2) {
-									int seq1 = o1.getSeq() == null ? 0 : o1.getSeq();
-									int seq2 = o2.getSeq() == null ? 0 : o2.getSeq();
-									return seq1 - seq2;
-								}
-							});
-							d.setFmOptionsList(v);
-						}
-					});
-				}
-				completionService.sync();
-			}
+			List<FmProperties> fmPropertiesList = fmPropertiesService.getByGoodsId(goodsId);
 			j.setObj(fmPropertiesList);
 			j.success();
 		}catch(Exception e){
