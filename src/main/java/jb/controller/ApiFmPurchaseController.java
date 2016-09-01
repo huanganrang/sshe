@@ -8,6 +8,7 @@ import jb.listener.Application;
 import jb.pageModel.*;
 import jb.service.FmPurchaseServiceI;
 import jb.service.FmPurchaseUserServiceI;
+import jb.service.FmShopUserServiceI;
 import jb.service.FmUserServiceI;
 import jb.service.impl.CompletionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,6 +35,9 @@ public class ApiFmPurchaseController extends BaseController {
 
     @Autowired
     private FmUserServiceI fmUserServiceI;
+
+    @Autowired
+    private FmShopUserServiceI fmShopUserService;
 
     /**
      * 发布采购(我要采购)
@@ -124,7 +128,7 @@ public class ApiFmPurchaseController extends BaseController {
     /**
      * 采购记录详情
      *
-     * 必要参数:id
+     * 必要参数:id,userId
      *
      */
     @RequestMapping("/get")
@@ -133,9 +137,11 @@ public class ApiFmPurchaseController extends BaseController {
         Json j = new Json();
         try {
             final String  id = fmPurchase.getId();
-            if(!F.empty(id)) {
+            final String  userId = fmPurchase.getUserId();
+            if(!F.empty(id) && !F.empty(userId)) {
                 final FmPurchase fp = fmPurchaseService.get(id);
                 final CompletionService completionService = CompletionFactory.initCompletion();
+                //查询询价用户信息
                 completionService.submit(new Task<FmPurchase, List<FmPurchaseUser>>(fp){
                     @Override
                     public List<FmPurchaseUser> call() throws Exception {
@@ -164,16 +170,31 @@ public class ApiFmPurchaseController extends BaseController {
                         }
                     }
                 });
-                completionService.submit(new Task<FmPurchase, FmUser>(fp){
-                    @Override
-                    public FmUser call() throws Exception {
-                        FmUser fmUser = fmUserServiceI.get(fp.getUserId());
-                        return fmUser;
-                    }
-                    protected void set(FmPurchase d, FmUser v) {
-                        d.setFmUser(v);
-                    }
-                });
+                //非自己的采购详情时添加用户的相关信息
+                if(!userId.equals(fp.getUserId())) {
+                    completionService.submit(new Task<FmPurchase, FmUser>(fp){
+                        @Override
+                        public FmUser call() throws Exception {
+                            FmUser fmUser = fmUserServiceI.get(fp.getUserId());
+                            return fmUser;
+                        }
+                        protected void set(FmPurchase d, FmUser v) {
+                            d.setFmUser(v);
+                            //判断是否关注过此发布采购的用户
+                            if(v != null) {
+                                FmShopUser fmShopUser = new FmShopUser();
+                                fmShopUser.setUserId(userId);
+                                fmShopUser.setShopId(v.getId());
+                                FmShopUser fs = fmShopUserService.get(fmShopUser);
+                                if(fs != null) {
+                                    d.setIsAttention(true);
+                                } else {
+                                    d.setIsAttention(false);
+                                }
+                            }
+                        }
+                    });
+                }
                 completionService.sync();
                 j.setSuccess(true);
                 j.setMsg(SUCCESS_MESSAGE);

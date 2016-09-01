@@ -1,8 +1,7 @@
 package jb.service;
 
-import jb.pageModel.FmGoodsUser;
-import jb.pageModel.FmShopUser;
 import jb.pageModel.DataGrid;
+import jb.pageModel.FmShopUser;
 import jb.pageModel.PageHelper;
 
 import java.util.List;
@@ -58,16 +57,16 @@ public interface FmShopUserServiceI {
 
 	/**
 	 *  通过条件get
-	 * @param fmGoodsUser
+	 * @param fmShopUser
 	 * @return
 	 */
-	FmShopUser get(FmShopUser fmGoodsUser);
+	FmShopUser get(FmShopUser fmShopUser);
 
 	/**
 	 * 查询
-	 * @param fmGoodsUser
+	 * @param fmShopUser
 	 * @return
 	 */
-	List<FmShopUser> query(FmShopUser fmGoodsUser);
+	List<FmShopUser> query(FmShopUser fmShopUser);
 
 }

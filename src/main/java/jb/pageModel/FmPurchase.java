@@ -40,6 +40,7 @@ public class FmPurchase implements java.io.Serializable {
 	private java.lang.String extFields;
 	private List<FmPurchaseUser> fmPurchaseUserList;
 	private FmUser fmUser;
+	private Boolean isAttention;
 
 	public void setId(java.lang.String value) {
 		this.id = value;
@@ -290,6 +291,14 @@ public class FmPurchase implements java.io.Serializable {
 
 	public void setFmUser(FmUser fmUser) {
 		this.fmUser = fmUser;
+	}
+
+	public Boolean getIsAttention() {
+		return isAttention;
+	}
+
+	public void setIsAttention(Boolean isAttention) {
+		this.isAttention = isAttention;
 	}
 
 }
