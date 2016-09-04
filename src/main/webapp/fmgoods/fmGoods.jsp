@@ -55,9 +55,10 @@
 				}, {
 				field : 'updatetime',
 				title : '<%=TfmGoods.ALIAS_UPDATETIME%>',
-				width : 50		
+				width : 50,
+				hidden : true
 				}, {
-				field : 'name',
+				field : 'nameName',
 				title : '<%=TfmGoods.ALIAS_NAME%>',
 				width : 50		
 				}, {
@@ -65,7 +66,7 @@
 				title : '<%=TfmGoods.ALIAS_PRICE%>',
 				width : 50		
 				}, {
-				field : 'unit',
+				field : 'unitName',
 				title : '<%=TfmGoods.ALIAS_UNIT%>',
 				width : 50		
 				}, {
@@ -73,8 +74,8 @@
 				title : '<%=TfmGoods.ALIAS_MIN_BATCH%>',
 				width : 50		
 				}, {
-				field : 'status',
-				title : '<%=TfmGoods.ALIAS_STATUS%>',
+				field : 'statusName',
+				title : '商品状态',
 				width : 50		
 				}, {
 				field : 'bornArea',
@@ -101,15 +102,7 @@
 				title : '<%=TfmGoods.ALIAS_TRANSACTION_AREA%>',
 				width : 50		
 				}, {
-				field : 'sendTime',
-				title : '<%=TfmGoods.ALIAS_SEND_TIME%>',
-				width : 50		
-				}, {
-				field : 'transactionTime',
-				title : '<%=TfmGoods.ALIAS_TRANSACTION_TIME%>',
-				width : 50		
-				}, {
-				field : 'onlineStatus',
+				field : 'onlineStatusName',
 				title : '<%=TfmGoods.ALIAS_ONLINE_STATUS%>',
 				width : 50		
 				}, {
