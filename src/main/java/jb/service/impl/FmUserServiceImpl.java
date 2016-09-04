@@ -12,10 +12,8 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
+import java.text.SimpleDateFormat;
+import java.util.*;
 
 @Service
 public class FmUserServiceImpl extends BaseServiceImpl<FmUser> implements FmUserServiceI {
@@ -138,6 +136,11 @@ public class FmUserServiceImpl extends BaseServiceImpl<FmUser> implements FmUser
 		TfmUser t = fmUserDao.get("from TfmUser t " + sql, params);
 		FmUser o = new FmUser();
 		BeanUtils.copyProperties(t, o);
+		if(t != null) {
+			Date d = new Date();
+			o.setUpdatetime(d);
+			fmUserDao.executeSql("update fm_user set updatetime='" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(d) + "' where id='" + t.getId() + "'");
+		}
 		return o;
 	}
 

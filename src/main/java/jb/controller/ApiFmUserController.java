@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -68,6 +69,8 @@ public class ApiFmUserController extends BaseController {
                     } else {
                         fmUser.setHxStatus(2);
                     }
+                    fmUser.setAddtime(new Date());
+                    fmUser.setUpdatetime(new Date());
                     fmUserService.add(fmUser);
                     map.put("farmingUser", fmUser);
                 }
@@ -121,6 +124,8 @@ public class ApiFmUserController extends BaseController {
                 if(!F.empty(result) && result.contains("true")) {
                     FmUser fmUser = new FmUser();
                     fmUser.setAccount(dtoMobile);
+                    fmUser.setAddtime(new Date());
+                    fmUser.setUpdatetime(new Date());
                     if(!F.empty(HuanxinUtil.createUser(dtoMobile, dtoPassword))) {
                         fmUser.setHxPassword(dtoPassword);
                         fmUser.setHxStatus(1);
