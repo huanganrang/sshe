@@ -49,10 +49,6 @@
 				width : 150,
 				hidden : true
 				}, {
-				field : 'addtime',
-				title : '<%=TfmGoods.ALIAS_ADDTIME%>',
-				width : 50		
-				}, {
 				field : 'updatetime',
 				title : '<%=TfmGoods.ALIAS_UPDATETIME%>',
 				width : 50,
@@ -62,14 +58,22 @@
 				title : '<%=TfmGoods.ALIAS_NAME%>',
 				width : 50		
 				}, {
+				field : 'typeName',
+				title : '商品分类',
+				width : 50
+				}, {
 				field : 'price',
 				title : '<%=TfmGoods.ALIAS_PRICE%>',
-				width : 50		
+				width : 20
 				}, {
 				field : 'unitName',
 				title : '<%=TfmGoods.ALIAS_UNIT%>',
-				width : 50		
+				width : 20
 				}, {
+				field : 'extFields',
+				title : '规格',
+				width : 100
+				},{
 				field : 'minBatch',
 				title : '<%=TfmGoods.ALIAS_MIN_BATCH%>',
 				width : 50		
@@ -82,33 +86,17 @@
 				title : '<%=TfmGoods.ALIAS_BORN_AREA%>',
 				width : 50		
 				}, {
-				field : 'storage',
-				title : '<%=TfmGoods.ALIAS_STORAGE%>',
-				width : 50		
-				}, {
-				field : 'offlineTime',
-				title : '<%=TfmGoods.ALIAS_OFFLINE_TIME%>',
-				width : 50		
-				}, {
-				field : 'goalArea',
-				title : '<%=TfmGoods.ALIAS_GOAL_AREA%>',
-				width : 50		
-				}, {
-				field : 'preOnlineTime',
-				title : '<%=TfmGoods.ALIAS_PRE_ONLINE_TIME%>',
-				width : 50		
-				}, {
-				field : 'transactionArea',
-				title : '<%=TfmGoods.ALIAS_TRANSACTION_AREA%>',
-				width : 50		
-				}, {
 				field : 'onlineStatusName',
-				title : '<%=TfmGoods.ALIAS_ONLINE_STATUS%>',
-				width : 50		
+				title : '上下架',
+				width : 30
+				}, {
+				field : 'addtime',
+				title : '<%=TfmGoods.ALIAS_ADDTIME%>',
+				width : 70
 				}, {
 				field : 'action',
 				title : '操作',
-				width : 100,
+				width : 30,
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {

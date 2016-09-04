@@ -8,13 +8,16 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jb.pageModel.Colum;
-import jb.pageModel.FmGoods;
-import jb.pageModel.DataGrid;
-import jb.pageModel.Json;
-import jb.pageModel.PageHelper;
+import farming.concurrent.CacheKey;
+import farming.concurrent.CompletionService;
+import farming.concurrent.Task;
+import jb.listener.Application;
+import jb.pageModel.*;
 import jb.service.FmGoodsServiceI;
 
+import jb.service.FmPropertiesServiceI;
+import jb.service.impl.CompletionFactory;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -35,7 +38,8 @@ public class FmGoodsController extends BaseController {
 	@Autowired
 	private FmGoodsServiceI fmGoodsService;
 
-
+	@Autowired
+	private FmPropertiesServiceI fmPropertiesService;
 	/**
 	 * 跳转到FmGoods管理页面
 	 * 
@@ -49,13 +53,36 @@ public class FmGoodsController extends BaseController {
 	/**
 	 * 获取FmGoods数据表格
 	 * 
-	 * @param user
 	 * @return
 	 */
 	@RequestMapping("/dataGrid")
 	@ResponseBody
 	public DataGrid dataGrid(FmGoods fmGoods, PageHelper ph) {
-		return fmGoodsService.dataGrid(fmGoods, ph);
+
+		DataGrid dataGrid = fmGoodsService.dataGrid(fmGoods, ph);
+		if (!CollectionUtils.isEmpty(dataGrid.getRows())) {
+			final CompletionService completionService = CompletionFactory.initCompletion();
+			for (FmGoods fmMarquee1 : (List<FmGoods>) dataGrid.getRows()) {
+				completionService.submit(new Task<FmGoods, String>(new CacheKey("goods",fmMarquee1.getName()),fmMarquee1) {
+					@Override
+					public String call() throws Exception {
+						String format = "<span>%s:%s</span>&nbsp;";
+						return fmPropertiesService.getAfterMatching(getD().getName(), JSON.parseObject(getD().getExtFields()), format);
+					}
+
+					protected void set(FmGoods d, String v) {
+						d.setExtFields(v);
+					}
+
+				});
+				BaseData baseData = Application.get(fmMarquee1.getName());
+				if (baseData != null) {
+					fmMarquee1.setTypeName(Application.getString(baseData.getPid()));
+				}
+			}
+			completionService.sync();
+		}
+		return dataGrid;
 	}
 	/**
 	 * 获取FmGoods数据表格excel
@@ -113,6 +140,8 @@ public class FmGoodsController extends BaseController {
 	@RequestMapping("/view")
 	public String view(HttpServletRequest request, String id) {
 		FmGoods fmGoods = fmGoodsService.get(id);
+		String format = "<span>%s:%s</span>&nbsp;";
+		fmGoods.setExtFields(fmPropertiesService.getAfterMatching(fmGoods.getName(), JSON.parseObject(fmGoods.getExtFields()), format));
 		request.setAttribute("fmGoods", fmGoods);
 		return "/fmgoods/fmGoodsView";
 	}

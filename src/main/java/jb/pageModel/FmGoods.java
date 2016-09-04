@@ -46,6 +46,7 @@ public class FmGoods implements java.io.Serializable {
 	private java.lang.String outerNumber;	
 	private java.lang.String grade;	
 	private java.lang.String extFields;
+	private String typeName;
 
 	
 
@@ -356,4 +357,16 @@ public class FmGoods implements java.io.Serializable {
 		this.extFields = extFields;
 	}
 
+	public String getTypeName() {
+		return typeName;
+	}
+
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
+	}
+
+	public String[] getImageList() {
+		if (this.images == null) return new String[]{};
+		return this.images.split("[;]");
+	}
 }

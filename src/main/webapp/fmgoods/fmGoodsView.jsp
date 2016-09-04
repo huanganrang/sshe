@@ -9,45 +9,45 @@
 <div class="easyui-layout" data-options="fit:true,border:false">
 	<div data-options="region:'center',border:false">
 		<table class="table table-hover table-condensed">
-				<tr>	
-					<th><%=TfmGoods.ALIAS_ADDTIME%></th>	
-					<td>
-						${fmGoods.addtime}							
-					</td>							
-					<th><%=TfmGoods.ALIAS_UPDATETIME%></th>	
-					<td>
-						${fmGoods.updatetime}							
-					</td>							
-				</tr>		
-				<tr>	
-					<th><%=TfmGoods.ALIAS_ISDELETED%></th>	
-					<td>
-						${fmGoods.isdeleted}							
-					</td>							
+
+				<tr>
 					<th><%=TfmGoods.ALIAS_NAME%></th>	
 					<td>
-						${fmGoods.name}							
-					</td>							
+						${fmGoods.nameName}
+					</td>
+					<th>状态</th>
+					<td>
+						${fmGoods.statusName}
+					</td>
 				</tr>		
+
+				<tr>
+					<th>规格</th>
+					<td colspan="3">
+						${fmGoods.extFields}
+					</td>
+
+				</tr>
+				<tr>
+					<th>描述</th>
+					<td colspan="3">
+						${fmGoods.description}
+					</td>
+
+				</tr>
+				<tr>
+					<th><%=TfmGoods.ALIAS_PRICE%></th>
+					<td>
+						${fmGoods.price}/${fmGoods.unitName}
+					</td>
+					<th><%=TfmGoods.ALIAS_MIN_BATCH%></th>
+					<td>
+						${fmGoods.minBatch}
+					</td>
+				</tr>
 				<tr>	
-					<th><%=TfmGoods.ALIAS_PRICE%></th>	
-					<td>
-						${fmGoods.price}							
-					</td>							
-					<th><%=TfmGoods.ALIAS_UNIT%></th>	
-					<td>
-						${fmGoods.unit}							
-					</td>							
-				</tr>		
-				<tr>	
-					<th><%=TfmGoods.ALIAS_MIN_BATCH%></th>	
-					<td>
-						${fmGoods.minBatch}							
-					</td>							
-					<th><%=TfmGoods.ALIAS_STATUS%></th>	
-					<td>
-						${fmGoods.status}							
-					</td>							
+
+
 				</tr>		
 				<tr>	
 					<th><%=TfmGoods.ALIAS_BORN_AREA%></th>	
@@ -103,52 +103,19 @@
 					<th><%=TfmGoods.ALIAS_CAR_NO%></th>	
 					<td>
 						${fmGoods.carNo}							
-					</td>							
-					<th><%=TfmGoods.ALIAS_IMAGES%></th>	
+					</td>
+					<th>发布时间</th>
 					<td>
-						${fmGoods.images}							
-					</td>							
-				</tr>		
-				<tr>	
-					<th><%=TfmGoods.ALIAS_DESCRIPTION%></th>	
-					<td>
-						${fmGoods.description}							
-					</td>							
-					<th><%=TfmGoods.ALIAS_DIAMETER%></th>	
-					<td>
-						${fmGoods.diameter}							
-					</td>							
-				</tr>		
-				<tr>	
-					<th><%=TfmGoods.ALIAS_DIAMETER_UNIT%></th>	
-					<td>
-						${fmGoods.diameterUnit}							
-					</td>							
-					<th><%=TfmGoods.ALIAS_COLOR%></th>	
-					<td>
-						${fmGoods.color}							
-					</td>							
-				</tr>		
-				<tr>	
-					<th><%=TfmGoods.ALIAS_IS_PACK%></th>	
-					<td>
-						${fmGoods.isPack}							
-					</td>							
-					<th><%=TfmGoods.ALIAS_PACK%></th>	
-					<td>
-						${fmGoods.pack}							
-					</td>							
-				</tr>		
-				<tr>	
-					<th><%=TfmGoods.ALIAS_FORMAT_DESC%></th>	
-					<td>
-						${fmGoods.formatDesc}							
-					</td>							
-					<th><%=TfmGoods.ALIAS_ONLINE_STATUS%></th>	
-					<td>
-						${fmGoods.onlineStatus}							
-					</td>							
-				</tr>		
+						${fmGoods.addtime}
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4">
+						<c:forEach items="${fmGoods.imageList}" var="image">
+							<img class="img-preview" src="${image}" width="200" height="150"/>
+						</c:forEach>
+					</td>
+				</tr>
 				<tr>	
 					<th><%=TfmGoods.ALIAS_USER_ID%></th>	
 					<td>
@@ -181,10 +148,11 @@
 				</tr>		
 				<tr>	
 					<th><%=TfmGoods.ALIAS_GRADE%></th>	
-					<td>
-						${fmGoods.grade}							
+					<td colspan="3">
+						${fmGoods.gradeName}
 					</td>							
-				</tr>		
+				</tr>
+
 		</table>
 	</div>
 </div>

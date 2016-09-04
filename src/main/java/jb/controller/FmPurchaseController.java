@@ -8,15 +8,17 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-import jb.pageModel.Colum;
-import jb.pageModel.FmPurchase;
-import jb.pageModel.DataGrid;
-import jb.pageModel.Json;
-import jb.pageModel.PageHelper;
+import farming.concurrent.CacheKey;
+import farming.concurrent.CompletionService;
+import farming.concurrent.Task;
+import jb.listener.Application;
+import jb.pageModel.*;
 import jb.service.FmPropertiesServiceI;
 import jb.service.FmPurchaseServiceI;
 
 import jb.service.FmUserServiceI;
+import jb.service.impl.CompletionFactory;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -60,7 +62,31 @@ public class FmPurchaseController extends BaseController {
 	@RequestMapping("/dataGrid")
 	@ResponseBody
 	public DataGrid dataGrid(FmPurchase fmPurchase, PageHelper ph) {
-		return fmPurchaseService.dataGrid(fmPurchase, ph);
+
+		DataGrid dataGrid = fmPurchaseService.dataGrid(fmPurchase, ph);
+		if (!CollectionUtils.isEmpty(dataGrid.getRows())) {
+			final CompletionService completionService = CompletionFactory.initCompletion();
+			for (FmPurchase fmMarquee1 : (List<FmPurchase>) dataGrid.getRows()) {
+				completionService.submit(new Task<FmPurchase, String>(new CacheKey("goods",fmMarquee1.getName()),fmMarquee1) {
+					@Override
+					public String call() throws Exception {
+						String format = "<span>%s:%s</span>&nbsp;";
+						return fmPropertiesService.getAfterMatching(getD().getName(), JSON.parseObject(getD().getExtFields()), format);
+					}
+
+					protected void set(FmPurchase d, String v) {
+							d.setExtFields(v);
+					}
+
+				});
+				BaseData baseData = Application.get(fmMarquee1.getName());
+				if (baseData != null) {
+					fmMarquee1.setTypeName(Application.getString(baseData.getPid()));
+				}
+			}
+			completionService.sync();
+		}
+		return dataGrid;
 	}
 	/**
 	 * 获取FmPurchase数据表格excel

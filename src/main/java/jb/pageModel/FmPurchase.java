@@ -41,6 +41,7 @@ public class FmPurchase implements java.io.Serializable {
 	private List<FmPurchaseUser> fmPurchaseUserList;
 	private FmUser fmUser;
 	private Boolean isAttention;
+	private String typeName; //商品品类
 
 	public void setId(java.lang.String value) {
 		this.id = value;
@@ -301,4 +302,11 @@ public class FmPurchase implements java.io.Serializable {
 		this.isAttention = isAttention;
 	}
 
+	public String getTypeName() {
+		return typeName;
+	}
+
+	public void setTypeName(String typeName) {
+		this.typeName = typeName;
+	}
 }

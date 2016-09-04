@@ -71,7 +71,7 @@
 					return value+"-"+row.maxNum;
 				}
 				},{
-				field : 'status',
+				field : 'extFields',
 				title : '规格',
 				width : 100
 				}, {
