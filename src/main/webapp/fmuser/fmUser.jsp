@@ -49,62 +49,68 @@
 				width : 150,
 				hidden : true
 				}, {
-				field : 'addtime',
-				title : '<%=TfmUser.ALIAS_ADDTIME%>',
-				width : 50		
-				}, {
-				field : 'updatetime',
-				title : '<%=TfmUser.ALIAS_UPDATETIME%>',
-				width : 50		
-				}, {
-				field : 'account',
-				title : '<%=TfmUser.ALIAS_ACCOUNT%>',
-				width : 50		
-				}, {
 				field : 'nickName',
 				title : '<%=TfmUser.ALIAS_NICK_NAME%>',
-				width : 50		
-				}, {
-				field : 'localArea',
-				title : '<%=TfmUser.ALIAS_LOCAL_AREA%>',
-				width : 50		
+				width : 50
 				}, {
 				field : 'icon',
 				title : '<%=TfmUser.ALIAS_ICON%>',
-				width : 50		
+				width : 50,
+				formatter:function(value){
+					var str = "";
+					if(value!="" || value!=null){
+						str = "<img style=\"height: 80px;width: 150px;\" src=\""+value+"\" />";
+						return str;
+					}
+				}
 				}, {
-				field : 'phone',
-				title : '<%=TfmUser.ALIAS_PHONE%>',
-				width : 50		
+				field : 'account',
+				title : '<%=TfmUser.ALIAS_ACCOUNT%>',
+				width : 50
 				}, {
-				field : 'realName',
-				title : '<%=TfmUser.ALIAS_REAL_NAME%>',
-				width : 50		
+				field : 'addtime',
+				title : '<%=TfmUser.ALIAS_ADDTIME%>',
+				width : 50,
+				sortable: true
 				}, {
-				field : 'cardId',
-				title : '<%=TfmUser.ALIAS_CARD_ID%>',
-				width : 50		
-				}, {
-				field : 'userRole',
-				title : '<%=TfmUser.ALIAS_USER_ROLE%>',
-				width : 50		
-				}, {
-				field : 'hxPassword',
-				title : '<%=TfmUser.ALIAS_HX_PASSWORD%>',
-				width : 50		
-				}, {
-				field : 'hxStatus',
-				title : '<%=TfmUser.ALIAS_HX_STATUS%>',
-				width : 30
+				field : 'updatetime',
+				title : '<%=TfmUser.ALIAS_UPDATETIME%>',
+				width : 50,
+				sortable: true
 				}, {
 				field : 'authStatus',
 				title : '<%=TfmUser.ALIAS_AUTH_STATUS%>',
-				width : 30
+				width : 30,
+				sortable: true,
+				formatter:function(value){
+					var str = "";
+					if(value == "AU01" || value == "AU03") {
+						str = "<span style='color: #ab1e1e'>待处理</span>";
+						return str;
+					} else if(value == "AU02") {
+						str = "<span style='color: #00a200'>认证通过</span>";
+						return str;
+					} else {
+						str = "<span style='color: #84909c'>未提交</span>";
+						return str;
+					}
+				}
 				}, {
 				field : 'status',
 				title : '<%=TfmUser.ALIAS_STATUS%>',
-				width : 30
-			}, {
+				width : 30,
+				sortable: true,
+				formatter:function(value){
+					var str = "";
+					if(value == "AS02") {
+						str = "<span style='color: #ab1e1e'>已冻结</span>";
+						return str;
+					} else {
+						str = "<span style='color: #00a200'>正常</span>";
+						return str;
+					}
+				}
+				}, {
 				field : 'action',
 				title : '操作',
 				width : 50,
