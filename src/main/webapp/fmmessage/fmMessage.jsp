@@ -49,46 +49,46 @@
 				width : 150,
 				hidden : true
 				}, {
-				field : 'addtime',
-				title : '<%=TfmMessage.ALIAS_ADDTIME%>',
-				width : 50		
-				}, {
-				field : 'updatetime',
-				title : '<%=TfmMessage.ALIAS_UPDATETIME%>',
-				width : 50		
-				}, {
-				field : 'isdeleted',
-				title : '<%=TfmMessage.ALIAS_ISDELETED%>',
-				width : 50		
-				}, {
 				field : 'content',
 				title : '<%=TfmMessage.ALIAS_CONTENT%>',
-				width : 50		
-				}, {
-				field : 'title',
-				title : '<%=TfmMessage.ALIAS_TITLE%>',
-				width : 50		
-				}, {
-				field : 'subTitle',
-				title : '<%=TfmMessage.ALIAS_SUB_TITLE%>',
-				width : 50		
-				}, {
-				field : 'sendType',
-				title : '<%=TfmMessage.ALIAS_SEND_TYPE%>',
-				width : 50		
+				width : 50
 				}, {
 				field : 'url',
 				title : '<%=TfmMessage.ALIAS_URL%>',
-				width : 50		
+				width : 50,
+				formatter:function(value){
+					var str = "";
+					if(value!="" || value!=null){
+						str = "<img style=\"height: 80px;width: 150px;\" src=\""+value+"\" />";
+						return str;
+					}
+				}
 				}, {
-				field : 'sendTime',
-				title : '<%=TfmMessage.ALIAS_SEND_TIME%>',
-				width : 50		
+				field : 'sendType',
+				title : '<%=TfmMessage.ALIAS_SEND_TYPE%>',
+				width : 50,
+				sortable: true,
+				formatter:function(value){
+					var str = "";
+					if(value == "ST01") {
+						str = "<span style='color: #84909c'>上架</span>";
+						return str;
+					} else {
+						str = "<span style='color: #84909c'>下架</span>";
+						return str;
+					}
+				}
 				}, {
 				field : 'loginId',
 				title : '<%=TfmMessage.ALIAS_LOGIN_ID%>',
-				width : 50		
-			}, {
+				width : 50,
+				sortable: true
+				}, {
+				field : 'sendTime',
+				title : '<%=TfmMessage.ALIAS_SEND_TIME%>',
+				width : 50,
+				sortable: true
+				}, {
 				field : 'action',
 				title : '操作',
 				width : 100,
@@ -220,56 +220,18 @@
 </head>
 <body>
 	<div class="easyui-layout" data-options="fit : true,border : false">
-		<div data-options="region:'north',title:'查询条件',border:false" style="height: 160px; overflow: hidden;">
+		<div data-options="region:'north',title:'查询条件',border:false" style="height: 65px; overflow: hidden;">
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
-						<tr>	
-							<th><%=TfmMessage.ALIAS_ADDTIME%></th>	
-							<td>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmMessage.FORMAT_ADDTIME%>'})" id="addtimeBegin" name="addtimeBegin"/>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmMessage.FORMAT_ADDTIME%>'})" id="addtimeEnd" name="addtimeEnd"/>
-							</td>
-							<th><%=TfmMessage.ALIAS_UPDATETIME%></th>	
-							<td>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmMessage.FORMAT_UPDATETIME%>'})" id="updatetimeBegin" name="updatetimeBegin"/>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmMessage.FORMAT_UPDATETIME%>'})" id="updatetimeEnd" name="updatetimeEnd"/>
-							</td>
-							<th><%=TfmMessage.ALIAS_ISDELETED%></th>	
-							<td>
-											<input type="text" name="isdeleted" maxlength="0" class="span2"/>
-							</td>
+						<tr>
 							<th><%=TfmMessage.ALIAS_CONTENT%></th>	
 							<td>
 											<input type="text" name="content" maxlength="65535" class="span2"/>
 							</td>
-						</tr>	
-						<tr>	
-							<th><%=TfmMessage.ALIAS_TITLE%></th>	
-							<td>
-											<input type="text" name="title" maxlength="100" class="span2"/>
-							</td>
-							<th><%=TfmMessage.ALIAS_SUB_TITLE%></th>	
-							<td>
-											<input type="text" name="subTitle" maxlength="100" class="span2"/>
-							</td>
-							<th><%=TfmMessage.ALIAS_SEND_TYPE%></th>	
-							<td>
-											<jb:select dataType="ST" name="sendType"></jb:select>	
-							</td>
-							<th><%=TfmMessage.ALIAS_URL%></th>	
-							<td>
-											<input type="text" name="url" maxlength="100" class="span2"/>
-							</td>
-						</tr>	
-						<tr>	
 							<th><%=TfmMessage.ALIAS_SEND_TIME%></th>	
 							<td>
 								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmMessage.FORMAT_SEND_TIME%>'})" id="sendTimeBegin" name="sendTimeBegin"/>
 								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmMessage.FORMAT_SEND_TIME%>'})" id="sendTimeEnd" name="sendTimeEnd"/>
-							</td>
-							<th><%=TfmMessage.ALIAS_LOGIN_ID%></th>	
-							<td>
-											<input type="text" name="loginId" maxlength="36" class="span2"/>
 							</td>
 						</tr>	
 				</table>

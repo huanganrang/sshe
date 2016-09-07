@@ -47,12 +47,11 @@
 					<input class="span2" name="updatetime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmMessage.FORMAT_UPDATETIME%>'})"  maxlength="0" class="required " />
 					</td>							
 				</tr>	
-				<tr>	
-					<th><%=TfmMessage.ALIAS_ISDELETED%></th>	
+				<tr>
+					<th><%=TfmMessage.ALIAS_SEND_TIME%></th>
 					<td>
-					
-											<input  name="isdeleted" type="text" class="easyui-validatebox span2" data-options="required:true"/>
-					</td>							
+						<input class="span2" name="sendTime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmMessage.FORMAT_SEND_TIME%>'})"  maxlength="0" class="" />
+					</td>
 					<th><%=TfmMessage.ALIAS_CONTENT%></th>	
 					<td>
 											<input class="span2" name="content" type="text"/>
@@ -77,17 +76,7 @@
 					<td>
 											<input class="span2" name="url" type="text"/>
 					</td>							
-				</tr>	
-				<tr>	
-					<th><%=TfmMessage.ALIAS_SEND_TIME%></th>	
-					<td>
-					<input class="span2" name="sendTime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmMessage.FORMAT_SEND_TIME%>'})"  maxlength="0" class="" />
-					</td>							
-					<th><%=TfmMessage.ALIAS_LOGIN_ID%></th>	
-					<td>
-											<input class="span2" name="loginId" type="text"/>
-					</td>							
-				</tr>	
+				</tr>
 			</table>		
 		</form>
 	</div>

@@ -1,24 +1,21 @@
 package jb.service.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
 import jb.absx.F;
 import jb.dao.FmMessageDaoI;
 import jb.model.TfmMessage;
-import jb.pageModel.FmMessage;
 import jb.pageModel.DataGrid;
+import jb.pageModel.FmMessage;
 import jb.pageModel.PageHelper;
 import jb.service.FmMessageServiceI;
-
+import jb.util.MyBeanUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import jb.util.MyBeanUtils;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class FmMessageServiceImpl extends BaseServiceImpl<FmMessage> implements FmMessageServiceI {
@@ -51,8 +48,8 @@ public class FmMessageServiceImpl extends BaseServiceImpl<FmMessage> implements 
 			whereHql += " where t.isdeleted = 0 ";
 
 			if (!F.empty(fmMessage.getContent())) {
-				whereHql += " and t.content = :content";
-				params.put("content", fmMessage.getContent());
+				whereHql += " and t.content like '%" + fmMessage.getContent() + "%'";
+				//params.put("content", fmMessage.getContent());
 			}		
 			if (!F.empty(fmMessage.getTitle())) {
 				whereHql += " and t.title = :title";

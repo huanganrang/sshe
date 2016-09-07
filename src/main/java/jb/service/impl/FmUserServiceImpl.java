@@ -50,8 +50,8 @@ public class FmUserServiceImpl extends BaseServiceImpl<FmUser> implements FmUser
 				params.put("account", fmUser.getAccount());
 			}		
 			if (!F.empty(fmUser.getNickName())) {
-				whereHql += " and t.nickName = :nickName";
-				params.put("nickName", fmUser.getNickName());
+				whereHql += " and t.nickName like '%" + fmUser.getNickName() + "%'";
+				//params.put("nickName", fmUser.getNickName());
 			}		
 			if (!F.empty(fmUser.getLocalArea())) {
 				whereHql += " and t.localArea = :localArea";

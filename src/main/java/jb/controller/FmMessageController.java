@@ -1,26 +1,20 @@
 package jb.controller;
 
-import java.io.IOException;
-import java.lang.reflect.InvocationTargetException;
-import java.util.List;
-import java.util.UUID;
-
-import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;
-
-import jb.pageModel.Colum;
-import jb.pageModel.FmMessage;
-import jb.pageModel.DataGrid;
-import jb.pageModel.Json;
-import jb.pageModel.PageHelper;
+import com.alibaba.fastjson.JSON;
+import jb.pageModel.*;
 import jb.service.FmMessageServiceI;
-
+import jb.util.ConfigUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.alibaba.fastjson.JSON;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.lang.reflect.InvocationTargetException;
+import java.util.List;
+import java.util.UUID;
 
 /**
  * FmMessage管理控制器
@@ -49,7 +43,7 @@ public class FmMessageController extends BaseController {
 	/**
 	 * 获取FmMessage数据表格
 	 * 
-	 * @param user
+	 * @param fmMessage
 	 * @return
 	 */
 	@RequestMapping("/dataGrid")
@@ -60,7 +54,7 @@ public class FmMessageController extends BaseController {
 	/**
 	 * 获取FmMessage数据表格excel
 	 * 
-	 * @param user
+	 * @param fmMessage
 	 * @return
 	 * @throws NoSuchMethodException 
 	 * @throws SecurityException 
@@ -97,8 +91,10 @@ public class FmMessageController extends BaseController {
 	 */
 	@RequestMapping("/add")
 	@ResponseBody
-	public Json add(FmMessage fmMessage) {
-		Json j = new Json();		
+	public Json add(FmMessage fmMessage, HttpServletRequest request) {
+		Json j = new Json();
+		SessionInfo sessionInfo = (SessionInfo) request.getSession().getAttribute(ConfigUtil.getSessionInfoName());
+		fmMessage.setLoginId(sessionInfo.getName());
 		fmMessageService.add(fmMessage);
 		j.setSuccess(true);
 		j.setMsg("添加成功！");		
