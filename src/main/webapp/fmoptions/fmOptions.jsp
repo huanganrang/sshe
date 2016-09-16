@@ -179,7 +179,9 @@
 	}
 	function cleanFunOption() {
 		$('#searchFormOption input').val('');
-		dataGridOption.datagrid('load', {});
+		/*var opts = dataGridOption.datagrid("options");
+		opts.url = null;*/
+		dataGridOption.datagrid('loadData',{"rows":[],"total":0});
 	}
 </script>
 

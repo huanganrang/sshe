@@ -215,6 +215,7 @@
         var opts = dataGrid.datagrid("options");
         opts.url = '${pageContext.request.contextPath}/fmPropertiesController/dataGrid';
         $("#goodName").val(goodName);
+        cleanFunOption();
         dataGrid.datagrid('load', $.serializeObject($('#searchForm')));
     }
     function cleanFun() {
