@@ -1,6 +1,7 @@
 package jb.controller;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -14,6 +15,8 @@ import jb.pageModel.Tree;
 import jb.service.BasedataServiceI;
 import jb.service.BasetypeServiceI;
 
+import org.apache.commons.collections.CollectionUtils;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -51,7 +54,7 @@ public class BasedataController extends BaseController {
 	/**
 	 * 获取基础数据数据表格
 	 * 
-	 * @param user
+	 * @param
 	 * @return
 	 */
 	@RequestMapping("/basedataDataGrid")
@@ -249,5 +252,26 @@ public class BasedataController extends BaseController {
 		j.setMsg("删除成功！");
 		j.setSuccess(true);
 		return j;
+	}
+
+
+	@RequestMapping("/goodsTree")
+	@ResponseBody
+	public List<Tree> tree() {
+		BaseData baseData = new BaseData();
+		baseData.setBasetypeCode("GN");
+		List<Tree> lt = new ArrayList<Tree>();
+		List<BaseData> baseDataList = basedataService.getBaseDatas(baseData);
+		if(!CollectionUtils.isEmpty(baseDataList)){
+			for (BaseData data : baseDataList) {
+				Tree tree = new Tree();
+				tree.setId(data.getId());
+				tree.setPid(data.getPid());
+				tree.setText(data.getName());
+				tree.setIconCls(data.getIcon());
+				lt.add(tree);
+			}
+		}
+		return lt;
 	}
 }

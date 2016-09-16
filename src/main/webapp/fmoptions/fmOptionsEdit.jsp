@@ -6,7 +6,7 @@
 <script type="text/javascript">
 	$(function() {
 		parent.$.messager.progress('close');
-		$('#form').form({
+		$('#formOption').form({
 			url : '${pageContext.request.contextPath}/fmOptionsController/edit',
 			onSubmit : function() {
 				parent.$.messager.progress({
@@ -34,40 +34,24 @@
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
 	<div data-options="region:'center',border:false" title="" style="overflow: hidden;">
-		<form id="form" method="post">
-				<input type="hidden" name="id" value = "${fmOptions.id}"/>
+		<form id="formOption" method="post">
+			<input type="hidden" name="id" value="${fmOptions.id}"/>
+			<input type="hidden" name="propertiesId" value="${fmOptions.propertiesId}"/>
 			<table class="table table-hover table-condensed">
-				<tr>	
-					<th><%=TfmOptions.ALIAS_ADDTIME%></th>	
+
+				<tr>
+					<th><%=TfmOptions.ALIAS_VALUE%>
+					</th>
 					<td>
-					<input class="span2" name="addtime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmOptions.FORMAT_ADDTIME%>'})"   maxlength="0" value="${fmOptions.addtime}"/>
-					</td>							
-					<th><%=TfmOptions.ALIAS_UPDATETIME%></th>	
+						<input class="span2" name="value" type="text" value="${fmOptions.value}"/>
+					</td>
+					<th><%=TfmOptions.ALIAS_SEQ%>
+					</th>
 					<td>
-					<input class="span2" name="updatetime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmOptions.FORMAT_UPDATETIME%>'})"   maxlength="0" value="${fmOptions.updatetime}"/>
-					</td>							
-			</tr>	
-				<tr>	
-					<th><%=TfmOptions.ALIAS_ISDELETED%></th>	
-					<td>
-											<input class="span2" name="isdeleted" type="text" class="easyui-validatebox span2" data-options="required:true" value="${fmOptions.isdeleted}"/>
-					</td>							
-					<th><%=TfmOptions.ALIAS_PROPERTIES_ID%></th>	
-					<td>
-											<input class="span2" name="propertiesId" type="text" value="${fmOptions.propertiesId}"/>
-					</td>							
-			</tr>	
-				<tr>	
-					<th><%=TfmOptions.ALIAS_VALUE%></th>	
-					<td>
-											<input class="span2" name="value" type="text" value="${fmOptions.value}"/>
-					</td>							
-					<th><%=TfmOptions.ALIAS_SEQ%></th>	
-					<td>
-											<input class="span2" name="seq" type="text" value="${fmOptions.seq}"/>
-					</td>							
-			</tr>	
-			</table>				
+						<input class="span2" name="seq" type="text" value="${fmOptions.seq}"/>
+					</td>
+				</tr>
+			</table>
 		</form>
 	</div>
 </div>

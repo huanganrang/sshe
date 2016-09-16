@@ -1,14 +1,13 @@
 package jb.controller;
 
-import farming.concurrent.CompletionService;
-import farming.concurrent.Task;
-import jb.pageModel.*;
+import jb.pageModel.BaseData;
+import jb.pageModel.DiveRegion;
+import jb.pageModel.FmProperties;
+import jb.pageModel.Json;
 import jb.service.BasedataServiceI;
 import jb.service.DiveRegionServiceI;
-
 import jb.service.FmOptionsServiceI;
 import jb.service.FmPropertiesServiceI;
-import jb.service.impl.CompletionFactory;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,7 +15,9 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Iterator;
+import java.util.List;
 
 /**
  * 基础数据
