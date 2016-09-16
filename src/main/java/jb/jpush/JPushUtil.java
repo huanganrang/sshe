@@ -18,9 +18,10 @@ import org.slf4j.LoggerFactory;
  */
 public class JPushUtil {
 
-    private static Logger logger = LoggerFactory.getLogger(JPushUtil.class);
-    private static String masterSecret = "5dc3923edd907b0d0b7ee0f1";
-    private static String appKey = "8014b282002be30319005c56";
+    final private static Logger logger = LoggerFactory.getLogger(JPushUtil.class);
+
+    final private static String masterSecret = "5dc3923edd907b0d0b7ee0f1";
+    final private static String appKey = "8014b282002be30319005c56";
 
     //最大重试次数为3
     private static JPushClient jpushClient = new JPushClient(masterSecret, appKey, 3);
