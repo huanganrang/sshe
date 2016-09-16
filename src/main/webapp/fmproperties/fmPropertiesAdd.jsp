@@ -33,58 +33,61 @@
 	});
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
-	<div data-options="region:'center',border:false" title="" style="overflow: hidden;">	
-		<form id="form" method="post">		
-				<input type="hidden" name="id"/>
+	<div data-options="region:'center',border:false" title="" style="overflow: hidden;">
+		<form id="form" method="post">
+			<input type="hidden" name="id"/>
 			<table class="table table-hover table-condensed">
-				<tr>	
-					<th><%=TfmProperties.ALIAS_ADDTIME%></th>	
+				<tr>
+					<th><%=TfmProperties.ALIAS_NAME%>
+					</th>
 					<td>
-					<input class="span2" name="addtime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmProperties.FORMAT_ADDTIME%>'})"  maxlength="0" class="required " />
-					</td>							
-					<th><%=TfmProperties.ALIAS_UPDATETIME%></th>	
+						<input class="span2" name="name" type="text"/>
+					</td>
+					<th><%=TfmProperties.ALIAS_GOOD_NAME%>
+					</th>
 					<td>
-					<input class="span2" name="updatetime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmProperties.FORMAT_UPDATETIME%>'})"  maxlength="0" class="required " />
-					</td>							
-				</tr>	
-				<tr>	
-					<th><%=TfmProperties.ALIAS_ISDELETED%></th>	
+						<jb:select dataType="GN" name="goodName"></jb:select>
+					</td>
+				</tr>
+				<tr>
+					<th><%=TfmProperties.ALIAS_FIELD_TYPE%>
+					</th>
 					<td>
-					
-											<input  name="isdeleted" type="text" class="easyui-validatebox span2" data-options="required:true"/>
-					</td>							
-					<th><%=TfmProperties.ALIAS_NAME%></th>	
+						<jb:select dataType="FT" name="fieldType"></jb:select>
+					</td>
+					<th><%=TfmProperties.ALIAS_REQUIRE%>
+					</th>
 					<td>
-											<input class="span2" name="name" type="text"/>
-					</td>							
-				</tr>	
-				<tr>	
-					<th><%=TfmProperties.ALIAS_GOOD_NAME%></th>	
+						<jb:select dataType="IS" name="require"></jb:select>
+					</td>
+				</tr>
+				<tr>
+					<th>排序
+					</th>
 					<td>
-											<jb:select dataType="GN" name="goodName"></jb:select>	
-					</td>							
-					<th><%=TfmProperties.ALIAS_DESCRIPTION%></th>	
+						<input class="span2" name="seq" type="number"/>
+					</td>
+					<th>组
+					</th>
 					<td>
-											<input class="span2" name="description" type="text"/>
-					</td>							
-				</tr>	
-				<tr>	
-					<th><%=TfmProperties.ALIAS_FIELD_TYPE%></th>	
-					<td>
-											<jb:select dataType="FT" name="fieldType"></jb:select>	
-					</td>							
-					<th><%=TfmProperties.ALIAS_REQUIRE%></th>	
-					<td>
-											<input class="span2" name="require" type="text"/>
-					</td>							
-				</tr>	
-				<tr>	
-					<th><%=TfmProperties.ALIAS_DEFAULT_VALUE%></th>	
-					<td>
-											<input class="span2" name="defaultValue" type="text"/>
-					</td>							
-				</tr>	
-			</table>		
+						<input class="span2" name="groupId" type="text"/>
+					</td>
+				</tr>
+				<tr>
+					<th><%=TfmProperties.ALIAS_DEFAULT_VALUE%>
+					</th>
+					<td colspan="3">
+						<input class="span2" name="defaultValue" type="text"/>
+					</td>
+				</tr>
+				<tr>
+					<th><%=TfmProperties.ALIAS_DESCRIPTION%>
+					</th>
+					<td colspan="3">
+						<textarea name="description" style="width: 90%" rows="3"/>
+					</td>
+				</tr>
+			</table>
 		</form>
 	</div>
 </div>

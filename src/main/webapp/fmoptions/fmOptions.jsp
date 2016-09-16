@@ -3,31 +3,22 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions"%>
 <%@ taglib prefix="jb" uri="http://www.jb.cn/jbtag"%> 
-<!DOCTYPE html>
-<html>
-<head>
-<title>FmOptions管理</title>
-<jsp:include page="../inc.jsp"></jsp:include>
+
 <c:if test="${fn:contains(sessionInfo.resourceList, '/fmOptionsController/editPage')}">
 	<script type="text/javascript">
-		$.canEdit = true;
+		$.canEditOption = true;
 	</script>
 </c:if>
 <c:if test="${fn:contains(sessionInfo.resourceList, '/fmOptionsController/delete')}">
 	<script type="text/javascript">
-		$.canDelete = true;
+		$.canDeleteOption = true;
 	</script>
 </c:if>
-<c:if test="${fn:contains(sessionInfo.resourceList, '/fmOptionsController/view')}">
-	<script type="text/javascript">
-		$.canView = true;
-	</script>
-</c:if>
+
 <script type="text/javascript">
-	var dataGrid;
+	var dataGridOption;
 	$(function() {
-		dataGrid = $('#dataGrid').datagrid({
-			url : '${pageContext.request.contextPath}/fmOptionsController/dataGrid',
+		dataGridOption = $('#dataGridOption').datagrid({
 			fit : true,
 			fitColumns : true,
 			border : false,
@@ -35,8 +26,8 @@
 			idField : 'id',
 			pageSize : 10,
 			pageList : [ 10, 20, 30, 40, 50 ],
-			sortName : 'id',
-			sortOrder : 'desc',
+			sortName : 'seq',
+			sortOrder : 'asc',
 			checkOnSelect : false,
 			selectOnCheck : false,
 			nowrap : false,
@@ -45,25 +36,14 @@
 			singleSelect : true,
 			columns : [ [ {
 				field : 'id',
-				title : '编号',
+				title : 'ID',
 				width : 150,
-				hidden : true
-				}, {
-				field : 'addtime',
-				title : '<%=TfmOptions.ALIAS_ADDTIME%>',
-				width : 50		
-				}, {
-				field : 'updatetime',
-				title : '<%=TfmOptions.ALIAS_UPDATETIME%>',
-				width : 50		
-				}, {
-				field : 'isdeleted',
-				title : '<%=TfmOptions.ALIAS_ISDELETED%>',
-				width : 50		
-				}, {
+				hidden : false
+				},{
 				field : 'propertiesId',
 				title : '<%=TfmOptions.ALIAS_PROPERTIES_ID%>',
-				width : 50		
+				width : 50,
+				hidden : true
 				}, {
 				field : 'value',
 				title : '<%=TfmOptions.ALIAS_VALUE%>',
@@ -71,30 +51,26 @@
 				}, {
 				field : 'seq',
 				title : '<%=TfmOptions.ALIAS_SEQ%>',
-				width : 50		
+				width : 30
 			}, {
 				field : 'action',
 				title : '操作',
-				width : 100,
+				width : 30,
 				formatter : function(value, row, index) {
 					var str = '';
-					if ($.canEdit) {
-						str += $.formatString('<img onclick="editFun(\'{0}\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_edit.png');
+					if ($.canEditOption) {
+						str += $.formatString('<img onclick="editFunOption(\'{0}\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_edit.png');
 					}
 					str += '&nbsp;';
-					if ($.canDelete) {
-						str += $.formatString('<img onclick="deleteFun(\'{0}\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_delete.png');
-					}
-					str += '&nbsp;';
-					if ($.canView) {
-						str += $.formatString('<img onclick="viewFun(\'{0}\');" src="{1}" title="查看"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_link.png');
+					if ($.canDeleteOption) {
+						str += $.formatString('<img onclick="deleteFunOption(\'{0}\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_delete.png');
 					}
 					return str;
 				}
 			} ] ],
-			toolbar : '#toolbar',
+			toolbar : '#toolbarOption',
 			onLoadSuccess : function() {
-				$('#searchForm table').show();
+				$('#searchFormOption table').show();
 				parent.$.messager.progress('close');
 
 				$(this).datagrid('tooltip');
@@ -102,9 +78,9 @@
 		});
 	});
 
-	function deleteFun(id) {
+	function deleteFunOption(id) {
 		if (id == undefined) {
-			var rows = dataGrid.datagrid('getSelections');
+			var rows = dataGridOption.datagrid('getSelections');
 			id = rows[0].id;
 		}
 		parent.$.messager.confirm('询问', '您是否要删除当前数据？', function(b) {
@@ -118,7 +94,7 @@
 				}, function(result) {
 					if (result.success) {
 						parent.$.messager.alert('提示', result.msg, 'info');
-						dataGrid.datagrid('reload');
+						dataGridOption.datagrid('reload');
 					}
 					parent.$.messager.progress('close');
 				}, 'JSON');
@@ -126,9 +102,9 @@
 		});
 	}
 
-	function editFun(id) {
+	function editFunOption(id) {
 		if (id == undefined) {
-			var rows = dataGrid.datagrid('getSelections');
+			var rows = dataGridOption.datagrid('getSelections');
 			id = rows[0].id;
 		}
 		parent.$.modalDialog({
@@ -139,17 +115,17 @@
 			buttons : [ {
 				text : '编辑',
 				handler : function() {
-					parent.$.modalDialog.openner_dataGrid = dataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
-					var f = parent.$.modalDialog.handler.find('#form');
+					parent.$.modalDialog.openner_dataGrid = dataGridOption;//因为添加成功之后，需要刷新这个dataGridOption，所以先预定义好
+					var f = parent.$.modalDialog.handler.find('#formOption');
 					f.submit();
 				}
 			} ]
 		});
 	}
 
-	function viewFun(id) {
+	/*function viewFunOption(id) {
 		if (id == undefined) {
-			var rows = dataGrid.datagrid('getSelections');
+			var rows = dataGridOption.datagrid('getSelections');
 			id = rows[0].id;
 		}
 		parent.$.modalDialog({
@@ -158,9 +134,9 @@
 			height : 500,
 			href : '${pageContext.request.contextPath}/fmOptionsController/view?id=' + id
 		});
-	}
+	}*/
 
-	function addFun() {
+	function addFunOption() {
 		parent.$.modalDialog({
 			title : '添加数据',
 			width : 780,
@@ -169,15 +145,16 @@
 			buttons : [ {
 				text : '添加',
 				handler : function() {
-					parent.$.modalDialog.openner_dataGrid = dataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
-					var f = parent.$.modalDialog.handler.find('#form');
+					parent.$.modalDialog.openner_dataGrid = dataGridOption;//因为添加成功之后，需要刷新这个dataGridOption，所以先预定义好
+					var f = parent.$.modalDialog.handler.find('#formOption');
+					f.find("#propertiesIdAdd").val(dataGridOption.propertiesId);
 					f.submit();
 				}
 			} ]
 		});
 	}
-	function downloadTable(){
-		var options = dataGrid.datagrid("options");
+	/*function downloadTable(){
+		var options = dataGridOption.datagrid("options");
 		var $colums = [];		
 		$.merge($colums, options.columns); 
 		$.merge($colums, options.frozenColumns);
@@ -185,76 +162,37 @@
 	    $('#downloadTable').form('submit', {
 	        url:'${pageContext.request.contextPath}/fmOptionsController/download',
 	        onSubmit: function(param){
-	        	$.extend(param, $.serializeObject($('#searchForm')));
+	        	$.extend(param, $.serializeObject($('#searchFormOption')));
 	        	param.downloadFields = columsStr;
 	        	param.page = options.pageNumber;
 	        	param.rows = options.pageSize;
 	        	
        	 }
         }); 
+	}*/
+	function searchFunOption(propertiesId) {
+		var opts = dataGridOption.datagrid("options");
+		opts.url = '${pageContext.request.contextPath}/fmOptionsController/dataGrid';
+		$("#propertiesId").val(propertiesId);
+		dataGridOption.propertiesId = propertiesId;
+		dataGridOption.datagrid('load', $.serializeObject($('#searchFormOption')));
 	}
-	function searchFun() {
-		dataGrid.datagrid('load', $.serializeObject($('#searchForm')));
-	}
-	function cleanFun() {
-		$('#searchForm input').val('');
-		dataGrid.datagrid('load', {});
+	function cleanFunOption() {
+		$('#searchFormOption input').val('');
+		dataGridOption.datagrid('load', {});
 	}
 </script>
-</head>
-<body>
-	<div class="easyui-layout" data-options="fit : true,border : false">
-		<div data-options="region:'north',title:'查询条件',border:false" style="height: 160px; overflow: hidden;">
-			<form id="searchForm">
-				<table class="table table-hover table-condensed" style="display: none;">
-						<tr>	
-							<th><%=TfmOptions.ALIAS_ADDTIME%></th>	
-							<td>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmOptions.FORMAT_ADDTIME%>'})" id="addtimeBegin" name="addtimeBegin"/>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmOptions.FORMAT_ADDTIME%>'})" id="addtimeEnd" name="addtimeEnd"/>
-							</td>
-							<th><%=TfmOptions.ALIAS_UPDATETIME%></th>	
-							<td>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmOptions.FORMAT_UPDATETIME%>'})" id="updatetimeBegin" name="updatetimeBegin"/>
-								<input type="text" class="span2" onclick="WdatePicker({dateFmt:'<%=TfmOptions.FORMAT_UPDATETIME%>'})" id="updatetimeEnd" name="updatetimeEnd"/>
-							</td>
-							<th><%=TfmOptions.ALIAS_ISDELETED%></th>	
-							<td>
-											<input type="text" name="isdeleted" maxlength="0" class="span2"/>
-							</td>
-							<th><%=TfmOptions.ALIAS_PROPERTIES_ID%></th>	
-							<td>
-											<input type="text" name="propertiesId" maxlength="36" class="span2"/>
-							</td>
-						</tr>	
-						<tr>	
-							<th><%=TfmOptions.ALIAS_VALUE%></th>	
-							<td>
-											<input type="text" name="value" maxlength="100" class="span2"/>
-							</td>
-							<th><%=TfmOptions.ALIAS_SEQ%></th>	
-							<td>
-											<input type="text" name="seq" maxlength="10" class="span2"/>
-							</td>
-						</tr>	
-				</table>
-			</form>
-		</div>
-		<div data-options="region:'center',border:false">
-			<table id="dataGrid"></table>
-		</div>
+
+<div class="easyui-layout" data-options="fit : true,border : false">
+	<div data-options="region:'center',border:false">
+		<form id="searchFormOption" style="display:none;">
+			<input type="hidden" name="propertiesId" id="propertiesId">
+		</form>
+		<table id="dataGridOption"></table>
 	</div>
-	<div id="toolbar" style="display: none;">
-		<c:if test="${fn:contains(sessionInfo.resourceList, '/fmOptionsController/addPage')}">
-			<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'bug_add'">添加</a>
-		</c:if>
-		<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">过滤条件</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_delete',plain:true" onclick="cleanFun();">清空条件</a>
-		<c:if test="${fn:contains(sessionInfo.resourceList, '/fmOptionsController/download')}">
-			<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'server_go',plain:true" onclick="downloadTable();">导出</a>		
-			<form id="downloadTable" target="downloadIframe" method="post" style="display: none;">
-			</form>
-			<iframe id="downloadIframe" name="downloadIframe" style="display: none;"></iframe>
-		</c:if>
-	</div>	
-</body>
-</html>
+</div>
+<div id="toolbarOption" style="display: none;">
+	<c:if test="${fn:contains(sessionInfo.resourceList, '/fmOptionsController/addPage')}">
+		<a onclick="addFunOption();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'bug_add'">添加</a>
+	</c:if>
+</div>	
