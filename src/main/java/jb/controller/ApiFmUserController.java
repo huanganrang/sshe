@@ -1,5 +1,6 @@
 package jb.controller;
 
+import com.alibaba.fastjson.JSON;
 import jb.absx.F;
 import jb.interceptors.TokenManage;
 import jb.listener.Application;
@@ -56,7 +57,7 @@ public class ApiFmUserController extends BaseController {
             String result = HttpUtil.httpRequest(url, "post", "{\"Dto_Mobile\":\""+dtoMobile+"\",\"Dto_Password\":\""+dtoPassword+"\"}");
             if(!F.empty(result) && result.contains("In_UserID") && result.contains("In_UserName")) {
                 Map<String, Object> map = new HashMap<String, Object>();
-                map.put("centerUser", result);
+                map.put("centerUser", JSON.parseObject(result));
                 FmUser fmUser = new FmUser();
                 fmUser.setAccount(dtoMobile);
                 FmUser fu = fmUserService.get(fmUser);
