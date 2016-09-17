@@ -92,7 +92,7 @@
 
 					</td>
 				</tr>
-				<tr>	
+				<tr style="display: none;">
 
 					<th><%=TfmAd.ALIAS_GOODS_ID%></th>	
 					<td>

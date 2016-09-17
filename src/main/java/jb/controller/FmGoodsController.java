@@ -7,16 +7,19 @@ import java.util.UUID;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import farming.concurrent.CacheKey;
 import farming.concurrent.CompletionService;
 import farming.concurrent.Task;
 import jb.listener.Application;
 import jb.pageModel.*;
+import jb.service.FmAdServiceI;
 import jb.service.FmGoodsServiceI;
 
 import jb.service.FmPropertiesServiceI;
 import jb.service.impl.CompletionFactory;
+import jb.util.ConfigUtil;
 import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -40,6 +43,9 @@ public class FmGoodsController extends BaseController {
 
 	@Autowired
 	private FmPropertiesServiceI fmPropertiesService;
+
+	@Autowired
+	private FmAdServiceI fmAdService;
 	/**
 	 * 跳转到FmGoods管理页面
 	 * 
@@ -87,7 +93,7 @@ public class FmGoodsController extends BaseController {
 	/**
 	 * 获取FmGoods数据表格excel
 	 * 
-	 * @param user
+	 * @param
 	 * @return
 	 * @throws NoSuchMethodException 
 	 * @throws SecurityException 
@@ -190,4 +196,61 @@ public class FmGoodsController extends BaseController {
 		return j;
 	}
 
+	@RequestMapping("/addToAd")
+	@ResponseBody
+	public Json addToAd(String id,HttpSession session) {
+		Json j = new Json();
+		String type = "AD01";
+		FmAd fmAd = getFmAd(id,type);
+		if(fmAd == null){
+			SessionInfo sessionInfo = (SessionInfo)session.getAttribute(ConfigUtil.getSessionInfoName());
+			String loginId = sessionInfo.getId();
+			addToAdForDb(id,type,loginId);
+		}
+		j.setMsg("推送成功！");
+		j.setSuccess(true);
+		return j;
+	}
+
+	@RequestMapping("/addToSanAd")
+	@ResponseBody
+	public Json addToSanAd(String id,HttpSession session) {
+		Json j = new Json();
+		String type = "AD02";
+		FmAd fmAd = getFmAd(id,type);
+		if(fmAd == null){
+			SessionInfo sessionInfo = (SessionInfo)session.getAttribute(ConfigUtil.getSessionInfoName());
+			String loginId = sessionInfo.getId();
+			addToAdForDb(id,type,loginId);
+		}
+		j.setMsg("推送成功！");
+		j.setSuccess(true);
+		return j;
+	}
+
+	private FmAd getFmAd(String goodsId,String type){
+		FmAd fmAd = new FmAd();
+		PageHelper ph = new PageHelper();
+		ph.setPage(1);
+		ph.setHiddenTotal(true);
+		ph.setRows(1);
+		fmAd.setType(type);
+		fmAd.setGoodsId(goodsId);
+		DataGrid dataGrid = fmAdService.dataGrid(fmAd, ph);
+		if(CollectionUtils.isNotEmpty(dataGrid.getRows())){
+			return (FmAd)dataGrid.getRows().get(0);
+		}
+		return null;
+	}
+
+	private void addToAdForDb(String goodsId,String type,String loginId){
+		FmGoods fmGoods = fmGoodsService.get(goodsId);
+		FmAd fmAd = new FmAd();
+		fmAd.setGoodsId(goodsId);
+		fmAd.setType(type);
+		fmAd.setLoginId(loginId);
+		fmAd.setGoodsName(fmGoods.getName());
+		fmAd.setStatus("FS01");
+		fmAdService.add(fmAd);
+	}
 }

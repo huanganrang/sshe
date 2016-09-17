@@ -23,6 +23,16 @@
 		$.canView = true;
 	</script>
 </c:if>
+<c:if test="${fn:contains(sessionInfo.resourceList, '/fmGoodsController/addToAd')}">
+	<script type="text/javascript">
+		$.canViewAddToAd = true;
+	</script>
+</c:if>
+<c:if test="${fn:contains(sessionInfo.resourceList, '/fmGoodsController/addToSanAd')}">
+	<script type="text/javascript">
+		$.canViewAddToSanAd = true;
+	</script>
+</c:if>
 <script type="text/javascript">
 	var dataGrid;
 	$(function() {
@@ -96,7 +106,7 @@
 				}, {
 				field : 'action',
 				title : '操作',
-				width : 30,
+				width : 60,
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {
@@ -109,6 +119,14 @@
 					str += '&nbsp;';
 					if ($.canView) {
 						str += $.formatString('<img onclick="viewFun(\'{0}\');" src="{1}" title="查看"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_link.png');
+					}
+					str += '&nbsp;';
+					if ($.canViewAddToAd) {
+						str += $.formatString('<img onclick="addToAd(\'{0}\');" src="{1}" title="推送至活动广告"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_link.png');
+					}
+					str += '&nbsp;';
+					if ($.canViewAddToSanAd) {
+						str += $.formatString('<img onclick="addToAd2(\'{0}\');" src="{1}" title="推送至三品一标"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_link.png');
 					}
 					return str;
 				}
@@ -181,6 +199,52 @@
 		});
 	}
 
+	function addToAd(id) {
+		if (id == undefined) {
+			var rows = dataGrid.datagrid('getSelections');
+			id = rows[0].id;
+		}
+		parent.$.messager.confirm('询问', '您是否要推送至活动广告？', function(b) {
+			if (b) {
+				parent.$.messager.progress({
+					title : '提示',
+					text : '数据处理中，请稍后....'
+				});
+				$.post('${pageContext.request.contextPath}/fmGoodsController/addToAd', {
+					id : id
+				}, function(result) {
+					if (result.success) {
+						parent.$.messager.alert('提示', result.msg, 'info');
+						dataGrid.datagrid('reload');
+					}
+					parent.$.messager.progress('close');
+				}, 'JSON');
+			}
+		});
+	}
+	function addToAd2(id) {
+		if (id == undefined) {
+			var rows = dataGrid.datagrid('getSelections');
+			id = rows[0].id;
+		}
+		parent.$.messager.confirm('询问', '您是否要推送至三品一标？', function(b) {
+			if (b) {
+				parent.$.messager.progress({
+					title : '提示',
+					text : '数据处理中，请稍后....'
+				});
+				$.post('${pageContext.request.contextPath}/fmGoodsController/addToSanAd', {
+					id : id
+				}, function(result) {
+					if (result.success) {
+						parent.$.messager.alert('提示', result.msg, 'info');
+						dataGrid.datagrid('reload');
+					}
+					parent.$.messager.progress('close');
+				}, 'JSON');
+			}
+		});
+	}
 	function addFun() {
 		parent.$.modalDialog({
 			title : '添加数据',
