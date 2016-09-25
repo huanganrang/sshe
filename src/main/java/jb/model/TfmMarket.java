@@ -51,6 +51,8 @@ public class TfmMarket implements java.io.Serializable,IEntity{
 	private java.lang.String area;
 	//columns END
 
+	private String userId;
+
 
 		public TfmMarket(){
 		}
@@ -115,33 +117,14 @@ public class TfmMarket implements java.io.Serializable,IEntity{
 	public void setArea(java.lang.String area) {
 		this.area = area;
 	}
-	
-	
-	/*
-	public String toString() {
-		return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
-			.append("Id",getId())
-			.append("Addtime",getAddtime())
-			.append("Updatetime",getUpdatetime())
-			.append("Isdeleted",getIsdeleted())
-			.append("Name",getName())
-			.append("Area",getArea())
-			.toString();
+
+	@Column(name = "user_id", unique = false, nullable = true, insertable = true, updatable = true, length = 36)
+	public String getUserId() {
+		return userId;
 	}
-	
-	public int hashCode() {
-		return new HashCodeBuilder()
-			.append(getId())
-			.toHashCode();
+
+	public void setUserId(String userId) {
+		this.userId = userId;
 	}
-	
-	public boolean equals(Object obj) {
-		if(obj instanceof FmMarket == false) return false;
-		if(this == obj) return true;
-		FmMarket other = (FmMarket)obj;
-		return new EqualsBuilder()
-			.append(getId(),other.getId())
-			.isEquals();
-	}*/
 }
 

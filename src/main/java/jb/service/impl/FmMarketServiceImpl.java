@@ -60,7 +60,14 @@ public class FmMarketServiceImpl extends BaseServiceImpl<FmMarket> implements Fm
 			if (!F.empty(fmMarket.getArea())) {
 				whereHql += " and t.area = :area";
 				params.put("area", fmMarket.getArea());
-			}		
+			}
+
+			if (!F.empty(fmMarket.getUserId())) {
+				whereHql += " and (t.userId is null or t.userId = :userId)";
+				params.put("userId", fmMarket.getUserId());
+			}else{
+				whereHql += " and t.userId is null";
+			}
 		}	
 		return whereHql;
 	}

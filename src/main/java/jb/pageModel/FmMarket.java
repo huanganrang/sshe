@@ -12,7 +12,8 @@ public class FmMarket implements java.io.Serializable {
 	private Date updatetime;			
 	private java.lang.Boolean isdeleted;	
 	private java.lang.String name;	
-	private java.lang.String area;	
+	private java.lang.String area;
+	private String userId;
 
 	
 
@@ -61,4 +62,11 @@ public class FmMarket implements java.io.Serializable {
 		return this.area;
 	}
 
+	public String getUserId() {
+		return userId;
+	}
+
+	public void setUserId(String userId) {
+		this.userId = userId;
+	}
 }
