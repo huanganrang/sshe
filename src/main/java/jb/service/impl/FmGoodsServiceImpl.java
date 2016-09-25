@@ -155,6 +155,7 @@ public class FmGoodsServiceImpl extends BaseServiceImpl<FmGoods> implements FmGo
 	@Override
 	public void add(FmGoods fmGoods) {
 		TfmGoods t = new TfmGoods();
+		t.setAccessNum(0);
 		BeanUtils.copyProperties(fmGoods, t);
 		t.setId(jb.absx.UUID.uuid());
 		t.setAddtime(new Date());
@@ -186,6 +187,13 @@ public class FmGoodsServiceImpl extends BaseServiceImpl<FmGoods> implements FmGo
 		params.put("id", id);
 		fmGoodsDao.executeHql("update TfmGoods t set t.isdeleted = 1 where t.id = :id",params);
 		//fmGoodsDao.delete(fmGoodsDao.get(TfmGoods.class, id));
+	}
+
+	@Override
+	public void updateAccess(String id) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("id", id);
+		fmGoodsDao.executeHql("update TfmGoods t set t.accessNum = t.accessNum+1 where t.id = :id",params);
 	}
 
 	@Override

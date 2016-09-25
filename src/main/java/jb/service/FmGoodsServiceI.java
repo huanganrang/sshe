@@ -54,6 +54,12 @@ public interface FmGoodsServiceI {
 	public void delete(String id);
 
 	/**
+	 * 修改访问数量
+	 * @param id
+	 */
+	void updateAccess(String id);
+
+	/**
 	 * 获取FmGoods集合
 	 *
 	 * @param fmGoods

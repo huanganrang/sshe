@@ -38,7 +38,9 @@ public class FmGoods implements java.io.Serializable {
 	private java.lang.String pack;	
 	private java.lang.String formatDesc;	
 	private java.lang.String onlineStatus;	
-	private java.lang.String userId;	
+	private java.lang.String userId;
+	//发布人信息
+	private FmUser fmUser;
 	private java.lang.String parentId;	
 	private java.lang.Integer accessNum;	
 	private java.lang.String source;	
@@ -47,6 +49,8 @@ public class FmGoods implements java.io.Serializable {
 	private java.lang.String grade;	
 	private java.lang.String extFields;
 	private String typeName;
+
+
 
 	
 
@@ -368,5 +372,13 @@ public class FmGoods implements java.io.Serializable {
 	public String[] getImageList() {
 		if (this.images == null) return new String[]{};
 		return this.images.split("[;]");
+	}
+
+	public FmUser getFmUser() {
+		return fmUser;
+	}
+
+	public void setFmUser(FmUser fmUser) {
+		this.fmUser = fmUser;
 	}
 }
