@@ -38,6 +38,7 @@ public class FmPurchase implements java.io.Serializable {
 	private java.lang.String userId;	
 	private java.lang.String onlineStatus;
 	private java.lang.String extFields;
+	private int fmPurchaseUserCount;
 	private List<FmPurchaseUser> fmPurchaseUserList;
 	private FmUser fmUser;
 	private Boolean isAttention;
@@ -308,5 +309,13 @@ public class FmPurchase implements java.io.Serializable {
 
 	public void setTypeName(String typeName) {
 		this.typeName = typeName;
+	}
+
+	public int getFmPurchaseUserCount() {
+		return fmPurchaseUserCount;
+	}
+
+	public void setFmPurchaseUserCount(int fmPurchaseUserCount) {
+		this.fmPurchaseUserCount = fmPurchaseUserCount;
 	}
 }

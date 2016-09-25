@@ -145,10 +145,12 @@ public class ApiFmPurchaseController extends BaseController {
                         FmPurchaseUser fmPurchaseUser = new FmPurchaseUser();
                         fmPurchaseUser.setPurchaseId(id);
                         List<FmPurchaseUser> fmPurchaseUserList = fmPurchaseUserServiceI.query(fmPurchaseUser);
+
                         return fmPurchaseUserList;
                     }
                     protected void set(FmPurchase d, List<FmPurchaseUser> fmPurchaseUserList) {
                         if(fmPurchaseUserList != null && fmPurchaseUserList.size() > 0) {
+                            d.setFmPurchaseUserCount(fmPurchaseUserList.size());
                             for (int m=0; m<fmPurchaseUserList.size(); m++) {
                                 final FmPurchaseUser fmPurchaseUser = fmPurchaseUserList.get(m);
                                 //根据用户id查询用户信息
