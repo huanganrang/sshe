@@ -48,7 +48,12 @@ public class FmGoodsServiceImpl extends BaseServiceImpl<FmGoods> implements FmGo
 			if (!F.empty(fmGoods.getName())) {
 				whereHql += " and t.name = :name";
 				params.put("name", fmGoods.getName());
-			}		
+			}
+
+			if (fmGoods.getGoodsIdList() != null && fmGoods.getGoodsIdList().length > 0) {
+				whereHql += " and t.name in(:nameList)";
+				params.put("nameList", fmGoods.getGoodsIdList());
+			}
 				
 			if (!F.empty(fmGoods.getUnit())) {
 				whereHql += " and t.unit = :unit";

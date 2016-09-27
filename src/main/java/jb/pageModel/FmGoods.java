@@ -49,6 +49,7 @@ public class FmGoods implements java.io.Serializable {
 	private java.lang.String grade;	
 	private java.lang.String extFields;
 	private String typeName;
+	private String[] goodsIdList;
 
 
 
@@ -380,5 +381,13 @@ public class FmGoods implements java.io.Serializable {
 
 	public void setFmUser(FmUser fmUser) {
 		this.fmUser = fmUser;
+	}
+
+	public String[] getGoodsIdList() {
+		return goodsIdList;
+	}
+
+	public void setGoodsIdList(String[] goodsIdList) {
+		this.goodsIdList = goodsIdList;
 	}
 }

@@ -9,6 +9,7 @@ import jb.pageModel.*;
 import jb.service.FmGoodsServiceI;
 import jb.service.FmUserServiceI;
 import jb.service.impl.CompletionFactory;
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -140,23 +141,52 @@ public class ApiFmGoodsController extends BaseController {
      */
     @RequestMapping("/dataGrid")
     @ResponseBody
-    public Json dataGrid(FmGoods fmGoods, PageHelper ph) {
+    public Json dataGrid(FmGoods fmGoods,String goodsIdStr, PageHelper ph) {
         Json j = new Json();
         try {
-            Map<String, DataGrid> resultMap = new HashMap<String, DataGrid>();
+            ph.setHiddenTotal(true);
+            if(!F.empty(goodsIdStr)){
+                fmGoods.setGoodsIdList(goodsIdStr.split("[;,]"));
+            }
+            final Map<String, DataGrid> resultMap = new HashMap<String, DataGrid>();
             if(F.empty(fmGoods.getStatus())){
-                //现货
-                fmGoods.setStatus("GS20");
-                DataGrid dg_spotGoods = fmGoodsService.dataGrid(fmGoods, ph);
-                resultMap.put("spotGoods", dg_spotGoods);
-                //在途
-                fmGoods.setStatus("GS30");
-                DataGrid dg_onTheWayGoods = fmGoodsService.dataGrid(fmGoods, ph);
-                resultMap.put("onTheWayGoods", dg_onTheWayGoods);
-                //预售
-                fmGoods.setStatus("GS10");
-                DataGrid dg_presellGoods = fmGoodsService.dataGrid(fmGoods, ph);
-                resultMap.put("presellGoods", dg_presellGoods);
+                final CompletionService completionService = CompletionFactory.initCompletion();
+                Object[] request = new Object[]{getRequestFmGoods(fmGoods,"GS20"),ph};
+                completionService.submit(new Task<Object[], DataGrid>(request) {
+                    @Override
+                    public DataGrid call() throws Exception {
+                        return fmGoodsService.dataGrid((FmGoods)getD()[0], (PageHelper)getD()[1]);
+                    }
+
+                    protected void set(Object[] d, DataGrid dataGrid) {
+                        resultMap.put("spotGoods", dataGrid);
+                    }
+                });
+
+                request = new Object[]{getRequestFmGoods(fmGoods,"GS30"),ph};
+                completionService.submit(new Task<Object[], DataGrid>(request) {
+                    @Override
+                    public DataGrid call() throws Exception {
+                        return fmGoodsService.dataGrid((FmGoods)getD()[0], (PageHelper)getD()[1]);
+                    }
+
+                    protected void set(Object[] d, DataGrid dataGrid) {
+                        resultMap.put("onTheWayGoods", dataGrid);
+                    }
+                });
+                request = new Object[]{getRequestFmGoods(fmGoods,"GS10"),ph};
+                completionService.submit(new Task<Object[], DataGrid>(request) {
+                    @Override
+                    public DataGrid call() throws Exception {
+                        return fmGoodsService.dataGrid((FmGoods)getD()[0], (PageHelper)getD()[1]);
+                    }
+
+                    protected void set(Object[] d, DataGrid dataGrid) {
+                        resultMap.put("presellGoods", dataGrid);
+                    }
+                });
+
+                completionService.sync();
             }else{
 
                 DataGrid dataGrid = fmGoodsService.dataGrid(fmGoods, ph);
@@ -181,4 +211,10 @@ public class ApiFmGoodsController extends BaseController {
         return j;
     }
 
+    private FmGoods getRequestFmGoods(FmGoods fmGoods,String status){
+        FmGoods fmGoods1 = new FmGoods();
+        BeanUtils.copyProperties(fmGoods,fmGoods1);
+        fmGoods1.setStatus(status);
+        return fmGoods1;
+    }
 }
