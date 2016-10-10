@@ -16,8 +16,10 @@ import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import java.net.URLDecoder;
 import java.util.Date;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -54,7 +56,10 @@ public class ApiFmUserController extends BaseController {
         try {
             //String url = "http://yizhuisu.com/api/Ba/userLogin";
             String url = "http://t149127q79.51mypc.cn:11169/api/Ba/userLogin";
-            String result = HttpUtil.httpRequest(url, "post", "{\"Dto_Mobile\":\""+dtoMobile+"\",\"Dto_Password\":\""+dtoPassword+"\"}");
+            Map<String, Object> httpMap = HttpUtil.httpRequestWithHeader(url, "post", "{\"Dto_Mobile\":\""+dtoMobile+"\",\"Dto_Password\":\""+dtoPassword+"\"}");
+            Map<String, List<String>> hederMap = (Map<String, List<String>>)httpMap.get("header");
+            String retShowMsg = hederMap.get("retShowMsg") == null?null:URLDecoder.decode((hederMap.get("retShowMsg").get(0)), "UTF-8");
+            String result = httpMap.get("body") == null?null:httpMap.get("body").toString();
             if(!F.empty(result) && result.contains("In_UserID") && result.contains("In_UserName")) {
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put("centerUser", JSON.parseObject(result));
@@ -79,7 +84,9 @@ public class ApiFmUserController extends BaseController {
                 j.setSuccess(true);
                 j.setMsg(SUCCESS_MESSAGE);
                 j.setObj(map);
+                return j;
             }
+            j.setMsg(retShowMsg);
         } catch (Exception e) {
             j.setMsg(Application.getString(EX_0001));
             logger.error("登陆异常", e);

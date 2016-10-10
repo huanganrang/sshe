@@ -1,5 +1,8 @@
 package jb.util;
 
+import org.apache.log4j.Logger;
+
+import javax.net.ssl.*;
 import java.io.BufferedReader;
 import java.io.InputStream;
 import java.io.InputStreamReader;
@@ -7,15 +10,9 @@ import java.io.OutputStream;
 import java.net.ConnectException;
 import java.net.HttpURLConnection;
 import java.net.URL;
-
-import javax.net.ssl.HostnameVerifier;
-import javax.net.ssl.HttpsURLConnection;
-import javax.net.ssl.SSLContext;
-import javax.net.ssl.SSLSession;
-import javax.net.ssl.SSLSocketFactory;
-import javax.net.ssl.TrustManager;
-
-import org.apache.log4j.Logger;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 public class HttpUtil {
 	
@@ -143,6 +140,64 @@ public class HttpUtil {
 			log.error("https request error:{}", e);
 		}
 		return buffer.toString();
+	}
+
+	/**
+	 * 发起http请求获取返回head和body内容
+	 *
+	 * @param requestUrl 请求地址
+	 * @return
+	 */
+	public static Map<String, Object> httpRequestWithHeader(String requestUrl, String requestMethod, String outputStr) {
+		Map<String, Object> map = new HashMap<String, Object>();
+		StringBuffer buffer = new StringBuffer();
+		try {
+			URL url = new URL(requestUrl);
+			HttpURLConnection httpUrlConn = (HttpURLConnection) url.openConnection();
+
+			httpUrlConn.setDoOutput(true);
+			httpUrlConn.setDoInput(true);
+			httpUrlConn.setUseCaches(false);
+			httpUrlConn.setRequestProperty("Content-Type", "application/json;charset=UTF-8");
+
+			httpUrlConn.setRequestMethod(requestMethod.toUpperCase());
+
+			if ("GET".equalsIgnoreCase(requestMethod))
+				httpUrlConn.connect();
+
+			// 当有数据需要提交时
+			if (null != outputStr) {
+				OutputStream outputStream = httpUrlConn.getOutputStream();
+				// 注意编码格式，防止中文乱码
+				outputStream.write(outputStr.getBytes("UTF-8"));
+				outputStream.close();
+			}
+
+			//提取header里面的信息
+			Map<String, List<String>> hederMap = httpUrlConn.getHeaderFields();
+			map.put("header", hederMap);
+
+			// 将返回的输入流转换成字符串
+			InputStream inputStream = httpUrlConn.getInputStream();
+			InputStreamReader inputStreamReader = new InputStreamReader(inputStream, "utf-8");
+			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+
+			String str = null;
+			while ((str = bufferedReader.readLine()) != null) {
+				buffer.append(str);
+			}
+			bufferedReader.close();
+			inputStreamReader.close();
+			// 释放资源
+			inputStream.close();
+			inputStream = null;
+			httpUrlConn.disconnect();
+			map.put("body", buffer.toString());
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		return map;
 	}
 	
 	public static void main(String[] args) {
