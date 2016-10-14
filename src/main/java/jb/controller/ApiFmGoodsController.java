@@ -1,11 +1,11 @@
 package jb.controller;
 
-import farming.concurrent.CacheKey;
 import farming.concurrent.CompletionService;
 import farming.concurrent.Task;
 import jb.absx.F;
 import jb.listener.Application;
 import jb.pageModel.*;
+import jb.service.BasedataServiceI;
 import jb.service.FmGoodsServiceI;
 import jb.service.FmUserServiceI;
 import jb.service.impl.CompletionFactory;
@@ -16,7 +16,6 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
 import java.util.HashMap;
-import java.util.List;
 import java.util.Map;
 
 /**
@@ -33,6 +32,9 @@ public class ApiFmGoodsController extends BaseController {
 
     @Autowired
     private FmUserServiceI fmUserServiceI;
+
+    @Autowired
+    private BasedataServiceI basedataService;
 
     /**
      * 发布商品接口
@@ -141,12 +143,18 @@ public class ApiFmGoodsController extends BaseController {
      */
     @RequestMapping("/dataGrid")
     @ResponseBody
-    public Json dataGrid(FmGoods fmGoods,String goodsIdStr, PageHelper ph) {
+    public Json dataGrid(FmGoods fmGoods, String goodsIdStr, String key, PageHelper ph) {
         Json j = new Json();
         try {
             ph.setHiddenTotal(true);
             if(!F.empty(goodsIdStr)){
                 fmGoods.setGoodsIdList(goodsIdStr.split("[;,]"));
+            }
+            if(!F.empty(key)){
+                BaseData baseData = new BaseData();
+                baseData.setName(key);
+                String[] keyList = basedataService.getGoodsName(key);
+                fmGoods.setKeyList(keyList);
             }
             final Map<String, DataGrid> resultMap = new HashMap<String, DataGrid>();
             if(F.empty(fmGoods.getStatus())){

@@ -1,11 +1,11 @@
 package jb.service;
 
-import java.util.List;
-import java.util.Map;
-
 import jb.pageModel.BaseData;
 import jb.pageModel.DataGrid;
 import jb.pageModel.PageHelper;
+
+import java.util.List;
+import java.util.Map;
 
 /**
  * 基础数据业务逻辑
@@ -75,5 +75,10 @@ public interface BasedataServiceI {
 	 * 获取系统环境变量
 	 */
 	Map<String,BaseData> getAppVariable();
+
+	/**
+	 * 商品搜索时，获取商品的名称
+	 */
+	String[] getGoodsName(String key);
 	
 }

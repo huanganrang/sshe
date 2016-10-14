@@ -1,10 +1,5 @@
 package jb.service.impl;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 import jb.absx.F;
 import jb.dao.BasedataDaoI;
 import jb.dao.BasetypeDaoI;
@@ -15,10 +10,14 @@ import jb.pageModel.DataGrid;
 import jb.pageModel.PageHelper;
 import jb.service.BasedataServiceI;
 import jb.util.MyBeanUtils;
-
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class BasedataServiceImpl implements BasedataServiceI {
@@ -145,6 +144,37 @@ public class BasedataServiceImpl implements BasedataServiceI {
 			}
 		}
 		return variable;
+	}
+
+	@Override
+	public String[] getGoodsName(String key) {
+		String hql = " from Tbasedata t where id like 'GN%' and name like '%" + key + "%'";
+		List<Tbasedata> l = basedataDao.find(hql);
+		if (l != null && l.size() > 0) {
+			List<String> list = new ArrayList<String>();
+			for(int i=0; i<l.size(); i++) {
+				list.add(l.get(i).getId());
+			}
+			//排除多余的子目录项
+			List<String> lt = new ArrayList<String>();
+			for(int j=0; j<list.size(); j++) {
+				String id_j = list.get(j);
+				Boolean ij = true;
+				for(int m=0; m<list.size(); m++) {
+					String id_m = list.get(m);
+					if(id_j.length()>id_m.length() && id_j.contains(id_m)) {
+						ij = false;
+						break;
+					}
+				}
+				if(ij) {
+					lt.add(id_j);
+				}
+			}
+			return lt.toArray(new String[lt.size()]);
+		}
+
+		return null;
 	}
 
 	@SuppressWarnings("rawtypes")

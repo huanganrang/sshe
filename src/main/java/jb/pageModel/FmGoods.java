@@ -50,10 +50,8 @@ public class FmGoods implements java.io.Serializable {
 	private java.lang.String extFields;
 	private String typeName;
 	private String[] goodsIdList;
+	private String[] keyList;
 
-
-
-	
 
 	public void setId(java.lang.String value) {
 		this.id = value;
@@ -63,7 +61,6 @@ public class FmGoods implements java.io.Serializable {
 		return this.id;
 	}
 
-	
 	public void setAddtime(Date addtime) {
 		this.addtime = addtime;
 	}
@@ -390,4 +387,13 @@ public class FmGoods implements java.io.Serializable {
 	public void setGoodsIdList(String[] goodsIdList) {
 		this.goodsIdList = goodsIdList;
 	}
+
+	public String[] getKeyList() {
+		return keyList;
+	}
+
+	public void setKeyList(String[] keyList) {
+		this.keyList = keyList;
+	}
+
 }
