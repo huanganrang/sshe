@@ -52,7 +52,8 @@ public class TfmPurchase implements java.io.Serializable,IEntity{
 	public static final String ALIAS_USER_ID = "用户ID";
 	public static final String ALIAS_ONLINE_STATUS = "上下线状态";
 	public static final String ALIAS_EXTFIELDS = "规格的json格式";
-	
+	public static final String ALIAS_TOP = "置顶";
+
 	//date formats
 	public static final String FORMAT_ADDTIME = jb.util.Constants.DATE_FORMAT_FOR_ENTITY;
 	public static final String FORMAT_UPDATETIME = jb.util.Constants.DATE_FORMAT_FOR_ENTITY;
@@ -119,7 +120,7 @@ public class TfmPurchase implements java.io.Serializable,IEntity{
 	//@Length(max=500)
 	private java.lang.String extFields;
 	//columns END
-
+	private Boolean topIndex;
 
 		public TfmPurchase(){
 		}
@@ -384,9 +385,16 @@ public class TfmPurchase implements java.io.Serializable,IEntity{
 	public void setExtFields(String extFields) {
 		this.extFields = extFields;
 	}
-	
-	
-	/*
+
+	@Column(name = "top_index", unique = false, nullable = true, insertable = true, updatable = true, length = 0)
+	public Boolean getTopIndex() {
+		return topIndex;
+	}
+
+	public void setTopIndex(Boolean topIndex) {
+		this.topIndex = topIndex;
+	}
+/*
 	public String toString() {
 		return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)
 			.append("Id",getId())

@@ -43,6 +43,7 @@ public class FmPurchase implements java.io.Serializable {
 	private FmUser fmUser;
 	private Boolean isAttention;
 	private String typeName; //商品品类
+	private Boolean topIndex;
 
 	public void setId(java.lang.String value) {
 		this.id = value;
@@ -318,4 +319,13 @@ public class FmPurchase implements java.io.Serializable {
 	public void setFmPurchaseUserCount(int fmPurchaseUserCount) {
 		this.fmPurchaseUserCount = fmPurchaseUserCount;
 	}
+
+	public Boolean getTopIndex() {
+		return topIndex;
+	}
+
+	public void setTopIndex(Boolean topIndex) {
+		this.topIndex = topIndex;
+	}
+
 }

@@ -63,6 +63,31 @@ public class ApiFmPurchaseController extends BaseController {
     }
 
     /**
+     * 编辑采购信息(我要采购)
+     *
+     *参数:name,startPrice,endPrice,unit,minNum,maxNum,status,bornArea,transactionArea,
+     * startTime,endTime,images,require,diameter,diameterUnit,color,isPack,pack,formatDesc,
+     * voiceUrl,voiceDuration,userId,onlineStatus
+     */
+    @RequestMapping("/edit")
+    @ResponseBody
+    public Json edit(FmPurchase fmPurchase) {
+        Json j = new Json();
+        try {
+            if(!F.empty(fmPurchase.getId())) {
+                fmPurchaseService.edit(fmPurchase);
+                j.setSuccess(true);
+                j.setMsg(SUCCESS_MESSAGE);
+            }
+        } catch (Exception e) {
+            j.setMsg(Application.getString(EX_0001));
+            logger.error("编辑采购信息异常", e);
+        }
+
+        return j;
+    }
+
+    /**
      * 采购发布记录
      *
      * 可选参数:userId,name,transactionArea,onlineStatus,page,rows,sort,order

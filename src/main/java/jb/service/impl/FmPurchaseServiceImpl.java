@@ -38,7 +38,14 @@ public class FmPurchaseServiceImpl extends BaseServiceImpl<FmPurchase> implement
 		dg.setRows(ol);
 		return dg;
 	}
-	
+
+	protected String orderHql(PageHelper ph) {
+		String orderString = " order by t.topIndex desc";
+		if (ph.getSort() != null && ph.getOrder() != null) {
+			orderString += " order by t." + ph.getSort() + " " + ph.getOrder();
+		}
+		return orderString;
+	}
 
 	protected String whereHql(FmPurchase fmPurchase, Map<String, Object> params) {
 		String whereHql = "";	
@@ -123,6 +130,9 @@ public class FmPurchaseServiceImpl extends BaseServiceImpl<FmPurchase> implement
 		t.setId(jb.absx.UUID.uuid());
 		t.setAddtime(new Date());
 		t.setIsdeleted(false);
+		if(t.getTopIndex() == null) {
+			t.setTopIndex(false);
+		}
 		fmPurchaseDao.save(t);
 	}
 
