@@ -118,7 +118,7 @@ public class FmPropertiesServiceImpl extends BaseServiceImpl<FmProperties> imple
 				String value = json.getString(fmProperties.getId());
 				sb.append(String.format(format,fmProperties.getName(),value == null ? "" : value));
 			} else if (FieldType.BOOLEAN.getType().equals(fieldType)) {
-				format = format.replaceFirst("%s^\\s%s","%s");
+				format = format.replaceFirst("%s:%s","%s");
 				sb.append(String.format(format,getValueName(json, fmProperties)+fmProperties.getName()));
 			}
 		}

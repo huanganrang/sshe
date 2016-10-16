@@ -39,13 +39,6 @@ public class FmPurchaseServiceImpl extends BaseServiceImpl<FmPurchase> implement
 		return dg;
 	}
 
-	protected String orderHql(PageHelper ph) {
-		String orderString = " order by t.topIndex desc";
-		if (ph.getSort() != null && ph.getOrder() != null) {
-			orderString += " order by t." + ph.getSort() + " " + ph.getOrder();
-		}
-		return orderString;
-	}
 
 	protected String whereHql(FmPurchase fmPurchase, Map<String, Object> params) {
 		String whereHql = "";	
