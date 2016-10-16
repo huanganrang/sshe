@@ -30,52 +30,71 @@
 				}
 			}
 		});
+
+		function ProcessFile() {
+			var file = document.getElementById('iconFile').files[0];
+			if (file) {
+				var reader = new FileReader();
+				reader.onload = function ( event ) {
+					var txt = event.target.result;
+					$('.img-preview').attr('src',txt);
+				};
+			}
+			reader.readAsDataURL(file);
+		}
+		$(document).delegate('#iconFile','change',function () {
+			ProcessFile();
+		});
 	});
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
 	<div data-options="region:'center',border:false" title="" style="overflow: hidden;">	
-		<form id="form" method="post">		
+		<form id="form" method="post" enctype="multipart/form-data">
 				<input type="hidden" name="id"/>
 			<table class="table table-hover table-condensed">
+
+
 				<tr>	
-					<th><%=TfmMessage.ALIAS_ADDTIME%></th>	
-					<td>
-					<input class="span2" name="addtime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmMessage.FORMAT_ADDTIME%>'})"  maxlength="0" class="required " />
+					<th><%=TfmMessage.ALIAS_TITLE%></th>	
+					<td colspan="3">
+						<input class="span2" name="title" type="text"/>
 					</td>							
-					<th><%=TfmMessage.ALIAS_UPDATETIME%></th>	
+
+				</tr>
+				<tr>
+					<th><%=TfmMessage.ALIAS_SUB_TITLE%></th>
+					<td colspan="3">
+						<input class="span2" name="subTitle" type="text"/>
+					</td>
+				</tr>
+				<tr>
+					<th><%=TfmMessage.ALIAS_CONTENT%></th>
 					<td>
-					<input class="span2" name="updatetime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmMessage.FORMAT_UPDATETIME%>'})"  maxlength="0" class="required " />
-					</td>							
-				</tr>	
+						<input class="span2" name="content" type="text"/>
+					</td>
+				</tr>
 				<tr>
 					<th><%=TfmMessage.ALIAS_SEND_TIME%></th>
 					<td>
 						<input class="span2" name="sendTime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmMessage.FORMAT_SEND_TIME%>'})"  maxlength="0" class="" />
 					</td>
-					<th><%=TfmMessage.ALIAS_CONTENT%></th>	
-					<td>
-											<input class="span2" name="content" type="text"/>
-					</td>							
-				</tr>	
-				<tr>	
-					<th><%=TfmMessage.ALIAS_TITLE%></th>	
-					<td>
-											<input class="span2" name="title" type="text"/>
-					</td>							
-					<th><%=TfmMessage.ALIAS_SUB_TITLE%></th>	
-					<td>
-											<input class="span2" name="subTitle" type="text"/>
-					</td>							
-				</tr>	
-				<tr>	
 					<th><%=TfmMessage.ALIAS_SEND_TYPE%></th>	
 					<td>
-											<jb:select dataType="ST" name="sendType"></jb:select>	
-					</td>							
-					<th><%=TfmMessage.ALIAS_URL%></th>	
+						<jb:select dataType="ST" name="sendType"></jb:select>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" height="155">
+
+						<img class="img-preview" src="" width="100%" height="100%"/>
+
+					</td>
+				</tr>
+				<tr>
+					<th><%=TfmMessage.ALIAS_URL%></th>
 					<td>
-											<input class="span2" name="url" type="text"/>
-					</td>							
+						<input type="file" id="iconFile" name="equipIconFile">
+					</td>
 				</tr>
 			</table>		
 		</form>

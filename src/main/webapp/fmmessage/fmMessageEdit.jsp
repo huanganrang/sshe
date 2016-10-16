@@ -30,64 +30,77 @@
 				}
 			}
 		});
+		function ProcessFile() {
+			var file = document.getElementById('iconFile').files[0];
+			if (file) {
+				var reader = new FileReader();
+				reader.onload = function ( event ) {
+					var txt = event.target.result;
+					$('.img-preview').attr('src',txt);
+				};
+			}
+			reader.readAsDataURL(file);
+		}
+		$(document).delegate('#iconFile','change',function () {
+			ProcessFile();
+		});
 	});
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
 	<div data-options="region:'center',border:false" title="" style="overflow: hidden;">
-		<form id="form" method="post">
-				<input type="hidden" name="id" value = "${fmMessage.id}"/>
+		<form id="form" method="post" enctype="multipart/form-data">
+			<input type="hidden" name="id" value="${fmMessage.id}"/>
 			<table class="table table-hover table-condensed">
-				<tr>	
-					<th><%=TfmMessage.ALIAS_ADDTIME%></th>	
+
+
+				<tr>
+					<th><%=TfmMessage.ALIAS_TITLE%>
+					</th>
 					<td>
-					<input class="span2" name="addtime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmMessage.FORMAT_ADDTIME%>'})"   maxlength="0" value="${fmMessage.addtime}"/>
-					</td>							
-					<th><%=TfmMessage.ALIAS_UPDATETIME%></th>	
+						<input class="span2" name="title" type="text" value="${fmMessage.title}"/>
+					</td>
+				</tr>
+				<tr>
+					<th><%=TfmMessage.ALIAS_SUB_TITLE%>
+					</th>
 					<td>
-					<input class="span2" name="updatetime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmMessage.FORMAT_UPDATETIME%>'})"   maxlength="0" value="${fmMessage.updatetime}"/>
-					</td>							
-			</tr>	
-				<tr>	
-					<th><%=TfmMessage.ALIAS_ISDELETED%></th>	
+						<input class="span2" name="subTitle" type="text" value="${fmMessage.subTitle}"/>
+					</td>
+				</tr>
+				<tr>
+
+					<th><%=TfmMessage.ALIAS_CONTENT%>
+					</th>
 					<td>
-											<input class="span2" name="isdeleted" type="text" class="easyui-validatebox span2" data-options="required:true" value="${fmMessage.isdeleted}"/>
-					</td>							
-					<th><%=TfmMessage.ALIAS_CONTENT%></th>	
+						<input class="span2" name="content" type="text" value="${fmMessage.content}"/>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" height="155">
+						<img class="img-preview" src="${fmMessage.url}" width="100%" height="100%"/>
+					</td>
+				</tr>
+				<tr>
+					<th><%=TfmMessage.ALIAS_URL%></th>
 					<td>
-											<input class="span2" name="content" type="text" value="${fmMessage.content}"/>
-					</td>							
-			</tr>	
-				<tr>	
-					<th><%=TfmMessage.ALIAS_TITLE%></th>	
+						<input type="file" id="iconFile" name="equipIconFile">
+					</td>
+				</tr>
+				<tr>
+					<th><%=TfmMessage.ALIAS_SEND_TIME%>
+					</th>
 					<td>
-											<input class="span2" name="title" type="text" value="${fmMessage.title}"/>
-					</td>							
-					<th><%=TfmMessage.ALIAS_SUB_TITLE%></th>	
+						<input class="span2" name="sendTime" type="text"
+							   onclick="WdatePicker({dateFmt:'<%=TfmMessage.FORMAT_SEND_TIME%>'})" maxlength="0"
+							   value="${fmMessage.sendTime}"/>
+					</td>
+					<th><%=TfmMessage.ALIAS_SEND_TYPE%>
+					</th>
 					<td>
-											<input class="span2" name="subTitle" type="text" value="${fmMessage.subTitle}"/>
-					</td>							
-			</tr>	
-				<tr>	
-					<th><%=TfmMessage.ALIAS_SEND_TYPE%></th>	
-					<td>
-											<jb:select dataType="ST" name="sendType" value="${fmMessage.sendType}"></jb:select>	
-					</td>							
-					<th><%=TfmMessage.ALIAS_URL%></th>	
-					<td>
-											<input class="span2" name="url" type="text" value="${fmMessage.url}"/>
-					</td>							
-			</tr>	
-				<tr>	
-					<th><%=TfmMessage.ALIAS_SEND_TIME%></th>	
-					<td>
-					<input class="span2" name="sendTime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmMessage.FORMAT_SEND_TIME%>'})"   maxlength="0" value="${fmMessage.sendTime}"/>
-					</td>							
-					<th><%=TfmMessage.ALIAS_LOGIN_ID%></th>	
-					<td>
-											<input class="span2" name="loginId" type="text" value="${fmMessage.loginId}"/>
-					</td>							
-			</tr>	
-			</table>				
+						<jb:select dataType="ST" name="sendType" value="${fmMessage.sendType}"></jb:select>
+					</td>
+				</tr>
+			</table>
 		</form>
 	</div>
 </div>

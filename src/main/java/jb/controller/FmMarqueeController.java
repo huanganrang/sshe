@@ -127,7 +127,7 @@ public class FmMarqueeController extends BaseController {
 		SessionInfo sessionInfo = (SessionInfo)session.getAttribute(ConfigUtil.getSessionInfoName());
 		fmMarquee.setLoginId(sessionInfo.getId());
 		Json j = new Json();
-		fmMarquee.setUrl(uploadFile(request, "marquee", equipIconFile));
+		fmMarquee.setUrl(uploadFile(request, MARQUEE, equipIconFile));
 		fmMarqueeService.add(fmMarquee);
 		j.setSuccess(true);
 		j.setMsg("添加成功！");		

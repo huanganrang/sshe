@@ -7,7 +7,9 @@ import jb.util.ConfigUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -91,10 +93,11 @@ public class FmMessageController extends BaseController {
 	 */
 	@RequestMapping("/add")
 	@ResponseBody
-	public Json add(FmMessage fmMessage, HttpServletRequest request) {
+	public Json add(FmMessage fmMessage,@RequestParam MultipartFile equipIconFile, HttpServletRequest request) {
 		Json j = new Json();
 		SessionInfo sessionInfo = (SessionInfo) request.getSession().getAttribute(ConfigUtil.getSessionInfoName());
 		fmMessage.setLoginId(sessionInfo.getName());
+		fmMessage.setUrl(uploadFile(request, "message", equipIconFile));
 		fmMessageService.add(fmMessage);
 		j.setSuccess(true);
 		j.setMsg("添加成功！");		
@@ -133,8 +136,11 @@ public class FmMessageController extends BaseController {
 	 */
 	@RequestMapping("/edit")
 	@ResponseBody
-	public Json edit(FmMessage fmMessage) {
-		Json j = new Json();		
+	public Json edit(FmMessage fmMessage,@RequestParam MultipartFile equipIconFile, HttpServletRequest request) {
+		Json j = new Json();
+		SessionInfo sessionInfo = (SessionInfo) request.getSession().getAttribute(ConfigUtil.getSessionInfoName());
+		fmMessage.setLoginId(sessionInfo.getName());
+		fmMessage.setUrl(uploadFile(request, "message", equipIconFile));
 		fmMessageService.edit(fmMessage);
 		j.setSuccess(true);
 		j.setMsg("编辑成功！");		
