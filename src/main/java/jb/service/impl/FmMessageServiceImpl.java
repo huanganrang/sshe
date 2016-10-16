@@ -70,7 +70,11 @@ public class FmMessageServiceImpl extends BaseServiceImpl<FmMessage> implements 
 			if (!F.empty(fmMessage.getLoginId())) {
 				whereHql += " and t.loginId = :loginId";
 				params.put("loginId", fmMessage.getLoginId());
-			}		
+			}
+			if (fmMessage.getIssended() != null) {
+				whereHql += " and t.issended = :issended";
+				params.put("issended", fmMessage.getIssended());
+			}
 		}	
 		return whereHql;
 	}

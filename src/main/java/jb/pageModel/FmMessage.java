@@ -102,4 +102,12 @@ public class FmMessage implements java.io.Serializable {
 		return this.loginId;
 	}
 
+	public Boolean getIssended() {
+		return issended;
+	}
+
+	public void setIssended(Boolean issended) {
+		this.issended = issended;
+	}
+
 }
