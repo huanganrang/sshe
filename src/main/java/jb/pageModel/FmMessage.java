@@ -10,7 +10,8 @@ public class FmMessage implements java.io.Serializable {
 	private java.lang.String id;	
 	private Date addtime;			
 	private Date updatetime;			
-	private java.lang.Boolean isdeleted;	
+	private java.lang.Boolean isdeleted;
+	private java.lang.Boolean issended;
 	private java.lang.String content;	
 	private java.lang.String title;	
 	private java.lang.String subTitle;	

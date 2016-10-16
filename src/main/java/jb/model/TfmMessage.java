@@ -51,6 +51,8 @@ public class TfmMessage implements java.io.Serializable,IEntity{
 	private java.util.Date updatetime;
 	//@NotNull 
 	private java.lang.Boolean isdeleted;
+
+	private java.lang.Boolean issended;
 	//@Length(max=65535)
 	private java.lang.String content;
 	//@Length(max=100)
@@ -113,7 +115,16 @@ public class TfmMessage implements java.io.Serializable,IEntity{
 	public void setIsdeleted(java.lang.Boolean isdeleted) {
 		this.isdeleted = isdeleted;
 	}
-	
+
+	@Column(name = "issended", unique = false, nullable = false, insertable = true, updatable = true, length = 0)
+	public Boolean getIssended() {
+		return issended;
+	}
+
+	public void setIssended(Boolean issended) {
+		this.issended = issended;
+	}
+
 	@Column(name = "content", unique = false, nullable = true, insertable = true, updatable = true, length = 65535)
 	public java.lang.String getContent() {
 		return this.content;

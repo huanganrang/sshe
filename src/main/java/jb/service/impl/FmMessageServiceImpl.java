@@ -81,6 +81,7 @@ public class FmMessageServiceImpl extends BaseServiceImpl<FmMessage> implements 
 		BeanUtils.copyProperties(fmMessage, t);
 		t.setId(jb.absx.UUID.uuid());
 		t.setIsdeleted(false);
+		t.setIssended(false);
 		fmMessageDao.save(t);
 	}
 
