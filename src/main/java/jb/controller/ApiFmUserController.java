@@ -105,9 +105,12 @@ public class ApiFmUserController extends BaseController {
         try {
             //String url = "http://yizhuisu.com/api/Ba/sendVerifyCode";
             String url = "http://t149127q79.51mypc.cn:11169/api/Ba/sendVerifyCode";
-            String result = HttpUtil.httpRequest(url, "post", "{\"Dto_UserId\":0,\"Dto_Mobile\":\""+dtoMobile+"\",\"Dto_VerifyType\":"+dtoVerifyType+"}");
+            Map<String, Object> httpMap = HttpUtil.httpRequestWithHeader(url, "post", "{\"Dto_UserId\":0,\"Dto_Mobile\":\""+dtoMobile+"\",\"Dto_VerifyType\":"+dtoVerifyType+"}");
+            Map<String, List<String>> hederMap = (Map<String, List<String>>)httpMap.get("header");
+            String retShowMsg = hederMap.get("retShowMsg") == null?null:URLDecoder.decode((hederMap.get("retShowMsg").get(0)), "UTF-8");
+            String result = httpMap.get("body") == null?null:httpMap.get("body").toString();
             j.setSuccess(true);
-            j.setMsg(SUCCESS_MESSAGE);
+            j.setMsg(retShowMsg);
             j.setObj(result);
         } catch (Exception e) {
             j.setMsg(Application.getString(EX_0001));
@@ -127,7 +130,10 @@ public class ApiFmUserController extends BaseController {
         try {
             //String url = "http://yizhuisu.com/api/Ba/userRegister";
             String url = "http://t149127q79.51mypc.cn:11169/api/Ba/userRegister";
-            String result = HttpUtil.httpRequest(url, "post", "{\"Dto_Mobile\":\""+dtoMobile+"\",\"Dto_Password\":\""+dtoPassword+"\",\"Dto_VerificationCode\":\""+dtoVerificationCode+"\",\"Dto_OperateType\":"+dtoOperateType+"}");
+            Map<String, Object> httpMap = HttpUtil.httpRequestWithHeader(url, "post", "{\"Dto_Mobile\":\""+dtoMobile+"\",\"Dto_Password\":\""+dtoPassword+"\",\"Dto_VerificationCode\":\""+dtoVerificationCode+"\",\"Dto_OperateType\":"+dtoOperateType+"}");
+            Map<String, List<String>> hederMap = (Map<String, List<String>>)httpMap.get("header");
+            String retShowMsg = hederMap.get("retShowMsg") == null?null:URLDecoder.decode((hederMap.get("retShowMsg").get(0)), "UTF-8");
+            String result = httpMap.get("body") == null?null:httpMap.get("body").toString();
             if("1".equals(dtoOperateType)) {
                 if(!F.empty(result) && result.contains("true")) {
                     FmUser fmUser = new FmUser();
@@ -143,13 +149,12 @@ public class ApiFmUserController extends BaseController {
                     fmUserService.add(fmUser);
                     j.setObj(fmUser);
                     j.setSuccess(true);
-                    j.setMsg(SUCCESS_MESSAGE);
                 }
             } else {
                 j.setObj(result);
                 j.setSuccess(true);
-                j.setMsg(SUCCESS_MESSAGE);
             }
+            j.setMsg(retShowMsg);
         } catch (Exception e) {
             j.setMsg(Application.getString(EX_0001));
             String errorMg = "";
@@ -174,9 +179,12 @@ public class ApiFmUserController extends BaseController {
         try {
             //String url = "http://yizhuisu.com/api/BA/userResetPassword";
             String url = "http://t149127q79.51mypc.cn:11169/api/BA/userResetPassword";
-            String result = HttpUtil.httpRequest(url, "post", "{\"Dto_ID\":"+dtoID+",\"Dto_Mobile\":\""+dtoMobile+"\",\"Dto_OldPassword\":\""+dtoOldPassword+"\",\"Dto_Password\":\""+dtoPassword+"\"}");
+            Map<String, Object> httpMap = HttpUtil.httpRequestWithHeader(url, "post", "{\"Dto_ID\":"+dtoID+",\"Dto_Mobile\":\""+dtoMobile+"\",\"Dto_OldPassword\":\""+dtoOldPassword+"\",\"Dto_Password\":\""+dtoPassword+"\"}");
+            Map<String, List<String>> hederMap = (Map<String, List<String>>)httpMap.get("header");
+            String retShowMsg = hederMap.get("retShowMsg") == null?null:URLDecoder.decode((hederMap.get("retShowMsg").get(0)), "UTF-8");
+            String result = httpMap.get("body") == null?null:httpMap.get("body").toString();
             j.setSuccess(true);
-            j.setMsg(SUCCESS_MESSAGE);
+            j.setMsg(retShowMsg);
             j.setObj(result);
         } catch (Exception e) {
             j.setMsg(Application.getString(EX_0001));
