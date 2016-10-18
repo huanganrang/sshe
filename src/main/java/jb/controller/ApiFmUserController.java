@@ -68,6 +68,7 @@ public class ApiFmUserController extends BaseController {
                 FmUser fu = fmUserService.get(fmUser);
                 if(fu != null && !F.empty(fu.getAccount())) {
                     map.put("farmingUser", fu);
+                    map.put("tokenId", tokenManage.buildToken(fu.getId(), fu.getAccount()));
                 } else {
                     if(!F.empty(HuanxinUtil.createUser(dtoMobile, dtoPassword))) {
                         fmUser.setHxPassword(dtoPassword);
@@ -79,8 +80,8 @@ public class ApiFmUserController extends BaseController {
                     fmUser.setUpdatetime(new Date());
                     fmUserService.add(fmUser);
                     map.put("farmingUser", fmUser);
+                    map.put("tokenId", tokenManage.buildToken(fmUser.getId(), fmUser.getAccount()));
                 }
-                map.put("tokenId", tokenManage.buildToken(fmUser.getId(), fmUser.getAccount()));
                 j.setSuccess(true);
                 j.setMsg(SUCCESS_MESSAGE);
                 j.setObj(map);
