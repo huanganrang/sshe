@@ -213,6 +213,8 @@ public class ApiFmUserController extends BaseController {
                     FmShopUser old = fmShopUserService.get(fmShopUser);
                     if(old != null){
                         fu.setCollected(true);
+                    }else{
+                        fu.setCollected(false);
                     }
                 }
                 j.setSuccess(true);
