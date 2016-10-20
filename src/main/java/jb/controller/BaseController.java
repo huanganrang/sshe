@@ -199,21 +199,21 @@ public class BaseController extends Objectx {
 		
 	}
 
-	public String uploadFile(String dirName, MultipartFile file){
+	public String uploadFile(MultipartFile file){
 		if(file==null||file.isEmpty())
 			return null;
 		String suffix = file.getOriginalFilename().substring(file.getOriginalFilename().lastIndexOf("."));
 		String fileName = UUID.randomUUID() + suffix;
 		try {
-			return OSSUtil.putInputStream(dirName, file.getInputStream(), fileName);
+			return OSSUtil.putInputStream(OSSUtil.bucketName, file.getInputStream(), fileName);
 		} catch (IOException e) {
 			throw new RuntimeException(e);
 		}
 	}
 	
 	public String uploadFile(HttpServletRequest request, String dirName, MultipartFile file){
-		return uploadFile(request, dirName, file, dirName); //上传图片到本地保存
-		//return uploadFile(dirName, file); //OSS上传图片
+		//return uploadFile(request, dirName, file, dirName); //上传图片到本地保存
+		return uploadFile(file); //OSS上传图片
 	}
 	
 	public boolean deleteFile(HttpServletRequest request, String filePath){

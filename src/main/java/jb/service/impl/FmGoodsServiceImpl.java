@@ -187,7 +187,7 @@ public class FmGoodsServiceImpl extends BaseServiceImpl<FmGoods> implements FmGo
 		params.put("id", id);
 		TfmGoods t = fmGoodsDao.get("from TfmGoods t  where t.id = :id", params);
 		FmGoods o = new FmGoods();
-		BeanUtils.copyProperties(t, o);
+		if(t != null) BeanUtils.copyProperties(t, o);
 		return o;
 	}
 

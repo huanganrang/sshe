@@ -51,6 +51,7 @@ public class FmGoods implements java.io.Serializable {
 	private String typeName;
 	private String[] goodsIdList;
 	private String[] keyList;
+	private Boolean collect; //是否收藏
 
 
 	public void setId(java.lang.String value) {
@@ -394,6 +395,14 @@ public class FmGoods implements java.io.Serializable {
 
 	public void setKeyList(String[] keyList) {
 		this.keyList = keyList;
+	}
+
+	public Boolean getCollect() {
+		return collect;
+	}
+
+	public void setCollect(Boolean collect) {
+		this.collect = collect;
 	}
 
 }

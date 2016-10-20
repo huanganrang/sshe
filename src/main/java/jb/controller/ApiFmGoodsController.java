@@ -7,6 +7,7 @@ import jb.listener.Application;
 import jb.pageModel.*;
 import jb.service.BasedataServiceI;
 import jb.service.FmGoodsServiceI;
+import jb.service.FmGoodsUserServiceI;
 import jb.service.FmUserServiceI;
 import jb.service.impl.CompletionFactory;
 import org.springframework.beans.BeanUtils;
@@ -35,6 +36,9 @@ public class ApiFmGoodsController extends BaseController {
 
     @Autowired
     private BasedataServiceI basedataService;
+
+    @Autowired
+    private FmGoodsUserServiceI fmGoodsUserService;
 
     /**
      * 发布商品接口
@@ -121,6 +125,23 @@ public class ApiFmGoodsController extends BaseController {
                         d.setAccessNum(num);
                     }
                 });
+
+                if(!F.empty(fmGoods.getUserId())) {
+                    final FmGoodsUser fmGoodsUser = new FmGoodsUser();
+                    fmGoodsUser.setUserId(fmGoods.getUserId());
+                    fmGoodsUser.setGoodsId(fmGoods.getId());
+                    completionService.submit(new Task<FmGoods, Boolean>(fmGoods1) {
+                        @Override
+                        public Boolean call() throws Exception {
+                            FmGoodsUser fu = fmGoodsUserService.get(fmGoodsUser);
+                            return fu == null ? false : true;
+                        }
+
+                        protected void set(FmGoods d, Boolean bo) {
+                            d.setCollect(bo);
+                        }
+                    });
+                }
 
                 completionService.sync();
 
