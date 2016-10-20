@@ -24,7 +24,8 @@ public class FmUser implements java.io.Serializable {
 	private java.lang.String hxPassword;	
 	private java.lang.Integer hxStatus;	
 	private java.lang.String authStatus;	
-	private java.lang.String status;	
+	private java.lang.String status;
+	private Boolean collected;
 
 	
 
@@ -148,4 +149,11 @@ public class FmUser implements java.io.Serializable {
 		return this.status;
 	}
 
+	public Boolean getCollected() {
+		return collected;
+	}
+
+	public void setCollected(Boolean collected) {
+		this.collected = collected;
+	}
 }

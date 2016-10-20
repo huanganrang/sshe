@@ -11,6 +11,7 @@ import jb.service.FmUserHobbyServiceI;
 import jb.service.FmUserServiceI;
 import jb.util.HttpUtil;
 import jb.util.easemob.HuanxinUtil;
+import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -200,11 +201,20 @@ public class ApiFmUserController extends BaseController {
      */
     @RequestMapping("/get")
     @ResponseBody
-    public Json get(FmUser fmUser) {
+    public Json get(FmUser fmUser,String accessId) {
         Json j = new Json();
         try {
             if(!F.empty(fmUser.getId())) {
                 FmUser fu = fmUserService.get(fmUser.getId());
+                if(StringUtils.isNotEmpty(accessId)){
+                    FmShopUser fmShopUser = new FmShopUser();
+                    fmShopUser.setShopId(fu.getId());
+                    fmShopUser.setUserId(accessId);
+                    FmShopUser old = fmShopUserService.get(fmShopUser);
+                    if(old != null){
+                        fu.setCollected(true);
+                    }
+                }
                 j.setSuccess(true);
                 j.setMsg(SUCCESS_MESSAGE);
                 j.setObj(fu);
