@@ -8,6 +8,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jb.enums.MessageType;
 import jb.pageModel.Colum;
 import jb.pageModel.FmAuthApply;
 import jb.pageModel.DataGrid;
@@ -142,6 +143,13 @@ public class FmAuthApplyController extends BaseController {
 	public Json edit(FmAuthApply fmAuthApply) {
 		Json j = new Json();		
 		fmAuthApplyService.edit(fmAuthApply);
+		//审核
+		if("AU02".equals(fmAuthApply.getStatus())){
+			sendMessage(MessageType.认证通过.getTitle(),MessageType.认证通过.getContent(),fmAuthApply.getUserId(),null);
+		}else if("AU03".equals(fmAuthApply.getStatus())){
+			sendMessage(MessageType.认证失败.getTitle(),MessageType.认证失败.getContent(),fmAuthApply.getUserId(),fmAuthApply.getUserId());
+		}
+
 		j.setSuccess(true);
 		j.setMsg("编辑成功！");		
 		return j;

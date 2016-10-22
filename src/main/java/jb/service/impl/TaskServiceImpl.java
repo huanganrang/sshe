@@ -20,6 +20,7 @@ import java.util.List;
 public class TaskServiceImpl implements TaskServiceI {
     @Autowired
     private FmMessageServiceI fmMessageService;
+
     @Override
     public void sendMessage() {
         FmMessage fmMessage = new FmMessage();
@@ -30,12 +31,12 @@ public class TaskServiceImpl implements TaskServiceI {
         ph.setOrder("asc");
         ph.setHiddenTotal(true);
         DataGrid dg = fmMessageService.dataGrid(fmMessage, ph);
-        if(dg != null && dg.getRows() != null && dg.getRows().size() > 0) {
+        if (dg != null && dg.getRows() != null && dg.getRows().size() > 0) {
             List<FmMessage> list = dg.getRows();
             Long dateTime = new Date().getTime();
-            for(int i=0; i<list.size(); i++) {
+            for (int i = 0; i < list.size(); i++) {
                 FmMessage fm = list.get(i);
-                if(fm.getSendTime() != null && dateTime >= fm.getSendTime().getTime() && !F.empty(fm.getContent())) {
+                if (fm.getSendTime() != null && dateTime >= fm.getSendTime().getTime() && !F.empty(fm.getContent())) {
                     JPushUtil.pushMessageToAll(fm.getContent());
                     fm.setIssended(true);
                     fmMessageService.edit(fm);

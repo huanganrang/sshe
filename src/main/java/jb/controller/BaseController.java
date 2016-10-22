@@ -1,5 +1,8 @@
 package jb.controller;
 
+import com.alibaba.fastjson.JSON;
+import farming.concurrent.CompletionService;
+import farming.concurrent.Task;
 import jb.absx.F;
 import jb.absx.Objectx;
 import jb.android.push.NotificationManager;
@@ -7,6 +10,8 @@ import jb.interceptors.TokenManage;
 import jb.listener.Application;
 import jb.oss.OSSUtil;
 import jb.pageModel.*;
+import jb.service.FmMessageServiceI;
+import jb.service.impl.CompletionFactory;
 import jb.util.Constants;
 import jb.util.StringEscapeEditor;
 import jb.util.Util;
@@ -17,6 +22,7 @@ import org.apache.commons.io.FileUtils;
 import org.apache.poi.xssf.usermodel.XSSFRow;
 import org.apache.poi.xssf.usermodel.XSSFSheet;
 import org.apache.poi.xssf.usermodel.XSSFWorkbook;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.propertyeditors.CustomDateEditor;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.ServletRequestDataBinder;
@@ -51,6 +57,8 @@ public class BaseController extends Objectx {
 	protected static final String SUCCESS_MESSAGE = "操作成功";
 	public static final String DEFAULT_TOKEN = TokenManage.DEFAULT_TOKEN;
 	private String _publishSettingVal = "2"; //生产环境
+	@Autowired
+	private FmMessageServiceI fmMessageService;
 	
 	@InitBinder
 	public void initBinder(ServletRequestDataBinder binder) {
@@ -254,5 +262,31 @@ public class BaseController extends Objectx {
 		
 		return mark;
 	}
+
+	/**
+	 *
+	 * @param title
+	 * @param content
+	 */
+	protected void sendMessage(String title,String content,String userId,Object obj){
+		final CompletionService completionService = CompletionFactory.initCompletion();
+		FmMessage request = new FmMessage();
+		request.setContent(content);
+		request.setTitle(title);
+		request.setToUser(userId);
+		if(obj != null){
+			request.setExtCfg(JSON.toJSONString(obj));
+		}
+
+		completionService.submit(new Task<FmMessage, Boolean>(request) {
+			@Override
+			public Boolean call() throws Exception {
+				fmMessageService.add(getD());
+				return true;
+			}
+		});
+	}
+
+
 }
  

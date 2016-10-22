@@ -69,6 +69,9 @@ public class TfmMessage implements java.io.Serializable,IEntity{
 	private java.lang.String loginId;
 	//columns END
 
+	private java.lang.String extCfg;
+	private String toUser;
+
 
 		public TfmMessage(){
 		}
@@ -188,8 +191,23 @@ public class TfmMessage implements java.io.Serializable,IEntity{
 	public void setLoginId(java.lang.String loginId) {
 		this.loginId = loginId;
 	}
-	
-	
+
+	@Column(name = "ext_cfg", unique = false, nullable = true, insertable = true, updatable = true, length = 65535)
+	public String getExtCfg() {
+		return extCfg;
+	}
+
+	public void setExtCfg(String extCfg) {
+		this.extCfg = extCfg;
+	}
+	@Column(name = "to_user", unique = false, nullable = true, insertable = true, updatable = true, length = 100)
+	public String getToUser() {
+		return toUser;
+	}
+
+	public void setToUser(String toUser) {
+		this.toUser = toUser;
+	}
 	/*
 	public String toString() {
 		return new ToStringBuilder(this,ToStringStyle.MULTI_LINE_STYLE)

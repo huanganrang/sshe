@@ -12,6 +12,7 @@ import javax.servlet.http.HttpSession;
 import farming.concurrent.CacheKey;
 import farming.concurrent.CompletionService;
 import farming.concurrent.Task;
+import jb.enums.MessageType;
 import jb.listener.Application;
 import jb.pageModel.*;
 import jb.service.FmAdServiceI;
@@ -206,6 +207,7 @@ public class FmGoodsController extends BaseController {
 			SessionInfo sessionInfo = (SessionInfo)session.getAttribute(ConfigUtil.getSessionInfoName());
 			String loginId = sessionInfo.getId();
 			addToAdForDb(id,type,loginId);
+			sendMessageToUser(MessageType.商品被推送至广告并发布.getTitle(),MessageType.商品被推送至广告并发布.getContent(),id);
 		}
 		j.setMsg("推送成功！");
 		j.setSuccess(true);
@@ -222,10 +224,25 @@ public class FmGoodsController extends BaseController {
 			SessionInfo sessionInfo = (SessionInfo)session.getAttribute(ConfigUtil.getSessionInfoName());
 			String loginId = sessionInfo.getId();
 			addToAdForDb(id,type,loginId);
+			sendMessageToUser(MessageType.商品被推送至三品一标并发布.getTitle(), MessageType.商品被推送至三品一标并发布.getContent(), id);
 		}
 		j.setMsg("推送成功！");
 		j.setSuccess(true);
 		return j;
+	}
+
+	protected void sendMessageToUser(final String title,final String content,String goodsId){
+		final CompletionService completionService = CompletionFactory.initCompletion();
+		final FmGoodsController service = this;
+
+		completionService.submit(new Task<String, FmGoods>(goodsId) {
+			@Override
+			public FmGoods call() throws Exception {
+				FmGoods fmGoods = fmGoodsService.get(getD());
+				service.sendMessage(title, String.format(content,fmGoods.getNameName()), fmGoods.getUserId(), fmGoods);
+				return fmGoods;
+			}
+		});
 	}
 
 	private FmAd getFmAd(String goodsId,String type){

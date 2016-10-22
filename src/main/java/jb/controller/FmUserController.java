@@ -8,6 +8,7 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import jb.enums.MessageType;
 import jb.pageModel.Colum;
 import jb.pageModel.FmUser;
 import jb.pageModel.DataGrid;
@@ -140,6 +141,10 @@ public class FmUserController extends BaseController {
 	public Json edit(FmUser fmUser) {
 		Json j = new Json();		
 		fmUserService.edit(fmUser);
+		//冻结
+		if("AS02".equals(fmUser.getStatus())){
+			sendMessage(MessageType.帐户被冻结.getTitle(),MessageType.帐户被冻结.getContent(),fmUser.getId(),fmUser);
+		}
 		j.setSuccess(true);
 		j.setMsg("编辑成功！");		
 		return j;

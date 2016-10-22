@@ -18,7 +18,9 @@ public class FmMessage implements java.io.Serializable {
 	private java.lang.String sendType;	
 	private java.lang.String url;	
 	private Date sendTime;			
-	private java.lang.String loginId;	
+	private java.lang.String loginId;
+	private java.lang.String extCfg;
+	private String toUser;
 
 	
 
@@ -110,4 +112,19 @@ public class FmMessage implements java.io.Serializable {
 		this.issended = issended;
 	}
 
+	public String getExtCfg() {
+		return extCfg;
+	}
+
+	public void setExtCfg(String extCfg) {
+		this.extCfg = extCfg;
+	}
+
+	public String getToUser() {
+		return toUser;
+	}
+
+	public void setToUser(String toUser) {
+		this.toUser = toUser;
+	}
 }

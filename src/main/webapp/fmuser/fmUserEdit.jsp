@@ -36,83 +36,13 @@
 	<div data-options="region:'center',border:false" title="" style="overflow: hidden;">
 		<form id="form" method="post">
 				<input type="hidden" name="id" value = "${fmUser.id}"/>
-			<table class="table table-hover table-condensed">
-				<tr>	
-					<th><%=TfmUser.ALIAS_ADDTIME%></th>	
-					<td>
-					<input class="span2" name="addtime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmUser.FORMAT_ADDTIME%>'})"   maxlength="0" value="${fmUser.addtime}"/>
-					</td>							
-					<th><%=TfmUser.ALIAS_UPDATETIME%></th>	
-					<td>
-					<input class="span2" name="updatetime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmUser.FORMAT_UPDATETIME%>'})"   maxlength="0" value="${fmUser.updatetime}"/>
-					</td>							
-			</tr>	
-				<tr>	
-					<th><%=TfmUser.ALIAS_ISDELETED%></th>	
-					<td>
-											<input class="span2" name="isdeleted" type="text" class="easyui-validatebox span2" data-options="required:true" value="${fmUser.isdeleted}"/>
-					</td>							
-					<th><%=TfmUser.ALIAS_ACCOUNT%></th>	
-					<td>
-											<input class="span2" name="account" type="text" value="${fmUser.account}"/>
-					</td>							
-			</tr>	
-				<tr>	
-					<th><%=TfmUser.ALIAS_NICK_NAME%></th>	
-					<td>
-											<input class="span2" name="nickName" type="text" value="${fmUser.nickName}"/>
-					</td>							
-					<th><%=TfmUser.ALIAS_LOCAL_AREA%></th>	
-					<td>
-											<input class="span2" name="localArea" type="text" value="${fmUser.localArea}"/>
-					</td>							
-			</tr>	
-				<tr>	
-					<th><%=TfmUser.ALIAS_ICON%></th>	
-					<td>
-											<input class="span2" name="icon" type="text" value="${fmUser.icon}"/>
-					</td>							
-					<th><%=TfmUser.ALIAS_PHONE%></th>	
-					<td>
-											<input class="span2" name="phone" type="text" value="${fmUser.phone}"/>
-					</td>							
-			</tr>	
-				<tr>	
-					<th><%=TfmUser.ALIAS_REAL_NAME%></th>	
-					<td>
-											<input class="span2" name="realName" type="text" value="${fmUser.realName}"/>
-					</td>							
-					<th><%=TfmUser.ALIAS_CARD_ID%></th>	
-					<td>
-											<input class="span2" name="cardId" type="text" value="${fmUser.cardId}"/>
-					</td>							
-			</tr>	
-				<tr>	
-					<th><%=TfmUser.ALIAS_USER_ROLE%></th>	
-					<td>
-											<jb:select dataType="UR" name="userRole" value="${fmUser.userRole}"></jb:select>	
-					</td>							
-					<th><%=TfmUser.ALIAS_HX_PASSWORD%></th>	
-					<td>
-											<input class="span2" name="hxPassword" type="text" value="${fmUser.hxPassword}"/>
-					</td>							
-			</tr>	
-				<tr>	
-					<th><%=TfmUser.ALIAS_HX_STATUS%></th>	
-					<td>
-											<jb:select dataType="IS" name="hxStatus" value="${fmUser.hxStatus}"></jb:select>	
-					</td>							
-					<th><%=TfmUser.ALIAS_AUTH_STATUS%></th>	
-					<td>
-											<jb:select dataType="AU" name="authStatus" value="${fmUser.authStatus}"></jb:select>	
-					</td>							
-			</tr>	
+
 				<tr>	
 					<th><%=TfmUser.ALIAS_STATUS%></th>	
 					<td>
-											<jb:select dataType="AS" name="status" value="${fmUser.status}"></jb:select>	
+						<jb:select dataType="AS" name="status" value="${fmUser.status}"></jb:select>
 					</td>							
-			</tr>	
+				</tr>
 			</table>				
 		</form>
 	</div>

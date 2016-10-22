@@ -62,6 +62,7 @@
 				<tr>
 					<th><%=TfmAuthApply.ALIAS_STATUS%></th>
 					<td colspan="3">
+						<input type="hidden" name="status" value = "${fmAuthApply.status}"/>
 						${fmAuthApply.statusName}
 					</td>
 				</tr>
