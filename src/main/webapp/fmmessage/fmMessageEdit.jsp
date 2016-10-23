@@ -76,6 +76,12 @@
 					</td>
 				</tr>
 				<tr>
+					<th>用户ID</th>
+					<td>
+						<input class="span2" name="toUser" type="text"/>
+					</td>
+				</tr>
+				<tr>
 					<td colspan="2" height="155">
 						<img class="img-preview" src="${fmMessage.url}" width="100%" height="100%"/>
 					</td>

@@ -1,5 +1,7 @@
 package jb.pageModel;
 
+import jb.listener.Application;
+
 import java.util.Date;
 
 @SuppressWarnings("serial")
@@ -81,6 +83,9 @@ public class FmMessage implements java.io.Serializable {
 	
 	public java.lang.String getSendType() {
 		return this.sendType;
+	}
+	public java.lang.String getSendTypeName() {
+		return Application.getString(this.sendType);
 	}
 	public void setUrl(java.lang.String url) {
 		this.url = url;

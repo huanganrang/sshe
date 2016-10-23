@@ -74,6 +74,12 @@
 					</td>
 				</tr>
 				<tr>
+					<th>用户ID</th>
+					<td>
+						<input class="span2" name="toUser" type="text"/>
+					</td>
+				</tr>
+				<tr>
 					<th><%=TfmMessage.ALIAS_SEND_TIME%></th>
 					<td>
 						<input class="span2" name="sendTime" type="text" onclick="WdatePicker({dateFmt:'<%=TfmMessage.FORMAT_SEND_TIME%>'})"  maxlength="0" class="" />

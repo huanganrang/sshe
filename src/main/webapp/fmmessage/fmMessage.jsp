@@ -64,20 +64,10 @@
 					}
 				}
 				}, {
-				field : 'sendType',
+				field : 'sendTypeName',
 				title : '<%=TfmMessage.ALIAS_SEND_TYPE%>',
 				width : 50,
-				sortable: true,
-				formatter:function(value){
-					var str = "";
-					if(value == "ST01") {
-						str = "<span style='color: #84909c'>上架</span>";
-						return str;
-					} else {
-						str = "<span style='color: #84909c'>下架</span>";
-						return str;
-					}
-				}
+				sortable: true
 				}, {
 				field : 'loginId',
 				title : '<%=TfmMessage.ALIAS_LOGIN_ID%>',
@@ -88,6 +78,11 @@
 				title : '<%=TfmMessage.ALIAS_SEND_TIME%>',
 				width : 50,
 				sortable: true
+				}, {
+					field : 'toUser',
+					title : '用户ID',
+					width : 50,
+					sortable: true
 				}, {
 				field : 'action',
 				title : '操作',
