@@ -1,5 +1,6 @@
 package jb.service.impl;
 
+import com.alibaba.fastjson.JSON;
 import jb.absx.F;
 import jb.jpush.JPushUtil;
 import jb.pageModel.DataGrid;
@@ -36,10 +37,22 @@ public class TaskServiceImpl implements TaskServiceI {
             Long dateTime = new Date().getTime();
             for (int i = 0; i < list.size(); i++) {
                 FmMessage fm = list.get(i);
-                if (fm.getSendTime() != null && dateTime >= fm.getSendTime().getTime() && !F.empty(fm.getContent())) {
-                    JPushUtil.pushMessageToAll(fm.getContent());
-                    fm.setIssended(true);
-                    fmMessageService.edit(fm);
+                if(F.empty(fm.getToUser())){
+                    if (fm.getSendTime() != null && dateTime >= fm.getSendTime().getTime() && !F.empty(fm.getContent())) {
+                        JPushUtil.pushMessageToAlias("all",fm.getToUser(),JSON.toJSONString(fm));
+                        fm.setIssended(true);
+                        fmMessageService.edit(fm);
+                    }else if(fm.getSendTime() == null){
+                        JPushUtil.pushMessageToAlias("all",fm.getToUser(),JSON.toJSONString(fm));
+                        fm.setIssended(true);
+                        fmMessageService.edit(fm);
+                    }
+                }else {
+                    if (fm.getSendTime() != null && dateTime >= fm.getSendTime().getTime() && !F.empty(fm.getContent())) {
+                        JPushUtil.pushMessageToAll(JSON.toJSONString(fm));
+                        fm.setIssended(true);
+                        fmMessageService.edit(fm);
+                    }
                 }
             }
         }
