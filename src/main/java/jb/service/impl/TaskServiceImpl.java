@@ -37,22 +37,26 @@ public class TaskServiceImpl implements TaskServiceI {
             Long dateTime = new Date().getTime();
             for (int i = 0; i < list.size(); i++) {
                 FmMessage fm = list.get(i);
-                if(F.empty(fm.getToUser())){
-                    if (fm.getSendTime() != null && dateTime >= fm.getSendTime().getTime() && !F.empty(fm.getContent())) {
-                        JPushUtil.pushMessageToAlias("all",fm.getToUser(),JSON.toJSONString(fm));
-                        fm.setIssended(true);
-                        fmMessageService.edit(fm);
-                    }else if(fm.getSendTime() == null){
-                        JPushUtil.pushMessageToAlias("all",fm.getToUser(),JSON.toJSONString(fm));
-                        fm.setIssended(true);
-                        fmMessageService.edit(fm);
+                try {
+                    if (F.empty(fm.getToUser())) {
+                        if (fm.getSendTime() != null && dateTime >= fm.getSendTime().getTime() && !F.empty(fm.getContent())) {
+                            JPushUtil.pushMessageToAlias("all", fm.getToUser(), JSON.toJSONString(fm));
+                            fm.setIssended(true);
+                            fmMessageService.edit(fm);
+                        } else if (fm.getSendTime() == null) {
+                            JPushUtil.pushMessageToAlias("all", fm.getToUser(), JSON.toJSONString(fm));
+                            fm.setIssended(true);
+                            fmMessageService.edit(fm);
+                        }
+                    } else {
+                        if (fm.getSendTime() != null && dateTime >= fm.getSendTime().getTime() && !F.empty(fm.getContent())) {
+                            JPushUtil.pushMessageToAll(JSON.toJSONString(fm));
+                            fm.setIssended(true);
+                            fmMessageService.edit(fm);
+                        }
                     }
-                }else {
-                    if (fm.getSendTime() != null && dateTime >= fm.getSendTime().getTime() && !F.empty(fm.getContent())) {
-                        JPushUtil.pushMessageToAll(JSON.toJSONString(fm));
-                        fm.setIssended(true);
-                        fmMessageService.edit(fm);
-                    }
+                }catch (Exception e){
+                    e.printStackTrace();
                 }
             }
         }
