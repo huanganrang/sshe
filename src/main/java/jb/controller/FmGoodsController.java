@@ -239,7 +239,11 @@ public class FmGoodsController extends BaseController {
 			@Override
 			public FmGoods call() throws Exception {
 				FmGoods fmGoods = fmGoodsService.get(getD());
-				service.sendMessage(title, String.format(content,fmGoods.getNameName()), fmGoods.getUserId(), fmGoods);
+				FmGoods fmGoods1 = new FmGoods();
+				fmGoods1.setUserId(fmGoods.getUserId());
+				fmGoods1.setId(fmGoods.getId());
+				fmGoods1.setName(fmGoods.getName());
+				service.sendMessage(title, String.format(content,fmGoods.getNameName()), fmGoods.getUserId(), fmGoods1);
 				return fmGoods;
 			}
 		});
