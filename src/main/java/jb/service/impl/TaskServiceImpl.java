@@ -38,7 +38,7 @@ public class TaskServiceImpl implements TaskServiceI {
             for (int i = 0; i < list.size(); i++) {
                 FmMessage fm = list.get(i);
                 try {
-                    if (F.empty(fm.getToUser())) {
+                    if (!F.empty(fm.getToUser())) {
                         if (fm.getSendTime() != null && dateTime >= fm.getSendTime().getTime() && !F.empty(fm.getContent())) {
                             JPushUtil.pushMessageToAlias("all", fm.getToUser(), JSON.toJSONString(fm));
                             fm.setIssended(true);
