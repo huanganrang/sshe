@@ -40,17 +40,17 @@ public class TaskServiceImpl implements TaskServiceI {
                 try {
                     if (!F.empty(fm.getToUser())) {
                         if (fm.getSendTime() != null && dateTime >= fm.getSendTime().getTime() && !F.empty(fm.getContent())) {
-                            JPushUtil.pushMessageToAlias("all", fm.getToUser(), JSON.toJSONString(fm));
+                            JPushUtil.pushMyMessageToAlias("all", fm.getToUser(), JSON.toJSONString(fm));
                             fm.setIssended(true);
                             fmMessageService.edit(fm);
                         } else if (fm.getSendTime() == null) {
-                            JPushUtil.pushMessageToAlias("all", fm.getToUser(), JSON.toJSONString(fm));
+                            JPushUtil.pushMyMessageToAlias("all", fm.getToUser(), JSON.toJSONString(fm));
                             fm.setIssended(true);
                             fmMessageService.edit(fm);
                         }
                     } else {
                         if (fm.getSendTime() != null && dateTime >= fm.getSendTime().getTime() && !F.empty(fm.getContent())) {
-                            JPushUtil.pushMessageToAll(JSON.toJSONString(fm));
+                            JPushUtil.pushMyMessageToAll(JSON.toJSONString(fm));
                             fm.setIssended(true);
                             fmMessageService.edit(fm);
                         }
