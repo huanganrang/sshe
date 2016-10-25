@@ -337,13 +337,7 @@ public class ApiFmUserController extends BaseController {
                     FmPurchaseUser fmPurchaseUser = new FmPurchaseUser();
                     fmPurchaseUser.setPurchaseId(bizId);
                     fmPurchaseUser.setUserId(userId);
-                    if(CollectionUtils.isEmpty(fmPurchaseUserService.query(fmPurchaseUser))){
-                        fmPurchaseUserService.add(fmPurchaseUser);
-                    }else{
-                        j.fail();
-                        j.setMsg("已关联上");
-                        return j;
-                    }
+                    fmPurchaseUserService.delete(fmPurchaseUser);
 
                 }
                 j.setSuccess(true);

@@ -63,6 +63,7 @@ public class FmPurchaseUserServiceImpl extends BaseServiceImpl<FmPurchaseUser> i
 		BeanUtils.copyProperties(fmPurchaseUser, t);
 		t.setId(jb.absx.UUID.uuid());
 		t.setAddtime(new Date());
+		t.setIsdeleted(false);
 		fmPurchaseUserDao.save(t);
 	}
 
