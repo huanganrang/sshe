@@ -2,6 +2,7 @@ package jb.service;
 
 import jb.pageModel.FmPurchaseUser;
 import jb.pageModel.DataGrid;
+import jb.pageModel.FmShopUser;
 import jb.pageModel.PageHelper;
 
 import java.util.List;
@@ -22,14 +23,14 @@ public interface FmPurchaseUserServiceI {
 	 *            分页帮助类
 	 * @return
 	 */
-	public DataGrid dataGrid(FmPurchaseUser fmPurchaseUser, PageHelper ph);
+	DataGrid dataGrid(FmPurchaseUser fmPurchaseUser, PageHelper ph);
 
 	/**
 	 * 添加FmPurchaseUser
 	 * 
 	 * @param fmPurchaseUser
 	 */
-	public void add(FmPurchaseUser fmPurchaseUser);
+	void add(FmPurchaseUser fmPurchaseUser);
 
 	/**
 	 * 获得FmPurchaseUser对象
@@ -37,27 +38,29 @@ public interface FmPurchaseUserServiceI {
 	 * @param id
 	 * @return
 	 */
-	public FmPurchaseUser get(String id);
+	FmPurchaseUser get(String id);
 
 	/**
 	 * 修改FmPurchaseUser
 	 * 
 	 * @param fmPurchaseUser
 	 */
-	public void edit(FmPurchaseUser fmPurchaseUser);
+	void edit(FmPurchaseUser fmPurchaseUser);
 
 	/**
 	 * 删除FmPurchaseUser
 	 * 
 	 * @param id
 	 */
-	public void delete(String id);
+	void delete(String id);
+
+	void delete(FmPurchaseUser fmPurchaseUser);
 
 	/**
 	 * 获取FmPurchaseUser集合
 	 *
 	 * @param fmPurchaseUser
 	 */
-	public List<FmPurchaseUser> query(FmPurchaseUser fmPurchaseUser);
+	List<FmPurchaseUser> query(FmPurchaseUser fmPurchaseUser);
 
 }

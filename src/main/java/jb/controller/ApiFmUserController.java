@@ -5,12 +5,10 @@ import jb.absx.F;
 import jb.interceptors.TokenManage;
 import jb.listener.Application;
 import jb.pageModel.*;
-import jb.service.FmGoodsUserServiceI;
-import jb.service.FmShopUserServiceI;
-import jb.service.FmUserHobbyServiceI;
-import jb.service.FmUserServiceI;
+import jb.service.*;
 import jb.util.HttpUtil;
 import jb.util.easemob.HuanxinUtil;
+import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -46,6 +44,9 @@ public class ApiFmUserController extends BaseController {
 
     @Autowired
     private TokenManage tokenManage;
+
+    @Autowired
+    private FmPurchaseUserServiceI fmPurchaseUserService;
 
     /**
      * 用户登陆
@@ -286,6 +287,18 @@ public class ApiFmUserController extends BaseController {
                         j.setMsg("已关联上");
                         return j;
                     }
+                }else if("FmPurchaseUserServiceI".equals(bizType)){
+                    FmPurchaseUser fmPurchaseUser = new FmPurchaseUser();
+                    fmPurchaseUser.setPurchaseId(bizId);
+                    fmPurchaseUser.setUserId(userId);
+                    if(CollectionUtils.isEmpty(fmPurchaseUserService.query(fmPurchaseUser))){
+                        fmPurchaseUserService.add(fmPurchaseUser);
+                    }else{
+                        j.fail();
+                        j.setMsg("已关联上");
+                        return j;
+                    }
+
                 }
 
                 j.setSuccess(true);
@@ -320,6 +333,18 @@ public class ApiFmUserController extends BaseController {
                     fmShopUser.setShopId(bizId);
                     fmShopUser.setUserId(userId);
                     fmShopUserService.delete(fmShopUser);
+                }else if("FmPurchaseUserServiceI".equals(bizType)){
+                    FmPurchaseUser fmPurchaseUser = new FmPurchaseUser();
+                    fmPurchaseUser.setPurchaseId(bizId);
+                    fmPurchaseUser.setUserId(userId);
+                    if(CollectionUtils.isEmpty(fmPurchaseUserService.query(fmPurchaseUser))){
+                        fmPurchaseUserService.add(fmPurchaseUser);
+                    }else{
+                        j.fail();
+                        j.setMsg("已关联上");
+                        return j;
+                    }
+
                 }
                 j.setSuccess(true);
                 j.setMsg(SUCCESS_MESSAGE);

@@ -93,6 +93,14 @@ public class FmPurchaseUserServiceImpl extends BaseServiceImpl<FmPurchaseUser> i
 	}
 
 	@Override
+	public void delete(FmPurchaseUser fmPurchaseUser) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("userId", fmPurchaseUser.getUserId());
+		params.put("purchaseId",fmPurchaseUser.getPurchaseId());
+		fmPurchaseUserDao.executeHql("update TfmPurchaseUser t set t.isdeleted = 1 where t.userId = :userId and t.purchaseId = :purchaseId",params);
+	}
+
+	@Override
 	public List<FmPurchaseUser> query(FmPurchaseUser fmPurchaseUser) {
 		List<FmPurchaseUser> fu = new ArrayList<FmPurchaseUser>();
 		String hql = " from TfmPurchaseUser t ";
