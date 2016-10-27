@@ -141,6 +141,9 @@ public class FmUser implements java.io.Serializable {
 	public java.lang.String getAuthStatus() {
 		return this.authStatus;
 	}
+	public java.lang.String getAuthStatusName() {
+		return Application.getString(this.authStatus,"待处理");
+	}
 	public void setStatus(java.lang.String status) {
 		this.status = status;
 	}

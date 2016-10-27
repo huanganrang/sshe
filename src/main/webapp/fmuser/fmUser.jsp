@@ -78,23 +78,10 @@
 				width : 50,
 				sortable: true
 				}, {
-				field : 'authStatus',
+				field : 'authStatusName',
 				title : '<%=TfmUser.ALIAS_AUTH_STATUS%>',
 				width : 30,
-				sortable: true,
-				formatter:function(value){
-					var str = "";
-					if(value == "AU01" || value == "AU03") {
-						str = "<span style='color: #ab1e1e'>待处理</span>";
-						return str;
-					} else if(value == "AU02") {
-						str = "<span style='color: #00a200'>认证通过</span>";
-						return str;
-					} else {
-						str = "<span style='color: #84909c'>未提交</span>";
-						return str;
-					}
-				}
+				sortable: true
 				}, {
 				field : 'status',
 				title : '<%=TfmUser.ALIAS_STATUS%>',

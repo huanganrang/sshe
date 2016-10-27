@@ -8,15 +8,14 @@ import java.util.UUID;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import farming.concurrent.CompletionService;
+import farming.concurrent.Task;
 import jb.enums.MessageType;
-import jb.pageModel.Colum;
-import jb.pageModel.FmAuthApply;
-import jb.pageModel.DataGrid;
-import jb.pageModel.Json;
-import jb.pageModel.PageHelper;
+import jb.pageModel.*;
 import jb.service.FmAuthApplyServiceI;
 
 import jb.service.FmUserServiceI;
+import jb.service.impl.CompletionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -143,13 +142,24 @@ public class FmAuthApplyController extends BaseController {
 	public Json edit(FmAuthApply fmAuthApply) {
 		Json j = new Json();		
 		fmAuthApplyService.edit(fmAuthApply);
-		//审核
-		if("AU02".equals(fmAuthApply.getStatus())){
-			sendMessage(MessageType.认证通过.getTitle(),MessageType.认证通过.getContent(),fmAuthApply.getUserId(),null);
-		}else if("AU03".equals(fmAuthApply.getStatus())){
-			sendMessage(MessageType.认证失败.getTitle(),MessageType.认证失败.getContent(),fmAuthApply.getUserId(),fmAuthApply.getUserId());
-		}
-
+		final CompletionService completionService = CompletionFactory.initCompletion();
+		completionService.submit(new Task<String, Boolean>(fmAuthApply.getId()) {
+			@Override
+			public Boolean call() throws Exception {
+				FmAuthApply fmAuthApply1 = fmAuthApplyService.get(getD());
+				//审核
+				if("AU02".equals(fmAuthApply1.getStatus())){
+					sendMessage(MessageType.认证通过.getTitle(),MessageType.认证通过.getContent(),fmAuthApply1.getUserId(),null);
+				}else if("AU03".equals(fmAuthApply1.getStatus())){
+					sendMessage(MessageType.认证失败.getTitle(),MessageType.认证失败.getContent(),fmAuthApply1.getUserId(),fmAuthApply1.getUserId());
+				}
+				FmUser fmUser = new FmUser();
+				fmUser.setId(fmAuthApply1.getUserId());
+				fmUser.setAuthStatus(fmAuthApply1.getStatus());
+				fmUserService.edit(fmUser);
+				return true;
+			}
+		});
 		j.setSuccess(true);
 		j.setMsg("编辑成功！");		
 		return j;
