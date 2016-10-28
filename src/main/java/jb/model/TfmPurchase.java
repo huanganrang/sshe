@@ -168,7 +168,7 @@ public class TfmPurchase implements java.io.Serializable,IEntity{
 		this.isdeleted = isdeleted;
 	}
 	
-	@Column(name = "name", unique = false, nullable = true, insertable = true, updatable = true, length = 8)
+	@Column(name = "name", unique = false, nullable = true, insertable = true, updatable = true, length = 32)
 	public java.lang.String getName() {
 		return this.name;
 	}

@@ -107,7 +107,7 @@ public class TfmUserHobby implements java.io.Serializable,IEntity{
 		this.userId = userId;
 	}
 	
-	@Column(name = "good_name", unique = false, nullable = true, insertable = true, updatable = true, length = 8)
+	@Column(name = "good_name", unique = false, nullable = true, insertable = true, updatable = true, length = 32)
 	public java.lang.String getGoodName() {
 		return this.goodName;
 	}

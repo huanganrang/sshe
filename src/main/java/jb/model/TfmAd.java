@@ -116,7 +116,7 @@ public class TfmAd implements java.io.Serializable,IEntity{
 		this.isdeleted = isdeleted;
 	}
 	
-	@Column(name = "goods_name", unique = false, nullable = true, insertable = true, updatable = true, length = 8)
+	@Column(name = "goods_name", unique = false, nullable = true, insertable = true, updatable = true, length = 32)
 	public java.lang.String getGoodsName() {
 		return this.goodsName;
 	}

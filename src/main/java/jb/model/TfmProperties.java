@@ -123,7 +123,7 @@ public class TfmProperties implements java.io.Serializable,IEntity{
 		this.name = name;
 	}
 	
-	@Column(name = "good_name", unique = false, nullable = true, insertable = true, updatable = true, length = 8)
+	@Column(name = "good_name", unique = false, nullable = true, insertable = true, updatable = true, length = 32)
 	public java.lang.String getGoodName() {
 		return this.goodName;
 	}
