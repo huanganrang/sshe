@@ -1,8 +1,6 @@
 package jb.controller;
 
-import java.util.ArrayList;
-import java.util.Iterator;
-import java.util.List;
+import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -106,20 +104,28 @@ public class BasedataController extends BaseController {
 		root.setState("open");
 		root.setText("枚举");
 		tree.add(root);
-		for(BaseType t :baseTypes){
-			Tree node = new Tree();
-			node.setId(t.getCode());
-			node.setText(t.getName());
-			node.setAttributes(t);
-			node.setPid(rootID);
-			if(t.getType()==0){
-				node.setIconCls("image");
-			}else{
-				//node.setIconCls(iconCls);
+		if (CollectionUtils.isNotEmpty(baseTypes)) {
+			Collections.sort(baseTypes, new Comparator<BaseType>() {
+				@Override
+				public int compare(BaseType o1, BaseType o2) {
+					return o1.getName().compareTo(o2.getName());
+				}
+			});
+			for (BaseType t : baseTypes) {
+				Tree node = new Tree();
+				node.setId(t.getCode());
+				node.setText(t.getName());
+				node.setAttributes(t);
+				node.setPid(rootID);
+				if (t.getType() == 0) {
+					node.setIconCls("image");
+				} else {
+					//node.setIconCls(iconCls);
+				}
+
+				tree.add(node);
 			}
-				
-			tree.add(node);
-		}	
+		}
 		return tree;
 	}
 	/**

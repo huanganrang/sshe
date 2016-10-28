@@ -33,25 +33,7 @@ public class ApiCommonController extends BaseController {
 	@Autowired
 	private TokenManage tokenManage;
 		
-	@Autowired
-	private DiveTravelServiceI diveTravelService;
-	@Autowired
-	private DiveAddressServiceI diveAddressService;
-	@Autowired
-	private DiveEquipServiceI diveEquipService;
-	@Autowired
-	private DiveActivityServiceI diveActivityService;
-	@Autowired
-	private DiveStoreServiceI diveStoreService;
-	@Autowired
-	private DiveCourseServiceI diveCourseService;
-	@Autowired
-	private DiveLogServiceI diveLogService;
-	@Autowired
-	private DiveLogDetailServiceI diveLogDetailService;
-	@Autowired
-	private DiveAccountServiceI diveAccountService;
-	
+
 	@Autowired
 	private BugServiceI bugService;
 	
@@ -66,19 +48,7 @@ public class ApiCommonController extends BaseController {
 		try{
 			response.setContentType("text/html");  
 			response.setCharacterEncoding("UTF-8");
-			if("BT01".equals(type)) { // 潜水旅游
-				content = diveTravelService.get(id).getDescription();
-			} else if("BT02".equals(type)) { // 潜点
-				content = diveAddressService.get(id).getDescription();
-			} else if("BT03".equals(type)) { // 装备
-				content = diveEquipService.get(id).getEquipDes();
-			} else if("BT04".equals(type)) { // 活动
-				content = diveActivityService.get(id).getIntroduce();
-			} else if("BT05".equals(type)) { // 度假村
-				content = diveStoreService.get(id).getDescription();
-			} else if("BT06".equals(type)) { // 学习
-				content = diveCourseService.get(id).getIntroduce();
-			}
+
 			out = response.getWriter();
 			out.write("<html><head>");
 			out.write("<meta name=\"viewport\" content=\"width=device-width, initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no\">");
@@ -127,74 +97,7 @@ public class ApiCommonController extends BaseController {
 	 */
 	@RequestMapping("/share")
 	public String share(String businessId,String businessType,HttpServletRequest request) {
-		String title = "";
-		String content = "";
-		Date date = null;
-		if("BT01".equals(businessType)) { // 潜水旅游
-			DiveTravel t = diveTravelService.get(businessId);
-			content = t.getDescription();
-			title = t.getName();
-			date = t.getAddtime();
-		} else if("BT02".equals(businessType)) { // 潜点
-			DiveAddress t = diveAddressService.get(businessId);
-			content = t.getDescription();
-			title = t.getName();
-			date = t.getAddtime();
-		} else if("BT03".equals(businessType)) { // 装备
-			DiveEquip t = diveEquipService.get(businessId);
-			content = t.getEquipDes();
-			title = t.getEquipName();
-			date = t.getAddtime();
-		} else if("BT04".equals(businessType)) { // 活动
-			DiveActivity t = diveActivityService.getDetail(businessId, null, false);
-			request.setAttribute("activity", t);
-			return "/diveshare/activityshare";
-//			content = t.getEquipDes();
-//			title = t.getEquipName();
-		} else if("BT05".equals(businessType)) { // 度假村
-			DiveStore t = diveStoreService.get(businessId);
-			content = t.getDescription();
-			title = t.getName();
-			date = t.getAddtime();
-		} else if("BT06".equals(businessType)) { // 视频
-			DiveCourse t = diveCourseService.get(businessId);
-			request.setAttribute("title", t.getTitle());
-			request.setAttribute("date", t.getAddtime());
-			request.setAttribute("fileId", t.getFileId());
-			return "/diveshare/courseshare";
-		} else if("BT07".equals(businessType)) { // 潜水日志
-			DiveLog t = diveLogService.get(businessId);
-			List<String> imageList = new ArrayList<String>();
-			if(!F.empty(t.getFileSrc())) {
-				String[] fileSrcArr = t.getFileSrc().split("\\|\\|");
-				for(String str : fileSrcArr) {
-					if(F.empty(str)) continue;
-					imageList.add(str);
-				}
-			}
-			DiveAccount account = diveAccountService.get(t.getAccountId());
 
-			PageHelper ph = new PageHelper();
-			ph.setSort("addtime");
-			ph.setOrder("asc");
-			ph.setPage(1);
-			ph.setRows(100);
-			DiveLogDetail diveLogDetail = new DiveLogDetail();
-			diveLogDetail.setLogId(businessId);
-			List<DiveLogDetail> details =  diveLogDetailService.dataGrid(diveLogDetail, ph).getRows();
-			
-			request.setAttribute("log", t);
-			request.setAttribute("imageList", imageList);
-			request.setAttribute("account", account);
-			request.setAttribute("details", details);
-			if(t.getOutTime() != null && t.getInTime() != null)
-				request.setAttribute("duration", (t.getOutTime().getTime()-t.getInTime().getTime())/(60*1000));
-			return "/diveshare/divelog/logshare";
-			
-		}
-		request.setAttribute("title", title);
-		request.setAttribute("content", content);
-		request.setAttribute("date", date);
 		return "/diveshare/diveshare";
 	}
 	

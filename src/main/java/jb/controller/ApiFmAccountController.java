@@ -2,31 +2,16 @@ package jb.controller;
 
 import farming.concurrent.CompletionService;
 import farming.concurrent.Task;
-import jb.absx.F;
 import jb.interceptors.TokenManage;
 import jb.pageModel.*;
-import jb.service.DiveAccountServiceI;
-import jb.service.DiveCertificateAuthorityServiceI;
-import jb.service.DiveCollectServiceI;
 import jb.service.FmUserServiceI;
 import jb.service.impl.CompletionFactory;
-import jb.util.Constants;
-import jb.util.DateUtil;
-import jb.util.EmailSendUtil;
-import jb.util.MD5Util;
-import jb.util.easemob.HuanxinUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpSession;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Vector;
 
 /**
