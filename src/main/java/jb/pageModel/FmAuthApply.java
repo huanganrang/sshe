@@ -116,7 +116,7 @@ public class FmAuthApply implements java.io.Serializable {
 
     public String[] getImageList() {
         if (this.images == null) return new String[]{};
-        return this.images.split("[;]");
+        return this.images.split("[;,]");
     }
 
     public void setUserCard(java.lang.String userCard) {

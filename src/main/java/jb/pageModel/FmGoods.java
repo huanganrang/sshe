@@ -370,7 +370,7 @@ public class FmGoods implements java.io.Serializable {
 
 	public String[] getImageList() {
 		if (this.images == null) return new String[]{};
-		return this.images.split("[;]");
+		return this.images.split("[;,]");
 	}
 
 	public FmUser getFmUser() {
