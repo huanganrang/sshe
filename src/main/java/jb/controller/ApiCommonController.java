@@ -143,6 +143,7 @@ public class ApiCommonController extends BaseController {
 			if(F.empty(versionNo) || (android_version != null && !versionNo.equals(android_version.getName()))) {
 				result.put("andriod_mark", true);
 				result.put("android_filePath", android_version.getIcon());
+				result.put("android_update_log", android_version.getDescription());
 			} 
 			
 			// 检查ios版本
