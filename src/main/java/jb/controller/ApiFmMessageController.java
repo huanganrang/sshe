@@ -2,10 +2,7 @@ package jb.controller;
 
 import jb.absx.F;
 import jb.listener.Application;
-import jb.pageModel.DataGrid;
-import jb.pageModel.FmMessage;
-import jb.pageModel.Json;
-import jb.pageModel.PageHelper;
+import jb.pageModel.*;
 import jb.service.FmMessageServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -56,9 +53,16 @@ public class ApiFmMessageController extends BaseController {
      */
     @RequestMapping("/dataGrid")
     @ResponseBody
-    public Json dataGrid(FmMessage fmMessage, PageHelper ph) {
+    public Json dataGrid(FmMessage fmMessage,String tokenId, PageHelper ph) {
         Json j = new Json();
         try {
+            SessionInfo sessionInfo = getSession(tokenId);
+            if (sessionInfo != null) {
+                fmMessage.setToUser(sessionInfo.getId());
+            } else {
+                fmMessage.setToUser("-1");
+            }
+            fmMessage.setExtCfg("forClient");
             DataGrid dataGrid = fmMessageService.dataGrid(fmMessage, ph);
             j.setSuccess(true);
             j.setMsg(SUCCESS_MESSAGE);

@@ -75,6 +75,10 @@ public class FmMessageServiceImpl extends BaseServiceImpl<FmMessage> implements 
 				whereHql += " and t.issended = :issended";
 				params.put("issended", fmMessage.getIssended());
 			}
+			if("forClient".equals(fmMessage.getExtCfg())){
+				whereHql += " and (t.toUser is null or t.toUser = :toUser)";
+				params.put("toUser", fmMessage.getToUser());
+			}
 		}	
 		return whereHql;
 	}

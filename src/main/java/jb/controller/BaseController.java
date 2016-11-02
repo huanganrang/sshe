@@ -59,6 +59,9 @@ public class BaseController extends Objectx {
 	private String _publishSettingVal = "2"; //生产环境
 	@Autowired
 	private FmMessageServiceI fmMessageService;
+
+	@Autowired
+	private TokenManage tokenManage;
 	
 	@InitBinder
 	public void initBinder(ServletRequestDataBinder binder) {
@@ -287,6 +290,8 @@ public class BaseController extends Objectx {
 		});
 	}
 
-
+	protected SessionInfo getSession(String tokenId){
+		return tokenManage.getSessionInfo(tokenId);
+	}
 }
  

@@ -89,6 +89,14 @@ public class TokenManage {
 		s.setName(token.getName());
 		return s;		
 	}
+	public SessionInfo getSessionInfo(String tokenId){
+		TokenWrap token = getTokenWrap(tokenId);
+		if(token == null) return null;
+		SessionInfo s = new SessionInfo();
+		s.setId(token.getUid());
+		s.setName(token.getName());
+		return s;
+	}
 	
 	
 	public String buildToken(String uid,String name){
