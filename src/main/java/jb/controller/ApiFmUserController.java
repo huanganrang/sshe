@@ -2,6 +2,7 @@ package jb.controller;
 
 import com.alibaba.fastjson.JSON;
 import jb.absx.F;
+import jb.absx.UUID;
 import jb.interceptors.TokenManage;
 import jb.listener.Application;
 import jb.pageModel.*;
@@ -72,8 +73,9 @@ public class ApiFmUserController extends BaseController {
                     map.put("farmingUser", fu);
                     map.put("tokenId", tokenManage.buildToken(fu.getId(), fu.getAccount()));
                 } else {
-                    if (!F.empty(HuanxinUtil.createUser(dtoMobile, dtoPassword))) {
-                        fmUser.setHxPassword(dtoPassword);
+                    String uuid = UUID.uuid();
+                    if (!F.empty(HuanxinUtil.createUser(dtoMobile, uuid))) {
+                        fmUser.setHxPassword(uuid);
                         fmUser.setHxStatus(1);
                     } else {
                         fmUser.setHxStatus(2);
