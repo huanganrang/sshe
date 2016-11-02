@@ -23,7 +23,7 @@ import java.util.Map;
 
 /**
  * Created by lenovo on 2016/8/15.
- *
+ * <p/>
  * 用户登陆、注册、个人信息等接口
  */
 @Controller
@@ -58,21 +58,21 @@ public class ApiFmUserController extends BaseController {
         try {
             //String url = "http://yizhuisu.com/api/Ba/userLogin";
             String url = "http://t149127q79.51mypc.cn:11169/api/Ba/userLogin";
-            Map<String, Object> httpMap = HttpUtil.httpRequestWithHeader(url, "post", "{\"Dto_Mobile\":\""+dtoMobile+"\",\"Dto_Password\":\""+dtoPassword+"\"}");
-            Map<String, List<String>> hederMap = (Map<String, List<String>>)httpMap.get("header");
-            String retShowMsg = hederMap.get("retShowMsg") == null?null:URLDecoder.decode((hederMap.get("retShowMsg").get(0)), "UTF-8");
-            String result = httpMap.get("body") == null?null:httpMap.get("body").toString();
-            if(!F.empty(result) && result.contains("In_UserID") && result.contains("In_UserName")) {
+            Map<String, Object> httpMap = HttpUtil.httpRequestWithHeader(url, "post", "{\"Dto_Mobile\":\"" + dtoMobile + "\",\"Dto_Password\":\"" + dtoPassword + "\"}");
+            Map<String, List<String>> hederMap = (Map<String, List<String>>) httpMap.get("header");
+            String retShowMsg = hederMap.get("retShowMsg") == null ? null : URLDecoder.decode((hederMap.get("retShowMsg").get(0)), "UTF-8");
+            String result = httpMap.get("body") == null ? null : httpMap.get("body").toString();
+            if (!F.empty(result) && result.contains("In_UserID") && result.contains("In_UserName")) {
                 Map<String, Object> map = new HashMap<String, Object>();
                 map.put("centerUser", JSON.parseObject(result));
                 FmUser fmUser = new FmUser();
                 fmUser.setAccount(dtoMobile);
                 FmUser fu = fmUserService.get(fmUser);
-                if(fu != null && !F.empty(fu.getAccount())) {
+                if (fu != null && !F.empty(fu.getAccount())) {
                     map.put("farmingUser", fu);
                     map.put("tokenId", tokenManage.buildToken(fu.getId(), fu.getAccount()));
                 } else {
-                    if(!F.empty(HuanxinUtil.createUser(dtoMobile, dtoPassword))) {
+                    if (!F.empty(HuanxinUtil.createUser(dtoMobile, dtoPassword))) {
                         fmUser.setHxPassword(dtoPassword);
                         fmUser.setHxStatus(1);
                     } else {
@@ -108,10 +108,10 @@ public class ApiFmUserController extends BaseController {
         try {
             //String url = "http://yizhuisu.com/api/Ba/sendVerifyCode";
             String url = "http://t149127q79.51mypc.cn:11169/api/Ba/sendVerifyCode";
-            Map<String, Object> httpMap = HttpUtil.httpRequestWithHeader(url, "post", "{\"Dto_UserId\":0,\"Dto_Mobile\":\""+dtoMobile+"\",\"Dto_VerifyType\":"+dtoVerifyType+"}");
-            Map<String, List<String>> hederMap = (Map<String, List<String>>)httpMap.get("header");
-            String retShowMsg = hederMap.get("retShowMsg") == null?null:URLDecoder.decode((hederMap.get("retShowMsg").get(0)), "UTF-8");
-            String result = httpMap.get("body") == null?null:httpMap.get("body").toString();
+            Map<String, Object> httpMap = HttpUtil.httpRequestWithHeader(url, "post", "{\"Dto_UserId\":0,\"Dto_Mobile\":\"" + dtoMobile + "\",\"Dto_VerifyType\":" + dtoVerifyType + "}");
+            Map<String, List<String>> hederMap = (Map<String, List<String>>) httpMap.get("header");
+            String retShowMsg = hederMap.get("retShowMsg") == null ? null : URLDecoder.decode((hederMap.get("retShowMsg").get(0)), "UTF-8");
+            String result = httpMap.get("body") == null ? null : httpMap.get("body").toString();
             j.setSuccess(true);
             j.setMsg(retShowMsg);
             j.setObj(result);
@@ -133,17 +133,17 @@ public class ApiFmUserController extends BaseController {
         try {
             //String url = "http://yizhuisu.com/api/Ba/userRegister";
             String url = "http://t149127q79.51mypc.cn:11169/api/Ba/userRegister";
-            Map<String, Object> httpMap = HttpUtil.httpRequestWithHeader(url, "post", "{\"Dto_Mobile\":\""+dtoMobile+"\",\"Dto_Password\":\""+dtoPassword+"\",\"Dto_VerificationCode\":\""+dtoVerificationCode+"\",\"Dto_OperateType\":"+dtoOperateType+"}");
-            Map<String, List<String>> hederMap = (Map<String, List<String>>)httpMap.get("header");
-            String retShowMsg = hederMap.get("retShowMsg") == null?null:URLDecoder.decode((hederMap.get("retShowMsg").get(0)), "UTF-8");
-            String result = httpMap.get("body") == null?null:httpMap.get("body").toString();
-            if("1".equals(dtoOperateType)) {
-                if(!F.empty(result) && result.contains("true")) {
+            Map<String, Object> httpMap = HttpUtil.httpRequestWithHeader(url, "post", "{\"Dto_Mobile\":\"" + dtoMobile + "\",\"Dto_Password\":\"" + dtoPassword + "\",\"Dto_VerificationCode\":\"" + dtoVerificationCode + "\",\"Dto_OperateType\":" + dtoOperateType + "}");
+            Map<String, List<String>> hederMap = (Map<String, List<String>>) httpMap.get("header");
+            String retShowMsg = hederMap.get("retShowMsg") == null ? null : URLDecoder.decode((hederMap.get("retShowMsg").get(0)), "UTF-8");
+            String result = httpMap.get("body") == null ? null : httpMap.get("body").toString();
+            if ("1".equals(dtoOperateType)) {
+                if (!F.empty(result) && result.contains("true")) {
                     FmUser fmUser = new FmUser();
                     fmUser.setAccount(dtoMobile);
                     fmUser.setAddtime(new Date());
                     fmUser.setUpdatetime(new Date());
-                    if(!F.empty(HuanxinUtil.createUser(dtoMobile, dtoPassword))) {
+                    if (!F.empty(HuanxinUtil.createUser(dtoMobile, dtoPassword))) {
                         fmUser.setHxPassword(dtoPassword);
                         fmUser.setHxStatus(1);
                     } else {
@@ -161,9 +161,9 @@ public class ApiFmUserController extends BaseController {
         } catch (Exception e) {
             j.setMsg(Application.getString(EX_0001));
             String errorMg = "";
-            if("1".equals(dtoOperateType)) {
+            if ("1".equals(dtoOperateType)) {
                 errorMg = "用户注册异常";
-            } else if("2".equals(dtoOperateType)) {
+            } else if ("2".equals(dtoOperateType)) {
                 errorMg = "找回密码异常";
             }
             logger.error(errorMg, e);
@@ -182,10 +182,10 @@ public class ApiFmUserController extends BaseController {
         try {
             //String url = "http://yizhuisu.com/api/BA/userResetPassword";
             String url = "http://t149127q79.51mypc.cn:11169/api/BA/userResetPassword";
-            Map<String, Object> httpMap = HttpUtil.httpRequestWithHeader(url, "post", "{\"Dto_ID\":"+dtoID+",\"Dto_Mobile\":\""+dtoMobile+"\",\"Dto_OldPassword\":\""+dtoOldPassword+"\",\"Dto_Password\":\""+dtoPassword+"\"}");
-            Map<String, List<String>> hederMap = (Map<String, List<String>>)httpMap.get("header");
-            String retShowMsg = hederMap.get("retShowMsg") == null?null:URLDecoder.decode((hederMap.get("retShowMsg").get(0)), "UTF-8");
-            String result = httpMap.get("body") == null?null:httpMap.get("body").toString();
+            Map<String, Object> httpMap = HttpUtil.httpRequestWithHeader(url, "post", "{\"Dto_ID\":" + dtoID + ",\"Dto_Mobile\":\"" + dtoMobile + "\",\"Dto_OldPassword\":\"" + dtoOldPassword + "\",\"Dto_Password\":\"" + dtoPassword + "\"}");
+            Map<String, List<String>> hederMap = (Map<String, List<String>>) httpMap.get("header");
+            String retShowMsg = hederMap.get("retShowMsg") == null ? null : URLDecoder.decode((hederMap.get("retShowMsg").get(0)), "UTF-8");
+            String result = httpMap.get("body") == null ? null : httpMap.get("body").toString();
             j.setSuccess(true);
             j.setMsg(retShowMsg);
             j.setObj(result);
@@ -202,19 +202,19 @@ public class ApiFmUserController extends BaseController {
      */
     @RequestMapping("/get")
     @ResponseBody
-    public Json get(FmUser fmUser,String accessId) {
+    public Json get(FmUser fmUser, String accessId) {
         Json j = new Json();
         try {
-            if(!F.empty(fmUser.getId())) {
+            if (!F.empty(fmUser.getId())) {
                 FmUser fu = fmUserService.get(fmUser.getId());
-                if(StringUtils.isNotEmpty(accessId)){
+                if (StringUtils.isNotEmpty(accessId)) {
                     FmShopUser fmShopUser = new FmShopUser();
                     fmShopUser.setShopId(fu.getId());
                     fmShopUser.setUserId(accessId);
                     FmShopUser old = fmShopUserService.get(fmShopUser);
-                    if(old != null){
+                    if (old != null) {
                         fu.setCollected(true);
-                    }else{
+                    } else {
                         fu.setCollected(false);
                     }
                 }
@@ -238,7 +238,7 @@ public class ApiFmUserController extends BaseController {
     public Json edit(FmUser fmUser) {
         Json j = new Json();
         try {
-            if(!F.empty(fmUser.getId())) {
+            if (!F.empty(fmUser.getId())) {
                 fmUserService.edit(fmUser);
                 j.setSuccess(true);
                 j.setMsg(SUCCESS_MESSAGE);
@@ -263,37 +263,37 @@ public class ApiFmUserController extends BaseController {
         try {
             if (!F.empty(userId) && !F.empty(bizId) && !F.empty(bizType)) {
 
-                if("FmGoodsUserServiceI".equals(bizType)){
+                if ("FmGoodsUserServiceI".equals(bizType)) {
                     FmGoodsUser fmGoodsUser = new FmGoodsUser();
                     fmGoodsUser.setUserId(userId);
                     fmGoodsUser.setGoodsId(bizId);
-                    FmGoodsUser old =  fmGoodsUserService.get(fmGoodsUser);
-                    if(old == null){
+                    FmGoodsUser old = fmGoodsUserService.get(fmGoodsUser);
+                    if (old == null) {
                         fmGoodsUserService.add(fmGoodsUser);
-                    }else{
+                    } else {
                         j.fail();
                         j.setMsg("已关联上");
                         return j;
                     }
-                }else if("FmShopUserServiceI".equals(bizType)){
+                } else if ("FmShopUserServiceI".equals(bizType)) {
                     FmShopUser fmShopUser = new FmShopUser();
                     fmShopUser.setShopId(bizId);
                     fmShopUser.setUserId(userId);
                     FmShopUser old = fmShopUserService.get(fmShopUser);
-                    if(old == null){
+                    if (old == null) {
                         fmShopUserService.add(fmShopUser);
-                    }else{
+                    } else {
                         j.fail();
                         j.setMsg("已关联上");
                         return j;
                     }
-                }else if("FmPurchaseUserServiceI".equals(bizType)){
+                } else if ("FmPurchaseUserServiceI".equals(bizType)) {
                     FmPurchaseUser fmPurchaseUser = new FmPurchaseUser();
                     fmPurchaseUser.setPurchaseId(bizId);
                     fmPurchaseUser.setUserId(userId);
-                    if(CollectionUtils.isEmpty(fmPurchaseUserService.query(fmPurchaseUser))){
+                    if (CollectionUtils.isEmpty(fmPurchaseUserService.query(fmPurchaseUser))) {
                         fmPurchaseUserService.add(fmPurchaseUser);
-                    }else{
+                    } else {
                         j.fail();
                         j.setMsg("已关联上");
                         return j;
@@ -323,17 +323,17 @@ public class ApiFmUserController extends BaseController {
         Json j = new Json();
         try {
             if (!F.empty(userId) && !F.empty(bizId) && !F.empty(bizType)) {
-                if("FmGoodsUserServiceI".equals(bizType)){
+                if ("FmGoodsUserServiceI".equals(bizType)) {
                     FmGoodsUser fmGoodsUser = new FmGoodsUser();
                     fmGoodsUser.setUserId(userId);
                     fmGoodsUser.setGoodsId(bizId);
                     fmGoodsUserService.delete(fmGoodsUser);
-                }else if("FmShopUserServiceI".equals(bizType)){
+                } else if ("FmShopUserServiceI".equals(bizType)) {
                     FmShopUser fmShopUser = new FmShopUser();
                     fmShopUser.setShopId(bizId);
                     fmShopUser.setUserId(userId);
                     fmShopUserService.delete(fmShopUser);
-                }else if("FmPurchaseUserServiceI".equals(bizType)){
+                } else if ("FmPurchaseUserServiceI".equals(bizType)) {
                     FmPurchaseUser fmPurchaseUser = new FmPurchaseUser();
                     fmPurchaseUser.setPurchaseId(bizId);
                     fmPurchaseUser.setUserId(userId);
@@ -354,7 +354,7 @@ public class ApiFmUserController extends BaseController {
 
     @RequestMapping("/saveOrUpdate")
     @ResponseBody
-    public Json saveOrUpdateHobby(String userId,String goodsIds) {
+    public Json saveOrUpdateHobby(String userId, String goodsIds) {
         Json j = new Json();
         try {
             if (!F.empty(userId) && !F.empty(goodsIds)) {
