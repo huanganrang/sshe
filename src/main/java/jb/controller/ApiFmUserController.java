@@ -145,8 +145,9 @@ public class ApiFmUserController extends BaseController {
                     fmUser.setAccount(dtoMobile);
                     fmUser.setAddtime(new Date());
                     fmUser.setUpdatetime(new Date());
-                    if (!F.empty(HuanxinUtil.createUser(dtoMobile, dtoPassword))) {
-                        fmUser.setHxPassword(dtoPassword);
+                    String uuid = UUID.uuid();
+                    if (!F.empty(HuanxinUtil.createUser(dtoMobile, uuid))) {
+                        fmUser.setHxPassword(uuid);
                         fmUser.setHxStatus(1);
                     } else {
                         fmUser.setHxStatus(2);

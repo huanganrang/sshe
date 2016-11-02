@@ -134,9 +134,11 @@ public class FmUserServiceImpl extends BaseServiceImpl<FmUser> implements FmUser
 		Map<String, Object> params = new HashMap<String, Object>();
 		String sql = whereHql(fmUser, params);
 		TfmUser t = fmUserDao.get("from TfmUser t " + sql, params);
-		FmUser o = new FmUser();
-		BeanUtils.copyProperties(t, o);
+		FmUser o = null;
 		if(t != null) {
+
+			o = new FmUser();
+			BeanUtils.copyProperties(t, o);
 			Date d = new Date();
 			o.setUpdatetime(d);
 			fmUserDao.executeSql("update fm_user set updatetime='" + new SimpleDateFormat("yyyy-MM-dd HH:mm:ss").format(d) + "' where id='" + t.getId() + "'");
