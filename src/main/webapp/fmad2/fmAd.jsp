@@ -63,7 +63,14 @@
 				}, {
 				field : 'url',
 				title : '<%=TfmAd.ALIAS_URL%>',
-				width : 100
+				width : 100,
+				formatter:function(value){
+					var str = "";
+					if(value){
+						str = "<img style=\"height: 80px;width: 150px;\" src=\""+value+"\" />";
+					}
+					return str;
+				}
 				}, {
 				field : 'localName',
 				title : '<%=TfmAd.ALIAS_LOCAL%>',
@@ -249,7 +256,7 @@
 		<c:if test="${fn:contains(sessionInfo.resourceList, '/fmAd2Controller/addPage')}">
 			<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'bug_add'">添加</a>
 		</c:if>
-		<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">过滤条件</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_delete',plain:true" onclick="cleanFun();">清空条件</a>
+		<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">查询</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_delete',plain:true" onclick="cleanFun();">清空条件</a>
 		<c:if test="${fn:contains(sessionInfo.resourceList, '/fmAd2Controller/download')}">
 			<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'server_go',plain:true" onclick="downloadTable();">导出</a>		
 			<form id="downloadTable" target="downloadIframe" method="post" style="display: none;">

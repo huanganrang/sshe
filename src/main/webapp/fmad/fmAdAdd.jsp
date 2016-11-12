@@ -45,6 +45,12 @@
 		$(document).delegate('#iconFile','change',function () {
 			ProcessFile();
 		});
+		$('.img-preview').each(function(){
+			var $this = $(this);
+			$this.css('height',$this.parent().attr('height'));
+		});
+
+
 	});
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
@@ -63,7 +69,7 @@
 				<tr>
 					<td colspan="2" height="155">
 
-						<img class="img-preview" src="" width="100%" height="100%"/>
+						<img class="img-preview" src=""/>
 
 					</td>
 				</tr>

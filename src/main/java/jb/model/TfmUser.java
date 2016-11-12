@@ -38,7 +38,7 @@ public class TfmUser implements java.io.Serializable,IEntity{
 	public static final String ALIAS_HX_PASSWORD = "环信密码";
 	public static final String ALIAS_HX_STATUS = "环信注册状态（1：成功，2：失败）";
 	public static final String ALIAS_AUTH_STATUS = "认证状态";
-	public static final String ALIAS_STATUS = "状态（冻结）";
+	public static final String ALIAS_STATUS = "状态";
 	
 	//date formats
 	public static final String FORMAT_ADDTIME = jb.util.Constants.DATE_FORMAT_FOR_ENTITY;

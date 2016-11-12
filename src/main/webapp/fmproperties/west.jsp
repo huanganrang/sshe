@@ -30,9 +30,11 @@
 				}
 			},
 			onLoadSuccess : function(node, data) {
+				layout_west_tree.tree('collapseAll');
 				parent.$.messager.progress('close');
 			}
 		});
+
 	});
 
 </script>

@@ -2,6 +2,7 @@ package jb.tag;
 
 import java.io.IOException;
 import java.util.Arrays;
+import java.util.Date;
 import java.util.List;
 
 import javax.servlet.jsp.JspException;
@@ -41,25 +42,77 @@ public class SelectTag extends TagSupport{
     public int doStartTag() throws JspException {  
 		JspWriter out = pageContext.getOut();  		  
         try{
-        	out.print("<select name=\""+name+"\" id=\""+name+"\" class=\"easyui-combobox\" data-options=\"width:140,height:29,multiple:"+multiple+",editable:false\">");
-        	BasedataServiceI service = Application.getBasedataService();
-        	BaseData baseData = new BaseData();
-			baseData.setBasetypeCode(dataType);
-        	List<BaseData> baseDataList = service.getBaseDatas(baseData);
-        	if(!mustSelect)
-        	out.print("<option value=\"\">    </option>");
-        	for(BaseData bd : baseDataList){
-        		if(multiple) {
-                	out.print("<option value=\""+bd.getId()+"\">"+bd.getName()+"</option>");
-        		} else {
-        			if(F.empty(value)||!value.equals(bd.getId())){
-                    	out.print("<option value=\""+bd.getId()+"\">"+bd.getName()+"</option>");
-            		}else{
-                    	out.print("<option value=\""+bd.getId()+"\" selected=\"selected\">"+bd.getName()+"</option>");
-            		}
-        		}
-        		
-        	}
+			String editable = "false";
+			if(dataType.equals("GN")){
+				//pageContext.getRequest().getContextPath();
+				StringBuffer sb = new StringBuffer();
+				String gClass = "grid_"+new Date().getTime();
+				sb.append("<select name=\"" + name + "\" id=\"" + name + "\" class=\"easyui-combogrid "+gClass+"\"  data-options=\"");
+				sb.append("width:140,height:29,panelWidth: 400,");
+				sb.append("		idField: 'id',");
+				sb.append("		textField: 'text',");
+
+
+				String showName = null;
+				if (!F.empty(value)){
+					showName = Application.getString(value);
+					sb.append("		mode: 'local',");
+					//sb.append("		onShowPanel: function(){alert(1)},");
+					sb.append("		onShowPanel: function(e){" +
+							"var select = $('."+gClass+"');" +
+							"if(!select.attr('enableRemote')){" +
+
+
+							"select.combogrid({ mode: 'remote',method: 'post',url: '/basedataController/goodsQuery'});" +
+							//"setTimeout(function(){select.combogrid('setText','"+showName+"')},1000);" +
+							"select.next().find('input').val('"+showName+"');" +
+							"var grid = select.combogrid('grid');" +
+							"grid.datagrid({'queryParams':{id:'"+value+"',q: '"+showName+"'}});" +
+							"select.attr('enableRemote',true);}}," +
+							"onHidePanel:function(e){" +
+							"var select = $('."+gClass+"');" +
+							"var val = select.combogrid('getValue');" +
+							"if(val == '"+showName+"'){select.combogrid('setValue','"+value+"')}else if(val.indexOf('GN')!=0){select.combogrid('setValue','')}" +
+							"},");
+					sb.append("		value:'"+value+"',data:[{id:'"+value+"',text:'"+showName+"'}],");
+				}else{
+					sb.append("		url: '/basedataController/goodsQuery',");
+					sb.append("		method: 'post',");
+					sb.append("		mode: 'remote',");
+
+				}
+				sb.append("		columns: [[");
+				sb.append("{field:'id',title:'ID',width:100},");
+				sb.append("{field:'text',title:'名称',width:180}");
+				sb.append("]]");
+				sb.append("\">");
+				out.print(sb.toString());
+				if (!F.empty(showName)) {
+					/*out.print("<script type=\"text/javascript\">$(function() {" +
+							"$('."+gClass+"').combogrid({keyHandler: {down:function(e){alert(1)}}});" +
+							"});</script>");*/
+				}
+			} else {
+				out.print("<select name=\"" + name + "\" id=\"" + name + "\" class=\"easyui-combobox\" data-options=\"width:140,height:29,multiple:" + multiple + ",editable:" + editable + "\">");
+				BasedataServiceI service = Application.getBasedataService();
+				BaseData baseData = new BaseData();
+				baseData.setBasetypeCode(dataType);
+				List<BaseData> baseDataList = service.getBaseDatas(baseData);
+				if (!mustSelect)
+					out.print("<option value=\"\">    </option>");
+				for (BaseData bd : baseDataList) {
+					if (multiple) {
+						out.print("<option value=\"" + bd.getId() + "\">" + bd.getName() + "</option>");
+					} else {
+						if (F.empty(value) || !value.equals(bd.getId())) {
+							out.print("<option value=\"" + bd.getId() + "\">" + bd.getName() + "</option>");
+						} else {
+							out.print("<option value=\"" + bd.getId() + "\" selected=\"selected\">" + bd.getName() + "</option>");
+						}
+					}
+
+				}
+			}
         	out.print("</select>");  
         } catch (IOException e) {  
             e.printStackTrace();  

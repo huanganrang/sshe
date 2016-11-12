@@ -87,7 +87,7 @@
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {
-						str += $.formatString('<img onclick="editFun(\'{0}\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_edit.png');
+						str += $.formatString('<a onclick="editFun(\'{0}\');" src="{1}" href="javascript:void(0)" title="回复">回复</a>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_edit.png');
 					}
 					str += '&nbsp;';
 					if ($.canDelete) {
@@ -140,12 +140,12 @@
 			id = rows[0].id;
 		}
 		parent.$.modalDialog({
-			title : '编辑数据',
-			width : 300,
+			title : '回复',
+			width : 400,
 			height : 350,
 			href : '${pageContext.request.contextPath}/fmFeedbackController/editPage?id=' + id,
 			buttons : [ {
-				text : '编辑',
+				text : '回复',
 				handler : function() {
 					parent.$.modalDialog.openner_dataGrid = dataGrid;//因为添加成功之后，需要刷新这个dataGrid，所以先预定义好
 					var f = parent.$.modalDialog.handler.find('#form');
@@ -240,7 +240,7 @@
 		<c:if test="${fn:contains(sessionInfo.resourceList, '/fmFeedbackController/addPage')}">
 			<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'bug_add'">添加</a>
 		</c:if>
-		<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">过滤条件</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_delete',plain:true" onclick="cleanFun();">清空条件</a>
+		<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">查询</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_delete',plain:true" onclick="cleanFun();">清空条件</a>
 		<c:if test="${fn:contains(sessionInfo.resourceList, '/fmFeedbackController/download')}">
 			<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'server_go',plain:true" onclick="downloadTable();">导出</a>		
 			<form id="downloadTable" target="downloadIframe" method="post" style="display: none;">

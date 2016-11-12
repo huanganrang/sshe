@@ -106,7 +106,7 @@
 				}, {
 				field : 'action',
 				title : '操作',
-				width : 60,
+				width : 120,
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {
@@ -118,15 +118,15 @@
 					}
 					str += '&nbsp;';
 					if ($.canView) {
-						str += $.formatString('<img onclick="viewFun(\'{0}\');" src="{1}" title="查看"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_link.png');
+						str += $.formatString('<a onclick="viewFun(\'{0}\');" href="javascript:void(0)" >查看</a>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_link.png');
 					}
 					str += '&nbsp;';
 					if ($.canViewAddToAd) {
-						str += $.formatString('<img onclick="addToAd(\'{0}\');" src="{1}" title="推送至活动广告"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_link.png');
+						str += $.formatString('<a onclick="addToAd(\'{0}\');" href="javascript:void(0)" >推送至活动广告</a>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_link.png');
 					}
 					str += '&nbsp;';
 					if ($.canViewAddToSanAd) {
-						str += $.formatString('<img onclick="addToAd2(\'{0}\');" src="{1}" title="推送至三品一标"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_link.png');
+						str += $.formatString('<a onclick="addToAd2(\'{0}\');" href="javascript:void(0)" >推送至三品一标</a>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_link.png');
 					}
 					return str;
 				}
@@ -327,7 +327,7 @@
 		<c:if test="${fn:contains(sessionInfo.resourceList, '/fmGoodsController/addPage')}">
 			<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'bug_add'">添加</a>
 		</c:if>
-		<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">过滤条件</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_delete',plain:true" onclick="cleanFun();">清空条件</a>
+		<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">查询</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_delete',plain:true" onclick="cleanFun();">清空条件</a>
 		<c:if test="${fn:contains(sessionInfo.resourceList, '/fmGoodsController/download')}">
 			<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'server_go',plain:true" onclick="downloadTable();">导出</a>		
 			<form id="downloadTable" target="downloadIframe" method="post" style="display: none;">

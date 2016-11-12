@@ -4,6 +4,7 @@ import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
+import jb.absx.F;
 import jb.pageModel.BaseData;
 import jb.pageModel.BaseType;
 import jb.pageModel.DataGrid;
@@ -263,10 +264,39 @@ public class BasedataController extends BaseController {
 
 	@RequestMapping("/goodsTree")
 	@ResponseBody
-	public List<Tree> tree() {
+	public List<Tree> tree(String q) {
 		BaseData baseData = new BaseData();
+		if(!F.empty(q)){
+			baseData.setName(q);
+		}
 		baseData.setBasetypeCode("GN");
 		List<Tree> lt = new ArrayList<Tree>();
+		List<BaseData> baseDataList = basedataService.getBaseDatas(baseData);
+		if(!CollectionUtils.isEmpty(baseDataList)){
+			for (BaseData data : baseDataList) {
+				Tree tree = new Tree();
+				tree.setId(data.getId());
+				tree.setPid(data.getPid());
+				tree.setText(data.getName());
+				tree.setIconCls(data.getIcon());
+				lt.add(tree);
+			}
+		}
+		return lt;
+	}
+
+	@RequestMapping("/goodsQuery")
+	@ResponseBody
+	public List<Tree> query(String q) {
+		BaseData baseData = new BaseData();
+
+		baseData.setBasetypeCode("GN");
+		List<Tree> lt = new ArrayList<Tree>();
+		if(!F.empty(q)){
+			baseData.setName(q);
+		}else{
+			return lt;
+		}
 		List<BaseData> baseDataList = basedataService.getBaseDatas(baseData);
 		if(!CollectionUtils.isEmpty(baseDataList)){
 			for (BaseData data : baseDataList) {

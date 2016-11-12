@@ -45,6 +45,10 @@
 		$(document).delegate('#iconFile','change',function () {
 			ProcessFile();
 		});
+		$('.img-preview').each(function(){
+			var $this = $(this);
+			$this.css('height',$this.parent().attr('height'));
+		});
 	});
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">

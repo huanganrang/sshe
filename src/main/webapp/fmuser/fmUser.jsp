@@ -45,9 +45,9 @@
 			singleSelect : true,
 			columns : [ [ {
 				field : 'id',
-				title : '编号',
-				width : 150,
-				hidden : true
+				title : '用户ID',
+				width : 100,
+				hidden : false
 				}, {
 				field : 'nickName',
 				title : '<%=TfmUser.ALIAS_NICK_NAME%>',
@@ -58,10 +58,10 @@
 				width : 50,
 				formatter:function(value){
 					var str = "";
-					if(value!="" || value!=null){
+					if(value){
 						str = "<img style=\"height: 80px;width: 150px;\" src=\""+value+"\" />";
-						return str;
 					}
+					return str;
 				}
 				}, {
 				field : 'account',
@@ -102,9 +102,10 @@
 				title : '操作',
 				width : 50,
 				formatter : function(value, row, index) {
+					row.status = row.status||"AS01";
 					var str = '';
 					if ($.canEdit) {
-						str += $.formatString('<img onclick="editFun(\'{0}\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_edit.png');
+						str += $.formatString('<a onclick="updateStatus(\'{0}\',\'{1}\');" href="javascript:void(0)">'+(row.status == "AS01"?"冻结":"解冻")+'</a>', row.id, row.status);
 					}
 					str += '&nbsp;';
 					if ($.canDelete) {
@@ -126,7 +127,27 @@
 			}
 		});
 	});
+	function updateStatus(id,status) {
+		var data = {};
+		data.id = id;
+		data.status = status == "AS01"?"AS02":"AS01";
 
+		parent.$.messager.confirm('询问', '您是否要'+(status == "AS01"?"冻结":"解冻")+'该账号？', function(b) {
+			if (b) {
+				parent.$.messager.progress({
+					title : '提示',
+					text : '数据处理中，请稍后....'
+				});
+				$.post('${pageContext.request.contextPath}/fmUserController/edit',data, function(result) {
+					if (result.success) {
+						parent.$.messager.alert('提示', result.msg, 'info');
+						dataGrid.datagrid('reload');
+					}
+					parent.$.messager.progress('close');
+				}, 'JSON');
+			}
+		});
+	}
 	function deleteFun(id) {
 		if (id == undefined) {
 			var rows = dataGrid.datagrid('getSelections');
@@ -233,7 +254,11 @@
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
 
-						<tr>	
+						<tr>
+							<th>用户ID</th>
+							<td>
+								<input type="text" name="id" maxlength="36" class="span2"/>
+							</td>
 							<th><%=TfmUser.ALIAS_NICK_NAME%></th>	
 							<td>
 								<input type="text" name="nickName" maxlength="36" class="span2"/>
@@ -256,7 +281,7 @@
 		<c:if test="${fn:contains(sessionInfo.resourceList, '/fmUserController/addPage')}">
 			<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'bug_add'">添加</a>
 		</c:if>
-		<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">过滤条件</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_delete',plain:true" onclick="cleanFun();">清空条件</a>
+		<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">查询</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_delete',plain:true" onclick="cleanFun();">清空条件</a>
 		<c:if test="${fn:contains(sessionInfo.resourceList, '/fmUserController/download')}">
 			<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'server_go',plain:true" onclick="downloadTable();">导出</a>		
 			<form id="downloadTable" target="downloadIframe" method="post" style="display: none;">

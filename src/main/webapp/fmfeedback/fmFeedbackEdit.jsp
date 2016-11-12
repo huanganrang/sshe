@@ -43,11 +43,11 @@
 						<jb:select dataType="CS" name="status" value="${fmFeedback.status}"></jb:select>
 					</td>							
 				</tr>
-				<tr>	
-					<th><%=TfmFeedback.ALIAS_REPLY%></th>	
-					<td colspan="3">
-						<textarea class="span2" name="reply"  value="${fmFeedback.reply}"/>
-					</td>							
+
+				<tr>
+					<td colspan="4">
+						<textarea class="span2" name="reply"  value="${fmFeedback.reply}" style="width: 95%;height:200px;"/>
+					</td>
 				</tr>
 			</table>				
 		</form>

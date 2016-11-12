@@ -85,7 +85,11 @@ public class FmUserServiceImpl extends BaseServiceImpl<FmUser> implements FmUser
 			if (!F.empty(fmUser.getAuthStatus())) {
 				whereHql += " and t.authStatus = :authStatus";
 				params.put("authStatus", fmUser.getAuthStatus());
-			}		
+			}
+			if (!F.empty(fmUser.getId())) {
+				whereHql += " and t.id = :id";
+				params.put("id", fmUser.getId());
+			}
 			if (!F.empty(fmUser.getStatus())) {
 				whereHql += " and t.status = :status";
 				params.put("status", fmUser.getStatus());

@@ -34,7 +34,7 @@ public class TfmAd implements java.io.Serializable,IEntity{
 	public static final String ALIAS_CHANNEL = "广告位置";
 	public static final String ALIAS_TYPE = "分类，专区|三品一标";
 	public static final String ALIAS_GOODS_ID = "商品ID";
-	public static final String ALIAS_LOGIN_ID = "运营人员ID";
+	public static final String ALIAS_LOGIN_ID = "运营人员";
 	
 	//date formats
 	public static final String FORMAT_ADDTIME = jb.util.Constants.DATE_FORMAT_FOR_ENTITY;

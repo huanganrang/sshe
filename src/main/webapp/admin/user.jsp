@@ -393,7 +393,7 @@
 				class="easyui-linkbutton" data-options="plain:true,iconCls:'delete'">批量删除</a>
 		</c:if>
 		<a href="javascript:void(0);" class="easyui-linkbutton"
-			data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">过滤条件</a><a
+			data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">查询</a><a
 			href="javascript:void(0);" class="easyui-linkbutton"
 			data-options="iconCls:'brick_delete',plain:true"
 			onclick="cleanFun();">清空条件</a>

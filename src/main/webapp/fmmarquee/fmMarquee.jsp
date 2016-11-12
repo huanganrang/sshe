@@ -70,7 +70,7 @@
 				width : 20
 				}, {
 				field : 'loginName',
-				title : '<%=TfmMarquee.ALIAS_LOGIN_ID%>',
+				title : '运营人员',
 				width : 50		
 				}, {
 				field : 'goodsId',
@@ -137,7 +137,7 @@
 		}
 		parent.$.modalDialog({
 			title : '编辑数据',
-			width : 350,
+			width : 400,
 			height : 450,
 			href : '${pageContext.request.contextPath}/fmMarqueeController/editPage?id=' + id,
 			buttons : [ {
@@ -167,7 +167,7 @@
 	function addFun() {
 		parent.$.modalDialog({
 			title : '添加数据',
-			width : 350,
+			width : 400,
 			height : 450,
 			href : '${pageContext.request.contextPath}/fmMarqueeController/addPage',
 			buttons : [ {
@@ -228,7 +228,7 @@
 		<c:if test="${fn:contains(sessionInfo.resourceList, '/fmMarqueeController/addPage')}">
 			<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'bug_add'">添加</a>
 		</c:if>
-		<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">过滤条件</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_delete',plain:true" onclick="cleanFun();">清空条件</a>
+		<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">查询</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_delete',plain:true" onclick="cleanFun();">清空条件</a>
 		<c:if test="${fn:contains(sessionInfo.resourceList, '/fmMarqueeController/download')}">
 			<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'server_go',plain:true" onclick="downloadTable();">导出</a>		
 			<form id="downloadTable" target="downloadIframe" method="post" style="display: none;">
