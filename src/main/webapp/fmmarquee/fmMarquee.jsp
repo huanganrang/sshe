@@ -63,7 +63,14 @@
 				}, {
 				field : 'url',
 				title : '<%=TfmMarquee.ALIAS_URL%>',
-				width : 120
+				width : 120,
+				formatter:function(value){
+					var str = "";
+					if(value){
+						str = "<img style=\"height: 80px;width: 150px;\" src=\""+value+"\" />";
+					}
+					return str;
+				}
 				}, {
 				field : 'seq',
 				title : '<%=TfmMarquee.ALIAS_SEQ%>',

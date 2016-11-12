@@ -93,6 +93,7 @@ public class FmFeedbackServiceImpl extends BaseServiceImpl<FmFeedback> implement
 	@Override
 	public void edit(FmFeedback fmFeedback) {
 		TfmFeedback t = fmFeedbackDao.get(TfmFeedback.class, fmFeedback.getId());
+		t.setUpdatetime(new Date());
 		if (t != null) {
 			MyBeanUtils.copyProperties(fmFeedback, t, new String[] { "id" , "addtime", "isdeleted","updatetime" },true);
 		}

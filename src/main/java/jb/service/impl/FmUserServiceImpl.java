@@ -104,6 +104,9 @@ public class FmUserServiceImpl extends BaseServiceImpl<FmUser> implements FmUser
 		BeanUtils.copyProperties(fmUser, t);
 		t.setId(jb.absx.UUID.uuid());
 		t.setIsdeleted(false);
+		if(F.empty(fmUser.getStatus())){
+			fmUser.setStatus("AS01");
+		}
 		fmUserDao.save(t);
 	}
 

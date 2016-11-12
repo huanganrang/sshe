@@ -51,27 +51,31 @@
 				}, {
 				field : 'content',
 				title : '<%=TfmMessage.ALIAS_CONTENT%>',
-				width : 50
+				width : 150
 				}, {
 				field : 'url',
 				title : '<%=TfmMessage.ALIAS_URL%>',
 				width : 50,
 				formatter:function(value){
 					var str = "";
-					if(value!="" || value!=null){
+					if(value){
 						str = "<img style=\"height: 80px;width: 150px;\" src=\""+value+"\" />";
-						return str;
 					}
+					return str;
 				}
+				}, {
+				field : 'title',
+				title : '<%=TfmMessage.ALIAS_TITLE%>',
+				width : 150
 				}, {
 				field : 'sendTypeName',
 				title : '<%=TfmMessage.ALIAS_SEND_TYPE%>',
-				width : 50,
+				width : 40,
 				sortable: true
 				}, {
 				field : 'loginId',
 				title : '<%=TfmMessage.ALIAS_LOGIN_ID%>',
-				width : 50,
+				width : 30,
 				sortable: true
 				}, {
 				field : 'sendTime',
@@ -86,7 +90,7 @@
 				}, {
 				field : 'action',
 				title : '操作',
-				width : 100,
+				width : 30,
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {
@@ -145,7 +149,7 @@
 		parent.$.modalDialog({
 			title : '编辑数据',
 			width : 780,
-			height : 500,
+			height : 550,
 			href : '${pageContext.request.contextPath}/fmMessageController/editPage?id=' + id,
 			buttons : [ {
 				text : '编辑',
@@ -175,7 +179,7 @@
 		parent.$.modalDialog({
 			title : '添加数据',
 			width : 780,
-			height : 500,
+			height : 550,
 			href : '${pageContext.request.contextPath}/fmMessageController/addPage',
 			buttons : [ {
 				text : '添加',

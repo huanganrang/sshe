@@ -45,6 +45,10 @@
 		$(document).delegate('#iconFile','change',function () {
 			ProcessFile();
 		});
+		$('.img-preview').each(function(){
+			var $this = $(this);
+			$this.css('height',$this.parent().attr('height'));
+		});
 	});
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
@@ -57,26 +61,26 @@
 				<tr>	
 					<th><%=TfmMessage.ALIAS_TITLE%></th>	
 					<td colspan="3">
-						<input class="span2" name="title" type="text"/>
+						<input class="span2" name="title" type="text" style="width: 95%"/>
 					</td>							
 
 				</tr>
 				<tr>
 					<th><%=TfmMessage.ALIAS_SUB_TITLE%></th>
 					<td colspan="3">
-						<input class="span2" name="subTitle" type="text"/>
+						<input class="span2" name="subTitle" type="text" style="width: 95%"/>
 					</td>
 				</tr>
 				<tr>
 					<th><%=TfmMessage.ALIAS_CONTENT%></th>
-					<td>
-						<input class="span2" name="content" type="text"/>
+					<td colspan="3">
+						<textarea rows="3" class="span2" name="content" type="text" style="width: 95%"/>
 					</td>
 				</tr>
 				<tr>
 					<th>用户ID</th>
-					<td>
-						<input class="span2" name="toUser" type="text"/>
+					<td colspan="3">
+						<input class="span2" name="toUser" type="text"/>不填则推送全用户
 					</td>
 				</tr>
 				<tr>
@@ -90,9 +94,9 @@
 					</td>
 				</tr>
 				<tr>
-					<td colspan="2" height="155">
+					<td colspan="4" height="155">
 
-						<img class="img-preview" src="" width="100%" height="100%"/>
+						<img class="img-preview" src="" />
 
 					</td>
 				</tr>

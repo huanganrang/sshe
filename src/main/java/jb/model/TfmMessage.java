@@ -33,7 +33,7 @@ public class TfmMessage implements java.io.Serializable,IEntity{
 	public static final String ALIAS_SEND_TYPE = "推送类型";
 	public static final String ALIAS_URL = "图片地址";
 	public static final String ALIAS_SEND_TIME = "发布时间";
-	public static final String ALIAS_LOGIN_ID = "运营人员ID";
+	public static final String ALIAS_LOGIN_ID = "运营人员";
 	
 	//date formats
 	public static final String FORMAT_ADDTIME = jb.util.Constants.DATE_FORMAT_FOR_ENTITY;

@@ -60,9 +60,9 @@ public class FmGoodsServiceImpl extends BaseServiceImpl<FmGoods> implements FmGo
 				whereHql += " and (";
 				for(int i=0; i<keyList.length; i++) {
 					if(i == 0) {
-						whereHql += "t.name like '" + keyList[i] + "%'";
+						whereHql += "t.name like '%" + keyList[i] + "%'";
 					} else {
-						whereHql += " or t.name like '" + keyList[i] + "%'";
+						whereHql += " or t.name like '%" + keyList[i] + "%'";
 					}
 				}
 				whereHql += ")";
@@ -78,8 +78,8 @@ public class FmGoodsServiceImpl extends BaseServiceImpl<FmGoods> implements FmGo
 				params.put("status", fmGoods.getStatus());
 			}		
 			if (!F.empty(fmGoods.getBornArea())) {
-				whereHql += " and t.bornArea = :bornArea";
-				params.put("bornArea", fmGoods.getBornArea());
+				whereHql += " and t.bornArea LIKE :bornArea";
+				params.put("bornArea","%"+fmGoods.getBornArea()+"%");
 			}		
 			if (!F.empty(fmGoods.getStorage())) {
 				whereHql += " and t.storage = :storage";

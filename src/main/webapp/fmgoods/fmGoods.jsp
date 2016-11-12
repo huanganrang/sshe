@@ -55,9 +55,9 @@
 			singleSelect : true,
 			columns : [ [ {
 				field : 'id',
-				title : '编号',
-				width : 150,
-				hidden : true
+				title : 'ID',
+				width : 125,
+				hidden : false
 				}, {
 				field : 'updatetime',
 				title : '<%=TfmGoods.ALIAS_UPDATETIME%>',
@@ -86,11 +86,11 @@
 				},{
 				field : 'minBatch',
 				title : '<%=TfmGoods.ALIAS_MIN_BATCH%>',
-				width : 50		
+				width : 22
 				}, {
 				field : 'statusName',
-				title : '商品状态',
-				width : 50		
+				title : '状态',
+				width : 20
 				}, {
 				field : 'bornArea',
 				title : '<%=TfmGoods.ALIAS_BORN_AREA%>',
@@ -98,7 +98,7 @@
 				}, {
 				field : 'onlineStatusName',
 				title : '上下架',
-				width : 30
+				width : 22
 				}, {
 				field : 'addtime',
 				title : '<%=TfmGoods.ALIAS_ADDTIME%>',
@@ -106,7 +106,7 @@
 				}, {
 				field : 'action',
 				title : '操作',
-				width : 120,
+				width : 75,
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {
@@ -122,11 +122,11 @@
 					}
 					str += '&nbsp;';
 					if ($.canViewAddToAd) {
-						str += $.formatString('<a onclick="addToAd(\'{0}\');" href="javascript:void(0)" >推送至活动广告</a>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_link.png');
+						str += $.formatString('<a onclick="addToAd(\'{0}\');" href="javascript:void(0)" >活动广告</a>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_link.png');
 					}
 					str += '&nbsp;';
 					if ($.canViewAddToSanAd) {
-						str += $.formatString('<a onclick="addToAd2(\'{0}\');" href="javascript:void(0)" >推送至三品一标</a>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_link.png');
+						str += $.formatString('<a onclick="addToAd2(\'{0}\');" href="javascript:void(0)" >三品一标</a>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_link.png');
 					}
 					return str;
 				}
@@ -297,7 +297,10 @@
 							<td>
 								<jb:select dataType="GN" name="name"></jb:select>
 							</td>
-
+							<th>状态</th>
+							<td>
+								<jb:select dataType="GS" name="status"></jb:select>
+							</td>
 							<th><%=TfmGoods.ALIAS_BORN_AREA%></th>
 							<td>
 								<input type="text" name="bornArea" maxlength="36" class="span2"/>
@@ -308,6 +311,10 @@
 							<th><%=TfmGoods.ALIAS_USER_ID%></th>
 							<td>
 								<input type="text" name="userId" maxlength="36" class="span2"/>
+							</td>
+							<th>上架状态</th>
+							<td>
+								<jb:select dataType="OS" name="onlineStatus"></jb:select>
 							</td>
 							<th><%=TfmGoods.ALIAS_ADDTIME%></th>
 							<td>

@@ -242,6 +242,10 @@
 							<td>
 								<jb:select dataType="AU" name="status"></jb:select>
 							</td>
+							<th><%=TfmAuthApply.ALIAS_TYPE%></th>
+							<td>
+								<jb:select dataType="AT" name="type"></jb:select>
+							</td>
 						</tr>
 				</table>
 			</form>

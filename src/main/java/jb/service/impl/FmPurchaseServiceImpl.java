@@ -60,8 +60,8 @@ public class FmPurchaseServiceImpl extends BaseServiceImpl<FmPurchase> implement
 				params.put("status", fmPurchase.getStatus());
 			}		
 			if (!F.empty(fmPurchase.getBornArea())) {
-				whereHql += " and t.bornArea = :bornArea";
-				params.put("bornArea", fmPurchase.getBornArea());
+				whereHql += " and t.bornArea like :bornArea";
+				params.put("bornArea", "%"+fmPurchase.getBornArea()+"%");
 			}		
 			if (!F.empty(fmPurchase.getTransactionArea())) {
 				whereHql += " and t.transactionArea = :transactionArea";

@@ -268,6 +268,15 @@
 							<td>
 								<input type="text" name="phone" maxlength="20" class="span2"/>
 							</td>
+							<th><%=TfmUser.ALIAS_AUTH_STATUS%></th>
+							<td>
+								<jb:select dataType="AU" name="authStatus"></jb:select>
+							</td>
+							<th><%=TfmUser.ALIAS_STATUS%></th>
+							<td>
+								<jb:select dataType="AS" name="status"></jb:select>
+							</td>
+
 						</tr>	
 
 				</table>

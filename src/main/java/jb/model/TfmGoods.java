@@ -31,7 +31,7 @@ public class TfmGoods implements java.io.Serializable,IEntity{
 	public static final String ALIAS_NAME = "名称";
 	public static final String ALIAS_PRICE = "单价";
 	public static final String ALIAS_UNIT = "单位";
-	public static final String ALIAS_MIN_BATCH = "起批量";
+	public static final String ALIAS_MIN_BATCH = "库存量";
 	public static final String ALIAS_STATUS = "状态（预售，现货，在途）";
 	public static final String ALIAS_BORN_AREA = "商品产地";
 	public static final String ALIAS_STORAGE = "存放地点";

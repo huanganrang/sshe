@@ -78,7 +78,7 @@
 				width: 50
 				}, {
 					field : 'reply',
-					title : '<%=TfmFeedback.ALIAS_REPLY%>',
+					title : '回复历史',
 					width : 150
 				}, {
 				field : 'action',

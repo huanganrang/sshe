@@ -44,6 +44,10 @@
 		$(document).delegate('#iconFile','change',function () {
 			ProcessFile();
 		});
+		$('.img-preview').each(function(){
+			var $this = $(this);
+			$this.css('height',$this.parent().attr('height'));
+		});
 	});
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
@@ -56,42 +60,32 @@
 				<tr>
 					<th><%=TfmMessage.ALIAS_TITLE%>
 					</th>
-					<td>
-						<input class="span2" name="title" type="text" value="${fmMessage.title}"/>
+					<td colspan="3">
+						<input class="span2" name="title" type="text" value="${fmMessage.title}" style="width: 95%"/>
 					</td>
 				</tr>
 				<tr>
 					<th><%=TfmMessage.ALIAS_SUB_TITLE%>
 					</th>
-					<td>
-						<input class="span2" name="subTitle" type="text" value="${fmMessage.subTitle}"/>
+					<td colspan="3">
+						<input class="span2" name="subTitle" type="text" value="${fmMessage.subTitle}" style="width: 95%"/>
 					</td>
 				</tr>
 				<tr>
 
 					<th><%=TfmMessage.ALIAS_CONTENT%>
 					</th>
-					<td>
-						<input class="span2" name="content" type="text" value="${fmMessage.content}"/>
+					<td colspan="3">
+						<textarea rows="3" class="span2" name="content" type="text" style="width: 95%">${fmMessage.content}</textarea>
 					</td>
 				</tr>
 				<tr>
 					<th>用户ID</th>
-					<td>
-						<input class="span2" name="toUser" type="text"/>
+					<td colspan="3">
+						<input class="span2" name="toUser" type="text"/>不填则推送全用户
 					</td>
 				</tr>
-				<tr>
-					<td colspan="2" height="155">
-						<img class="img-preview" src="${fmMessage.url}" width="100%" height="100%"/>
-					</td>
-				</tr>
-				<tr>
-					<th><%=TfmMessage.ALIAS_URL%></th>
-					<td>
-						<input type="file" id="iconFile" name="equipIconFile">
-					</td>
-				</tr>
+
 				<tr>
 					<th><%=TfmMessage.ALIAS_SEND_TIME%>
 					</th>
@@ -104,6 +98,17 @@
 					</th>
 					<td>
 						<jb:select dataType="ST" name="sendType" value="${fmMessage.sendType}"></jb:select>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="4" height="155">
+						<img class="img-preview" src="${fmMessage.url}" />
+					</td>
+				</tr>
+				<tr>
+					<th><%=TfmMessage.ALIAS_URL%></th>
+					<td>
+						<input type="file" id="iconFile" name="equipIconFile">
 					</td>
 				</tr>
 			</table>
