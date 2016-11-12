@@ -77,7 +77,7 @@ public class SelectTag extends TagSupport{
 							"},");
 					sb.append("		value:'"+value+"',data:[{id:'"+value+"',text:'"+showName+"'}],");
 				}else{
-					sb.append("		url: '/basedataController/goodsQuery',");
+					sb.append("		url: '"+path+"/basedataController/goodsQuery',");
 					sb.append("		method: 'post',");
 					sb.append("		mode: 'remote',");
 
