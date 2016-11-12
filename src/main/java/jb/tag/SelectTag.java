@@ -5,6 +5,7 @@ import java.util.Arrays;
 import java.util.Date;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
 import javax.servlet.jsp.JspException;
 import javax.servlet.jsp.JspWriter;
 import javax.servlet.jsp.tagext.TagSupport;
@@ -44,7 +45,7 @@ public class SelectTag extends TagSupport{
         try{
 			String editable = "false";
 			if(dataType.equals("GN")){
-				//pageContext.getRequest().getContextPath();
+				String path = ((HttpServletRequest)pageContext.getRequest()).getContextPath();
 				StringBuffer sb = new StringBuffer();
 				String gClass = "grid_"+new Date().getTime();
 				sb.append("<select name=\"" + name + "\" id=\"" + name + "\" class=\"easyui-combogrid "+gClass+"\"  data-options=\"");
@@ -63,7 +64,7 @@ public class SelectTag extends TagSupport{
 							"if(!select.attr('enableRemote')){" +
 
 
-							"select.combogrid({ mode: 'remote',method: 'post',url: '/basedataController/goodsQuery'});" +
+							"select.combogrid({ mode: 'remote',method: 'post',url: '"+path+"/basedataController/goodsQuery'});" +
 							//"setTimeout(function(){select.combogrid('setText','"+showName+"')},1000);" +
 							"select.next().find('input').val('"+showName+"');" +
 							"var grid = select.combogrid('grid');" +
