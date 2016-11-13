@@ -47,6 +47,7 @@ public class FmGoodsServiceImpl extends BaseServiceImpl<FmGoods> implements FmGo
 				
 			if (!F.empty(fmGoods.getName())) {
 				//whereHql += " and t.name like '" + fmGoods.getName() + "%'";
+				whereHql += " and t.name = :name";
 				params.put("name", fmGoods.getName());
 			}
 
