@@ -177,7 +177,7 @@ public class ApiFmGoodsController extends BaseController {
                 BaseData baseData = new BaseData();
                 baseData.setName(key);
                 String[] keyList = basedataService.getGoodsName(key);
-                fmGoods.setGoodsIdList(keyList);
+                fmGoods.setKeyList(keyList);
             }
             final Map<String, DataGrid> resultMap = new HashMap<String, DataGrid>();
             if(F.empty(fmGoods.getStatus())){

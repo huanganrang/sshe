@@ -46,8 +46,8 @@ public class FmGoodsServiceImpl extends BaseServiceImpl<FmGoods> implements FmGo
 			whereHql += " where t.isdeleted = 0 ";
 				
 			if (!F.empty(fmGoods.getName())) {
-				whereHql += " and t.name like '" + fmGoods.getName() + "%'";
-				//params.put("name", fmGoods.getName());
+				//whereHql += " and t.name like '" + fmGoods.getName() + "%'";
+				params.put("name", fmGoods.getName());
 			}
 
 			if (fmGoods.getGoodsIdList() != null && fmGoods.getGoodsIdList().length > 0) {
@@ -56,16 +56,8 @@ public class FmGoodsServiceImpl extends BaseServiceImpl<FmGoods> implements FmGo
 			}
 
 			if (fmGoods.getKeyList() != null && fmGoods.getKeyList().length > 0) {
-				String[] keyList = fmGoods.getKeyList();
-				whereHql += " and (";
-				for(int i=0; i<keyList.length; i++) {
-					if(i == 0) {
-						whereHql += "t.name like '%" + keyList[i] + "%'";
-					} else {
-						whereHql += " or t.name like '%" + keyList[i] + "%'";
-					}
-				}
-				whereHql += ")";
+				whereHql += " and t.name in(:keyList)";
+				params.put("keyList", fmGoods.getKeyList());
 			}
 				
 			if (!F.empty(fmGoods.getUnit())) {
