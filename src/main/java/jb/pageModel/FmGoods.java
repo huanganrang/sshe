@@ -11,7 +11,9 @@ public class FmGoods implements java.io.Serializable {
 
 	private java.lang.String id;	
 	private Date addtime;			
-	private Date updatetime;			
+	private Date updatetime;
+	private Date addtimeBegin;
+	private Date addtimeEnd;
 	private java.lang.Boolean isdeleted;	
 	private java.lang.String name;	
 	private java.lang.Float price;	
@@ -405,4 +407,20 @@ public class FmGoods implements java.io.Serializable {
 		this.collect = collect;
 	}
 
+
+	public Date getAddtimeBegin() {
+		return addtimeBegin;
+	}
+
+	public void setAddtimeBegin(Date addtimeBegin) {
+		this.addtimeBegin = addtimeBegin;
+	}
+
+	public Date getAddtimeEnd() {
+		return addtimeEnd;
+	}
+
+	public void setAddtimeEnd(Date addtimeEnd) {
+		this.addtimeEnd = addtimeEnd;
+	}
 }

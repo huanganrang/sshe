@@ -157,7 +157,16 @@ public class FmGoodsServiceImpl extends BaseServiceImpl<FmGoods> implements FmGo
 			if (!F.empty(fmGoods.getGrade())) {
 				whereHql += " and t.grade = :grade";
 				params.put("grade", fmGoods.getGrade());
-			}		
+			}
+
+			if (fmGoods.getAddtimeBegin() != null) {
+				whereHql += " and t.addtime >= :modifydatetimeStart";
+				params.put("modifydatetimeStart", fmGoods.getAddtimeBegin());
+			}
+			if (fmGoods.getAddtimeEnd() != null) {
+				whereHql += " and t.addtime <= :modifydatetimeEnd";
+				params.put("modifydatetimeEnd", fmGoods.getAddtimeEnd());
+			}
 		}	
 		return whereHql;
 	}
