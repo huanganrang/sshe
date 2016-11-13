@@ -1,9 +1,12 @@
 package jb.controller;
 
+import jb.absx.F;
 import jb.listener.Application;
 import jb.pageModel.FmFeedback;
+import jb.pageModel.FmUser;
 import jb.pageModel.Json;
 import jb.service.FmFeedbackServiceI;
+import jb.service.FmUserServiceI;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,6 +24,9 @@ public class ApiFmFeedbackController extends BaseController {
     @Autowired
     private FmFeedbackServiceI fmFeedbackService;
 
+    @Autowired
+    private FmUserServiceI fmUserService;
+
     /**
      * 意见反馈
      *
@@ -32,6 +38,13 @@ public class ApiFmFeedbackController extends BaseController {
     public Json add(FmFeedback fmFeedback) {
         Json j = new Json();
         try {
+            if (!F.empty(fmFeedback.getUserId())) {
+                FmUser fmUser = fmUserService.get(fmFeedback.getUserId());
+                if (fmUser != null) {
+                    fmFeedback.setUserAccount(fmUser.getAccount());
+                    fmFeedback.setMobile(fmUser.getPhone());
+                }
+            }
             fmFeedbackService.add(fmFeedback);
             j.setSuccess(true);
             j.setMsg(SUCCESS_MESSAGE);
