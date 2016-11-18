@@ -55,11 +55,11 @@
 				}, {
 				field : 'regionNameZh',
 				title : '<%=TdiveRegion.ALIAS_REGION_NAME_ZH%>',
-				width : 50		
+				width : 80
 				}, {
 				field : 'regionNameEn',
 				title : '<%=TdiveRegion.ALIAS_REGION_NAME_EN%>',
-				width : 50		
+				width : 80
 				}, {
 				field : 'regionParentId',
 				title : '<%=TdiveRegion.ALIAS_REGION_PARENT_ID%>',
@@ -71,7 +71,7 @@
 			}, {
 				field : 'action',
 				title : '操作',
-				width : 100,
+				width : 40,
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {

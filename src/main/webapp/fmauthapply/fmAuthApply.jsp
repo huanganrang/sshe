@@ -91,7 +91,7 @@
 			}, {
 				field : 'action',
 				title : '操作',
-				width : 50,
+				width : 20,
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {

@@ -118,15 +118,15 @@
 					}
 					str += '&nbsp;';
 					if ($.canView) {
-						str += $.formatString('<input type="button" onclick="viewFun(\'{0}\');" href="javascript:void(0)" value="查看"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/link.png');
+						str += $.formatString('<input type="button" class="button gray" onclick="viewFun(\'{0}\');" href="javascript:void(0)" value="查看"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/link.png');
 					}
 					str += '&nbsp;';
 					if ($.canViewAddToAd) {
-						str += $.formatString('<input type="button" onclick="addToAd(\'{0}\');" href="javascript:void(0)" value="活动广告" />', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/link.png');
+						str += $.formatString('<input type="button" class="button gray" onclick="addToAd(\'{0}\');" href="javascript:void(0)" value="活动广告" />', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/link.png');
 					}
 					str += '&nbsp;';
 					if ($.canViewAddToSanAd) {
-						str += $.formatString('<input type="button" onclick="addToAd2(\'{0}\');" href="javascript:void(0)" value="三品一标" />', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/link.png');
+						str += $.formatString('<input type="button" class="button gray" onclick="addToAd2(\'{0}\');" href="javascript:void(0)" value="三品一标" />', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/link.png');
 					}
 					return str;
 				}

@@ -87,7 +87,7 @@
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {
-						str += $.formatString('<input type="button" onclick="editFun(\'{0}\');" src="{1}" href="javascript:void(0)" title="回复" value="回复" />', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+						str += $.formatString('<input type="button" class="button gray" onclick="editFun(\'{0}\');" src="{1}" href="javascript:void(0)" title="回复" value="回复" />', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
 					}
 					str += '&nbsp;';
 					if ($.canDelete) {

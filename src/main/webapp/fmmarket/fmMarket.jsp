@@ -59,15 +59,15 @@
 				}, {
 				field : 'name',
 				title : '<%=TfmMarket.ALIAS_NAME%>',
-				width : 50		
+				width : 100
 				}, {
 				field : 'area',
 				title : '<%=TfmMarket.ALIAS_AREA%>',
-				width : 50		
+				width : 60
 			}, {
 				field : 'action',
 				title : '操作',
-				width : 100,
+				width : 40,
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {

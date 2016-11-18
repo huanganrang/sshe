@@ -105,7 +105,7 @@
 					row.status = row.status||"AS01";
 					var str = '';
 					if ($.canEdit) {
-						str += $.formatString('<input type="button" onclick="updateStatus(\'{0}\',\'{1}\');" href="javascript:void(0)" value="'+(row.status == "AS01"?"冻结":"解冻")+'"/>', row.id, row.status);
+						str += $.formatString('<input type="button" class="button gray" onclick="updateStatus(\'{0}\',\'{1}\');" href="javascript:void(0)" value="'+(row.status == "AS01"?"冻结":"解冻")+'"/>', row.id, row.status);
 					}
 					str += '&nbsp;';
 					if ($.canDelete) {

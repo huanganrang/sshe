@@ -63,7 +63,7 @@
 				}, {
 				field : 'url',
 				title : '<%=TfmAd.ALIAS_URL%>',
-				width : 100,
+				width : 80,
 				formatter:function(value){
 					var str = "";
 					if(value){
@@ -74,7 +74,7 @@
 				}, {
 				field : 'local',
 				title : '<%=TfmAd.ALIAS_LOCAL%>',
-				width : 50		
+				width : 20
 				}, {
 				field : 'statusName',
 				title : '<%=TfmAd.ALIAS_STATUS%>',
@@ -86,7 +86,7 @@
 				}, {
 				field : 'goodsId',
 				title : '<%=TfmAd.ALIAS_GOODS_ID%>',
-				width : 50		
+				width : 100
 				}, {
 				field : 'loginName',
 				title : '<%=TfmAd.ALIAS_LOGIN_ID%>',
@@ -94,7 +94,7 @@
 			}, {
 				field : 'action',
 				title : '操作',
-				width : 50,
+				width : 20,
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {
