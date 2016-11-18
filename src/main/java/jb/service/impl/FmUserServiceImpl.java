@@ -107,6 +107,10 @@ public class FmUserServiceImpl extends BaseServiceImpl<FmUser> implements FmUser
 		if(F.empty(fmUser.getStatus())){
 			fmUser.setStatus("AS01");
 		}
+		if(F.empty(fmUser.getAuthStatus())){
+			fmUser.setStatus("AU01");
+		}
+
 		fmUserDao.save(t);
 	}
 

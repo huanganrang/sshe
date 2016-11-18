@@ -16,9 +16,9 @@
 					<td>
 						${fmPurchase.nameName}
 					</td>
-					<th>状态</th>
+					<th><%=TfmPurchase.ALIAS_ONLINE_STATUS%></th>
 					<td>
-						${fmPurchase.statusName}
+						${fmPurchase.onlineStatusName}
 					</td>
 				</tr>
 				<tr>
@@ -32,7 +32,7 @@
 					<td>
 						${fmPurchase.startPrice}-${fmPurchase.endPrice}/${fmPurchase.unitName}
 					</td>
-					<th>采购数量</th>
+					<th>库存量</th>
 					<td>
 						${fmPurchase.minNum}-${fmPurchase.maxNum}/${fmPurchase.unitName}
 					</td>							
@@ -93,13 +93,10 @@
 				</tr>
 				<tr>
 					<th>发布时间</th>
-					<td>
+					<td colspan="3">
 						${fmPurchase.addtime}
 					</td>
-					<th><%=TfmPurchase.ALIAS_ONLINE_STATUS%></th>
-					<td>
-						${fmPurchase.onlineStatusName}
-					</td>
+
 				</tr>
 		</table>
 	</div>

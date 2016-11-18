@@ -59,7 +59,7 @@
 				</tr>	
 				<tr>	
 					<th><%=TdiveRegion.ALIAS_REGION_ID%></th>	
-					<td>
+					<td colspan="3">
 											<input class="span2" name="regionId" type="text"/>
 					</td>							
 				</tr>	

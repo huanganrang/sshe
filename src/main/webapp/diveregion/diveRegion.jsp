@@ -35,7 +35,7 @@
 			idField : 'id',
 			pageSize : 10,
 			pageList : [ 10, 20, 30, 40, 50 ],
-			sortName : 'id',
+			sortName : 'regionNameZh',
 			sortOrder : 'desc',
 			checkOnSelect : false,
 			selectOnCheck : false,
@@ -75,15 +75,15 @@
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {
-						str += $.formatString('<img onclick="editFun(\'{0}\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_edit.png');
+						str += $.formatString('<img onclick="editFun(\'{0}\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
 					}
 					str += '&nbsp;';
 					if ($.canDelete) {
-						str += $.formatString('<img onclick="deleteFun(\'{0}\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_delete.png');
+						str += $.formatString('<img onclick="deleteFun(\'{0}\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/cancel.png');
 					}
 					str += '&nbsp;';
 					if ($.canView) {
-						str += $.formatString('<img onclick="viewFun(\'{0}\');" src="{1}" title="查看"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_link.png');
+						str += $.formatString('<img onclick="viewFun(\'{0}\');" src="{1}" title="查看"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/link.png');
 					}
 					return str;
 				}
@@ -130,7 +130,7 @@
 		parent.$.modalDialog({
 			title : '编辑数据',
 			width : 780,
-			height : 500,
+			height : 220,
 			href : '${pageContext.request.contextPath}/diveRegionController/editPage?id=' + id,
 			buttons : [ {
 				text : '编辑',
@@ -151,7 +151,7 @@
 		parent.$.modalDialog({
 			title : '查看数据',
 			width : 780,
-			height : 500,
+			height : 200,
 			href : '${pageContext.request.contextPath}/diveRegionController/view?id=' + id
 		});
 	}
@@ -160,7 +160,7 @@
 		parent.$.modalDialog({
 			title : '添加数据',
 			width : 780,
-			height : 500,
+			height : 220,
 			href : '${pageContext.request.contextPath}/diveRegionController/addPage',
 			buttons : [ {
 				text : '添加',
@@ -200,7 +200,7 @@
 </head>
 <body>
 	<div class="easyui-layout" data-options="fit : true,border : false">
-		<div data-options="region:'north',title:'查询条件',border:false" style="height: 160px; overflow: hidden;">
+		<div data-options="region:'north',title:'查询条件',border:false" style="height: 65px; overflow: hidden;">
 			<form id="searchForm">
 				<table class="table table-hover table-condensed" style="display: none;">
 						<tr>	
@@ -220,8 +220,7 @@
 							<td>
 											<input type="text" name="regionParentId" maxlength="10" class="span2"/>
 							</td>
-						</tr>	
-						<tr>	
+
 							<th><%=TdiveRegion.ALIAS_REGION_ID%></th>	
 							<td>
 											<input type="text" name="regionId" maxlength="10" class="span2"/>
@@ -236,7 +235,7 @@
 	</div>
 	<div id="toolbar" style="display: none;">
 		<c:if test="${fn:contains(sessionInfo.resourceList, '/diveRegionController/addPage')}">
-			<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'bug_add'">添加</a>
+			<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'common_add'">添加</a>
 		</c:if>
 		<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">查询</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_delete',plain:true" onclick="cleanFun();">清空条件</a>
 		<c:if test="${fn:contains(sessionInfo.resourceList, '/diveRegionController/download')}">

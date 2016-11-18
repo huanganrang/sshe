@@ -107,7 +107,7 @@
 				</tr>
 				<tr>
 					<th><%=TfmMessage.ALIAS_URL%></th>
-					<td>
+					<td colspan="3">
 						<input type="file" id="iconFile" name="equipIconFile">
 					</td>
 				</tr>

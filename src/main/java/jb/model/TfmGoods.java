@@ -52,14 +52,14 @@ public class TfmGoods implements java.io.Serializable,IEntity{
 	public static final String ALIAS_IS_PACK = "是否套袋(1/0)";
 	public static final String ALIAS_PACK = "包装";
 	public static final String ALIAS_FORMAT_DESC = "规格描述";
-	public static final String ALIAS_ONLINE_STATUS = "上架状态（上架、下架）";
+	public static final String ALIAS_ONLINE_STATUS = "上架状态";
 	public static final String ALIAS_USER_ID = "用户ID";
 	public static final String ALIAS_PARENT_ID = "parentId";
 	public static final String ALIAS_ACCESS_NUM = "访问数";
 	public static final String ALIAS_SOURCE = "来源";
 	public static final String ALIAS_OUTER_ID = "外部ID";
-	public static final String ALIAS_OUTER_NUMBER = "外部号（批次号）";
-	public static final String ALIAS_GRADE = "商品级别（有机、无机）";
+	public static final String ALIAS_OUTER_NUMBER = "外部号";
+	public static final String ALIAS_GRADE = "商品级别";
 	public static final String ALIAS_EXTFIELDS = "规格的json格式";
 
 	//date formats

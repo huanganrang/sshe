@@ -2386,6 +2386,14 @@ img {
 	background: url('images/extjs_icons/bug/bug_add.png') no-repeat center
 		center;
 }
+.common_add {
+	background: url('images/extjs_icons/arrow/add.png') no-repeat center
+	center;
+}
+.common_edit {
+	background: url('images/extjs_icons/pencil.png') no-repeat center
+	center;
+}
 
 .bug_delete {
 	background: url('images/extjs_icons/bug/bug_delete.png') no-repeat
@@ -2393,7 +2401,7 @@ img {
 }
 
 .bug_edit {
-	background: url('images/extjs_icons/bug/bug_edit.png') no-repeat center
+	background: url('images/extjs_icons/pencil.png') no-repeat center
 		center;
 }
 
@@ -2408,7 +2416,7 @@ img {
 }
 
 .bug_link {
-	background: url('images/extjs_icons/bug/bug_link.png') no-repeat center
+	background: url('images/extjs_icons/link.png') no-repeat center
 		center;
 }
 

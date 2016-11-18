@@ -59,11 +59,11 @@
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEditOption) {
-						str += $.formatString('<img onclick="editFunOption(\'{0}\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_edit.png');
+						str += $.formatString('<img onclick="editFunOption(\'{0}\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
 					}
 					str += '&nbsp;';
 					if ($.canDeleteOption) {
-						str += $.formatString('<img onclick="deleteFunOption(\'{0}\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_delete.png');
+						str += $.formatString('<img onclick="deleteFunOption(\'{0}\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/cancel.png');
 					}
 					return str;
 				}
@@ -137,6 +137,7 @@
 	}*/
 
 	function addFunOption() {
+		if(!dataGridOption.propertiesId)return;
 		parent.$.modalDialog({
 			title : '添加数据',
 			width : 780,
@@ -181,6 +182,7 @@
 		$('#searchFormOption input').val('');
 		/*var opts = dataGridOption.datagrid("options");
 		opts.url = null;*/
+		dataGridOption.propertiesId = null;
 		dataGridOption.datagrid('loadData',{"rows":[],"total":0});
 	}
 </script>
@@ -195,6 +197,6 @@
 </div>
 <div id="toolbarOption" style="display: none;">
 	<c:if test="${fn:contains(sessionInfo.resourceList, '/fmOptionsController/addPage')}">
-		<a onclick="addFunOption();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'bug_add'">添加</a>
+		<a onclick="addFunOption();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'common_add'">添加</a>
 	</c:if>
 </div>	

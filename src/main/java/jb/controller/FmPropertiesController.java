@@ -84,9 +84,11 @@ public class FmPropertiesController extends BaseController {
 	 * @return
 	 */
 	@RequestMapping("/addPage")
-	public String addPage(HttpServletRequest request) {
+	public String addPage(HttpServletRequest request,String goodName) {
 		FmProperties fmProperties = new FmProperties();
 		fmProperties.setId(UUID.randomUUID().toString());
+		fmProperties.setGoodName(goodName);
+		request.setAttribute("fmProperties", fmProperties);
 		return "/fmproperties/fmPropertiesAdd";
 	}
 

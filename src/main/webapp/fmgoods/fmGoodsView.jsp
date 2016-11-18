@@ -148,9 +148,13 @@
 				</tr>		
 				<tr>	
 					<th><%=TfmGoods.ALIAS_GRADE%></th>	
-					<td colspan="3">
+					<td>
 						${fmGoods.gradeName}
-					</td>							
+					</td>
+					<th>商品ID</th>
+					<td colspan="3">
+						${fmGoods.id}
+					</td>
 				</tr>
 
 		</table>

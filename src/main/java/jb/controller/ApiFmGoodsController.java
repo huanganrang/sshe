@@ -170,6 +170,7 @@ public class ApiFmGoodsController extends BaseController {
         Json j = new Json();
         try {
             ph.setHiddenTotal(true);
+            final Map<String, DataGrid> resultMap = new HashMap<String, DataGrid>();
             if(!F.empty(goodsIdStr)){
                 fmGoods.setGoodsIdList(goodsIdStr.split("[;,]"));
             }
@@ -178,8 +179,17 @@ public class ApiFmGoodsController extends BaseController {
                 baseData.setName(key);
                 String[] keyList = basedataService.getGoodsName(key);
                 fmGoods.setKeyList(keyList);
+                if (keyList == null || keyList.length == 0) {
+                    DataGrid dg = new DataGrid();
+                    resultMap.put("spotGoods", dg);
+                    resultMap.put("onTheWayGoods", dg);
+                    resultMap.put("presellGoods", dg);
+                    j.setSuccess(true);
+                    j.setMsg(SUCCESS_MESSAGE);
+                    j.setObj(resultMap);
+                    return j;
+                }
             }
-            final Map<String, DataGrid> resultMap = new HashMap<String, DataGrid>();
             if(F.empty(fmGoods.getStatus())){
                 final CompletionService completionService = CompletionFactory.initCompletion();
                 Object[] request = new Object[]{getRequestFmGoods(fmGoods,"GS20"),ph};

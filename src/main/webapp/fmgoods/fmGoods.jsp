@@ -106,27 +106,27 @@
 				}, {
 				field : 'action',
 				title : '操作',
-				width : 75,
+				width : 100,
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {
-						str += $.formatString('<img onclick="editFun(\'{0}\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_edit.png');
+						str += $.formatString('<img onclick="editFun(\'{0}\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
 					}
 					str += '&nbsp;';
 					if ($.canDelete) {
-						str += $.formatString('<img onclick="deleteFun(\'{0}\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_delete.png');
+						str += $.formatString('<img onclick="deleteFun(\'{0}\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/cancel.png');
 					}
 					str += '&nbsp;';
 					if ($.canView) {
-						str += $.formatString('<a onclick="viewFun(\'{0}\');" href="javascript:void(0)" >查看</a>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_link.png');
+						str += $.formatString('<input type="button" onclick="viewFun(\'{0}\');" href="javascript:void(0)" value="查看"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/link.png');
 					}
 					str += '&nbsp;';
 					if ($.canViewAddToAd) {
-						str += $.formatString('<a onclick="addToAd(\'{0}\');" href="javascript:void(0)" >活动广告</a>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_link.png');
+						str += $.formatString('<input type="button" onclick="addToAd(\'{0}\');" href="javascript:void(0)" value="活动广告" />', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/link.png');
 					}
 					str += '&nbsp;';
 					if ($.canViewAddToSanAd) {
-						str += $.formatString('<a onclick="addToAd2(\'{0}\');" href="javascript:void(0)" >三品一标</a>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/bug/bug_link.png');
+						str += $.formatString('<input type="button" onclick="addToAd2(\'{0}\');" href="javascript:void(0)" value="三品一标" />', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/link.png');
 					}
 					return str;
 				}
@@ -332,7 +332,7 @@
 	</div>
 	<div id="toolbar" style="display: none;">
 		<c:if test="${fn:contains(sessionInfo.resourceList, '/fmGoodsController/addPage')}">
-			<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'bug_add'">添加</a>
+			<a onclick="addFun();" href="javascript:void(0);" class="easyui-linkbutton" data-options="plain:true,iconCls:'common_add'">添加</a>
 		</c:if>
 		<a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_add',plain:true" onclick="searchFun();">查询</a><a href="javascript:void(0);" class="easyui-linkbutton" data-options="iconCls:'brick_delete',plain:true" onclick="cleanFun();">清空条件</a>
 		<c:if test="${fn:contains(sessionInfo.resourceList, '/fmGoodsController/download')}">

@@ -31,7 +31,7 @@
 				</tr>		
 				<tr>	
 					<th><%=TdiveRegion.ALIAS_REGION_ID%></th>	
-					<td>
+					<td colspan="3">
 						${diveRegion.regionId}							
 					</td>							
 				</tr>		

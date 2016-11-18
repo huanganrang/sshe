@@ -48,7 +48,7 @@
                     <th><%=TfmProperties.ALIAS_GOOD_NAME%>
                     </th>
                     <td>
-                        <jb:select dataType="GN" name="goodName" value="${fmProperties.goodName}"></jb:select>
+                        ${fmProperties.goodNameName}
                     </td>
                 </tr>
 

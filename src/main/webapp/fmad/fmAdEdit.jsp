@@ -92,7 +92,7 @@
 				<tr>
 					<th><%=TfmAd.ALIAS_CHANNEL%></th>	
 					<td>
-						<jb:select dataType="GS" name="channel" value="${fmAd.type}"></jb:select>
+						<jb:select dataType="GS" name="channel" value="${fmAd.channel}"></jb:select>
 
 					</td>
 				</tr>
