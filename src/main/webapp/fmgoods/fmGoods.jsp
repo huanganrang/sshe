@@ -82,7 +82,7 @@
 				}, {
 				field : 'extFields',
 				title : '规格',
-				width : 100
+				width : 80
 				},{
 				field : 'minBatch',
 				title : '<%=TfmGoods.ALIAS_MIN_BATCH%>',
@@ -106,7 +106,7 @@
 				}, {
 				field : 'action',
 				title : '操作',
-				width : 100,
+				width : 120,
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {
