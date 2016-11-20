@@ -110,7 +110,7 @@
 		parent.$.modalDialog({
 			title : '编辑数据',
 			width : 780,
-			height : 500,
+			height : 120,
 			href : '${pageContext.request.contextPath}/fmOptionsController/editPage?id=' + id,
 			buttons : [ {
 				text : '编辑',
@@ -141,7 +141,7 @@
 		parent.$.modalDialog({
 			title : '添加数据',
 			width : 780,
-			height : 500,
+			height : 120,
 			href : '${pageContext.request.contextPath}/fmOptionsController/addPage',
 			buttons : [ {
 				text : '添加',

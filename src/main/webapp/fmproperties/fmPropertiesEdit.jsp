@@ -90,7 +90,7 @@
                     <th><%=TfmProperties.ALIAS_DESCRIPTION%>
                     </th>
                     <td colspan="3">
-                        <input class="span2" name="description" type="text" value="${fmProperties.description}"/>
+                        <textarea name="description" style="width: 90%" rows="3">${fmProperties.description}</textarea>
                     </td>
                 </tr>
             </table>
