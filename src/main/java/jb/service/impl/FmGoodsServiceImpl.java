@@ -179,6 +179,8 @@ public class FmGoodsServiceImpl extends BaseServiceImpl<FmGoods> implements FmGo
 		BeanUtils.copyProperties(fmGoods, t);
 		t.setId(jb.absx.UUID.uuid());
 		t.setAddtime(new Date());
+		if(fmGoods.getAccessNum() == null)
+		t.setAccessNum(0);
 		t.setIsdeleted(false);
 		fmGoodsDao.save(t);
 	}
