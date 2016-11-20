@@ -120,16 +120,16 @@
 					<th><%=TfmGoods.ALIAS_USER_ID%></th>	
 					<td>
 						${fmGoods.userId}							
-					</td>							
-					<th><%=TfmGoods.ALIAS_PARENT_ID%></th>	
+					</td>
+					<th><%=TfmGoods.ALIAS_GRADE%></th>
 					<td>
-						${fmGoods.parentId}							
-					</td>							
+						${fmGoods.gradeName}
+					</td>
 				</tr>		
 				<tr>	
 					<th><%=TfmGoods.ALIAS_ACCESS_NUM%></th>	
 					<td>
-						${fmGoods.accessNum}							
+						${fmGoods.accessNum}
 					</td>							
 					<th><%=TfmGoods.ALIAS_SOURCE%></th>	
 					<td>
@@ -146,11 +146,7 @@
 						${fmGoods.outerNumber}							
 					</td>							
 				</tr>		
-				<tr>	
-					<th><%=TfmGoods.ALIAS_GRADE%></th>	
-					<td>
-						${fmGoods.gradeName}
-					</td>
+				<tr>
 					<th>商品ID</th>
 					<td colspan="3">
 						${fmGoods.id}
