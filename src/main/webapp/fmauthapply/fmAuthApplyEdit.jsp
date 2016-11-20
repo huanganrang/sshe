@@ -107,7 +107,7 @@
 				<tr>	
 					<th><%=TfmAuthApply.ALIAS_AUTH_REMARK%></th>	
 					<td colspan="3">
-						<textarea class="span2" name="authRemark"  value="${fmAuthApply.authRemark}"/>
+						<textarea class="span2" name="authRemark" style="width: 90%">${fmAuthApply.authRemark}</textarea>
 					</td>							
 
 				</tr>
