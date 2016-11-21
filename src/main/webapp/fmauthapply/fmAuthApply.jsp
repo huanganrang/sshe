@@ -39,7 +39,7 @@
 			sortOrder : 'desc',
 			checkOnSelect : false,
 			selectOnCheck : false,
-			nowrap : false,
+			nowrap : true,
 			striped : true,
 			rownumbers : true,
 			singleSelect : true,
@@ -91,19 +91,19 @@
 			}, {
 				field : 'action',
 				title : '操作',
-				width : 20,
+				width : 50,
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit && row.status == 'AU01') {
-						str += $.formatString('<img onclick="editFun(\'{0}\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+						str += $.formatString('<input type="button" class="button gray" onclick="editFun(\'{0}\');" value="审核"/>', row.id);
 					}
 					str += '&nbsp;';
 					if ($.canDelete) {
-						str += $.formatString('<img onclick="deleteFun(\'{0}\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/cancel.png');
+						str += $.formatString('<input type="button" class="button gray" onclick="deleteFun(\'{0}\');" value="删除"/>', row.id);
 					}
 					str += '&nbsp;';
 					if ($.canView) {
-						str += $.formatString('<img onclick="viewFun(\'{0}\');" src="{1}" title="查看"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/link.png');
+						str += $.formatString('<input type="button" class="button gray" onclick="viewFun(\'{0}\');" value="查看"/>', row.id);
 					}
 					return str;
 				}

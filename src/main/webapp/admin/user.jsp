@@ -89,26 +89,30 @@
 			}, {
 				field : 'action',
 				title : '操作',
-				width : 100,
+				width : 120,
 				formatter : function(value, row, index) {
 					var str = '';
 					if(row.id == '0' && '${sessionInfo.id}' != '0') {
 						str = '超级管理员';
 					} else {
 						if ($.canEdit) {
-							str += $.formatString('<img onclick="editFun(\'{0}\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
+							str += $.formatString('<input type="button" class="button gray" onclick="editFun(\'{0}\');" value="修改"/>', row.id);
 						}
 						str += '&nbsp;';
 						if ($.canGrant) {
-							str += $.formatString('<img onclick="grantFun(\'{0}\');" src="{1}" title="授权"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/key.png');
+							//str += $.formatString('<img onclick="grantFun(\'{0}\');" src="{1}" title="授权"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/key.png');
+							str += $.formatString('<input type="button" class="button gray" onclick="grantFun(\'{0}\');" value="授权"/>', row.id);
+
 						}
 						str += '&nbsp;';
 						if (row.id != '0' && $.canDelete) {
-							str += $.formatString('<img onclick="deleteFun(\'{0}\');" src="{1}" title="删除"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/cancel.png');
+							str += $.formatString('<input type="button" class="button gray" onclick="deleteFun(\'{0}\');" value="删除"/>', row.id);
 						}
 						str += '&nbsp;';
 						if ($.canEditPwd) {
-							str += $.formatString('<img onclick="editPwdFun(\'{0}\');" src="{1}" title="修改密码"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/lock/lock_edit.png');
+							//str += $.formatString('<img onclick="editPwdFun(\'{0}\');" src="{1}" title="修改密码"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/lock/lock_edit.png');
+							str += $.formatString('<input type="button" class="button gray" onclick="editPwdFun(\'{0}\');" value="修改密码"/>', row.id);
+
 						}
 					}
 					return str;
