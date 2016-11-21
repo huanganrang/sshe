@@ -48,7 +48,7 @@
 			sortOrder : 'asc',
 			checkOnSelect : false,
 			selectOnCheck : false,
-			nowrap : false,
+			nowrap : true,
 			frozenColumns : [ [ {
 				field : 'id',
 				title : '编号',
