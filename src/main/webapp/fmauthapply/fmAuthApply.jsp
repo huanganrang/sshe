@@ -94,7 +94,7 @@
 				width : 20,
 				formatter : function(value, row, index) {
 					var str = '';
-					if ($.canEdit) {
+					if ($.canEdit && row.status == 'AU01') {
 						str += $.formatString('<img onclick="editFun(\'{0}\');" src="{1}" title="编辑"/>', row.id, '${pageContext.request.contextPath}/style/images/extjs_icons/pencil.png');
 					}
 					str += '&nbsp;';

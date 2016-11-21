@@ -30,6 +30,10 @@
 				}
 			}
 		});
+		$('.img-preview').each(function(){
+			var $this = $(this);
+			$this.css('height',$this.parent().attr('height'));
+		});
 	});
 </script>
 <div class="easyui-layout" data-options="fit:true,border:false">
@@ -98,7 +102,7 @@
 				</tr>
 				<tr>
 
-					<td colspan="4">
+					<td colspan="4" height="155">
 						<c:forEach items="${fmAuthApply.imageList}" var="image">
 							<img class="img-preview" src="${image}" width="200" height="150"/>
 						</c:forEach>

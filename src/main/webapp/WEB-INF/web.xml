@@ -39,6 +39,19 @@
     <filter-name>druidWebStatFilter</filter-name>
     <url-pattern>/*</url-pattern>
   </filter-mapping>
+
+    <filter>
+        <filter-name>corsFilter</filter-name>
+        <filter-class>filter.CorsFilter</filter-class>
+        <init-param>
+            <param-name>targetFilterLifecycle</param-name>
+            <param-value>true</param-value>
+        </init-param>
+    </filter>
+    <filter-mapping>
+        <filter-name>corsFilter</filter-name>
+        <url-pattern>/api/*</url-pattern><!-- 配置需要鉴权的url-pattern -->
+    </filter-mapping>
   <listener>
     <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
   </listener> 

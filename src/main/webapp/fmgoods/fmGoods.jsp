@@ -45,7 +45,7 @@
 			idField : 'id',
 			pageSize : 10,
 			pageList : [ 10, 20, 30, 40, 50 ],
-			sortName : 'id',
+			sortName : 'updatetime',
 			sortOrder : 'desc',
 			checkOnSelect : false,
 			selectOnCheck : false,
@@ -55,7 +55,7 @@
 			singleSelect : true,
 			columns : [ [ {
 				field : 'id',
-				title : 'ID',
+				title : '商品ID',
 				width : 125,
 				hidden : false
 				}, {

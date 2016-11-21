@@ -340,15 +340,14 @@
 <body>
 	<div class="easyui-layout" data-options="fit : true,border : false">
 		<div data-options="region:'north',title:'查询条件',border:false"
-			style="height: 160px; overflow: hidden;">
+			style="height: 65px; overflow: hidden;">
 			<form id="searchForm">
 				<table class="table table-hover table-condensed"
 					style="display: none;">
 					<tr>
 						<th>登录名</th>
 						<td><input name="name" placeholder="可以模糊查询登录名" class="span2" /></td>
-					</tr>
-					<tr>
+
 						<th>创建时间</th>
 						<td><input class="span2" name="createdatetimeStart"
 							placeholder="点击选择时间"
@@ -357,8 +356,7 @@
 							name="createdatetimeEnd" placeholder="点击选择时间"
 							onclick="WdatePicker({readOnly:true,dateFmt:'yyyy-MM-dd HH:mm:ss'})"
 							readonly="readonly" /></td>
-					</tr>
-					<tr>
+
 						<th>最后修改时间</th>
 						<td><input class="span2" name="modifydatetimeStart"
 							placeholder="点击选择时间"

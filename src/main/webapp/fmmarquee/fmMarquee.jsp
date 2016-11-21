@@ -63,7 +63,7 @@
 				}, {
 				field : 'url',
 				title : '<%=TfmMarquee.ALIAS_URL%>',
-				width : 120,
+				width : 80,
 				formatter:function(value){
 					var str = "";
 					if(value){
@@ -82,11 +82,11 @@
 				}, {
 				field : 'goodsId',
 				title : '<%=TfmMarquee.ALIAS_GOODS_ID%>',
-				width : 50		
+				width : 120
 			}, {
 				field : 'action',
 				title : '操作',
-				width : 50,
+				width : 20,
 				formatter : function(value, row, index) {
 					var str = '';
 					if ($.canEdit) {
