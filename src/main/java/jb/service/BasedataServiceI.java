@@ -81,5 +81,5 @@ public interface BasedataServiceI {
 	 */
 	String[] getGoodsName(String key);
 
-	boolean hasChild(String id);
+	Map<String, Object> queryHaveChildsByPid(String pid);
 }

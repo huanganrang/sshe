@@ -10,6 +10,7 @@ import jb.pageModel.DataGrid;
 import jb.pageModel.PageHelper;
 import jb.service.BasedataServiceI;
 import jb.util.MyBeanUtils;
+import org.apache.commons.collections.CollectionUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -163,11 +164,16 @@ public class BasedataServiceImpl implements BasedataServiceI {
 	}
 
 	@Override
-	public boolean hasChild(String id) {
-		Map<String, Object> params = new HashMap<String, Object>();
-		params.put("pid", id);
-		Long count= basedataDao.count("select count(*) from Tbasedata t where t.pid = :pid", params);
-		return (count == null || count == 0) ? false : true;
+	public Map<String, Object> queryHaveChildsByPid(String pid) {
+		Map<String, Object> result = new HashMap<String, Object>();
+		List<Map> l = basedataDao.findBySql2Map("select t.id from tbasedata t where t.pid = '"+pid+"' and exists (select 1 from tbasedata where pid = t.id )");
+		if(CollectionUtils.isNotEmpty(l)) {
+			for(Map m : l) {
+				String id = (String) m.get("id");
+				result.put(id, id);
+			}
+		}
+		return result;
 	}
 
 	@SuppressWarnings("rawtypes")

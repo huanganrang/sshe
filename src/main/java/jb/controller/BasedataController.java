@@ -275,31 +275,18 @@ public class BasedataController extends BaseController {
 		List<Tree> lt = new ArrayList<Tree>();
 		List<BaseData> baseDataList = basedataService.getBaseDatas(baseData);
 		if(!CollectionUtils.isEmpty(baseDataList)){
-			final CompletionService completionService = CompletionFactory.initCompletion();
-			int index = 0;
-			for (final BaseData data : baseDataList) {
-				completionService.submit(new Task<List<Tree>, Tree>(lt){
-					@Override
-					public Tree call() throws Exception {
-						Tree tree = new Tree();
-						tree.setId(data.getId());
-						tree.setPid(data.getPid());
-						tree.setText(data.getName());
-						tree.setIconCls(data.getIcon());
-						if(basedataService.hasChild(tree.getId()))
-							tree.setState("closed");
+			Map<String, Object> idsMap = basedataService.queryHaveChildsByPid(baseData.getPid());
+			for (BaseData data : baseDataList) {
+				Tree tree = new Tree();
+				tree.setId(data.getId());
+				tree.setPid(data.getPid());
+				tree.setText(data.getName());
+				tree.setIconCls(data.getIcon());
+				if(idsMap.containsKey(data.getId()))
+					tree.setState("closed");
 
-						return tree;
-					}
-					protected void set(List<Tree> d, Tree v) {
-						d.add(v);
-					}
-				});
-				if(index % 20 == 0)
-					completionService.sync();
-				index ++;
+				lt.add(tree);
 			}
-			completionService.sync();
 		}
 		return lt;
 	}
