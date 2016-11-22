@@ -80,5 +80,6 @@ public interface BasedataServiceI {
 	 * 商品搜索时，获取商品的名称
 	 */
 	String[] getGoodsName(String key);
-	
+
+	boolean hasChild(String id);
 }

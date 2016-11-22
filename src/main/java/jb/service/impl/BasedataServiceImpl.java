@@ -162,6 +162,14 @@ public class BasedataServiceImpl implements BasedataServiceI {
 		return null;
 	}
 
+	@Override
+	public boolean hasChild(String id) {
+		Map<String, Object> params = new HashMap<String, Object>();
+		params.put("pid", id);
+		Long count= basedataDao.count("select count(*) from Tbasedata t where t.pid = :pid", params);
+		return (count == null || count == 0) ? false : true;
+	}
+
 	@SuppressWarnings("rawtypes")
 	@Override
 	public List<BaseData> getBaseDatas(BaseData baseData) {

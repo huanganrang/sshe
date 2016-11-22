@@ -4,16 +4,14 @@ import java.util.*;
 
 import javax.servlet.http.HttpServletRequest;
 
+import farming.concurrent.CompletionService;
+import farming.concurrent.Task;
 import jb.absx.F;
-import jb.pageModel.BaseData;
-import jb.pageModel.BaseType;
-import jb.pageModel.DataGrid;
-import jb.pageModel.Json;
-import jb.pageModel.PageHelper;
-import jb.pageModel.Tree;
+import jb.pageModel.*;
 import jb.service.BasedataServiceI;
 import jb.service.BasetypeServiceI;
 
+import jb.service.impl.CompletionFactory;
 import org.apache.commons.collections.CollectionUtils;
 import org.apache.commons.lang.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -264,23 +262,40 @@ public class BasedataController extends BaseController {
 
 	@RequestMapping("/goodsTree")
 	@ResponseBody
-	public List<Tree> tree(String q) {
+	public List<Tree> tree(String q, String id) {
 		BaseData baseData = new BaseData();
 		if(!F.empty(q)){
 			baseData.setName(q);
 		}
+		if(F.empty(id))
+			baseData.setPid("GN");
+		else
+			baseData.setPid(id);
 		baseData.setBasetypeCode("GN");
 		List<Tree> lt = new ArrayList<Tree>();
 		List<BaseData> baseDataList = basedataService.getBaseDatas(baseData);
 		if(!CollectionUtils.isEmpty(baseDataList)){
-			for (BaseData data : baseDataList) {
-				Tree tree = new Tree();
-				tree.setId(data.getId());
-				tree.setPid(data.getPid());
-				tree.setText(data.getName());
-				tree.setIconCls(data.getIcon());
-				lt.add(tree);
+			CompletionService completionService = CompletionFactory.initCompletion();
+			for (final BaseData data : baseDataList) {
+				completionService.submit(new Task<List<Tree>, Tree>(lt){
+					@Override
+					public Tree call() throws Exception {
+						Tree tree = new Tree();
+						tree.setId(data.getId());
+						tree.setPid(data.getPid());
+						tree.setText(data.getName());
+						tree.setIconCls(data.getIcon());
+						if(basedataService.hasChild(tree.getId()))
+							tree.setState("closed");
+
+						return tree;
+					}
+					protected void set(List<Tree> d, Tree v) {
+						d.add(v);
+					}
+				});
 			}
+			completionService.sync();
 		}
 		return lt;
 	}
