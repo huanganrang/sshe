@@ -275,7 +275,8 @@ public class BasedataController extends BaseController {
 		List<Tree> lt = new ArrayList<Tree>();
 		List<BaseData> baseDataList = basedataService.getBaseDatas(baseData);
 		if(!CollectionUtils.isEmpty(baseDataList)){
-			CompletionService completionService = CompletionFactory.initCompletion();
+			final CompletionService completionService = CompletionFactory.initCompletion();
+			int index = 0;
 			for (final BaseData data : baseDataList) {
 				completionService.submit(new Task<List<Tree>, Tree>(lt){
 					@Override
@@ -294,6 +295,9 @@ public class BasedataController extends BaseController {
 						d.add(v);
 					}
 				});
+				if(index % 20 == 0)
+					completionService.sync();
+				index ++;
 			}
 			completionService.sync();
 		}
