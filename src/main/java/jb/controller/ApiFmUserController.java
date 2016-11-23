@@ -189,7 +189,13 @@ public class ApiFmUserController extends BaseController {
             Map<String, List<String>> hederMap = (Map<String, List<String>>) httpMap.get("header");
             String retShowMsg = hederMap.get("retShowMsg") == null ? null : URLDecoder.decode((hederMap.get("retShowMsg").get(0)), "UTF-8");
             String result = httpMap.get("body") == null ? null : httpMap.get("body").toString();
-            j.setSuccess(true);
+            String code = hederMap.get("retCode") == null ? null : hederMap.get("retCode").get(0);
+            Boolean success = false;
+            if(StringUtils.isNumeric(code)) {
+                Integer retCode = Integer.parseInt(code);
+                if(retCode.intValue() == 1) success = true;
+            }
+            j.setSuccess(success);
             j.setMsg(retShowMsg);
             j.setObj(result);
         } catch (Exception e) {
