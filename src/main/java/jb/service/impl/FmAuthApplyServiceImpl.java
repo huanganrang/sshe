@@ -1,30 +1,30 @@
 package jb.service.impl;
 
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-import java.util.UUID;
-
 import jb.absx.F;
 import jb.dao.FmAuthApplyDaoI;
 import jb.model.TfmAuthApply;
-import jb.pageModel.FmAuthApply;
 import jb.pageModel.DataGrid;
+import jb.pageModel.FmAuthApply;
+import jb.pageModel.FmUser;
 import jb.pageModel.PageHelper;
 import jb.service.FmAuthApplyServiceI;
-
+import jb.util.MyBeanUtils;
 import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-import jb.util.MyBeanUtils;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 @Service
 public class FmAuthApplyServiceImpl extends BaseServiceImpl<FmAuthApply> implements FmAuthApplyServiceI {
 
 	@Autowired
 	private FmAuthApplyDaoI fmAuthApplyDao;
+	@Autowired
+	private FmUserServiceImpl fmUserServiceImpl;
 
 	@Override
 	public DataGrid dataGrid(FmAuthApply fmAuthApply, PageHelper ph) {
@@ -98,6 +98,10 @@ public class FmAuthApplyServiceImpl extends BaseServiceImpl<FmAuthApply> impleme
 		t.setIsdeleted(false);
 		t.setStatus("AU01");
 		fmAuthApplyDao.save(t);
+		FmUser fmUser = new FmUser();
+		fmUser.setId(t.getUserId());
+		fmUser.setAuthStatus("AU01");
+		fmUserServiceImpl.edit(fmUser);
 	}
 
 	@Override
